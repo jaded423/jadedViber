@@ -8,31 +8,294 @@
   <link rel="icon" type="image/png" href="snek.png">
 </head>
 <body>
+
+  <nav class="topnav">
+    <a href="#hero" class="nav-brand">JADED</a>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="https://github.com/jaded423" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
   <div class="container">
-    <div class="hero">
-      <img src="snek.png" alt="Jaded Viper" class="logo">
+
+    <!-- Hero -->
+    <section id="hero" class="hero">
+      <div class="logo-container" id="logo-container">
+        <img src="snek.png" alt="Jaded Viper" class="logo" id="snek-color">
+        <img src="snek-ascii.png" alt="Jaded Viper ASCII" class="logo logo-ascii" id="snek-ascii">
+      </div>
       <h1 class="title">JADED</h1>
       <p class="tagline">All vibe. No grind.</p>
-    </div>
+      <p class="about">Vibe coder. Homelab tinkerer. AI-driven development.</p>
+    </section>
 
-    <div class="about">
-      <p>Vibe coder. Homelab tinkerer. AI-driven development.</p>
-    </div>
+    <!-- Projects -->
+    <section id="projects" class="section">
+      <h2 class="section-title">Projects</h2>
+      <div class="project-grid">
 
-    <nav class="links">
-      <a href="https://github.com/jaded423" class="link-card">
-        <span class="link-icon">&#xe709;</span>
-        <span class="link-label">GitHub</span>
-      </a>
-    </nav>
+        <a href="https://github.com/jaded423/nvimConfig" target="_blank" class="project-card">
+          <div class="project-header">
+            <span class="project-icon">&#9881;</span>
+            <span class="project-lang">Lua</span>
+          </div>
+          <h3>nvimConfig</h3>
+          <p>Modern Neovim config with LSP, Tree-sitter, 59 plugins, and AI-assisted coding. Dracula theme with custom dashboard.</p>
+        </a>
+
+        <div class="project-card private">
+          <div class="project-header">
+            <span class="project-icon">&#128274;</span>
+            <span class="project-lang">Python</span>
+          </div>
+          <h3>odooReports</h3>
+          <p>Automated Odoo business reporting — AR/AP, inventory labels, COA extraction. Generates daily PDF/Excel reports with email distribution.</p>
+        </div>
+
+        <div class="project-card private">
+          <div class="project-header">
+            <span class="project-icon">&#128274;</span>
+            <span class="project-lang">Python</span>
+          </div>
+          <h3>commandCenter</h3>
+          <p>Unified terminal command center: ClickUp tasks, Gmail, SMS, and phone notifications — all in tmux.</p>
+        </div>
+
+        <div class="project-card private">
+          <div class="project-header">
+            <span class="project-icon">&#128274;</span>
+            <span class="project-lang">Python</span>
+          </div>
+          <h3>COA Extractors</h3>
+          <p>Certificate of Analysis data extraction pipeline. Pulls cannabinoid data from PDFs into Google Sheets for two brands.</p>
+        </div>
+
+        <div class="project-card private">
+          <div class="project-header">
+            <span class="project-icon">&#128274;</span>
+            <span class="project-lang">Swift</span>
+          </div>
+          <h3>OrphanedTasks</h3>
+          <p>macOS menu bar app for capturing and tracking interrupted tasks. Built natively in Swift.</p>
+        </div>
+
+        <div class="project-card private">
+          <div class="project-header">
+            <span class="project-icon">&#128274;</span>
+            <span class="project-lang">HTML/Python</span>
+          </div>
+          <h3>Loom SOP Pipeline</h3>
+          <p>Converts Loom screen recordings into structured SOPs. Auto-downloads, transcribes, and generates documentation.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Stack -->
+    <section id="stack" class="section">
+      <h2 class="section-title">Stack</h2>
+
+      <div class="stack-terminal">
+        <div class="terminal-bar">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+          <span class="terminal-title">tmux</span>
+        </div>
+        <div class="terminal-body">
+          <img src="stack-screenshot.png" alt="tmux + neovim setup" class="stack-img" loading="lazy">
+        </div>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-category">
+          <h3>Editor</h3>
+          <ul>
+            <li>Neovim</li>
+            <li>lazy.nvim</li>
+            <li>Dracula theme</li>
+            <li>Ghostty terminal</li>
+          </ul>
+        </div>
+        <div class="stack-category">
+          <h3>Terminal</h3>
+          <ul>
+            <li>tmux + sesh</li>
+            <li>zsh + p10k</li>
+            <li>fzf + zoxide</li>
+            <li>lazygit</li>
+          </ul>
+        </div>
+        <div class="stack-category">
+          <h3>AI</h3>
+          <ul>
+            <li>Claude Code</li>
+            <li>GitHub Copilot</li>
+            <li>Ollama</li>
+            <li>n8n automations</li>
+          </ul>
+        </div>
+        <div class="stack-category">
+          <h3>Homelab</h3>
+          <ul>
+            <li>Proxmox (2 nodes)</li>
+            <li>Docker</li>
+            <li>Twingate</li>
+            <li>Pi-hole</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
     <footer>
       <p>&copy; <span id="year"></span> jadedviber.com</p>
     </footer>
+
   </div>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Terminal block reveal effect
+    function initTerminalReveal() {
+      const container = document.querySelector('.terminal-body');
+      const img = container.querySelector('.stack-img');
+      const cols = 20;
+      const rows = 20;
+
+      // Create overlay grid
+      const overlay = document.createElement('div');
+      overlay.className = 'terminal-overlay';
+      overlay.style.cssText = `
+        position:absolute;top:0;left:0;right:0;bottom:0;
+        display:grid;grid-template-columns:repeat(${cols},1fr);
+        grid-template-rows:repeat(${rows},1fr);z-index:2;
+      `;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const block = document.createElement('div');
+          block.style.cssText = `background:#0a0a0a;transition:opacity 0.15s ease;`;
+          block.dataset.index = r * cols + c;
+          overlay.appendChild(block);
+        }
+      }
+
+      container.style.position = 'relative';
+      container.appendChild(overlay);
+
+      // Trigger on scroll into view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            img.style.opacity = '1';
+            const blocks = overlay.querySelectorAll('div');
+            let i = 0;
+            const reveal = setInterval(() => {
+              // Reveal a few blocks at a time for speed
+              for (let b = 0; b < 2 && i < blocks.length; b++, i++) {
+                blocks[i].style.opacity = '0';
+              }
+              if (i >= blocks.length) {
+                clearInterval(reveal);
+                setTimeout(() => overlay.remove(), 300);
+              }
+            }, 30);
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      observer.observe(container);
+    }
+
+    // Snek ASCII reveal on click
+    const logoContainer = document.getElementById('logo-container');
+    const snekColor = document.getElementById('snek-color');
+    const snekAscii = document.getElementById('snek-ascii');
+    let snekAnimating = false;
+
+    logoContainer.addEventListener('click', () => {
+      if (snekAnimating) return;
+      snekAnimating = true;
+
+      const cols = 12;
+      const rows = 12;
+
+      // ASCII is hidden, color is visible. Overlay sits between them.
+      // Phase 1: scan black blocks over the color snek
+      // Phase 2: swap images behind the black, then remove blocks to reveal ASCII
+
+      const overlay = document.createElement('div');
+      overlay.className = 'snek-overlay';
+      overlay.style.cssText = `
+        display:grid;grid-template-columns:repeat(${cols},1fr);
+        grid-template-rows:repeat(${rows},1fr);
+      `;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const block = document.createElement('div');
+          block.style.opacity = '0';
+          overlay.appendChild(block);
+        }
+      }
+
+      logoContainer.appendChild(overlay);
+      const blocks = overlay.querySelectorAll('div');
+
+      // Phase 1: Black blocks scan in over color snek
+      let i = 0;
+      const coverInterval = setInterval(() => {
+        for (let b = 0; b < 2 && i < blocks.length; b++, i++) {
+          blocks[i].style.opacity = '1';
+        }
+        if (i >= blocks.length) {
+          clearInterval(coverInterval);
+
+          // Fully covered — swap images behind the black wall
+          snekColor.style.opacity = '0';
+          snekAscii.style.opacity = '1';
+
+          // Phase 2: Remove black blocks to reveal ASCII
+          setTimeout(() => {
+            let j = 0;
+            const revealInterval = setInterval(() => {
+              for (let b = 0; b < 2 && j < blocks.length; b++, j++) {
+                blocks[j].style.opacity = '0';
+              }
+              if (j >= blocks.length) {
+                clearInterval(revealInterval);
+
+                // Phase 3: Hold ASCII, then flash back to color
+                setTimeout(() => {
+                  snekAscii.style.transition = 'opacity 0.3s ease';
+                  snekAscii.style.opacity = '0';
+                  snekColor.style.transition = 'opacity 0.3s ease';
+                  snekColor.style.opacity = '1';
+                  overlay.remove();
+
+                  setTimeout(() => {
+                    snekColor.style.transition = '';
+                    snekAscii.style.transition = '';
+                    snekAnimating = false;
+                  }, 400);
+                }, 1500);
+              }
+            }, 25);
+          }, 200);
+        }
+      }, 25);
+    });
+
+    // Wait for image to load before setting up reveal
+    const stackImg = document.querySelector('.stack-img');
+    if (stackImg) {
+      if (stackImg.complete) initTerminalReveal();
+      else stackImg.addEventListener('load', initTerminalReveal);
+    }
   </script>
 </body>
 </html>
