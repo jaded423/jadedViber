@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jaded Viber</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="snek.png">
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <img src="snek.png" alt="Jaded Viper" class="logo">
+      <h1 class="title">JADED</h1>
+      <p class="tagline">All vibe. No grind.</p>
+    </div>
+
+    <div class="about">
+      <p>Vibe coder. Homelab tinkerer. AI-driven development.</p>
+    </div>
+
+    <nav class="links">
+      <a href="https://github.com/jaded423" class="link-card">
+        <span class="link-icon">&#xe709;</span>
+        <span class="link-label">GitHub</span>
+      </a>
+    </nav>
+
+    <footer>
+      <p>&copy; <span id="year"></span> jadedviber.com</p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
