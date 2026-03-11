@@ -1,0 +1,236 @@
+/* Homelab page styles */
+
+.homelab-container {
+  max-width: 1000px;
+}
+
+.homelab-hero {
+  text-align: center;
+  padding: 8rem 0 2rem;
+}
+
+.homelab-subtitle {
+  color: #6272a4;
+  font-size: 0.9rem;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Topology SVG */
+.topology-wrapper {
+  margin: 2rem 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  background: #0d0d0d;
+  padding: 1rem;
+}
+
+#topology {
+  width: 100%;
+  height: auto;
+  min-width: 600px;
+}
+
+/* Node styles */
+.topo-node {
+  cursor: pointer;
+}
+
+.topo-node rect {
+  rx: 6;
+  ry: 6;
+  stroke-width: 2;
+  transition: filter 0.2s ease;
+}
+
+.topo-node:hover rect {
+  filter: drop-shadow(0 0 8px var(--node-color, #50fa7b));
+}
+
+.topo-node text {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  fill: #f8f8f2;
+  font-size: 11px;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.topo-node .node-icon {
+  font-size: 16px;
+  text-anchor: middle;
+}
+
+/* Connection lines */
+.topo-line {
+  stroke-width: 1.5;
+  fill: none;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+}
+
+.topo-line.animated {
+  animation: drawLine 0.8s ease forwards;
+}
+
+.topo-line-flow {
+  stroke-width: 1;
+  fill: none;
+  stroke-dasharray: 6 4;
+  opacity: 0;
+}
+
+.topo-line-flow.animated {
+  opacity: 0.4;
+  animation: flowDash 1.5s linear infinite;
+}
+
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes flowDash {
+  to { stroke-dashoffset: -20; }
+}
+
+/* Node fade in */
+.topo-node {
+  opacity: 0;
+}
+
+.topo-node.visible {
+  animation: nodeFadeIn 0.4s ease forwards;
+}
+
+@keyframes nodeFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Highlight on hover */
+.topo-line.highlight {
+  stroke-width: 2.5;
+  opacity: 1;
+}
+
+.topo-line-flow.highlight {
+  opacity: 0.7;
+}
+
+/* Detail panel */
+.detail-panel {
+  position: fixed;
+  top: 0;
+  right: -380px;
+  width: 340px;
+  height: 100vh;
+  background: #131313;
+  border-left: 1px solid #2a2a2a;
+  padding: 5rem 1.5rem 2rem;
+  z-index: 200;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+}
+
+.detail-panel.open {
+  right: 0;
+}
+
+.detail-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #6272a4;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.detail-close:hover {
+  color: #ff5555;
+}
+
+.detail-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #f8f8f2;
+  margin-bottom: 0.5rem;
+}
+
+.detail-type {
+  font-size: 0.75rem;
+  color: #6272a4;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.detail-desc {
+  color: #b0b0b0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.detail-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detail-spec {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #1a1a1a;
+  font-size: 0.8rem;
+}
+
+.detail-spec-label {
+  color: #6272a4;
+}
+
+.detail-spec-value {
+  color: #8be9fd;
+}
+
+/* Legend */
+.topology-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 1.5rem 0;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: #6272a4;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .detail-panel {
+    width: 100%;
+    right: -100%;
+  }
+
+  .topology-legend {
+    gap: 1rem;
+  }
+}

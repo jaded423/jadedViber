@@ -12,10 +12,16 @@
   <nav class="topnav">
     <a href="#hero" class="nav-brand">JADED</a>
     <div class="nav-links">
+      <a href="#philosophy">Philosophy</a>
       <a href="#projects">Projects</a>
       <a href="#stack">Stack</a>
+      <a href="homelab.html">Homelab</a>
+      <a href="now.html">Now</a>
       <a href="https://github.com/jaded423" target="_blank">GitHub</a>
     </div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <div class="container">
@@ -29,6 +35,18 @@
       <h1 class="title">JADED</h1>
       <p class="tagline">All vibe. No grind.</p>
       <p class="about">Vibe coder. Homelab tinkerer. AI-driven development.</p>
+    </section>
+
+    <!-- Philosophy -->
+    <section id="philosophy" class="philosophy">
+      <div class="philosophy-content">
+        <p>In 2026, <span class="highlight">coding is a conversation</span>.</p>
+        <p>This entire site was built through dialogue with AI.</p>
+        <p>No boilerplate. No templates. <span class="highlight">Just vibes</span>.</p>
+        <p>I don't fight the tools — I flow with them.</p>
+        <p>Homelab tinkerer. Automation obsessive.</p>
+        <p>Building things that work <span class="highlight">while I sleep</span>.</p>
+      </div>
     </section>
 
     <!-- Projects -->
@@ -149,8 +167,58 @@
       </div>
     </section>
 
+    <!-- Roadmap -->
+    <section id="roadmap" class="section">
+      <h2 class="section-title">Roadmap</h2>
+      <div class="roadmap-timeline">
+        <div class="roadmap-item">
+          <span class="roadmap-badge shipped">Shipped</span>
+          <div class="roadmap-text">
+            <h3>Interactive Homelab Topology</h3>
+            <p>SVG network map with clickable nodes and animated connections.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <span class="roadmap-badge shipped">Shipped</span>
+          <div class="roadmap-text">
+            <h3>Turing Machine Easter Egg</h3>
+            <p>Hidden binary counter widget. Can you find the trigger?</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <span class="roadmap-badge in-progress">In Progress</span>
+          <div class="roadmap-text">
+            <h3>/now Page Content</h3>
+            <p>Real-time status updates on current projects and focus areas.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <span class="roadmap-badge planned">Planned</span>
+          <div class="roadmap-text">
+            <h3>Interactive Terminal</h3>
+            <p>Live terminal emulator showcasing dotfiles and workflow.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <span class="roadmap-badge planned">Planned</span>
+          <div class="roadmap-text">
+            <h3>Matrix Snek Animation</h3>
+            <p>ASCII rain effect with the snek mascot. Full weirdness.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <span class="roadmap-badge planned">Planned</span>
+          <div class="roadmap-text">
+            <h3>Blog / TIL</h3>
+            <p>Short-form "Today I Learned" posts. Vibe-coded knowledge drops.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- try typing 'turing' -->
     <footer>
-      <p>&copy; <span id="year"></span> jadedviber.com</p>
+      <p>&copy; <span id="year"></span> jadedviber.com <span class="footer-cursor"></span></p>
     </footer>
 
   </div>
@@ -296,6 +364,17 @@
       if (stackImg.complete) initTerminalReveal();
       else stackImg.addEventListener('load', initTerminalReveal);
     }
+
+    // Hamburger toggle
+    const hamburger = document.getElementById('nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger) {
+      hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+        hamburger.classList.toggle('open');
+      });
+    }
   </script>
+  <script src="turing.js"></script>
 </body>
 </html>

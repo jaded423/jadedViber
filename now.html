@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jaded Viber — /now</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="now.css">
+  <link rel="icon" type="image/png" href="snek.png">
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="index.html#hero" class="nav-brand">JADED</a>
+    <div class="nav-links">
+      <a href="index.html#philosophy">Philosophy</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#stack">Stack</a>
+      <a href="homelab.html">Homelab</a>
+      <a href="now.html" class="active">Now</a>
+      <a href="https://github.com/jaded423" target="_blank">GitHub</a>
+    </div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="container">
+    <section class="now-hero">
+      <h1 class="section-title">/now</h1>
+      <p class="now-subtitle">What I'm currently up to</p>
+    </section>
+
+    <div class="stack-terminal now-terminal">
+      <div class="terminal-bar">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+        <span class="terminal-title">zsh</span>
+      </div>
+      <div class="terminal-body now-terminal-body">
+        <div class="now-line" style="--delay: 0">
+          <span class="now-prompt">$</span>
+          <span class="now-cmd typing" style="--chars: 16"> cat /now.txt</span>
+        </div>
+        <div class="now-line" style="--delay: 1">
+          <span class="now-output">Loading current status...</span>
+        </div>
+        <div class="now-line" style="--delay: 2">
+          <div class="now-progress-container">
+            <div class="now-progress-bar"></div>
+            <span class="now-progress-text">67%</span>
+          </div>
+        </div>
+        <div class="now-line" style="--delay: 3">
+          <span class="now-error">ERROR: Page still under construction.</span>
+        </div>
+        <div class="now-line" style="--delay: 4">
+          <span class="now-comment">// Check back soon. Building in public.</span>
+        </div>
+        <div class="now-line now-cursor-line" style="--delay: 5">
+          <span class="now-prompt">$</span>
+          <span class="now-blink-cursor"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="now-explanation">
+      <p>This is a <a href="https://nownownow.com/about" target="_blank">/now page</a>.</p>
+      <p>It's like an about page, but for what I'm focused on <em>right now</em>.</p>
+      <p>The irony of a "what I'm working on" page being under construction is not lost on me.</p>
+    </div>
+
+    <footer>
+      <p>&copy; <span id="year"></span> jadedviber.com</p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hamburger toggle
+    const hamburger = document.getElementById('nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger) {
+      hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+        hamburger.classList.toggle('open');
+      });
+    }
+  </script>
+</body>
+</html>

@@ -55,8 +55,40 @@ body {
   transition: color 0.2s ease;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
   color: #50fa7b;
+}
+
+/* Hamburger menu (mobile) */
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #6272a4;
+  transition: all 0.3s ease;
+}
+
+.nav-hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(4px, 4px);
+}
+
+.nav-hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(4px, -4px);
 }
 
 /* Container */
@@ -319,12 +351,117 @@ body {
   border-bottom: none;
 }
 
+/* Philosophy Section */
+.philosophy {
+  padding: 3rem 0 2rem;
+  text-align: center;
+}
+
+.philosophy-content {
+  max-width: 700px;
+  margin: 0 auto;
+  border-left: 3px solid #50fa7b;
+  padding-left: 1.5rem;
+  text-align: left;
+}
+
+.philosophy-content p {
+  font-size: 1rem;
+  color: #b0b0b0;
+  line-height: 2;
+  letter-spacing: 0.02em;
+}
+
+.philosophy-content .highlight {
+  color: #50fa7b;
+  font-weight: 700;
+}
+
+/* Roadmap Section */
+.roadmap-timeline {
+  max-width: 600px;
+  margin: 0 auto;
+  border-left: 2px solid #2a2a2a;
+  padding-left: 1.5rem;
+}
+
+.roadmap-item {
+  position: relative;
+  padding: 0.75rem 0 1.5rem;
+}
+
+.roadmap-item::before {
+  content: '';
+  position: absolute;
+  left: -1.75rem;
+  top: 1rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #2a2a2a;
+  border: 2px solid #0a0a0a;
+}
+
+.roadmap-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  margin-bottom: 0.4rem;
+}
+
+.roadmap-badge.shipped {
+  background: rgba(80, 250, 123, 0.15);
+  color: #50fa7b;
+}
+
+.roadmap-badge.in-progress {
+  background: rgba(255, 184, 108, 0.15);
+  color: #ffb86c;
+}
+
+.roadmap-badge.planned {
+  background: rgba(98, 114, 164, 0.15);
+  color: #6272a4;
+}
+
+.roadmap-item h3 {
+  font-size: 0.95rem;
+  color: #f8f8f2;
+  margin-bottom: 0.25rem;
+}
+
+.roadmap-item p {
+  font-size: 0.8rem;
+  color: #888;
+  line-height: 1.5;
+}
+
 /* Footer */
 footer {
   text-align: center;
   color: #444;
   font-size: 0.8rem;
   padding: 3rem 0 2rem;
+}
+
+.footer-cursor {
+  display: inline-block;
+  width: 6px;
+  height: 0.9em;
+  background: #50fa7b;
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: footerBlink 1.2s step-end infinite;
+  opacity: 0.4;
+}
+
+@keyframes footerBlink {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0; }
 }
 
 /* Mobile */
@@ -347,8 +484,26 @@ footer {
     padding: 0.75rem 1rem;
   }
 
+  .nav-hamburger {
+    display: flex;
+  }
+
   .nav-links {
-    gap: 1rem;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #1a1a1a;
+    gap: 0.75rem;
+  }
+
+  .nav-links.open {
+    display: flex;
   }
 
   .project-grid {
@@ -357,5 +512,13 @@ footer {
 
   .stack-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .philosophy-content {
+    padding-left: 1rem;
+  }
+
+  .philosophy-content p {
+    font-size: 0.9rem;
   }
 }

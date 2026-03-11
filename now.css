@@ -1,0 +1,174 @@
+/* /now page styles */
+
+.now-hero {
+  text-align: center;
+  padding: 8rem 0 2rem;
+}
+
+.now-subtitle {
+  color: #6272a4;
+  font-size: 0.95rem;
+  font-style: italic;
+  letter-spacing: 0.1em;
+}
+
+.now-terminal {
+  margin: 2rem 0;
+}
+
+.now-terminal-body {
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  min-height: 220px;
+}
+
+.now-line {
+  opacity: 0;
+  animation: nowFadeIn 0.3s ease forwards;
+  animation-delay: calc(var(--delay) * 0.8s + 0.5s);
+}
+
+.now-prompt {
+  color: #50fa7b;
+  margin-right: 0.5rem;
+}
+
+.now-cmd {
+  color: #f8f8f2;
+}
+
+.now-output {
+  color: #8be9fd;
+}
+
+.now-error {
+  color: #ff5555;
+  font-weight: 700;
+}
+
+.now-comment {
+  color: #6272a4;
+  font-style: italic;
+}
+
+/* Typing animation */
+.typing {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #50fa7b;
+  width: 0;
+  animation:
+    nowType 0.8s steps(16) 0.5s forwards,
+    nowBlink 0.5s step-end 3;
+}
+
+@keyframes nowType {
+  to { width: var(--chars, 16ch); }
+}
+
+@keyframes nowBlink {
+  50% { border-color: transparent; }
+}
+
+/* Progress bar */
+.now-progress-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 320px;
+}
+
+.now-progress-bar {
+  flex: 1;
+  height: 16px;
+  background: #2a2a2a;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.now-progress-bar::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #50fa7b, #8be9fd);
+  border-radius: 2px;
+  animation: nowProgress 1.5s ease-out forwards;
+  animation-delay: calc(2 * 0.8s + 0.5s);
+}
+
+.now-progress-text {
+  color: #ffb86c;
+  font-weight: 700;
+  font-size: 0.85rem;
+  opacity: 0;
+  animation: nowFadeIn 0.3s ease forwards;
+  animation-delay: calc(2 * 0.8s + 1.8s);
+}
+
+@keyframes nowProgress {
+  to { width: 67%; }
+}
+
+@keyframes nowFadeIn {
+  to { opacity: 1; }
+}
+
+/* Blinking cursor at end */
+.now-cursor-line {
+  display: flex;
+  align-items: center;
+}
+
+.now-blink-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.1em;
+  background: #50fa7b;
+  animation: nowCursorBlink 1s step-end infinite;
+  animation-delay: calc(5 * 0.8s + 0.5s);
+  opacity: 0;
+}
+
+.now-cursor-line.visible .now-blink-cursor {
+  opacity: 1;
+}
+
+@keyframes nowCursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Explanation */
+.now-explanation {
+  text-align: center;
+  padding: 3rem 0;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.now-explanation p {
+  color: #888;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.now-explanation a {
+  color: #8be9fd;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(139, 233, 253, 0.3);
+  transition: border-color 0.2s ease;
+}
+
+.now-explanation a:hover {
+  border-color: #8be9fd;
+}
+
+.now-explanation em {
+  color: #bd93f9;
+}

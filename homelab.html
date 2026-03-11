@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jaded Viber — Homelab</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="homelab.css">
+  <link rel="icon" type="image/png" href="snek.png">
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="index.html#hero" class="nav-brand">JADED</a>
+    <div class="nav-links">
+      <a href="index.html#philosophy">Philosophy</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#stack">Stack</a>
+      <a href="homelab.html" class="active">Homelab</a>
+      <a href="now.html">Now</a>
+      <a href="https://github.com/jaded423" target="_blank">GitHub</a>
+    </div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="container homelab-container">
+    <section class="homelab-hero">
+      <h1 class="section-title">Homelab</h1>
+      <p class="homelab-subtitle">A two-node Proxmox cluster, VMs, Docker services, and a mesh of devices connected through Twingate.</p>
+    </section>
+
+    <div class="topology-wrapper">
+      <svg id="topology" viewBox="0 0 800 620" xmlns="http://www.w3.org/2000/svg">
+        <!-- Connection lines (drawn first, behind nodes) -->
+        <g id="connections" class="connections"></g>
+        <!-- Nodes (drawn on top) -->
+        <g id="nodes"></g>
+      </svg>
+    </div>
+
+    <!-- Detail panel -->
+    <div class="detail-panel" id="detail-panel">
+      <button class="detail-close" id="detail-close">&times;</button>
+      <h3 class="detail-title" id="detail-title"></h3>
+      <p class="detail-type" id="detail-type"></p>
+      <p class="detail-desc" id="detail-desc"></p>
+      <div class="detail-specs" id="detail-specs"></div>
+    </div>
+
+    <!-- Legend -->
+    <div class="topology-legend">
+      <div class="legend-item"><span class="legend-dot" style="background:#50fa7b"></span> Physical</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#8be9fd"></span> Virtual Machines</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#ffb86c"></span> Services</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#bd93f9"></span> Devices</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#ff79c6"></span> Cloud</div>
+    </div>
+
+    <footer>
+      <p>&copy; <span id="year"></span> jadedviber.com</p>
+    </footer>
+  </div>
+
+  <script src="homelab.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const hamburger = document.getElementById('nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger) {
+      hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+        hamburger.classList.toggle('open');
+      });
+    }
+  </script>
+</body>
+</html>
