@@ -3,14 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Now — JadedViber build log</title>
+  <title>Now — JadedViber build log + shipped archive</title>
   <meta name="description" content="What I'm building right now plus a log of recently shipped work. Live build log from JadedViber — homelab, AI workflows, SEO tooling, neovim.">
   <link rel="canonical" href="https://jadedviber.com/now.html">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jadedviber.com/now.html">
-  <meta property="og:title" content="Now — JadedViber build log">
+  <meta property="og:title" content="Now — JadedViber build log + shipped archive">
   <meta property="og:description" content="What I'm building right now plus a log of recently shipped work.">
   <meta property="og:image" content="https://jadedviber.com/og.png">
+  <meta property="og:site_name" content="JadedViber">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Now — JadedViber build log + shipped archive">
+  <meta name="twitter:description" content="What I'm building right now plus a log of recently shipped work.">
+  <meta name="twitter:image" content="https://jadedviber.com/og.png">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="now.css">
   <link rel="icon" type="image/png" href="snek.png">
@@ -165,58 +170,85 @@
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Blog",
-  "url": "https://jadedviber.com/now.html",
-  "name": "JadedViber build log",
-  "description": "Shipped work \u2014 most recent first.",
-  "blogPost": [
+  "@graph": [
     {
-      "@type": "BlogPosting",
-      "headline": "On-page audit + fix-generator loop",
-      "abstract": "Built rule-based defect detector (onpage_audit.py) and a fix generator that emits paste-ready patches: head snippets, JSON-LD, robots.txt, sitemap.xml, llms.txt. First run on jadedviber.com: score 36/100, 12 defects.",
-      "datePublished": "2026-05-19",
-      "author": {
-        "@type": "Person",
-        "name": "Joshua Brown",
-        "url": "https://github.com/jaded423"
-      },
+      "@type": "WebSite",
+      "@id": "https://jadedviber.com/#website",
+      "url": "https://jadedviber.com",
+      "name": "JadedViber",
       "publisher": {
         "@id": "https://jadedviber.com/#identity"
-      },
-      "keywords": "Python, SEO",
-      "url": "https://jadedviber.com/now.html#post.1.md"
+      }
     },
     {
-      "@type": "BlogPosting",
-      "headline": "jadedviber.com SEO foundation",
-      "abstract": "Shipped the patches: meta + Open Graph + Twitter Card + WebSite/Person JSON-LD on index.html, plus robots.txt/sitemap.xml/llms.txt at site root. Generated a 1200\u00d7630 og.png via headless chrome from a styled template. Audit score: 36/100 \u2192 98/100.",
-      "datePublished": "2026-05-19",
-      "author": {
-        "@type": "Person",
-        "name": "Joshua Brown",
-        "url": "https://github.com/jaded423"
-      },
-      "publisher": {
-        "@id": "https://jadedviber.com/#identity"
-      },
-      "keywords": "SEO, GitHub Pages",
-      "url": "https://jadedviber.com/now.html#post.2.md"
+      "@type": "Person",
+      "@id": "https://jadedviber.com/#identity",
+      "name": "Joshua Brown",
+      "url": "https://github.com/jaded423",
+      "sameAs": [
+        "https://github.com/jaded423"
+      ],
+      "description": "Dracula-themed cyberpunk developer brand"
     },
     {
-      "@type": "BlogPosting",
-      "headline": "geoTracker scaffold",
-      "abstract": "Free-tier SEO/GEO tracker scaffolded. Brave Search API + DuckDuckGo fallback for SERP, SQLite for storage, daily rank diff + weekly content-gap reports. Anti-spam guardrails baked into the workflow.",
-      "datePublished": "2026-05-18",
-      "author": {
-        "@type": "Person",
-        "name": "Joshua Brown",
-        "url": "https://github.com/jaded423"
-      },
+      "@type": "Blog",
+      "@id": "https://jadedviber.com/now.html#blog",
+      "url": "https://jadedviber.com/now.html",
+      "name": "JadedViber build log",
+      "description": "Shipped work \u2014 most recent first.",
       "publisher": {
         "@id": "https://jadedviber.com/#identity"
       },
-      "keywords": "Python, SEO",
-      "url": "https://jadedviber.com/now.html#post.3.md"
+      "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "headline": "On-page audit + fix-generator loop",
+          "abstract": "Built rule-based defect detector (onpage_audit.py) and a fix generator that emits paste-ready patches: head snippets, JSON-LD, robots.txt, sitemap.xml, llms.txt. First run on jadedviber.com: score 36/100, 12 defects.",
+          "datePublished": "2026-05-19",
+          "author": {
+            "@type": "Person",
+            "name": "Joshua Brown",
+            "url": "https://github.com/jaded423"
+          },
+          "publisher": {
+            "@id": "https://jadedviber.com/#identity"
+          },
+          "keywords": "Python, SEO",
+          "url": "https://jadedviber.com/now.html#post.1.md"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "jadedviber.com SEO foundation",
+          "abstract": "Shipped the patches: meta + Open Graph + Twitter Card + WebSite/Person JSON-LD on index.html, plus robots.txt/sitemap.xml/llms.txt at site root. Generated a 1200\u00d7630 og.png via headless chrome from a styled template. Audit score: 36/100 \u2192 98/100.",
+          "datePublished": "2026-05-19",
+          "author": {
+            "@type": "Person",
+            "name": "Joshua Brown",
+            "url": "https://github.com/jaded423"
+          },
+          "publisher": {
+            "@id": "https://jadedviber.com/#identity"
+          },
+          "keywords": "SEO, GitHub Pages",
+          "url": "https://jadedviber.com/now.html#post.2.md"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "geoTracker scaffold",
+          "abstract": "Free-tier SEO/GEO tracker scaffolded. Brave Search API + DuckDuckGo fallback for SERP, SQLite for storage, daily rank diff + weekly content-gap reports. Anti-spam guardrails baked into the workflow.",
+          "datePublished": "2026-05-18",
+          "author": {
+            "@type": "Person",
+            "name": "Joshua Brown",
+            "url": "https://github.com/jaded423"
+          },
+          "publisher": {
+            "@id": "https://jadedviber.com/#identity"
+          },
+          "keywords": "Python, SEO",
+          "url": "https://jadedviber.com/now.html#post.3.md"
+        }
+      ]
     }
   ]
 }

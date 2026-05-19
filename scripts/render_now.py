@@ -123,11 +123,32 @@ def render_jsonld(posts: list[dict]) -> str:
         blog_posts.append(item)
     data = {
         "@context": "https://schema.org",
-        "@type": "Blog",
-        "url": "https://jadedviber.com/now.html",
-        "name": "JadedViber build log",
-        "description": "Shipped work — most recent first.",
-        "blogPost": blog_posts,
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://jadedviber.com/#website",
+                "url": "https://jadedviber.com",
+                "name": "JadedViber",
+                "publisher": {"@id": "https://jadedviber.com/#identity"},
+            },
+            {
+                "@type": "Person",
+                "@id": "https://jadedviber.com/#identity",
+                "name": "Joshua Brown",
+                "url": "https://github.com/jaded423",
+                "sameAs": ["https://github.com/jaded423"],
+                "description": "Dracula-themed cyberpunk developer brand",
+            },
+            {
+                "@type": "Blog",
+                "@id": "https://jadedviber.com/now.html#blog",
+                "url": "https://jadedviber.com/now.html",
+                "name": "JadedViber build log",
+                "description": "Shipped work — most recent first.",
+                "publisher": {"@id": "https://jadedviber.com/#identity"},
+                "blogPost": blog_posts,
+            },
+        ],
     }
     return f'  <script type="application/ld+json">\n{json.dumps(data, indent=2)}\n  </script>'
 
@@ -198,14 +219,19 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Now — JadedViber build log</title>
+  <title>Now — JadedViber build log + shipped archive</title>
   <meta name="description" content="What I'm building right now plus a log of recently shipped work. Live build log from JadedViber — homelab, AI workflows, SEO tooling, neovim.">
   <link rel="canonical" href="https://jadedviber.com/now.html">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jadedviber.com/now.html">
-  <meta property="og:title" content="Now — JadedViber build log">
+  <meta property="og:title" content="Now — JadedViber build log + shipped archive">
   <meta property="og:description" content="What I'm building right now plus a log of recently shipped work.">
   <meta property="og:image" content="https://jadedviber.com/og.png">
+  <meta property="og:site_name" content="JadedViber">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Now — JadedViber build log + shipped archive">
+  <meta name="twitter:description" content="What I'm building right now plus a log of recently shipped work.">
+  <meta name="twitter:image" content="https://jadedviber.com/og.png">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="now.css">
   <link rel="icon" type="image/png" href="snek.png">
