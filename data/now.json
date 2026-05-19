@@ -1,0 +1,37 @@
+{
+  "_schema": "v1",
+  "_managed_by": "scripts/render_now.py (via ~/scripts/bin/now)",
+  "current": {
+    "title": "geoTracker — free-tier SEO + GEO rank tracker",
+    "summary": "Building a zero-cost SEO/GEO pipeline. Tracks SERP rank, scrapes competitors, audits on-page health, and generates paste-ready patches via Claude. Pilot site: jadedviber.com. Inspired by an AI-assisted SEO stack a colleague uses to track 500-1000 keywords.",
+    "started": "2026-05-18",
+    "progress_pct": 60,
+    "tags": ["SEO", "GEO", "Python", "Brave API", "Claude"],
+    "links": [
+      {"label": "code", "url": "https://github.com/jaded423/geoTracker"}
+    ]
+  },
+  "completed": [
+    {
+      "title": "On-page audit + fix-generator loop",
+      "summary": "Built rule-based defect detector (onpage_audit.py) and a fix generator that emits paste-ready patches: head snippets, JSON-LD, robots.txt, sitemap.xml, llms.txt. First run on jadedviber.com: score 36/100, 12 defects.",
+      "started": "2026-05-19",
+      "finished": "2026-05-19",
+      "tags": ["Python", "SEO"]
+    },
+    {
+      "title": "jadedviber.com SEO foundation",
+      "summary": "Shipped the patches: meta + Open Graph + Twitter Card + WebSite/Person JSON-LD on index.html, plus robots.txt/sitemap.xml/llms.txt at site root. Generated a 1200×630 og.png via headless chrome from a styled template. Audit score: 36/100 → 98/100.",
+      "started": "2026-05-19",
+      "finished": "2026-05-19",
+      "tags": ["SEO", "GitHub Pages"]
+    },
+    {
+      "title": "geoTracker scaffold",
+      "summary": "Free-tier SEO/GEO tracker scaffolded. Brave Search API + DuckDuckGo fallback for SERP, SQLite for storage, daily rank diff + weekly content-gap reports. Anti-spam guardrails baked into the workflow.",
+      "started": "2026-05-18",
+      "finished": "2026-05-18",
+      "tags": ["Python", "SEO"]
+    }
+  ]
+}

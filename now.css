@@ -98,7 +98,7 @@
   background: linear-gradient(90deg, #50fa7b, #8be9fd);
   border-radius: 2px;
   animation: nowProgress 1.5s ease-out forwards;
-  animation-delay: calc(2 * 0.8s + 0.5s);
+  animation-delay: calc(5 * 0.8s + 0.5s);
 }
 
 .now-progress-text {
@@ -111,7 +111,7 @@
 }
 
 @keyframes nowProgress {
-  to { width: 67%; }
+  to { width: var(--target-pct, 50%); }
 }
 
 @keyframes nowFadeIn {
@@ -170,5 +170,130 @@
 }
 
 .now-explanation em {
+  color: #bd93f9;
+}
+
+/* Current task styling */
+.now-current-title {
+  color: #50fa7b;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.now-summary-line {
+  display: block;
+  margin: 0.5rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid #44475a;
+}
+
+.now-output-text {
+  color: #f8f8f2;
+  line-height: 1.6;
+  font-size: 0.85rem;
+  display: block;
+  white-space: normal;
+}
+
+.now-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.75rem 0;
+  opacity: 0;
+  animation: nowFadeIn 0.3s ease forwards;
+  animation-delay: calc(4 * 0.8s + 0.5s);
+}
+
+.now-tag {
+  background: rgba(189, 147, 249, 0.12);
+  border: 1px solid rgba(189, 147, 249, 0.4);
+  color: #bd93f9;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+.now-links {
+  display: flex;
+  gap: 1rem;
+  margin: 0.5rem 0 0.75rem;
+  opacity: 0;
+  animation: nowFadeIn 0.3s ease forwards;
+  animation-delay: calc(4 * 0.8s + 0.7s);
+}
+
+.now-links a {
+  color: #8be9fd;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(139, 233, 253, 0.3);
+  font-size: 0.8rem;
+}
+
+.now-links a:hover {
+  border-color: #8be9fd;
+}
+
+/* Archive section */
+.now-archive {
+  margin: 4rem 0 3rem;
+}
+
+.now-archive .section-title {
+  margin-bottom: 2rem;
+}
+
+.now-archive-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.now-archive-item {
+  background: #161616;
+  border: 1px solid #2a2a2a;
+  border-left: 3px solid #50fa7b;
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.now-archive-item:hover {
+  border-color: #bd93f9;
+  border-left-color: #bd93f9;
+  transform: translateX(2px);
+}
+
+.now-archive-meta {
+  color: #6272a4;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.now-archive-title {
+  color: #f8f8f2;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.now-archive-summary {
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.now-archive-item .now-tags {
+  margin: 0;
+  opacity: 1;
+  animation: none;
+}
+
+.now-updated {
   color: #bd93f9;
 }
