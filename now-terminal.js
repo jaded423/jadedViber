@@ -131,16 +131,16 @@
         'available commands:',
         '  <span class="kw">help</span>             show this',
         '  <span class="kw">ls</span> [-l|-la]      list shipped posts',
-        '  <span class="kw">cat</span> &lt;file&gt;       print file',
-        '  <span class="kw">open</span> &lt;file&gt;      alias for cat',
+        '  <span class="kw">cat</span> &lt;file&gt;       print file contents',
         '  <span class="kw">pwd</span>              print working dir',
         '  <span class="kw">whoami</span>           guest',
         '  <span class="kw">date</span>             today',
         '  <span class="kw">history</span>          recent commands',
-        '  <span class="kw">clear</span>            clear screen',
+        '  <span class="kw">clear</span>            clear screen (or Ctrl-L)',
         '  <span class="kw">exit</span>             well, you can try',
         '',
         'tip: lowest-numbered post is newest. <span class="kw">cat post.1</span>',
+        'tab completes file names. up/down recalls history.',
       ].join('\n'));
     },
     ls(args) {
@@ -167,7 +167,6 @@
         printHTML('<pre class="now-term-file">' + escapeHTML(files[name]) + '</pre>');
       });
     },
-    open(args) { commands.cat(args); },
     pwd() { println('/home/guest/archive'); },
     whoami() { println('guest'); },
     date() { println(new Date().toString()); },
@@ -199,6 +198,18 @@
     snek() { printHTML('<span class="snek">🐍 vssssss</span>'); },
     matrix() { printHTML('<span class="dim">wake up, neo…</span>'); },
   };
+
+  function longestCommonPrefix(strs) {
+    if (!strs.length) return '';
+    let pre = strs[0];
+    for (let i = 1; i < strs.length; i++) {
+      while (strs[i].indexOf(pre) !== 0) {
+        pre = pre.slice(0, -1);
+        if (!pre) return '';
+      }
+    }
+    return pre;
+  }
 
   function resolveName(arg) {
     if (files[arg]) return arg;
@@ -252,17 +263,29 @@
     } else if (e.key === 'Tab') {
       e.preventDefault();
       const tokens = input.value.split(/\s+/);
-      const last = tokens[tokens.length - 1];
-      if (tokens.length < 2 || !last) return;
-      const matches = allNames.filter((n) => n.startsWith(last));
+      const last = tokens[tokens.length - 1] || '';
+      // First token: complete command name. Else: complete filename.
+      const pool = tokens.length <= 1
+        ? Object.keys(commands).sort()
+        : (last.startsWith('.') ? allNames : visibleNames);
+      if (!last) return;
+      const matches = pool.filter((n) => n.startsWith(last));
+      if (matches.length === 0) return;
       if (matches.length === 1) {
         tokens[tokens.length - 1] = matches[0];
-        input.value = tokens.join(' ');
-      } else if (matches.length > 1) {
-        printEcho(input.value);
-        printHTML(matches.map((n) => `<span class="fname">${escapeHTML(n)}</span>`).join('  '));
-        scrollToBottom();
+        input.value = tokens.join(' ') + (tokens.length === 1 ? ' ' : '');
+        return;
       }
+      // Multiple matches: complete to longest common prefix, then show options.
+      const prefix = longestCommonPrefix(matches);
+      if (prefix.length > last.length) {
+        tokens[tokens.length - 1] = prefix;
+        input.value = tokens.join(' ');
+        return;
+      }
+      printEcho(input.value);
+      printHTML(matches.map((n) => `<span class="fname">${escapeHTML(n)}</span>`).join('  '));
+      scrollToBottom();
     } else if (e.key === 'l' && e.ctrlKey) {
       e.preventDefault();
       commands.clear();
