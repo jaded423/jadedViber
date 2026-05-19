@@ -90,31 +90,105 @@ def render_current(c: dict) -> str:
 """
 
 
-def render_archive(items: list[dict]) -> str:
-    if not items:
+def build_posts(items: list[dict], current: dict | None) -> list[dict]:
+    """Augment items with synthetic terminal fields (filename, index)."""
+    posts = []
+    for idx, it in enumerate(items, start=1):
+        posts.append({
+            "filename": f"post.{idx}.md",
+            "index": idx,
+            "title": it["title"],
+            "summary": it["summary"],
+            "started": it.get("started", ""),
+            "finished": it.get("finished", ""),
+            "tags": it.get("tags", []),
+            "links": it.get("links", []),
+        })
+    return posts
+
+
+def render_jsonld(posts: list[dict]) -> str:
+    blog_posts = []
+    for p in posts:
+        item = {
+            "@type": "BlogPosting",
+            "headline": p["title"],
+            "abstract": p["summary"],
+            "datePublished": p["finished"] or p["started"],
+            "author": {"@type": "Person", "name": "Joshua Brown", "url": "https://github.com/jaded423"},
+            "publisher": {"@id": "https://jadedviber.com/#identity"},
+            "keywords": ", ".join(p["tags"]) if p["tags"] else "",
+            "url": f"https://jadedviber.com/now.html#{p['filename']}",
+        }
+        blog_posts.append(item)
+    data = {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "url": "https://jadedviber.com/now.html",
+        "name": "JadedViber build log",
+        "description": "Shipped work — most recent first.",
+        "blogPost": blog_posts,
+    }
+    return f'  <script type="application/ld+json">\n{json.dumps(data, indent=2)}\n  </script>'
+
+
+def render_noscript_fallback(posts: list[dict]) -> str:
+    """Static cards for crawlers + JS-off users."""
+    if not posts:
         return ""
     cards = []
-    for it in items:
-        title = esc(it["title"])
-        summary = esc(it["summary"])
-        finished = esc(it.get("finished", ""))
-        started = esc(it.get("started", ""))
+    for p in posts:
+        title = esc(p["title"])
+        summary = esc(p["summary"])
+        finished = esc(p["finished"])
         date_line = f"shipped {finished}" if finished else ""
-        if started and finished and started != finished:
-            date_line = f"shipped {finished} • started {started}"
-        tags_html = render_tags(it.get("tags", []))
-        cards.append(f"""      <article class="now-archive-item">
-        <div class="now-archive-meta">{date_line}</div>
+        tags_html = render_tags(p["tags"])
+        cards.append(f"""      <article class="now-archive-item" id="{esc(p['filename'])}">
+        <div class="now-archive-meta">{date_line} · {esc(p['filename'])}</div>
         <h3 class="now-archive-title">{title}</h3>
         <p class="now-archive-summary">{summary}</p>
         {tags_html}
       </article>""")
-    cards_html = "\n".join(cards)
-    return f"""    <section class="now-archive">
-      <h2 class="section-title">Archive — shipped</h2>
+    return f"""    <noscript>
       <div class="now-archive-list">
-{cards_html}
+{chr(10).join(cards)}
       </div>
+    </noscript>"""
+
+
+def render_archive(items: list[dict], current: dict | None) -> str:
+    posts = build_posts(items, current)
+    data_payload = {
+        "posts": posts,
+        "current": current or None,
+    }
+    data_json = json.dumps(data_payload, indent=2)
+    jsonld = render_jsonld(posts)
+    noscript = render_noscript_fallback(posts)
+    return f"""    <section class="now-archive">
+      <h2 class="section-title">Archive</h2>
+      <p class="now-archive-hint">Interactive terminal — try <code>help</code>, <code>ls</code>, <code>cat post.1</code>.</p>
+      <div class="now-term" id="now-term">
+        <div class="terminal-bar">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+          <span class="terminal-title">guest@jadedviber:~/archive</span>
+        </div>
+        <div class="now-term-body" id="now-term-body">
+          <div class="now-term-output" id="now-term-output"></div>
+          <form class="now-term-input-line" id="now-term-form" autocomplete="off">
+            <span class="now-term-prompt">guest@jadedviber:~/archive$</span>
+            <input class="now-term-input" id="now-term-input" type="text" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" aria-label="terminal input">
+          </form>
+        </div>
+      </div>
+
+      <script type="application/json" id="now-data">
+{data_json}
+      </script>
+{jsonld}
+{noscript}
     </section>
 """
 
@@ -182,6 +256,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       }});
     }}
   </script>
+  <script src="now-terminal.js"></script>
 </body>
 </html>
 """
@@ -192,7 +267,7 @@ def render(data: dict) -> str:
     completed = data.get("completed") or []
     return PAGE_TEMPLATE.format(
         current_block=render_current(current) if current else "",
-        archive_block=render_archive(completed),
+        archive_block=render_archive(completed, current),
         today=date.today().isoformat(),
     )
 
