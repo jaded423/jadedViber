@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OG template</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 1200px;
+      height: 630px;
+      background: #0a0a0a;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+      overflow: hidden;
+    }
+    .og {
+      width: 1200px;
+      height: 630px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      padding: 60px 80px;
+      background: radial-gradient(ellipse at center, #14141c 0%, #0a0a0a 70%);
+    }
+    .logo-ring {
+      width: 440px;
+      height: 440px;
+      border-radius: 50%;
+      border: 6px solid #bd93f9;
+      padding: 10px;
+      background: #0a0a0a;
+      box-shadow:
+        0 0 60px rgba(189, 147, 249, 0.35),
+        inset 0 0 40px rgba(189, 147, 249, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .logo-ring img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      image-rendering: -webkit-optimize-contrast;
+    }
+    .text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .title {
+      font-size: 11rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      line-height: 1;
+      background: linear-gradient(135deg, #50fa7b, #8be9fd, #bd93f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.2rem;
+    }
+    .tagline {
+      font-size: 2.1rem;
+      color: #6272a4;
+      letter-spacing: 0.15em;
+      font-style: italic;
+    }
+    .domain {
+      margin-top: 2rem;
+      font-size: 1.3rem;
+      color: #44475a;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="og">
+    <div class="logo-ring">
+      <img src="snek-ascii.png" alt="">
+    </div>
+    <div class="text">
+      <div class="title">JADED</div>
+      <div class="tagline">All vibe. No grind.</div>
+      <div class="domain">jadedviber.com</div>
+    </div>
+  </div>
+</body>
+</html>

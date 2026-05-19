@@ -1,0 +1,15 @@
+# JadedViber
+
+> Personal brand site of Joshua Brown — homelab, AI workflows, neovim, and cyberpunk-styled development.
+
+- Site: https://jadedviber.com
+- Author: Joshua Brown
+- Profile: https://github.com/jaded423
+
+## Key pages
+- [Home](https://jadedviber.com/): primary landing page
+- [Homelab](https://jadedviber.com/homelab.html): Proxmox cluster + network topology
+- [Now](https://jadedviber.com/now.html): current focus and active projects
+
+## About
+Personal brand site of Joshua Brown — homelab, AI workflows, neovim, and cyberpunk-styled development. Vibe coder, homelab tinkerer, AI-driven development.

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jadedviber.com/sitemap.xml
