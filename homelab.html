@@ -3,7 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jaded Viber — Homelab</title>
+  <title>Homelab — Two-node Proxmox cluster, Tailscale mesh, Pi1 mirror | JadedViber</title>
+  <meta name="description" content="Interactive topology of a two-node Proxmox homelab: book5 + tower, VMs running Plex/Jellyfin/Ollama/Frigate, Twingate + Tailscale mesh, Pi1 git mirror at a remote site.">
+  <link rel="canonical" href="https://jadedviber.com/homelab.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://jadedviber.com/homelab.html">
+  <meta property="og:title" content="Homelab — Two-node Proxmox cluster, Tailscale mesh, Pi1 mirror">
+  <meta property="og:description" content="Interactive topology of a two-node Proxmox homelab: book5 + tower, VMs running Plex/Jellyfin/Ollama/Frigate, Twingate + Tailscale mesh, Pi1 git mirror at a remote site.">
+  <meta property="og:image" content="https://jadedviber.com/og.png">
+  <meta property="og:site_name" content="JadedViber">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Homelab — Two-node Proxmox cluster, Tailscale mesh, Pi1 mirror">
+  <meta name="twitter:description" content="Interactive topology of a two-node Proxmox homelab: book5 + tower, VMs running Plex/Jellyfin/Ollama/Frigate, Twingate + Tailscale mesh, Pi1 git mirror at a remote site.">
+  <meta name="twitter:image" content="https://jadedviber.com/og.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://jadedviber.com/homelab.html#webpage",
+        "url": "https://jadedviber.com/homelab.html",
+        "name": "Homelab — Two-node Proxmox cluster, Tailscale mesh, Pi1 mirror",
+        "description": "Interactive topology of a two-node Proxmox homelab: book5 + tower, VMs running Plex/Jellyfin/Ollama/Frigate, Twingate + Tailscale mesh, Pi1 git mirror at a remote site.",
+        "isPartOf": { "@id": "https://jadedviber.com/#website" },
+        "author": { "@id": "https://jadedviber.com/#identity" },
+        "primaryImageOfPage": "https://jadedviber.com/og.png"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jadedviber.com/#website",
+        "url": "https://jadedviber.com",
+        "name": "JadedViber",
+        "publisher": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jadedviber.com/#identity",
+        "name": "Joshua Brown",
+        "url": "https://github.com/jaded423",
+        "sameAs": ["https://github.com/jaded423"],
+        "description": "Homelab tinkerer and developer behind JadedViber."
+      }
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="homelab.css">
   <link rel="icon" type="image/png" href="snek.png">
@@ -57,6 +107,25 @@
       <div class="legend-item"><span class="legend-dot" style="background:#bd93f9"></span> Devices</div>
       <div class="legend-item"><span class="legend-dot" style="background:#ff79c6"></span> Cloud</div>
     </div>
+
+    <section class="homelab-writeup">
+      <h2>About this lab</h2>
+      <p>This is a two-node Proxmox VE cluster running on commodity mini-PCs. <strong>book5</strong> is the primary hypervisor — it hosts the Twingate connector, a Pi-hole LXC, a transcript-processing LXC, and acts as the SSH jump host for every roaming device. <strong>tower</strong> is the heavier node — Nvidia M4000 passthrough to a media VM, kernel pinned to a known-good 6.17.4-2-pve after a regression in 6.17.13 caused silent hangs every 1–3 days.</p>
+
+      <h2>Virtual machines and services</h2>
+      <p>VM 100 (Omarchy) is an Arch desktop used for headless GPU experiments. VM 101 (Ubuntu) is the media + AI workhorse — it runs Plex (32400), Jellyfin (8096), Ollama (11434) for local LLM inference, Frigate (5000) for two Tapo cameras on the 192.168.68.0/22 subnet, qBittorrent (8080), and a local ALPR service on 8088. A separate Pi-hole LXC (192.168.68.248) handles DNS for the lab, overriding the Twingate resolver because the Twingate DNS started failing while the client still reported <code>online</code>.</p>
+
+      <h2>Networking</h2>
+      <p>Everything sits on a single 192.168.68.0/22 subnet after a router migration in early 2026 collapsed the old dual-subnet setup. Both Proxmox nodes run 2.5 GbE primary interfaces on vmbr1. <strong>Tailscale</strong> provides MagicDNS across the whole tailnet — laptops, phones, the Pi1 mirror — and <strong>Twingate</strong> handles outside-network access into the lab. The two overlay networks intentionally overlap; when one breaks, the other usually still works.</p>
+
+      <h2>Remote mirror</h2>
+      <p>A Raspberry Pi (<strong>Pi1</strong>) sits at a separate physical site running DietPi-Bookworm. It mirrors 15 git repos weekly from GitHub + Gitea, driven by a <code>push-all</code> skill from the workstation. The Pi has no Wi-Fi — it runs off ICS from a host PC for internet, but Tailscale reachability is host-independent, so it stays online on the tailnet even when the host is off. A small 3.5" SPI TFT renders a live status dashboard (<code>pi1-hub</code>, Python + rich).</p>
+
+      <h2>Observability</h2>
+      <p>tower forwards its full syslog to book5 over UDP/514 via rsyslog. After the kernel regression turned hangs into silent freezes, the box was instrumented with <code>softlockup_panic=1</code>, <code>hardlockup_panic=1</code>, and a 30-second auto-reboot on panic — so a hang now becomes a loud panic + auto-recovery instead of a remote-reboot-required outage. <code>pstore</code> captures panic dumps across the reboot. book5 also runs a network-health watchdog that probes internet, peers, and DNS separately and only escalates to a NetworkManager restart on true isolation.</p>
+
+      <p>Tap or click any node above to see its IP, role, and dependencies.</p>
+    </section>
 
     <footer>
       <p>&copy; <span id="year"></span> jadedviber.com</p>
