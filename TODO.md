@@ -235,6 +235,33 @@ Google's March 2024 spam policy hits scaled AI content. Rules for every page:
 
 ---
 
+## Social presence (deferred, not blocking)
+
+Brand reach beyond the site. Not a first-tier task — site needs to be the
+canonical destination first — but needs to land eventually to feed traffic
+back to jadedviber.com and broaden GEO discovery surface.
+
+- [ ] **Pick the platforms.** Realistic shortlist: GitHub (already live),
+  Mastodon or Bluesky (developer audience, federated, AI-friendly),
+  one short-form video (YouTube or Twitch for homelab + coding sessions),
+  and a writing surface (dev.to or Hashnode) that backlinks to /blog posts.
+- [ ] **Consistent handle across platforms** — `jaded423` or `jadedviber`,
+  pick one and lock it everywhere.
+- [ ] **Single canonical link per bio** — point at jadedviber.com root,
+  not /now and not GitHub. Lets the canonical tag resolve cleanly and
+  funnels every social click through the brand homepage.
+- [ ] **Cross-post `/now` bumps and `/blog` launches** — notification-style
+  with a backlink. Never auto-publish full content (cannibalization +
+  scaled-content risk). The site is the source of truth.
+- [ ] **Extend Person `sameAs` JSON-LD** on the homepage to include every
+  social handle. Search engines + LLMs use that to assemble the identity
+  graph and surface JadedViber in entity-aware results.
+- [ ] **Decide on comment signatures** — pick 2–3 long-running threads
+  (HN, Reddit /r/selfhosted, /r/homelab) and add a passive sig with the
+  site link. Slow-burn backlinks.
+
+---
+
 ## Notes for next session
 
 - Build queue is set: photoEditor → nvim → terminal → /projects/index.html →
