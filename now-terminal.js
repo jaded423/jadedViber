@@ -21,7 +21,7 @@
   const current = data.current || null;
 
   // --- virtual filesystem ---
-  // post.N.md = shipped items (lowest N = newest)
+  // ship.N.md = shipped items (lowest N = newest)
   // .now      = current task (hidden)
   // .profile  = bio (hidden)
   // .tags     = all unique tags (hidden)
@@ -130,7 +130,7 @@
       printHTML([
         'available commands:',
         '  <span class="kw">help</span>             show this',
-        '  <span class="kw">ls</span> [-l|-la]      list shipped posts',
+        '  <span class="kw">ls</span> [-l|-la]      list shipped items',
         '  <span class="kw">cat</span> &lt;file&gt;       print file contents',
         '  <span class="kw">pwd</span>              print working dir',
         '  <span class="kw">whoami</span>           guest',
@@ -139,7 +139,7 @@
         '  <span class="kw">clear</span>            clear screen (or Ctrl-L)',
         '  <span class="kw">exit</span>             well, you can try',
         '',
-        'tip: lowest-numbered post is newest. <span class="kw">cat post.1</span>',
+        'tip: lowest-numbered ship is newest. <span class="kw">cat ship.1</span>',
         'tab completes file names. up/down recalls history.',
       ].join('\n'));
     },
@@ -302,11 +302,11 @@
   const banner = [
     '┌──────────────────────────────────────────────────────────┐',
     '│  jadedviber.archive — shipped work, terminal-style       │',
-    '│  type \'help\' for commands, \'ls\' to list, \'cat post.1\' │',
+    '│  type \'help\' for commands, \'ls\' to list, \'cat ship.1\' │',
     '└──────────────────────────────────────────────────────────┘',
   ].join('\n');
   printHTML('<pre class="now-term-banner">' + escapeHTML(banner) + '</pre>');
-  println(`${posts.length} shipped posts available.`, 'dim');
+  println(`${posts.length} shipped items available.`, 'dim');
   println('');
 
   input.focus();

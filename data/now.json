@@ -3,9 +3,9 @@
   "_managed_by": "scripts/render_now.py (via ~/scripts/bin/now)",
   "current": {
     "title": "geoTracker — free-tier SEO + GEO rank tracker",
-    "summary": "Building a zero-cost SEO/GEO pipeline. Tracks SERP rank, scrapes competitors, audits on-page health, and generates paste-ready patches via Claude. Pilot site: jadedviber.com. Inspired by an AI-assisted SEO stack a colleague uses to track 500-1000 keywords.",
+    "summary": "A zero-cost SEO + GEO pipeline, driven through Claude. The model writes the diagnostics; I review and ship. Shipped so far: SERP rank pulls via Brave API with a DuckDuckGo fallback, a rule-based on-page auditor that scores pages 0–100, and a fix generator that emits paste-ready meta tags, JSON-LD, robots.txt, sitemap.xml, and llms.txt — plus IndexNow pings so Bing reindexes within minutes. 42 keywords tracked, daily diff reports, brand-mention detection. Building now: competitor page scrapes, weekly content-gap reports, LLM citation tracking (does ChatGPT/Claude/Perplexity actually mention us?), and a cron loop so the whole pipeline runs untouched.",
     "started": "2026-05-18",
-    "progress_pct": 60,
+    "progress_pct": 73,
     "tags": ["SEO", "GEO", "Python", "Brave API", "Claude"],
     "links": [
       {"label": "code", "url": "https://github.com/jaded423/geoTracker"}

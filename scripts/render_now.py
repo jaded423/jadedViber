@@ -95,7 +95,7 @@ def build_posts(items: list[dict], current: dict | None) -> list[dict]:
     posts = []
     for idx, it in enumerate(items, start=1):
         posts.append({
-            "filename": f"post.{idx}.md",
+            "filename": f"ship.{idx}.md",
             "index": idx,
             "title": it["title"],
             "summary": it["summary"],
@@ -188,7 +188,7 @@ def render_archive(items: list[dict], current: dict | None) -> str:
     noscript = render_noscript_fallback(posts)
     return f"""    <section class="now-archive">
       <h2 class="section-title">Archive</h2>
-      <p class="now-archive-hint">Interactive terminal — try <code>help</code>, <code>ls</code>, <code>cat post.1</code>.</p>
+      <p class="now-archive-hint">Interactive terminal — try <code>help</code>, <code>ls</code>, <code>cat ship.1</code>.</p>
       <div class="now-term" id="now-term">
         <div class="terminal-bar">
           <span class="terminal-dot red"></span>
