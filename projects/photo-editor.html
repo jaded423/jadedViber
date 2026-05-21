@@ -29,6 +29,26 @@
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebSite",
+        "@id": "https://jadedviber.com/#website",
+        "url": "https://jadedviber.com",
+        "name": "JadedViber",
+        "description": "Personal brand site of Joshua Brown — homelab tinkerer, AI-driven development, neovim, automation, and Dracula-themed cyberpunk vibes.",
+        "publisher": {
+          "@id": "https://jadedviber.com/#identity"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jadedviber.com/projects/photo-editor.html#webpage",
+        "url": "https://jadedviber.com/projects/photo-editor.html",
+        "name": "Tkinter Photo Editor for Mac — Bulk rembg Background Removal",
+        "isPartOf": { "@id": "https://jadedviber.com/#website" },
+        "author": { "@id": "https://jadedviber.com/#identity" },
+        "primaryImageOfPage": "https://jadedviber.com/og.png",
+        "about": { "@id": "https://jadedviber.com/projects/photo-editor.html#app" }
+      },
+      {
         "@type": "SoftwareApplication",
         "@id": "https://jadedviber.com/projects/photo-editor.html#app",
         "name": "PhotoEditor",
