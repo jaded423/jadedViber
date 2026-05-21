@@ -11,5 +11,8 @@
 - [Homelab](https://jadedviber.com/homelab.html): Proxmox cluster + network topology
 - [Now](https://jadedviber.com/now.html): current focus and active projects
 
+## Projects
+- [PhotoEditor](https://jadedviber.com/projects/photo-editor.html): macOS Tkinter app for bulk product-photo processing — rembg background removal, smart 1000×1000 crop, SKU banner stamping, webhook export.
+
 ## About
 Personal brand site of Joshua Brown — homelab, AI workflows, neovim, and cyberpunk-styled development. Vibe coder, homelab tinkerer, AI-driven development.

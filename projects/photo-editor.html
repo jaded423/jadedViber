@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tkinter Photo Editor for Mac — Bulk rembg Background Removal</title>
+  <meta name="description" content="macOS Tkinter app for bulk product-photo processing. rembg background removal, smart crop to 1000×1000, SKU banner stamping, webhook export. Open source, MIT.">
+  <link rel="canonical" href="https://jadedviber.com/projects/photo-editor.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://jadedviber.com/projects/photo-editor.html">
+  <meta property="og:title" content="Tkinter Photo Editor for Mac — Bulk rembg Background Removal">
+  <meta property="og:description" content="macOS Tkinter app for bulk product-photo processing. rembg background removal, smart crop, SKU banner stamping, webhook export. Open source.">
+  <meta property="og:image" content="https://jadedviber.com/og.png">
+  <meta property="og:site_name" content="JadedViber">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tkinter Photo Editor for Mac — Bulk rembg Background Removal">
+  <meta name="twitter:description" content="macOS Tkinter app for bulk product-photo processing. rembg background removal, smart crop, SKU banner stamping, webhook export. Open source.">
+  <meta name="twitter:image" content="https://jadedviber.com/og.png">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/png" href="../snek.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://jadedviber.com/projects/photo-editor.html#app",
+        "name": "PhotoEditor",
+        "url": "https://jadedviber.com/projects/photo-editor.html",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "macOS 12+",
+        "description": "Batch product-photo processor for macOS. rembg background removal, smart 1000×1000 crop, SKU banner stamping, webhook export.",
+        "softwareVersion": "1.0",
+        "downloadUrl": "https://github.com/jaded423/photoEditor",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "license": "https://opensource.org/licenses/MIT",
+        "author": {
+          "@id": "https://jadedviber.com/#identity"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jadedviber.com/#identity",
+        "name": "Joshua Brown",
+        "url": "https://github.com/jaded423",
+        "sameAs": [
+          "https://github.com/jaded423",
+          "https://nownownow.com/p/DTGZ"
+        ],
+        "description": "Dracula-themed cyberpunk developer brand"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://jadedviber.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Projects",
+            "item": "https://jadedviber.com/#projects"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "PhotoEditor",
+            "item": "https://jadedviber.com/projects/photo-editor.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* Page-specific styles */
+    .project-page { padding-top: 5rem; padding-bottom: 4rem; }
+    .project-hero { text-align: center; padding: 3rem 1rem 2rem; }
+    .project-hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      background: linear-gradient(135deg, #50fa7b, #8be9fd, #bd93f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .project-hero .lead {
+      color: #f8f8f2;
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin: 0 auto 1rem;
+      line-height: 1.6;
+    }
+    .project-hero .meta {
+      color: #6272a4;
+      font-size: 0.85rem;
+    }
+    .project-hero .meta a { color: #8be9fd; text-decoration: none; }
+    .project-hero .meta a:hover { color: #50fa7b; }
+
+    .project-body { max-width: 820px; margin: 0 auto; padding: 0 1.5rem; }
+    .project-body h2 {
+      color: #bd93f9;
+      font-size: 1.4rem;
+      margin: 2.5rem 0 1rem;
+      letter-spacing: 0.05em;
+    }
+    .project-body h3 {
+      color: #50fa7b;
+      font-size: 1.05rem;
+      margin: 1.5rem 0 0.5rem;
+    }
+    .project-body p {
+      color: #d8d8d2;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .project-body ol, .project-body ul {
+      color: #d8d8d2;
+      line-height: 1.7;
+      margin: 0 0 1rem 1.25rem;
+    }
+    .project-body li { margin-bottom: 0.4rem; }
+    .project-body code {
+      background: #1a1a1a;
+      color: #ff79c6;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    .project-body pre {
+      background: #0e0e12;
+      border: 1px solid #1a1a1a;
+      border-radius: 6px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    .project-body pre code {
+      background: transparent;
+      color: #f8f8f2;
+      padding: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .project-body a { color: #8be9fd; text-decoration: none; border-bottom: 1px dashed #6272a4; }
+    .project-body a:hover { color: #50fa7b; border-bottom-color: #50fa7b; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .feature-card {
+      background: #12121a;
+      border: 1px solid #1a1a1a;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .feature-card h4 {
+      color: #ff79c6;
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.03em;
+    }
+    .feature-card p {
+      color: #6272a4;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.88rem;
+    }
+    .matrix-table th, .matrix-table td {
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .matrix-table th {
+      color: #bd93f9;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    .matrix-table td { color: #d8d8d2; }
+    .matrix-table code {
+      background: #1a1a1a;
+      color: #ff79c6;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+
+    .stack-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .stack-pill {
+      background: #1a1a1a;
+      color: #8be9fd;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      border: 1px solid #2a2a3a;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2.5rem 0 1rem;
+    }
+    .cta {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border: 1px solid;
+      transition: all 0.2s ease;
+    }
+    .cta.primary {
+      background: #50fa7b;
+      color: #0a0a0a;
+      border-color: #50fa7b;
+    }
+    .cta.primary:hover {
+      background: transparent;
+      color: #50fa7b;
+    }
+    .cta.secondary {
+      background: transparent;
+      color: #8be9fd;
+      border-color: #6272a4;
+    }
+    .cta.secondary:hover {
+      border-color: #8be9fd;
+    }
+
+    .crosslinks {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #1a1a1a;
+      color: #6272a4;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    .crosslinks a { color: #8be9fd; text-decoration: none; margin: 0 0.5rem; }
+    .crosslinks a:hover { color: #50fa7b; }
+  </style>
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="../index.html" class="nav-brand">JADED</a>
+    <div class="nav-links">
+      <a href="../index.html#philosophy">Philosophy</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#stack">Stack</a>
+      <a href="../homelab.html">Homelab</a>
+      <a href="../now.html">Now</a>
+      <a href="https://github.com/jaded423" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="container project-page">
+
+    <header class="project-hero">
+      <h1>PhotoEditor</h1>
+      <p class="lead">macOS Tkinter app for bulk product-photo processing. Background removal via <code>rembg</code>, smart 1000×1000 crop, SKU banner stamping, webhook export. Point at a folder, hit Process — 200 photos in 5 minutes.</p>
+      <p class="meta">
+        <a href="https://github.com/jaded423/photoEditor" target="_blank" rel="noopener">github.com/jaded423/photoEditor</a>
+        · Python 3.13 · Tkinter · MIT
+      </p>
+    </header>
+
+    <article class="project-body">
+
+      <h2>Why it exists</h2>
+      <p>Product photography for a multi-SKU catalog. Dozens of new SKUs per week. Each photo needs background removed, square-cropped, scaled to 1000×1000, optionally stamped with the SKU filename. Doing this by hand in Photoshop is death.</p>
+      <p>Built originally for an internal team that ships hundreds of new product photos per week. Open-sourced because the pattern is generic — anyone running a catalog with manual photo-prep grind can use it as-is or adapt it.</p>
+
+      <h2>The pipeline</h2>
+      <ol>
+        <li><strong>Background removal</strong> — <code>rembg</code> with the <code>birefnet-general</code> model. Filename prefix <code>smalls</code> skips this step (pile shots, bulk product fills the frame already).</li>
+        <li><strong>Bulk detection</strong> — if <code>rembg</code> kept &gt;85% coverage (no clear subject) OR &lt;5% coverage (over-removed), falls back to the original. Saves the "pile of nugs" case.</li>
+        <li><strong>Component cleanup</strong> — keeps everything connected to the main subject. Strips only small distant fragments (alpha &gt; 30 threshold).</li>
+        <li><strong>Smart resize</strong> — crops to subject bounding box, scales to 900×900, centers on a 1000×1000 transparent canvas with a 50px border.</li>
+        <li><strong>Outputs three folders</strong> — <code>pendingProducts/</code> (clean square PNG, catalog-ready), <code>edited/</code> (same image + SKU filename banner), <code>original/</code> (source files moved here, nothing destroyed).</li>
+        <li><strong>Webhook ping</strong> (optional) — POST to a configured URL with API-key header on batch completion. Drives downstream Odoo / Shopify / CMS sync.</li>
+      </ol>
+
+      <h2>What makes it different</h2>
+      <p>The hard part wasn't calling <code>rembg</code> — it was the heuristic for "did the background-removal step actually <em>work</em>, or did it make things worse?" That came out of pairing with Claude on real failure cases. Two patterns broke naive bg-removal:</p>
+      <ul>
+        <li><strong>Pile shots</strong> — no clear subject, <code>rembg</code> would over-remove and produce empty PNGs.</li>
+        <li><strong>Scattered subjects</strong> — small fragments (loose nugs around a jar) got stripped as noise.</li>
+      </ul>
+      <p>The coverage-percentage fallback turned a manual triage step into one heuristic. The component-cleanup threshold preserved scatter while still stripping JPEG artifacts.</p>
+
+      <h2>Photo type matrix</h2>
+      <table class="matrix-table">
+        <thead>
+          <tr><th>Type</th><th>Example filename</th><th>Behavior</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Single subject</td><td><code>jar-001.jpg</code></td><td>Full pipeline: bg removal + resize + banner</td></tr>
+          <tr><td>Bulk / pile</td><td><code>smalls-batch-3.jpg</code></td><td>Skip bg removal (filename prefix), resize only</td></tr>
+          <tr><td>Scattered subject</td><td><code>jar-with-scatter.jpg</code></td><td>Full pipeline, keeps scattered pieces (cleanup tuned)</td></tr>
+          <tr><td>Over-removed by rembg</td><td>(auto-detected)</td><td>Falls back to original</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Stack</h2>
+      <div class="stack-pills">
+        <span class="stack-pill">Python 3.13</span>
+        <span class="stack-pill">Tkinter</span>
+        <span class="stack-pill">rembg</span>
+        <span class="stack-pill">birefnet-general</span>
+        <span class="stack-pill">Pillow</span>
+        <span class="stack-pill">PyInstaller</span>
+        <span class="stack-pill">requests</span>
+        <span class="stack-pill">Inter Bold</span>
+      </div>
+      <p>Native macOS Tkinter UI — no Electron, no web frontend, no 200MB Chromium runtime. Standalone <code>.app</code> built with PyInstaller (spec bundles font, model paths, icon). Settings live in <code>~/Library/Application Support/CombinedProcessor/settings.json</code>, outside the repo by design.</p>
+
+      <h2>Architecture</h2>
+<pre><code>photoEditor/
+├── combined_processor.py    # Core pipeline: rembg → cleanup → resize → banner
+├── network_utils.py         # Webhook HTTP client
+├── tk_app/
+│   ├── app.py               # Tkinter GUI
+│   └── settings.py          # JSON settings persistence
+├── build_app.sh             # PyInstaller build script (→ dist/PhotoEditor.app)
+├── PhotoEditor.icns         # App icon
+├── PhotoEditor.spec         # PyInstaller spec (bundled font, model)
+├── Inter-Bold.ttf           # Banner font
+└── requirements.txt         # 37 deps</code></pre>
+
+      <h2>Configuration</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h4>Default folder</h4>
+          <p>Where the file picker opens by default.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Webhook URL</h4>
+          <p>POSTed to on batch completion — e.g. <code>https://hooks.example.com/photos-done</code>.</p>
+        </div>
+        <div class="feature-card">
+          <h4>API key + header</h4>
+          <p>Sent as the value of a configurable header (default: <code>Authorization</code>).</p>
+        </div>
+        <div class="feature-card">
+          <h4>Logs</h4>
+          <p>Rolling debug logs under <code>~/Library/Logs/CombinedProcessor/</code>.</p>
+        </div>
+      </div>
+
+      <h2>Install</h2>
+      <h3>End users (Mac, no Python required)</h3>
+      <p>Download the standalone <code>.app</code> bundle and follow the macOS Gatekeeper walkthrough in <a href="https://github.com/jaded423/photoEditor/blob/master/INSTALL.md" target="_blank" rel="noopener">INSTALL.md</a>. The app is unsigned (no Apple Developer Program enrollment), so first launch needs Privacy &amp; Security → Open Anyway. One-time setup; subsequent launches are normal.</p>
+
+      <h3>Developers (build from source)</h3>
+<pre><code>git clone https://github.com/jaded423/photoEditor.git
+cd photoEditor
+
+# Requires Python 3.13
+./build_app.sh           # → dist/PhotoEditor.app
+./build_app.sh --clean   # clean build artifacts first
+
+# Or run directly without packaging
+./run_python.sh</code></pre>
+
+      <h2>AI-assisted, end-to-end</h2>
+      <p>Built through iterative dialogue with Claude. Same approach behind everything on this site — see <a href="../index.html#philosophy">the philosophy</a> for more, or <a href="../now.html">what I'm building right now</a>.</p>
+
+      <div class="cta-row">
+        <a href="https://github.com/jaded423/photoEditor" target="_blank" rel="noopener" class="cta primary">View on GitHub</a>
+        <a href="https://github.com/jaded423/photoEditor/blob/master/INSTALL.md" target="_blank" rel="noopener" class="cta secondary">Install guide</a>
+      </div>
+
+      <div class="crosslinks">
+        <a href="../index.html">← Home</a> ·
+        <a href="../index.html#projects">All projects</a> ·
+        <a href="../homelab.html">Homelab</a> ·
+        <a href="../now.html">/now</a>
+      </div>
+
+    </article>
+
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> jadedviber.com</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hamburger menu (matches index.html behavior)
+    const hamburger = document.querySelector('.nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+    }
+  </script>
+
+</body>
+</html>
