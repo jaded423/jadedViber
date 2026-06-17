@@ -25,6 +25,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://jadedviber.com/app/</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://jadedviber.com/privacy/</loc>
     <lastmod>2026-06-17</lastmod>
     <changefreq>yearly</changefreq>
