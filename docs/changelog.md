@@ -4,6 +4,24 @@ All notable changes to jadedViber are documented here.
 
 ---
 
+## 2026-06-17 - OAuth app pages + logo
+
+**What changed:**
+- Added `/app`, `/privacy`, `/terms` as clean paths (`dir/index.html`, served
+  without `.html` by GitHub Pages no-Jekyll). All match the Dracula theme + nav/
+  footer from `projects/photo-editor.html`.
+- `/app` — OAuth app home page, H1 "JadedViber" (matches OAuth consent app name),
+  explains purpose + Google scopes requested.
+- `/privacy` — privacy policy with verbatim Google API Services Limited Use
+  disclosure (not sold/shared/ads, not used to train models). Effective 2026-06-17.
+- `/terms` — terms of service.
+- `snek-logo.png` — 512×512 mascot composited on `#0a0a0a` for the OAuth logo
+  (transparent `snek.png` rendered white on Google's light consent card).
+- Added all three pages to `sitemap.xml`.
+
+**Why:** Google OAuth consent/branding flow requires a home page that explains
+the app's purpose, plus privacy + terms URLs on the same verified domain.
+
 ## 2026-03-10 - Initial Site Launch
 
 **What changed:**

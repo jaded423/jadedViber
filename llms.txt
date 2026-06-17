@@ -14,5 +14,10 @@
 ## Projects
 - [PhotoEditor](https://jadedviber.com/projects/photo-editor.html): macOS Tkinter app for bulk product-photo processing — rembg background removal, smart 1000×1000 crop, SKU banner stamping, webhook export.
 
+## App & legal
+- [JadedViber app](https://jadedviber.com/app/): personal Google Workspace automation tools (MCP servers + n8n) that act on your own Google account at your request.
+- [Privacy Policy](https://jadedviber.com/privacy/): how the tools handle data, incl. Google API limited-use disclosure.
+- [Terms of Service](https://jadedviber.com/terms/): terms governing use of the tools.
+
 ## About
 Personal brand site of Joshua Brown — homelab, AI workflows, neovim, and cyberpunk-styled development. Vibe coder, homelab tinkerer, AI-driven development.
