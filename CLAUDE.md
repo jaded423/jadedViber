@@ -1,5 +1,7 @@
 # CLAUDE.md - jadedViber
 
+> **Stack:** Tier-2 leaf (standalone). Parent/router: [global](~/.claude/CLAUDE.md). Leaf → no `wiki/` tree.
+
 Personal brand website at **jadedviber.com**.
 
 ## Hosting
