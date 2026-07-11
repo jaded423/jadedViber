@@ -1,3 +1,10 @@
+---
+type: log
+title: jadedViber Changelog
+tags: [jadedviber, changelog, history]
+related: [index, site-reference]
+---
+
 # Changelog
 
 All notable changes to jadedViber are documented here.

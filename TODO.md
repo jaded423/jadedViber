@@ -4,6 +4,16 @@ Content strategy + build queue. Source of truth for what to ship next.
 
 ---
 
+## → POINTER: publish MemArch as a featured page (from T0 2026-07-09)
+- [ ] **jadedViber's leg = the GH-Pages publish** of the "MemArch" memory-architecture methodology.
+      Cross-owner plan (T0 authors the methodology → new `memoryArchitecture` repo = canonical source →
+      **jadedViber publishes**) lives at `~/.claude/plans/memarch-publish.md` (steps 4–6 are yours: new
+      featured page in the site's HTML/CSS/JS style + design tokens, house the rendered docs, ship to GH Pages).
+      **Blocked** until T0 finishes authoring the public docs (steps 1–3). Don't start the page until the
+      content exists. T0 owns the concept; you own the last leg + page assets.
+
+---
+
 ## Context: 2026-05-21 conversation (geoTracker session)
 
 Working session with Claude in `~/projects/geoTracker/` covered SEO direction
@@ -88,7 +98,7 @@ pages become the deep version.
 
 ## Build queue (in order)
 
-### 1. [ ] /projects/photo-editor.html (FIRST)
+### 1. [x] /projects/photo-editor.html (FIRST) — DONE (commit 643a7dd, live)
 
 **Why first**: substantive, distinctive (Tkinter is rare on Mac), already has
 working app to screenshot.
