@@ -9,18 +9,20 @@ related: [index, changelog]
 
 Cold reference for the jadedviber.com static site (DNS records, OAuth/app pages, design tokens, interactive features). Extracted from CLAUDE.md on 2026-07-08. Current-state hosting summary + the DNS gotcha stay in [../CLAUDE.md](../CLAUDE.md).
 
-## DNS (Squarespace registration, Google Domains nameservers)
+## DNS (Squarespace registration, **Cloudflare nameservers** since 2026-09-10)
 
-Nameservers are Google Domains (`ns-cloud-c1-4.googledomains.com`), not Squarespace.
+Registrar stays Squarespace; the zone moved to Cloudflare (free plan, account jaded423@gmail.com, nameservers `lamar.ns.cloudflare.com` / `thea.ns.cloudflare.com`, replacing `ns-cloud-c1-4.googledomains.com`) so a piGate box can get DNS-01 certificates for names under the domain. **Every record is DNS-only (grey cloud)** — GitHub Pages serves its own certificate and must not be proxied.
 
-Custom records:
+Records (17):
 - 4x `@` A records → GitHub Pages IPs (185.199.108-111.153)
 - `www` CNAME → `jaded423.github.io`
-- `_github-pages-challenge-jaded423` TXT → domain verification
-- `dns` A → `192.168.68.250` (pihole, unrelated)
-- `_acme-challenge.dns` TXT (pihole cert, unrelated)
+- `_github-pages-challenge-jaded423` TXT → GitHub domain verification (Cloudflare's import scan missed this one — added by hand)
+- `status` A → `100.104.88.96` — **pi-gw1's Tailscale IP**: `https://status.jadedviber.com/` is the piGate Uptime Kuma status page, reachable only from the tailnet, cert via Caddy + Cloudflare DNS-01 (token scoped Zone:DNS:Edit on this zone only, stored on the Pi). Owner: `~/projects/piGate` (`networks/home-dryrun.md`).
+- `dns` A → `192.168.68.250` (pihole, unrelated) · `_acme-challenge.dns` TXT (pihole cert, unrelated; carried over)
+- `_domainconnect` CNAME → Squarespace's domain-connect hook (harmless)
+- 5x Google MX (`aspmx.l.google.com` + alt1–4) + 2x `google-site-verification` TXT — Workspace leftovers, kept
 
-**Keep**: Google Workspace MX records, Google Workspace Verification TXT.
+DNSSEC: off (was off before the move; leave it unless re-enabled through Cloudflare).
 
 ## OAuth / app pages (added 2026-06-17)
 
