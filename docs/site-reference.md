@@ -31,6 +31,8 @@ Built so the Google-account-automation tooling (served from other repos) has the
 - **`/app`** — home page. H1 is exactly **"JadedViber"** (must match the OAuth consent-screen app name). Explains purpose + lists requested Google scopes. This is the URL to set as the Google "Application home page".
 - **`/privacy`** — privacy policy. Contains the verbatim **Google API Services Limited Use** disclosure (data not sold/shared/used for ads, not used to train models). Effective 2026-06-17, contact jaded423@gmail.com.
 - **`/terms`** — terms of service.
+- **`snek-ascii-hq.png`** (780px, width-55 chars — same look as the nvim dashboard) and **`snek-ascii-xl.png`** (1410px, width-100) — high-res ASCII snek on pure `#000000`, for external branding (Uptime Kuma status-page logo, etc.). There is no stored ASCII source: the ASCII is rendered from `snek.png` by `ascii-image-converter` (the `-C -c -W 55` recipe the nvim dashboard uses). `snek-ascii.png` (470px) is the old screenshot used by the index easter egg — leave it. Regenerate:
+  `~/projects/go/bin/ascii-image-converter snek.png -C -c -W 55 --only-save -s . --save-bg 0,0,0,100` (the 4th `--save-bg` value is opacity 0–100, not alpha 0–255).
 - **`snek-logo.png`** — use this (not `snek.png`) for the OAuth logo. `snek.png` is transparent and renders **white** on Google's light consent card; the logo version is composited on the site's `#0a0a0a` background.
 
 The tooling that consumes these pages lives in another repo and is owned by a separate session — this repo only hosts the static pages + logo.

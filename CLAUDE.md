@@ -24,7 +24,7 @@ jadedViber/
 ├── homelab.html        # Proxmox cluster + network topology
 ├── now.html            # current focus (/now)
 ├── style.css           # Dracula-themed styles
-├── snek*.png           # mascot assets (snek-logo.png = OAuth/app icon)
+├── snek*.png           # mascot assets (snek-logo.png = OAuth/app icon; snek-ascii-{hq,xl}.png = hi-res ASCII on #000 for external branding — regen recipe in docs/site-reference.md)
 ├── sitemap.xml · CNAME
 ├── app/ privacy/ terms/  # clean-path pages for Google OAuth consent (dir/index.html)
 ├── projects/photo-editor.html
