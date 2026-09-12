@@ -33,7 +33,7 @@ Built so the Google-account-automation tooling (served from other repos) has the
 - **`/terms`** — terms of service.
 - **`snek-ascii-hq.png`** (780px, width-55 chars — same look as the nvim dashboard) and **`snek-ascii-xl.png`** (1410px, width-100) — high-res ASCII snek on pure `#000000`, for external branding (Uptime Kuma status-page logo, etc.). There is no stored ASCII source: the ASCII is rendered from `snek.png` by `ascii-image-converter` (the `-C -c -W 55` recipe the nvim dashboard uses). `snek-ascii.png` (470px) is the old screenshot used by the index easter egg — leave it. Regenerate:
   `~/projects/go/bin/ascii-image-converter snek.png -C -c -W 55 --only-save -s . --save-bg 0,0,0,100` (the 4th `--save-bg` value is opacity 0–100, not alpha 0–255).
-- **`snek-logo.png`** — use this (not `snek.png`) for the OAuth logo. `snek.png` is transparent and renders **white** on Google's light consent card; the logo version is composited on the site's `#0a0a0a` background.
+- **`snek-logo.png`** — the seed composited on the site background, for the Google OAuth consent card ONLY (it is not the brand mark and not an app icon — the brand is the ASCII render). Use this (not `snek.png`) there: `snek.png` is transparent and renders **white** on Google's light consent card; the logo version is composited on the site's `#0a0a0a` background.
 
 The tooling that consumes these pages lives in another repo and is owned by a separate session — this repo only hosts the static pages + logo.
 

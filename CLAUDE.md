@@ -24,7 +24,7 @@ jadedViber/
 ├── homelab.html        # Proxmox cluster + network topology
 ├── now.html            # current focus (/now)
 ├── style.css           # Dracula-themed styles
-├── snek*.png           # mascot assets (snek-logo.png = OAuth/app icon; snek-ascii-{hq,xl}.png = hi-res ASCII on #000 for external branding — regen recipe in docs/site-reference.md)
+├── snek*.png           # the snek is a SEED, not a logo — brand mark = the live ASCII render, deliberately non-uniform (never standardize; see brain `jadedviber-brand-snek-is-a-seed`). snek.png = seed · snek-logo.png = seed composited on #0a0a0a ONLY for Google's OAuth consent card (not an icon, not the brand) · snek-ascii-{hq,xl}.png = frozen ASCII renders on #000 for places that need a raster — regen recipe in docs/site-reference.md
 ├── sitemap.xml · CNAME
 ├── app/ privacy/ terms/  # clean-path pages for Google OAuth consent (dir/index.html)
 ├── projects/photo-editor.html
