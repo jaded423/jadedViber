@@ -24,7 +24,7 @@ jadedViber/
 ├── homelab.html        # Proxmox cluster + network topology
 ├── now.html            # current focus (/now)
 ├── style.css           # Dracula-themed styles
-├── snek*.png           # mascot assets (snek-logo.png = OAuth/app icon; snek-ascii-{hq,xl}.png = hi-res ASCII on #000 for external branding — regen recipe in docs/site-reference.md)
+├── snek*.png           # mascot assets (snek-logo.png = OAuth/app icon; snek-app-icon.png = launcher/PWA icon — vector snek trimmed to the inner 78% of a 512 square, survives Android's circle mask; the ASCII snek is unreadable at 48 dp — used for the piGate Kuma status page 2026-09-12; snek-ascii-{hq,xl}.png = hi-res ASCII on #000 for external branding — regen recipe in docs/site-reference.md)
 ├── sitemap.xml · CNAME
 ├── app/ privacy/ terms/  # clean-path pages for Google OAuth consent (dir/index.html)
 ├── projects/photo-editor.html
