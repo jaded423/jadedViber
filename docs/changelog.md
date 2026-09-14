@@ -11,6 +11,22 @@ All notable changes to jadedViber are documented here.
 
 ---
 
+## 2026-09-12 - snek-ascii-icon.png: the ASCII snek as a maskable phone/app icon
+
+**What changed:**
+- New `snek-ascii-icon.png` (1024×1024, 16-colour palette, ~82 KB): the ASCII render of the seed snek, trimmed, brightened ×2, strokes thickened, jet black edge to edge, snek filling ~86% of the square.
+- New `scripts/snek-icon.py` regenerates it from `snek.png` (ascii-image-converter `-C -c -W 55`, same recipe as the nvim dashboard) — every render differs a little on purpose.
+- `docs/site-reference.md` asset list + `CLAUDE.md` asset line updated.
+
+**Why:**
+- The Uptime Kuma status page on pi-gw1 uses it as the Android home-screen icon. It looked small inside a white disc — not the image's fault: Chrome pads any manifest icon lacking `"purpose": "any maskable"`. The icon side needed full-bleed black + heavier glyphs to survive the ~48 px launcher circle; the manifest side lives in piGate (Kuma patch). Joshua approved the look on the phone 2026-09-12.
+
+**Technical notes:**
+- Kuma's socket.io status-page save silently times out past ~100 KB, hence the palette/size cap. Pillow `optimize=True` made this image 4× larger; plain save + `quantize(16)` instead.
+- Detail + regen recipe: `docs/site-reference.md`; brain `android-home-icon-white-border-maskable`.
+
+---
+
 ## 2026-06-17 - OAuth app pages + logo
 
 **What changed:**
