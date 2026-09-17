@@ -11,6 +11,19 @@ All notable changes to jadedViber are documented here.
 
 ---
 
+## 2026-09-16 - Landing-page thesis; jadedviber.com is a live Workspace org; SPF + DKIM
+
+**What changed:**
+- `index.html` Philosophy block now leads with the thesis (Joshua's words, reworded): *"I have more ideas than know-how. So does almost everyone. The tools finally closed that gap, so I use them — the way a builder uses a concrete truck instead of a shovel. Everything on this site was made that way, on purpose."* Roadmap blog line no longer says "no AI slop" (Joshua: never label own work slop — it's the Luddite conversation, new era).
+- **DNS**: SPF TXT `v=spf1 include:_spf.google.com ~all` + DKIM TXT `google._domainkey` (2048-bit) added on the Cloudflare zone via the API (pi-gw1's zone token). The old Google MX + site-verification records were "Workspace leftovers" — the Workspace org on this domain is now **live again** (Business Starter, admin `j@jadedviber.com`).
+- Site direction (Cody 2026-09-16): jadedviber.com IS the showcase/value-log destination → `/projects/` pages queued: photo→web pipeline, headless-Claude cost gate, piGate, Point4 Doc→Webflow flow (global TODO Leg 4). Cartoony step illustrations wanted (NotebookLM/Nano Banana candidate).
+
+**Why:** Cody's "make a showcase site" advice + the org needed for a non-expiring OAuth app.
+
+**Files modified:** `index.html`, `docs/site-reference.md` (DNS section). Zone edits are remote (Cloudflare).
+
+---
+
 ## 2026-09-12 - snek-ascii-icon.png: the ASCII snek as a maskable phone/app icon
 
 **What changed:**

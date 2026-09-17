@@ -20,7 +20,8 @@ Records (17):
 - `status` A → `100.104.88.96` — **pi-gw1's Tailscale IP**: `https://status.jadedviber.com/` is the piGate Uptime Kuma status page, reachable only from the tailnet, cert via Caddy + Cloudflare DNS-01 (token scoped Zone:DNS:Edit on this zone only, stored on the Pi). Owner: `~/projects/piGate` (`networks/home-dryrun.md`).
 - `dns` A → `192.168.68.250` (pihole, unrelated) · `_acme-challenge.dns` TXT (pihole cert, unrelated; carried over)
 - `_domainconnect` CNAME → Squarespace's domain-connect hook (harmless)
-- 5x Google MX (`aspmx.l.google.com` + alt1–4) + 2x `google-site-verification` TXT — Workspace leftovers, kept
+- 5x Google MX (`aspmx.l.google.com` + alt1–4) + 2x `google-site-verification` TXT — the **jadedviber.com Google Workspace org** (Business Starter, re-subscribed 2026-09-16; admin/primary `j@jadedviber.com`, `joshua@` alias; brain `jadedviber-workspace-org`)
+- `@` TXT `v=spf1 include:_spf.google.com ~all` (SPF) + `google._domainkey` TXT (DKIM, 2048) — added 2026-09-16 via the Cloudflare API from pi-gw1's zone token (the DNS edit path for this zone: brain `jadedviber-dns-edit-path`)
 
 DNSSEC: off (was off before the move; leave it unless re-enabled through Cloudflare).
 
