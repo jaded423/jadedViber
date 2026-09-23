@@ -41,7 +41,7 @@
     .tm-lamp.idle { background: #50fa7b; box-shadow: 0 0 10px rgba(80,250,123,0.6); }
     .tm-lamp.carry { background: #ff79c6; box-shadow: 0 0 12px rgba(255,121,198,0.7); }
     .tm-lamp.return { background: #8be9fd; box-shadow: 0 0 10px rgba(139,233,253,0.6); }
-    .tm-tape-wrap { min-width: 0; overflow-x: auto; padding: 1rem 0 0.4rem; }
+    .tm-tape-wrap { min-width: 0; overflow: visible; padding: 1rem 0 0.4rem; }
     .tm-tape { display: grid; grid-template-columns: repeat(${CELLS}, auto); gap: 2px; position: relative; justify-content: center; }
     .tm-cell {
       width: clamp(9px, 2.3vw, 24px); height: clamp(16px, 3.4vw, 34px); display: flex; align-items: center; justify-content: center;

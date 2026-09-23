@@ -122,10 +122,9 @@ a.work-card:hover { border-color: #bd93f9; transform: translateY(-2px); }
   border-radius: 8px;
   padding: 1rem;
   margin: 1.25rem 0;
-  overflow-x: auto;
+  overflow: hidden;
 }
-.diagram svg { display: block; width: 100%; height: auto; min-width: 720px; }
-.diagram.small svg { min-width: 560px; }
+.diagram svg { display: block; width: 100%; height: auto; }
 .diagram-caption { color: #6272a4; font-size: 0.82rem; margin: -0.5rem 0 1.5rem; text-align: center; }
 
 .stack-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }

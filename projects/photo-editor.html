@@ -168,7 +168,9 @@
       border: 1px solid #1a1a1a;
       border-radius: 6px;
       padding: 1rem;
-      overflow-x: auto;
+      overflow: hidden;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
       margin: 1rem 0;
     }
     .project-body pre code {
@@ -382,15 +384,15 @@
 
       <h2>Architecture</h2>
 <pre><code>photoEditor/
-├── combined_processor.py    # Core pipeline: focal cut → rembg fallback → cleanup → resize → banner
-├── focal_cut.py             # Scene-aware cut: cues → SAM region → BiRefNet matte → defringe
-├── test_focal_cut.py        # Regression set for the cut (real shots, expected verdicts)
-├── tk_app/app.py            # Tkinter GUI: Browse · Start · Stop, progress + log
-├── build_app.sh             # PyInstaller build script (→ dist/PhotoEditor.app)
-├── PhotoEditor.spec         # PyInstaller spec (bundled font, models, icon)
+├── combined_processor.py   # pipeline: focal cut → rembg → cleanup → resize → banner
+├── focal_cut.py            # cues → SAM region → BiRefNet matte → defringe
+├── test_focal_cut.py       # regression set: real shots, expected verdicts
+├── tk_app/app.py           # Tkinter GUI: Browse · Start · Stop, progress + log
+├── build_app.sh            # PyInstaller build → dist/PhotoEditor.app
+├── PhotoEditor.spec        # bundled font, models, icon
 ├── PhotoEditor.icns · Inter-Bold.ttf
-├── INSTALL.md               # Gatekeeper walkthrough for the people who run it
-└── requirements.txt         # 36 deps</code></pre>
+├── INSTALL.md              # Gatekeeper walkthrough for the people who run it
+└── requirements.txt        # 36 deps</code></pre>
 
       <h2>Who runs it</h2>
       <div class="feature-grid">

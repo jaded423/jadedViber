@@ -18,10 +18,10 @@
 }
 
 /* Topology SVG */
+.topology-wrapper svg { display: block; width: 100%; height: auto; max-width: 100%; }
 .topology-wrapper {
   margin: 2rem 0;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
   border: 1px solid #2a2a2a;
   border-radius: 10px;
   background: #0d0d0d;
@@ -31,7 +31,6 @@
 #topology {
   width: 100%;
   height: auto;
-  min-width: 600px;
 }
 
 /* Node styles */
