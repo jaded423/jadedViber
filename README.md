@@ -16,7 +16,7 @@ Built end-to-end through dialogue with AI — no boilerplate, no templates. Drac
 
 - Vanilla HTML / CSS / JS (no framework, no build step)
 - Hosted on GitHub Pages
-- Custom interactions: terminal block reveal, ASCII snek easter egg, Turing machine binary counter (try typing `turing`)
+- Custom interactions: terminal block reveal, ASCII snek easter egg, command palette (`/`), Turing tribute (type `turing`, search it, or open `#turing`)
 
 ## Local dev
 

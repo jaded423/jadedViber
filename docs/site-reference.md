@@ -49,5 +49,7 @@ The tooling that consumes these pages lives in another repo and is owned by a se
 ## Interactive features
 
 - **Snek easter egg**: click logo → scanline block transition to ASCII art → fade back.
+- **Command palette** (`palette.js`, every content page; not the OAuth legal pages): `/` or `Ctrl+K`, the `/` chip in the nav (tap target for phones and for boxes where a compositor bind eats `t`), or `#search`. Jumps between pages (list = `PAGES` in the file). A query that matches nothing and reads `turing` opens the tribute.
+- **Turing tribute** (`turing.js`, every content page; replaced the 2026-05 binary-counter widget 2026-09-23): type `turing`, search it in the palette, or open `#turing`. Full-screen: ASCII portrait (frozen in the file; regen = `ascii-image-converter turing.jpg -c -W 56`, seed = the public-domain 1928 school photo from Wikimedia Commons `Alan_Turing_Aged_16.jpg`), name, 1912–1954, one quote, and a 32-cell tape running a binary-increment machine. **The number on the tape is the seconds since the site went live** (`EPOCH_S = 1773162378` = the CNAME commit, 2026-03-10 12:06:18 CST) — deliberately unexplained on the page; every visitor sees the same count. Head sits at the least-significant bit; an increment walks left through the carry and back. If the tab sleeps and the tape falls >15 s behind the clock it resyncs silently.
 - **Stack terminal reveal**: scroll into view → 20x20 grid blocks disappear left-to-right, row-by-row.
 - **Nav**: fixed top bar with smooth scroll to sections.

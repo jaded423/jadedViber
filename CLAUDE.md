@@ -24,6 +24,7 @@ jadedViber/
 ├── homelab.html        # Proxmox cluster + network topology
 ├── now.html            # current focus (/now)
 ├── style.css           # Dracula-themed styles
+├── palette.js · turing.js · turing.jpg   # `/` command palette + the Turing tribute (loaded on every content page); detail in docs/site-reference.md § Interactive features
 ├── snek*.png           # the snek is a SEED, not a logo — brand mark = the live ASCII render, deliberately non-uniform (never standardize; see brain `jadedviber-brand-snek-is-a-seed`). snek.png = seed · snek-logo.png = seed composited on #0a0a0a ONLY for Google's OAuth consent card (not an icon, not the brand) · snek-ascii-{hq,xl}.png = frozen ASCII renders on #000 for places that need a raster · snek-ascii-icon.png = full-bleed maskable phone/app icon (regen `scripts/snek-icon.py`) — regen recipe in docs/site-reference.md
 ├── sitemap.xml · CNAME
 ├── app/ privacy/ terms/  # clean-path pages for Google OAuth consent (dir/index.html)

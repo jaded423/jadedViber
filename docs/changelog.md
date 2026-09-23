@@ -11,6 +11,19 @@ All notable changes to jadedViber are documented here.
 
 ---
 
+## 2026-09-23 - Command palette + Turing tribute (replaces the binary-counter widget)
+
+**What changed:**
+- `palette.js` (new, loaded on every content page): `/`, `Ctrl+K`, a `/` chip injected into the nav (wraps links + chip + hamburger in `.nav-right`), or `#search` → a jump-to-page palette. Typing `turing` with no match opens the tribute.
+- `turing.js` (rewritten): full-screen tribute — frozen ASCII portrait (seed `turing.jpg`, PD 1928 school photo), name, dates, one quote, and a 32-cell tape running a binary-increment machine whose value is the seconds since the CNAME commit (2026-03-10 12:06:18 CST). Triggers: typed `turing` (kept), the palette, `#turing`. Esc / × / backdrop closes. No controls on purpose (Joshua: "less interactive, more flash").
+- Docs: `site-reference.md` § Interactive features (regen recipe + epoch), README, CLAUDE.md tree.
+
+**Why:** Joshua's Hyprland setup eats a bare `t`, and phones have no keyboard, so the typed trigger needed a clickable and linkable door; the palette is that door and a real nav improvement on its own. The counter as a hidden est.-date was Joshua's addition.
+
+**Files:** `palette.js`, `turing.js`, `turing.jpg`, script tags in `index.html` · `homelab.html` · `now.html` · `now-archive.html` · `projects/photo-editor.html` · `work/*.html`, `docs/site-reference.md`, `README.md`, `CLAUDE.md`.
+
+---
+
 ## 2026-09-23 - /work/ portfolio gallery + first case study (photos-to-web pipeline)
 
 **What changed:**
