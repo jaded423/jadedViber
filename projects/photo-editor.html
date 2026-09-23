@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tkinter Photo Editor for Mac — Bulk rembg Background Removal</title>
-  <meta name="description" content="macOS Tkinter app for bulk product-photo processing. rembg background removal, smart crop to 1000×1000, SKU banner stamping, webhook export. Open source, MIT.">
+  <title>PhotoEditor for Mac — Scene-Aware Product Photo Cutouts in Bulk</title>
+  <meta name="description" content="macOS Tkinter app for bulk product-photo processing. Scene-aware subject cut (SAM + BiRefNet), full-frame rembg fallback, smart crop to 1000×1000, SKU banner stamping. Open source, MIT.">
   <link rel="canonical" href="https://jadedviber.com/projects/photo-editor.html">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://jadedviber.com/projects/photo-editor.html">
-  <meta property="og:title" content="Tkinter Photo Editor for Mac — Bulk rembg Background Removal">
-  <meta property="og:description" content="macOS Tkinter app for bulk product-photo processing. rembg background removal, smart crop, SKU banner stamping, webhook export. Open source.">
+  <meta property="og:title" content="PhotoEditor for Mac — Scene-Aware Product Photo Cutouts in Bulk">
+  <meta property="og:description" content="macOS Tkinter app for bulk product-photo processing. Scene-aware subject cut (SAM + BiRefNet), smart crop, SKU banner stamping. Open source.">
   <meta property="og:image" content="https://jadedviber.com/og.png">
   <meta property="og:site_name" content="JadedViber">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tkinter Photo Editor for Mac — Bulk rembg Background Removal">
-  <meta name="twitter:description" content="macOS Tkinter app for bulk product-photo processing. rembg background removal, smart crop, SKU banner stamping, webhook export. Open source.">
+  <meta name="twitter:title" content="PhotoEditor for Mac — Scene-Aware Product Photo Cutouts in Bulk">
+  <meta name="twitter:description" content="macOS Tkinter app for bulk product-photo processing. Scene-aware subject cut (SAM + BiRefNet), smart crop, SKU banner stamping. Open source.">
   <meta name="twitter:image" content="https://jadedviber.com/og.png">
 
   <link rel="stylesheet" href="../style.css">
@@ -42,7 +42,7 @@
         "@type": "WebPage",
         "@id": "https://jadedviber.com/projects/photo-editor.html#webpage",
         "url": "https://jadedviber.com/projects/photo-editor.html",
-        "name": "Tkinter Photo Editor for Mac — Bulk rembg Background Removal",
+        "name": "PhotoEditor for Mac — Scene-Aware Product Photo Cutouts in Bulk",
         "isPartOf": { "@id": "https://jadedviber.com/#website" },
         "author": { "@id": "https://jadedviber.com/#identity" },
         "primaryImageOfPage": "https://jadedviber.com/og.png",
@@ -55,8 +55,8 @@
         "url": "https://jadedviber.com/projects/photo-editor.html",
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "macOS 12+",
-        "description": "Batch product-photo processor for macOS. rembg background removal, smart 1000×1000 crop, SKU banner stamping, webhook export.",
-        "softwareVersion": "1.0",
+        "description": "Batch product-photo processor for macOS. Scene-aware subject cut (SAM + BiRefNet), rembg fallback, smart 1000×1000 crop, SKU banner stamping.",
+        "softwareVersion": "1.0.0",
         "downloadUrl": "https://github.com/jaded423/photoEditor",
         "offers": {
           "@type": "Offer",
@@ -205,6 +205,8 @@
       line-height: 1.5;
       margin: 0;
     }
+    .project-body code { overflow-wrap: anywhere; }
+    .feature-card { min-width: 0; }
 
     .matrix-table {
       width: 100%;
@@ -298,6 +300,7 @@
   <nav class="topnav">
     <a href="../index.html" class="nav-brand">JADED</a>
     <div class="nav-links">
+      <a href="../work/">Work</a>
       <a href="../index.html#philosophy">Philosophy</a>
       <a href="../index.html#projects">Projects</a>
       <a href="../index.html#stack">Stack</a>
@@ -314,10 +317,10 @@
 
     <header class="project-hero">
       <h1>PhotoEditor</h1>
-      <p class="lead">macOS Tkinter app for bulk product-photo processing. Background removal via <code>rembg</code>, smart 1000×1000 crop, SKU banner stamping, webhook export. Point at a folder, hit Process — 200 photos in 5 minutes.</p>
+      <p class="lead">macOS Tkinter app for bulk product-photo processing. Finds the one hand-held product in a messy shot and cuts it out clean, falls back to plain background removal when there isn't one, squares everything to 1000×1000, and stamps the SKU. Point at a folder, hit Start.</p>
       <p class="meta">
         <a href="https://github.com/jaded423/photoEditor" target="_blank" rel="noopener">github.com/jaded423/photoEditor</a>
-        · Python 3.13 · Tkinter · MIT
+        · Python 3.13 · Tkinter · MIT · v1.0.0 · in daily use at a wholesale distributor
       </p>
     </header>
 
@@ -325,17 +328,18 @@
 
       <h2>Why it exists</h2>
       <p>Product photography for a multi-SKU catalog. Dozens of new SKUs per week. Each photo needs background removed, square-cropped, scaled to 1000×1000, optionally stamped with the SKU filename. Doing this by hand in Photoshop is death.</p>
-      <p>Built originally for an internal team that ships hundreds of new product photos per week. Open-sourced because the pattern is generic — anyone running a catalog with manual photo-prep grind can use it as-is or adapt it.</p>
+      <p>Built for an internal team that ships hundreds of new product photos per week, and it's the front door of the <a href="../work/photo-to-web.html">photos-to-product-pages pipeline</a>: the folder this app fills is the folder that automation watches. Open-sourced because the pattern is generic — anyone running a catalog with manual photo-prep grind can use it as-is or adapt it.</p>
 
       <h2>The pipeline</h2>
       <ol>
-        <li><strong>Background removal</strong> — <code>rembg</code> with the <code>birefnet-general</code> model. Filename prefix <code>smalls</code> skips this step (pile shots, bulk product fills the frame already).</li>
+        <li><strong>Focal cut</strong> (<code>focal_cut.py</code>, added Sept 2026) — finds the one hand-held product in the frame from cheap cues (colour classes, sharpness, texture, position), prompts <strong>SAM</strong> at it with negative points on the hand or glove, the pile behind, and the backdrop, then mattes a tight crop with <strong>BiRefNet</strong> for fine edges and defringes the backdrop colour. Hands, gloves, the pile and the tray are excluded. It declines, and hands off to step 2, on pile shots or anything it isn't sure about.</li>
+        <li><strong>Full-frame fallback</strong> — <code>rembg</code> with <code>birefnet-general</code> on the whole frame. Filename prefix <code>smalls</code> skips it (bulk product fills the frame already).</li>
         <li><strong>Bulk detection</strong> — if <code>rembg</code> kept &gt;85% coverage (no clear subject) OR &lt;5% coverage (over-removed), falls back to the original. Saves the "pile of nugs" case.</li>
         <li><strong>Component cleanup</strong> — keeps everything connected to the main subject. Strips only small distant fragments (alpha &gt; 30 threshold).</li>
-        <li><strong>Smart resize</strong> — crops to subject bounding box, scales to 900×900, centers on a 1000×1000 transparent canvas with a 50px border.</li>
+        <li><strong>Smart resize</strong> — a cut-out subject is cropped to its bounding box, scaled to 900×900 and centered on a 1000×1000 transparent canvas with a 50px border. A full-frame shot (pile, smalls, fallback) is center-cropped to fill the whole tile instead of letterboxing.</li>
         <li><strong>Outputs three folders</strong> — <code>pendingProducts/</code> (clean square PNG, catalog-ready), <code>edited/</code> (same image + SKU filename banner), <code>original/</code> (source files moved here, nothing destroyed).</li>
-        <li><strong>Webhook ping</strong> (optional) — POST to a configured URL with API-key header on batch completion. Drives downstream Odoo / Shopify / CMS sync.</li>
       </ol>
+      <p>Videos go through the same banner step. The model loads once per batch and runs on the CPU, about a second and a half per photo, so a rep processing a single shot never waits on a cold start.</p>
 
       <h2>What makes it different</h2>
       <p>The hard part wasn't calling <code>rembg</code> — it was the heuristic for "did the background-removal step actually <em>work</em>, or did it make things worse?" That came out of pairing with Claude on real failure cases. Two patterns broke naive bg-removal:</p>
@@ -344,6 +348,7 @@
         <li><strong>Scattered subjects</strong> — small fragments (loose nugs around a jar) got stripped as noise.</li>
       </ul>
       <p>The coverage-percentage fallback turned a manual triage step into one heuristic. The component-cleanup threshold preserved scatter while still stripping JPEG artifacts.</p>
+      <p>The 2026 addition was the harder version of the same question: in a photo of a gloved hand holding one bud over a tray of a hundred more, which pixels are <em>the product</em>? No single model answers that. The focal cut gets there by making two models agree: SAM decides <em>which object</em> from point prompts the cue stage placed, BiRefNet decides <em>the edge</em> on a tight crop at three to four times the resolution of a full-frame pass, and the result only ships if both landed on one solid blob. Otherwise it declines and the old path runs. Declining on purpose is what keeps it safe to run unattended.</p>
 
       <h2>Photo type matrix</h2>
       <table class="matrix-table">
@@ -351,7 +356,8 @@
           <tr><th>Type</th><th>Example filename</th><th>Behavior</th></tr>
         </thead>
         <tbody>
-          <tr><td>Single subject</td><td><code>jar-001.jpg</code></td><td>Full pipeline: bg removal + resize + banner</td></tr>
+          <tr><td>Hand-held product over a tray or pile</td><td><code>aaa-strain.jpg</code></td><td>Focal cut: product only, hand + pile + tray removed</td></tr>
+          <tr><td>Single subject on a clean backdrop</td><td><code>jar-001.jpg</code></td><td>Full-frame bg removal + resize + banner</td></tr>
           <tr><td>Bulk / pile</td><td><code>smalls-batch-3.jpg</code></td><td>Skip bg removal (filename prefix), resize only</td></tr>
           <tr><td>Scattered subject</td><td><code>jar-with-scatter.jpg</code></td><td>Full pipeline, keeps scattered pieces (cleanup tuned)</td></tr>
           <tr><td>Over-removed by rembg</td><td>(auto-detected)</td><td>Falls back to original</td></tr>
@@ -365,48 +371,50 @@
         <span class="stack-pill">rembg</span>
         <span class="stack-pill">birefnet-general</span>
         <span class="stack-pill">Pillow</span>
+        <span class="stack-pill">SAM (sam_vit_b, ONNX)</span>
+        <span class="stack-pill">BiRefNet</span>
+        <span class="stack-pill">OpenCV</span>
+        <span class="stack-pill">onnxruntime</span>
         <span class="stack-pill">PyInstaller</span>
-        <span class="stack-pill">requests</span>
         <span class="stack-pill">Inter Bold</span>
       </div>
-      <p>Native macOS Tkinter UI — no Electron, no web frontend, no 200MB Chromium runtime. Standalone <code>.app</code> built with PyInstaller (spec bundles font, model paths, icon). Settings live in <code>~/Library/Application Support/CombinedProcessor/settings.json</code>, outside the repo by design.</p>
+      <p>Native macOS Tkinter UI — no Electron, no web frontend, no 200MB Chromium runtime. Everything runs as ONNX on the CPU, no torch, so the standalone <code>.app</code> built with PyInstaller stays a single zip. There is no settings screen any more: the app remembers the last folder and that's the whole configuration. The old settings window and its n8n webhook went away in June 2026 when the pipeline moved to watching the output folder instead of being pinged.</p>
 
       <h2>Architecture</h2>
 <pre><code>photoEditor/
-├── combined_processor.py    # Core pipeline: rembg → cleanup → resize → banner
-├── network_utils.py         # Webhook HTTP client
-├── tk_app/
-│   ├── app.py               # Tkinter GUI
-│   └── settings.py          # JSON settings persistence
+├── combined_processor.py    # Core pipeline: focal cut → rembg fallback → cleanup → resize → banner
+├── focal_cut.py             # Scene-aware cut: cues → SAM region → BiRefNet matte → defringe
+├── test_focal_cut.py        # Regression set for the cut (real shots, expected verdicts)
+├── tk_app/app.py            # Tkinter GUI: Browse · Start · Stop, progress + log
 ├── build_app.sh             # PyInstaller build script (→ dist/PhotoEditor.app)
-├── PhotoEditor.icns         # App icon
-├── PhotoEditor.spec         # PyInstaller spec (bundled font, model)
-├── Inter-Bold.ttf           # Banner font
-└── requirements.txt         # 37 deps</code></pre>
+├── PhotoEditor.spec         # PyInstaller spec (bundled font, models, icon)
+├── PhotoEditor.icns · Inter-Bold.ttf
+├── INSTALL.md               # Gatekeeper walkthrough for the people who run it
+└── requirements.txt         # 36 deps</code></pre>
 
-      <h2>Configuration</h2>
+      <h2>Who runs it</h2>
       <div class="feature-grid">
         <div class="feature-card">
-          <h4>Default folder</h4>
-          <p>Where the file picker opens by default.</p>
+          <h4>The photographer</h4>
+          <p>Opens the app, picks the day's folder, hits Start. Comes back to three folders.</p>
         </div>
         <div class="feature-card">
-          <h4>Webhook URL</h4>
-          <p>POSTed to on batch completion — e.g. <code>https://hooks.example.com/photos-done</code>.</p>
+          <h4>The pipeline</h4>
+          <p><code>pendingProducts/</code> lands in a Drive folder that the <a href="../work/photo-to-web.html">15-minute tick</a> watches. No webhook, no button.</p>
         </div>
         <div class="feature-card">
-          <h4>API key + header</h4>
-          <p>Sent as the value of a configurable header (default: <code>Authorization</code>).</p>
+          <h4>The company</h4>
+          <p>A fork under the company's GitHub org carries the release. Upstream is mine; fixes flow both ways.</p>
         </div>
         <div class="feature-card">
           <h4>Logs</h4>
-          <p>Rolling debug logs under <code>~/Library/Logs/CombinedProcessor/</code>.</p>
+          <p>Rolling debug logs under <code>~/Library/Logs/CombinedProcessor/</code>, the first thing to send when a photo comes out wrong.</p>
         </div>
       </div>
 
       <h2>Install</h2>
       <h3>End users (Mac, no Python required)</h3>
-      <p>Download the standalone <code>.app</code> bundle and follow the macOS Gatekeeper walkthrough in <a href="https://github.com/jaded423/photoEditor/blob/master/INSTALL.md" target="_blank" rel="noopener">INSTALL.md</a>. The app is unsigned (no Apple Developer Program enrollment), so first launch needs Privacy &amp; Security → Open Anyway. One-time setup; subsequent launches are normal.</p>
+      <p>Download the standalone <code>.app</code> bundle from <a href="https://github.com/Elevated-Trading-LLC/photoEditor/releases" target="_blank" rel="noopener">GitHub Releases</a> (the <code>latest</code> link always points at the newest build) and follow the macOS Gatekeeper walkthrough in <a href="https://github.com/jaded423/photoEditor/blob/main/INSTALL.md" target="_blank" rel="noopener">INSTALL.md</a>. The app is unsigned (no Apple Developer Program enrollment), so first launch needs Privacy &amp; Security → Open Anyway. One-time setup; subsequent launches are normal.</p>
 
       <h3>Developers (build from source)</h3>
 <pre><code>git clone https://github.com/jaded423/photoEditor.git
@@ -420,15 +428,16 @@ cd photoEditor
 ./run_python.sh</code></pre>
 
       <h2>AI-assisted, end-to-end</h2>
-      <p>Built through iterative dialogue with Claude. Same approach behind everything on this site — see <a href="../index.html#philosophy">the philosophy</a> for more, or <a href="../now.html">what I'm building right now</a>.</p>
+      <p>Built through iterative dialogue with Claude, including the focal cut: the cue heuristics, the negative-prompt strategy and the "both models must agree" rule all came out of arguing over real failure photos. Same approach behind everything on this site — see <a href="../index.html#philosophy">the philosophy</a> for more, or <a href="../now.html">what I'm building right now</a>.</p>
 
       <div class="cta-row">
         <a href="https://github.com/jaded423/photoEditor" target="_blank" rel="noopener" class="cta primary">View on GitHub</a>
-        <a href="https://github.com/jaded423/photoEditor/blob/master/INSTALL.md" target="_blank" rel="noopener" class="cta secondary">Install guide</a>
+        <a href="https://github.com/Elevated-Trading-LLC/photoEditor/releases/latest/download/PhotoEditor.zip" class="cta secondary">Download the app</a>
       </div>
 
       <div class="crosslinks">
         <a href="../index.html">← Home</a> ·
+        <a href="../work/">Work</a> ·
         <a href="../index.html#projects">All projects</a> ·
         <a href="../homelab.html">Homelab</a> ·
         <a href="../now.html">/now</a>

@@ -11,6 +11,12 @@ All notable changes to jadedViber are documented here.
 
 ---
 
+## 2026-09-23 - photo-editor page refreshed to the Sept-2026 app (focal cut, no webhook, Releases)
+
+**What changed:** `projects/photo-editor.html` rewritten section by section against the photoEditor repo as it stands (the elevatedCore refactor did NOT touch the app; the app's own history did): focal cut (SAM + BiRefNet, 2026-09-04) leads the pipeline list + a "two models must agree" paragraph; the webhook/settings window is gone (stripped 2026-06-30) so title/description/OG/JSON-LD/config cards no longer claim it; "Configuration" → "Who runs it" (photographer · the 15-min tick watches the folder · company fork · logs); install points at GitHub Releases on the Elevated org (`v1.0.0`, `latest` link); architecture tree + 36 deps; stack pills gain SAM/BiRefNet/OpenCV/onnxruntime; nav + crosslinks gain Work; page links to `/work/photo-to-web.html` as its front door. **Overflow fix** (Joshua's screenshot): inline `code` now `overflow-wrap: anywhere`, feature cards `min-width: 0`.
+
+---
+
 ## 2026-09-23 - Command palette + Turing tribute (replaces the binary-counter widget)
 
 **What changed:**
