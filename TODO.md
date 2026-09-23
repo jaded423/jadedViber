@@ -4,6 +4,12 @@ Content strategy + build queue. Source of truth for what to ship next.
 
 ---
 
+## → POINTER: the client-facing `/work/` portfolio (from T0 2026-09-23)
+
+- [ ] **Build the `/work/` gallery Cody can send clients to.** Plan + page order + open decisions live in `~/.claude/plans/jadedviber-portfolio.md` (added 2026-09-23). This dir owns the pages; materials come from elevatedCore, point4Core, tct, the Dax graveyard. The `/projects/` queue below is the separate dev-tools track.
+
+---
+
 ## → POINTER: publish MemArch as a featured page (from T0 2026-07-09)
 - [x] **Move jadedviber.com DNS to Cloudflare → `status.jadedviber.com` for the piGate status page** (added 2026-09-10; DONE 2026-09-10 02:32). Zone on Cloudflare free (account jaded423@), all 17 records DNS-only, nameservers `lamar`/`thea.ns.cloudflare.com` set at Squarespace, `A status → 100.104.88.96`; Zone:DNS:Edit token lives only on pi-gw1. Record list → `docs/site-reference.md` § DNS. Evidence: `dig +short NS jadedviber.com` → cloudflare; cert `CN=status.jadedviber.com` issued 2026-09-10.
 - [ ] **jadedViber's leg = the GH-Pages publish** of the "MemArch" memory-architecture methodology.

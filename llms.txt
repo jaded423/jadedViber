@@ -11,6 +11,10 @@
 - [Homelab](https://jadedviber.com/homelab.html): Proxmox cluster + network topology
 - [Now](https://jadedviber.com/now.html): current focus and active projects
 
+## Work (case studies for businesses)
+- [Work](https://jadedviber.com/work/): systems built for real businesses in conversation with an LLM — pipeline, blog-from-a-Doc, compliance portal, rep order portal, LLM cost gate, piGate.
+- [Photos to product pages](https://jadedviber.com/work/photo-to-web.html): a 15-minute unattended pipeline from a Drive folder to Odoo, a Google Sheet, a customer photo folder, and WooCommerce product pages.
+
 ## Projects
 - [PhotoEditor](https://jadedviber.com/projects/photo-editor.html): macOS Tkinter app for bulk product-photo processing — rembg background removal, smart 1000×1000 crop, SKU banner stamping, webhook export.
 

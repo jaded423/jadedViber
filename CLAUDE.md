@@ -28,6 +28,7 @@ jadedViber/
 ├── sitemap.xml · CNAME
 ├── app/ privacy/ terms/  # clean-path pages for Google OAuth consent (dir/index.html)
 ├── projects/photo-editor.html
+├── work/               # client-facing case studies (index = the gallery Cody sends clients; work.css shared) — plan: ~/.claude/plans/jadedviber-portfolio.md
 └── docs/               # typed notes (see index)
 ```
 

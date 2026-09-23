@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work — Business Systems Built in Conversation with AI | JadedViber</title>
+  <meta name="description" content="Automation and web systems Joshua Brown built for real businesses: a photos-to-product-pages pipeline, a blog you write from one Google Doc, a Texas hemp compliance portal, a sales-rep order portal. All built by one person in conversation with an LLM.">
+  <link rel="canonical" href="https://jadedviber.com/work/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jadedviber.com/work/">
+  <meta property="og:title" content="Work — Business Systems Built in Conversation with AI">
+  <meta property="og:description" content="A photos-to-product-pages pipeline, a blog written from one Google Doc, a compliance portal, a sales-rep order portal. One person, an LLM, real businesses.">
+  <meta property="og:image" content="https://jadedviber.com/og.png">
+  <meta property="og:site_name" content="JadedViber">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Work — Business Systems Built in Conversation with AI">
+  <meta name="twitter:description" content="A photos-to-product-pages pipeline, a blog written from one Google Doc, a compliance portal, a sales-rep order portal. One person, an LLM, real businesses.">
+  <meta name="twitter:image" content="https://jadedviber.com/og.png">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="work.css">
+  <link rel="icon" type="image/png" href="../snek.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jadedviber.com/#website",
+        "url": "https://jadedviber.com",
+        "name": "JadedViber",
+        "publisher": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "https://jadedviber.com/work/#webpage",
+        "url": "https://jadedviber.com/work/",
+        "name": "Work — Business Systems Built in Conversation with AI",
+        "isPartOf": { "@id": "https://jadedviber.com/#website" },
+        "author": { "@id": "https://jadedviber.com/#identity" },
+        "description": "Automation and web systems built for real businesses by one person in conversation with an LLM."
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jadedviber.com/#identity",
+        "name": "Joshua Brown",
+        "url": "https://jadedviber.com",
+        "sameAs": [
+          "https://github.com/jaded423",
+          "https://nownownow.com/p/DTGZ"
+        ],
+        "knowsAbout": ["business automation", "Odoo", "WooCommerce", "Google Workspace APIs", "n8n", "Webflow", "Laravel", "Claude API", "homelab"]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jadedviber.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://jadedviber.com/work/" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="../index.html" class="nav-brand">JADED</a>
+    <div class="nav-links">
+      <a href="../work/">Work</a>
+      <a href="../index.html#philosophy">Philosophy</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#stack">Stack</a>
+      <a href="../homelab.html">Homelab</a>
+      <a href="../now.html">Now</a>
+      <a href="https://github.com/jaded423" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="container work-page">
+
+    <header class="work-hero">
+      <h1>Work</h1>
+      <p class="lead">Systems built for real businesses, by one person in conversation with an LLM. No dev team, no agency. Every one of these ran in production, unattended, and most of them still do.</p>
+      <p class="meta">This site is the same experiment: every page on it came out of a chat. <a href="../index.html#philosophy">Why that matters</a>.</p>
+    </header>
+
+    <section class="work-grid" aria-label="Case studies">
+
+      <a href="photo-to-web.html" class="work-card">
+        <span class="client">Elevated Trading · wholesale distributor</span>
+        <h3>Photos go in a folder. Product pages come out.</h3>
+        <p>A new product used to mean an afternoon across the website, the spreadsheet, and the ERP. Now the photo and lab report land in Drive and fifteen minutes later everything is updated, with an email saying what's still missing.</p>
+        <div class="flow"><span>Drive folder</span><em>→</em><span>15-min tick</span><em>→</em><span>Odoo · Sheet · site</span></div>
+        <div class="status"><b class="live">Live</b> · runs every 15 minutes on a cloud VM · handed off with docs</div>
+      </a>
+
+      <div class="work-card pending">
+        <span class="client">Point 4 · content brand</span>
+        <h3>A blog you write from one Google Doc.</h3>
+        <p>The writer opens a Doc, clicks <em>Publish</em> in a custom menu, and the post is live on the Webflow site. Pull a post back into the Doc to edit it. No CMS login, no settings, no tech.</p>
+        <div class="flow"><span>Google Doc</span><em>→</em><span>n8n</span><em>→</em><span>Webflow CMS</span></div>
+        <div class="status"><b class="handed">Live · handed off</b> · <span class="soon">write-up coming</span></div>
+      </div>
+
+      <div class="work-card pending">
+        <span class="client">Elevated Trading · Texas hemp compliance</span>
+        <h3>A compliance portal that keeps the batch trail.</h3>
+        <p>Lab reports, products, production records, and ingredients tied together the way the Texas regulation reads them, so the answer to "show me this batch" is one click instead of a folder hunt.</p>
+        <div class="flow"><span>COA</span><em>→</em><span>product</span><em>→</em><span>production record</span></div>
+        <div class="status"><b class="live">Live</b> · Laravel, Google sign-in · <span class="soon">write-up coming</span></div>
+      </div>
+
+      <div class="work-card pending">
+        <span class="client">Dax Distro · distributor</span>
+        <h3>An order portal for 1099 sales reps, on a spreadsheet backend.</h3>
+        <p>Reps signed in with email and PIN, built orders from live inventory with pricing and commission worked out for them, and every order landed in a Google Sheet the office already used. Leads flowed in from Gmail the same way.</p>
+        <div class="flow"><span>rep login</span><em>→</em><span>order builder</span><em>→</em><span>Google Sheets</span></div>
+        <div class="status"><b class="retired">Retired with the company</b> · <span class="soon">write-up coming</span></div>
+      </div>
+
+      <div class="work-card pending">
+        <span class="client">Elevated Trading · AI spend</span>
+        <h3>An LLM that only gets paid when something is new.</h3>
+        <p>Product blurbs written by Claude, gated so the API is called once per new item and never for a repeat. The pipeline stays AI-written and the bill stays flat.</p>
+        <div class="flow"><span>new item?</span><em>→</em><span>cache</span><em>→</em><span>API only if new</span></div>
+        <div class="status"><b class="live">Live</b> · <span class="soon">write-up coming</span></div>
+      </div>
+
+      <div class="work-card pending">
+        <span class="client">piGate · small sites</span>
+        <h3>Remote access in a box.</h3>
+        <p>A Raspberry Pi that gives a church, a family, or a small office a private network they can reach from anywhere, without a VPN subscription or a firewall to learn.</p>
+        <div class="flow"><span>Pi on the LAN</span><em>→</em><span>Tailscale</span><em>→</em><span>your phone</span></div>
+        <div class="status"><b class="building">In build</b> · pilot site next · <span class="soon">write-up coming</span></div>
+      </div>
+
+    </section>
+
+    <p class="work-aside">The tools behind these live on the <a href="../index.html#projects">Projects</a> page: the <a href="../projects/photo-editor.html">photo editor</a> that starts the pipeline, the <a href="../homelab.html">homelab</a> where the rest gets tested. What I'm on right now is on <a href="../now.html">/now</a>.</p>
+
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> jadedviber.com</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const hamburger = document.querySelector('.nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+    }
+  </script>
+
+</body>
+</html>

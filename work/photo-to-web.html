@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photos to Product Pages — An Unattended Odoo + WooCommerce Pipeline</title>
+  <meta name="description" content="Case study: a 15-minute automation that turns a product photo and lab report dropped in Google Drive into an Odoo record, a spreadsheet row, a customer photo folder, and a live WooCommerce product page. Built for a wholesale distributor, in conversation with Claude.">
+  <link rel="canonical" href="https://jadedviber.com/work/photo-to-web.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://jadedviber.com/work/photo-to-web.html">
+  <meta property="og:title" content="Photos to Product Pages — An Unattended Odoo + WooCommerce Pipeline">
+  <meta property="og:description" content="Drop a photo and a lab report in Drive. Fifteen minutes later the ERP, the spreadsheet, the customer folder, and the website are all updated. Nobody touched anything.">
+  <meta property="og:image" content="https://jadedviber.com/og.png">
+  <meta property="og:site_name" content="JadedViber">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Photos to Product Pages — An Unattended Odoo + WooCommerce Pipeline">
+  <meta name="twitter:description" content="Drop a photo and a lab report in Drive. Fifteen minutes later the ERP, the spreadsheet, the customer folder, and the website are all updated. Nobody touched anything.">
+  <meta name="twitter:image" content="https://jadedviber.com/og.png">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="work.css">
+  <link rel="icon" type="image/png" href="../snek.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jadedviber.com/#website",
+        "url": "https://jadedviber.com",
+        "name": "JadedViber",
+        "publisher": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jadedviber.com/work/photo-to-web.html#webpage",
+        "url": "https://jadedviber.com/work/photo-to-web.html",
+        "name": "Photos to Product Pages — An Unattended Odoo + WooCommerce Pipeline",
+        "isPartOf": { "@id": "https://jadedviber.com/#website" },
+        "author": { "@id": "https://jadedviber.com/#identity" },
+        "primaryImageOfPage": "https://jadedviber.com/og.png",
+        "about": { "@id": "https://jadedviber.com/work/photo-to-web.html#system" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://jadedviber.com/work/photo-to-web.html#system",
+        "name": "Photos-to-web pipeline (elevatedCore)",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Ubuntu",
+        "description": "A scheduled Python pipeline that reads Google Drive, Odoo, and a Google Sheet, and writes Odoo attachments, a Live Ref spreadsheet, a customer-facing Drive folder, and WooCommerce product pages every 15 minutes.",
+        "author": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jadedviber.com/#identity",
+        "name": "Joshua Brown",
+        "url": "https://jadedviber.com",
+        "sameAs": [ "https://github.com/jaded423", "https://nownownow.com/p/DTGZ" ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jadedviber.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://jadedviber.com/work/" },
+          { "@type": "ListItem", "position": 3, "name": "Photos to product pages", "item": "https://jadedviber.com/work/photo-to-web.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="../index.html" class="nav-brand">JADED</a>
+    <div class="nav-links">
+      <a href="../work/">Work</a>
+      <a href="../index.html#philosophy">Philosophy</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#stack">Stack</a>
+      <a href="../homelab.html">Homelab</a>
+      <a href="../now.html">Now</a>
+      <a href="https://github.com/jaded423" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="container work-page">
+
+    <header class="work-hero">
+      <h1>Photos go in a folder. Product pages come out.</h1>
+      <p class="lead">A wholesale distributor with a catalog that changes every week. Someone drops a product photo and its lab report into Google Drive. Fifteen minutes later the ERP has the report attached, the team's spreadsheet has the new row, the customer photo folder is updated, and the website has a product page with photo, lab results, a written description, and related products. Nobody touched anything.</p>
+      <p class="meta">Elevated Trading · 2025–2026 · Python · runs every 15 minutes on a cloud VM · <a href="../work/">← all work</a></p>
+    </header>
+
+    <article class="work-body">
+
+      <div class="story">
+        <div class="story-card">
+          <h4>The problem</h4>
+          <p>A new product needed a photo edited, a lab report pulled, inventory updated, then a page built by hand on the website, in the spreadsheet, and in the ERP. Three places, three chances to drift, one person's afternoon. And nobody noticed when a lab report expired.</p>
+        </div>
+        <div class="story-card">
+          <h4>What I built</h4>
+          <p>One scheduled job that watches Drive for the photo, the report, and a stock quantity. When all three are there it builds the page, updates the ERP, mirrors the photo for customers, and emails whoever added the product what's still missing and which reports are about to expire.</p>
+        </div>
+        <div class="story-card">
+          <h4>What changed</h4>
+          <p>The manual three-location update per product is gone. The expiring-report problem is gone. The person who used to spend the afternoon now spends it on customers, and the company kept the system after I moved on.</p>
+        </div>
+      </div>
+
+      <h2>The mechanism</h2>
+      <p>Every fifteen minutes one script walks its steps in order. On the left is what it reads. In the middle are the steps. On the right is what the company sees. A small local store in the middle is written once per tick and read by every later step, so the site, the sheet, and the customer folder never disagree with each other.</p>
+
+      <div class="diagram" role="figure" aria-label="The 15-minute tick: inputs on the left, ten ordered steps in the middle, outputs on the right.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 580" role="img" aria-label="The 15-minute tick in the middle, ten steps top to bottom. On the left the inputs it reads: GitHub master at step 0, the Shared Drive at step 1, Odoo at steps 3 and 3.5, the Claude API at step 4.5, the upsell sheet at step 5.5. On the right what it writes: the inventory store at steps 2 and 3, which every later step reads; from the store, This Just-in on the Live Ref sheet; the InStock folder at step 4; blurbs to the sheet's _Descriptions tab at 4.5; WooCommerce at steps 5 and 5.5; email at the end.">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+        </defs>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#f8f8f2}
+.lbl{font-size:11px;fill:#a3abc9}
+.box{fill:#12121a;stroke:#3a3a4a;stroke-width:1}
+.box-accent{fill:rgba(189,147,249,.10);stroke:#bd93f9;stroke-width:1.2}
+.box-blue{fill:rgba(139,233,253,.10);stroke:#8be9fd;stroke-width:1.2}
+.box-sage{fill:rgba(80,250,123,.12);stroke:#50fa7b;stroke-width:1.2}
+.box-dash{fill:none;stroke:#6272a4;stroke-dasharray:4 3}
+.edge{fill:none;stroke:#c8ccd8;stroke-width:1.2}
+.edge-faint{fill:none;stroke:#6272a4;stroke-width:1.2;stroke-dasharray:4 3}
+.t-strong{font-weight:600}
+.t-c{text-anchor:middle}
+</style>
+        <!-- inputs, left column x 20..250 -->
+        <text x="135" y="36" class="t-c lbl">INPUTS</text>
+        <rect x="20" y="60" width="230" height="40" rx="7" class="box"/>
+        <text x="135" y="78" class="t-c t-strong">GitHub · master</text>
+        <text x="135" y="93" class="t-c lbl">the code, read-only deploy key</text>
+        <rect x="20" y="110" width="230" height="40" rx="7" class="box"/>
+        <text x="135" y="128" class="t-c t-strong">Shared Drive</text>
+        <text x="135" y="143" class="t-c lbl">pending photos · the COA folders</text>
+        <rect x="20" y="210" width="230" height="90" rx="7" class="box"/>
+        <text x="135" y="232" class="t-c t-strong">Odoo</text>
+        <text x="135" y="248" class="t-c lbl">stock · variants · orders</text>
+        <text x="135" y="286" class="t-c lbl">the ERP, cloud-hosted</text>
+        <rect x="20" y="360" width="230" height="40" rx="7" class="box"/>
+        <text x="135" y="378" class="t-c t-strong">Claude API</text>
+        <text x="135" y="393" class="t-c lbl">Haiku, one blurb per new strain</text>
+        <rect x="20" y="460" width="230" height="40" rx="7" class="box"/>
+        <text x="135" y="478" class="t-c t-strong">Upsell sheet</text>
+        <text x="135" y="493" class="t-c lbl">the maintainer's related-product picks</text>
+
+        <!-- the tick, middle x 330..570 -->
+        <rect x="330" y="46" width="240" height="524" rx="9" class="box-accent"/>
+        <text x="450" y="34" class="t-c lbl">THE TICK · every 15 minutes, prod host only</text>
+        <g class="steps">
+          <circle cx="352" cy="80" r="10" class="box-sage"/><text x="352" y="84" class="t-c" style="font-size:10px;font-weight:600">0</text><text x="372" y="84" class="t-strong">pull the latest code</text>
+          <circle cx="352" cy="130" r="10" class="box-sage"/><text x="352" y="134" class="t-c" style="font-size:10px;font-weight:600">1</text><text x="372" y="134" class="t-strong">mirror the Drive folders</text>
+          <circle cx="352" cy="180" r="10" class="box-sage"/><text x="352" y="184" class="t-c" style="font-size:10px;font-weight:600">2</text><text x="372" y="184" class="t-strong">extract COA data → the store</text>
+          <circle cx="352" cy="230" r="10" class="box-sage"/><text x="352" y="234" class="t-c" style="font-size:10px;font-weight:600">3</text><text x="372" y="234" class="t-strong">sync inventory → the store</text>
+          <circle cx="352" cy="280" r="10" class="box-sage"/><text x="352" y="284" class="t-c" style="font-size:9px;font-weight:600">3.5</text><text x="372" y="284" class="t-strong">attach COAs in Odoo</text>
+          <circle cx="352" cy="330" r="10" class="box-sage"/><text x="352" y="334" class="t-c" style="font-size:10px;font-weight:600">4</text><text x="372" y="334" class="t-strong">mirror media to InStock</text>
+          <circle cx="352" cy="380" r="10" class="box-sage"/><text x="352" y="384" class="t-c" style="font-size:9px;font-weight:600">4.5</text><text x="372" y="384" class="t-strong">write blurbs → _Descriptions</text>
+          <circle cx="352" cy="430" r="10" class="box-sage"/><text x="352" y="434" class="t-c" style="font-size:10px;font-weight:600">5</text><text x="372" y="434" class="t-strong">reconcile WooCommerce</text>
+          <circle cx="352" cy="480" r="10" class="box-sage"/><text x="352" y="484" class="t-c" style="font-size:9px;font-weight:600">5.5</text><text x="372" y="484" class="t-strong">push upsells</text>
+          <circle cx="352" cy="530" r="10" class="box-dash"/><text x="352" y="534" class="t-c" style="font-size:9px;font-weight:600">end</text><text x="372" y="534" class="t-strong">notify on a change</text>
+        </g>
+        <text x="450" y="558" class="t-c lbl">each step non-fatal; failures named in sync.log</text>
+
+        <!-- input edges -->
+        <path d="M250 80 H330" class="edge" marker-end="url(#ar)"/><text x="290" y="72" class="t-c lbl">git pull</text>
+        <path d="M250 130 H330" class="edge" marker-end="url(#ar)"/><text x="290" y="122" class="t-c lbl">API mirror</text>
+        <path d="M250 230 H330" class="edge" marker-end="url(#ar)"/><text x="290" y="222" class="t-c lbl">stock</text>
+        <path d="M330 280 H250" class="edge" marker-end="url(#ar)"/><text x="290" y="294" class="t-c lbl">newest COA</text>
+        <path d="M250 380 H330" class="edge" marker-end="url(#ar)"/><text x="290" y="372" class="t-c lbl">blurbs</text>
+        <path d="M250 480 H330" class="edge" marker-end="url(#ar)"/><text x="290" y="472" class="t-c lbl">picks</text>
+
+        <!-- the store, near right column x 640..810 -->
+        <text x="815" y="36" class="t-c lbl">OUTPUTS</text>
+        <rect x="635" y="150" width="180" height="124" rx="7" class="box-blue"/>
+        <text x="725" y="172" class="t-c t-strong">Inventory store</text>
+        <text x="725" y="190" class="t-c lbl">inventory.db + inventory.json</text>
+        <text x="725" y="205" class="t-c lbl">products · label ready · coa</text>
+        <text x="725" y="220" class="t-c lbl">meta: tick time, tier order</text>
+        <text x="725" y="238" class="t-c lbl">written at 2 and 3, inside the lock</text>
+        <text x="725" y="252" class="t-c lbl">read by 4 · 5 · 5.5 and This Just-in</text>
+        <path d="M570 180 H635" class="edge" marker-end="url(#ar)"/><text x="602" y="172" class="t-c lbl">COA rows</text>
+        <path d="M570 230 H635" class="edge" marker-end="url(#ar)"/><text x="602" y="222" class="t-c lbl">stock rows</text>
+
+        <!-- the sheet, far right -->
+        <rect x="850" y="150" width="140" height="100" rx="7" class="box-blue"/>
+        <text x="920" y="172" class="t-c t-strong">Live Ref sheet</text>
+        <text x="920" y="190" class="t-c lbl">This Just-in · Notes</text>
+        <text x="920" y="205" class="t-c lbl">Categories · _Descriptions</text>
+        <text x="920" y="238" class="t-c lbl">the sheet the team reads</text>
+        <path d="M815 200 H850" class="edge" marker-end="url(#ar)"/><text x="832" y="192" class="t-c lbl" style="font-size:10px">Just-in</text>
+        <path d="M570 380 H825 V235 H850" class="edge" marker-end="url(#ar)"/><text x="700" y="372" class="t-c lbl">new blurbs → the _Descriptions tab</text>
+
+        <rect x="635" y="310" width="180" height="40" rx="7" class="box"/>
+        <text x="725" y="328" class="t-c t-strong">InStock folder</text>
+        <text x="725" y="343" class="t-c lbl">customer-facing media</text>
+        <path d="M570 330 H635" class="edge" marker-end="url(#ar)"/><text x="602" y="322" class="t-c lbl">photos</text>
+
+        <rect x="850" y="415" width="140" height="80" rx="7" class="box-blue"/>
+        <text x="920" y="437" class="t-c t-strong">elevatedtrading.com</text>
+        <text x="920" y="453" class="t-c lbl">WooCommerce pages</text>
+        <text x="920" y="468" class="t-c lbl">create · show · hide</text>
+        <text x="920" y="483" class="t-c lbl">photo · COA · upsells</text>
+        <path d="M570 480 H850" class="edge" marker-end="url(#ar)"/><text x="710" y="472" class="t-c lbl">related products</text>
+        <path d="M570 430 H850" class="edge" marker-end="url(#ar)"/><text x="710" y="422" class="t-c lbl">page per in-stock strain, from the store</text>
+
+        <rect x="850" y="510" width="140" height="40" rx="7" class="box"/>
+        <text x="920" y="528" class="t-c t-strong">Email</text>
+        <text x="920" y="543" class="t-c lbl">8am digest · failure notices</text>
+        <path d="M570 530 H850" class="edge" marker-end="url(#ar)"/><text x="710" y="522" class="t-c lbl">only when the set of failing steps changes</text>
+      </svg>
+      </div>
+      <p class="diagram-caption">Each step is non-fatal. A failure is named in the log, and an email goes out only when the set of failing steps changes, so nobody gets paged for a known blip.</p>
+
+      <h3>Step by step, in plain words</h3>
+      <ol>
+        <li><strong>Pull the latest code.</strong> The host updates itself from the repository before every run. Shipping a fix is a push; it's live within fifteen minutes.</li>
+        <li><strong>Mirror the Drive folders.</strong> Pending product photos and the lab-report folders are copied down so the rest of the run works on local files.</li>
+        <li><strong>Read the lab reports.</strong> Cannabinoid percentages and dates are extracted from each PDF into the store. Reports older than a year are flagged.</li>
+        <li><strong>Sync inventory.</strong> Stock, variants, and orders come from the ERP into the same store.</li>
+        <li><strong>Attach reports in the ERP.</strong> The newest report for each product is attached to its record, so the ERP is the source of truth for compliance too.</li>
+        <li><strong>Mirror media for customers.</strong> In-stock photos land in a shared folder the sales team sends to customers.</li>
+        <li><strong>Write descriptions.</strong> A new strain gets a short blurb from Claude, once. Existing blurbs are reused, so the API bill stays flat.</li>
+        <li><strong>Reconcile the website.</strong> Every in-stock product gets a page with photo, lab results, and description. Out-of-stock pages are hidden, not deleted.</li>
+        <li><strong>Push related products.</strong> The maintainer's picks from a spreadsheet become the "you might also like" strip.</li>
+        <li><strong>Notify.</strong> A morning digest and, only on change, a failure notice.</li>
+      </ol>
+
+      <h2>How it stays alive after I leave</h2>
+      <p>The whole system is one repository with one Python package underneath it. Connecting to the ERP, authenticating to Google, knowing which sheet is which: each of those lives in exactly one place instead of being copied into every job. The production host pulls the repository at the top of every run, so a change moves from a developer's laptop to production without anyone logging into the server.</p>
+
+      <div class="diagram small" role="figure" aria-label="A change moves from a developer's fork through a pull request to master, and the production host pulls master at step 0 of every tick.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 150" role="img" aria-label="A change moves from a fork through a pull request to master on GitHub, and the production host pulls master at step 0 of every tick. A hand edit on the production host makes the tree dirty, which stops that pull.">
+        <defs>
+          <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+        </defs>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#f8f8f2}
+.lbl{font-size:11px;fill:#a3abc9}
+.box{fill:#12121a;stroke:#3a3a4a;stroke-width:1}
+.box-accent{fill:rgba(189,147,249,.10);stroke:#bd93f9;stroke-width:1.2}
+.box-blue{fill:rgba(139,233,253,.10);stroke:#8be9fd;stroke-width:1.2}
+.box-sage{fill:rgba(80,250,123,.12);stroke:#50fa7b;stroke-width:1.2}
+.box-dash{fill:none;stroke:#6272a4;stroke-dasharray:4 3}
+.edge{fill:none;stroke:#c8ccd8;stroke-width:1.2}
+.edge-faint{fill:none;stroke:#6272a4;stroke-width:1.2;stroke-dasharray:4 3}
+.t-strong{font-weight:600}
+.t-c{text-anchor:middle}
+</style>
+        <rect x="20" y="40" width="170" height="56" rx="7" class="box"/>
+        <text x="105" y="64" class="t-c t-strong">A developer's fork</text>
+        <text x="105" y="82" class="t-c lbl">branch · edit · pytest</text>
+        <rect x="295" y="40" width="170" height="56" rx="7" class="box-blue"/>
+        <text x="380" y="64" class="t-c t-strong">GitHub · master</text>
+        <text x="380" y="82" class="t-c lbl">a maintainer merges</text>
+        <rect x="570" y="40" width="170" height="56" rx="7" class="box-accent"/>
+        <text x="655" y="64" class="t-c t-strong">Production host</text>
+        <text x="655" y="82" class="t-c lbl">step 0: git pull, every tick</text>
+        <path d="M190 68 H295" class="edge" marker-end="url(#ar2)"/><text x="242" y="60" class="t-c lbl">pull request</text>
+        <path d="M465 68 H570" class="edge" marker-end="url(#ar2)"/><text x="517" y="60" class="t-c lbl">live ≤ 15 min</text>
+        <path d="M655 96 V116" class="edge-faint"/><text x="655" y="130" class="t-c lbl" style="fill:#f1fa8c">a hand edit here = dirty tree</text><text x="655" y="144" class="t-c lbl" style="fill:#f1fa8c">= the pull stops, silently</text>
+      </svg>
+      </div>
+      <p class="diagram-caption">The one rule: never edit on the server. A hand edit makes the tree dirty and the self-update silently stops. The docs say so on page one.</p>
+
+      <p>The documentation is written for a reader who has never seen the system: what it is, how to install it, how to authenticate, what each job does, how to add a report, how to test end to end, what to do when something breaks. That's the part that makes it a handoff instead of a hostage situation.</p>
+
+      <h2>Stack</h2>
+      <div class="stack-pills">
+        <span class="stack-pill">Python 3</span>
+        <span class="stack-pill">SQLite</span>
+        <span class="stack-pill">Odoo XML-RPC</span>
+        <span class="stack-pill">Google Drive + Sheets API</span>
+        <span class="stack-pill">WooCommerce REST</span>
+        <span class="stack-pill">Claude API</span>
+        <span class="stack-pill">systemd timers</span>
+        <span class="stack-pill">Ubuntu VM</span>
+        <span class="stack-pill">GitHub</span>
+      </div>
+      <p>The front of the pipeline is a small desktop app that cleans up the raw photos before they go in the folder. That one is open source: <a href="../projects/photo-editor.html">PhotoEditor</a>.</p>
+
+      <h2>Built in conversation</h2>
+      <p>I'm not a career software engineer. This was designed, written, debugged, and documented through dialogue with Claude, one decision at a time, over about a year of evenings alongside a day job. The hard parts weren't the code. They were deciding what the source of truth is, what happens when a step fails at 2am, and how to hand the whole thing to someone else. Those are conversations, and in 2026 you can have them with a machine that never gets tired of the follow-up question.</p>
+      <p>Same approach behind everything on this site. <a href="../index.html#philosophy">The philosophy</a>, or <a href="../now.html">what I'm building right now</a>.</p>
+
+      <div class="cta-row">
+        <a href="../work/" class="cta primary">All work</a>
+        <a href="../projects/photo-editor.html" class="cta secondary">The photo editor that feeds it</a>
+      </div>
+
+      <div class="crosslinks">
+        <a href="../index.html">← Home</a> ·
+        <a href="../work/">Work</a> ·
+        <a href="../index.html#projects">Projects</a> ·
+        <a href="../now.html">/now</a>
+      </div>
+
+    </article>
+
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> jadedviber.com</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const hamburger = document.querySelector('.nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+    }
+  </script>
+
+</body>
+</html>

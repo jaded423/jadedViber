@@ -11,6 +11,19 @@ All notable changes to jadedViber are documented here.
 
 ---
 
+## 2026-09-23 - /work/ portfolio gallery + first case study (photos-to-web pipeline)
+
+**What changed:**
+- New `work/` track, additive to the site (hero + Philosophy untouched, per Joshua): `work/index.html` = the client-facing gallery Cody can hand a client (six cards: Elevated photos→web pipeline · Point 4 blog-from-a-Doc · TCT compliance portal · Dax rep order portal · LLM cost gate · piGate; one live link, five "write-up coming"), `work/photo-to-web.html` = case study #1 (problem / built / changed cards, the elevatedCore tick + deploy diagrams recolored to Dracula and inlined, plain-words step list, handoff section), `work/work.css` = shared page styles (mirrors the `/projects/` inline styles).
+- Homepage: **Work** nav link (first) + a two-card Work strip above Projects. `sitemap.xml` + `llms.txt` list both pages. `CLAUDE.md` site tree gains `work/`.
+- Naming decided: Elevated / Point 4 / TCT / Dax named openly (Joshua shows Cody after creation).
+
+**Why:** Cody's showcase ask (global TODO Leg 4) extended 2026-09-23 with "snapshots of the sites"; plan + page order + open decisions = `~/.claude/plans/jadedviber-portfolio.md`.
+
+**Files:** `work/{index.html,photo-to-web.html,work.css}`, `index.html`, `sitemap.xml`, `llms.txt`, `CLAUDE.md`. Diagrams generated from `elevatedCore/docs/{tick,deploy}-light.svg` by a scratch script (recolor = style-block swap); regenerate the same way if the source SVGs change.
+
+---
+
 ## 2026-09-16 - Landing-page thesis; jadedviber.com is a live Workspace org; SPF + DKIM
 
 **What changed:**
