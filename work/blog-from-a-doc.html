@@ -274,8 +274,8 @@ text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
       <h2>The mechanism</h2>
       <p>One automation does all of it, sitting between the Doc and the site. The Doc's menu sends it a single message: this Doc's id, or this post's id. Everything else is the workflow's problem, and the writer never sees any of it.</p>
 
-      <div class="diagram" role="figure" aria-label="The round trip: the Google Doc on the left, the n8n publisher in the middle with its Publish, Pull, List, and Rescan branches, Webflow on the right, the photo pool below the Doc, and Beehiiv drawn alongside with no connection.">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 480" role="img" aria-label="The round trip. On the left, one Google Doc: its Point 4 menu and the header block. In the middle, the publisher, one n8n workflow with four branches. Publish reads the Doc, checks the header, picks a cover, finds the post by its Post ID, creates it live or updates it in place, stamps the Post ID back into the Doc, and records the post. Pull fetches a post and rewrites the Doc. List feeds the picker. Rescan adds new photos to the pool. On the right, the Webflow Blog Posts collection and the live page. Below the Doc, the photo pool: four Drive folders and one sheet. Beehiiv sits alongside the site with no connection to any of it.">
+      <div class="diagram" role="figure" aria-label="The round trip: the Google Doc on the left, the n8n publisher in the middle with its Publish, Pull, List, and Rescan branches, Webflow on the right, the photo pool below the Doc, and Beehiiv drawn alongside, with the blog-to-newsletter link as the planned next step.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 480" role="img" aria-label="The round trip. On the left, one Google Doc: its Point 4 menu and the header block. In the middle, the publisher, one n8n workflow with four branches. Publish reads the Doc, checks the header, picks a cover, finds the post by its Post ID, creates it live or updates it in place, stamps the Post ID back into the Doc, and records the post. Pull fetches a post and rewrites the Doc. List feeds the picker. Rescan adds new photos to the pool. On the right, the Webflow Blog Posts collection and the live page. Below the Doc, the photo pool: four Drive folders and one sheet. Beehiiv sits alongside the site; wiring the blog to the newsletter is the planned next step.">
         <defs>
           <marker id="arB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
         </defs>
@@ -349,12 +349,12 @@ text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
         <text x="895" y="170" class="t-c lbl">the Title can change; the URL doesn't</text>
         <text x="895" y="190" class="t-c lbl" style="fill:#50fa7b">create = live, not draft</text>
 
-        <!-- Beehiiv: alongside, no edges, on purpose -->
+        <!-- Beehiiv: alongside; the blog→newsletter edge is the planned next step, so none is drawn yet -->
         <rect x="780" y="300" width="230" height="90" rx="7" class="box-dash"/>
         <text x="895" y="324" class="t-c t-strong" style="fill:#a3abc9">Beehiiv · alongside</text>
         <text x="895" y="342" class="t-c lbl">the signup forms on the site</text>
         <text x="895" y="357" class="t-c lbl">and the newsletter sends</text>
-        <text x="895" y="378" class="t-c lbl" style="fill:#f1fa8c">not connected to the blog, on purpose</text>
+        <text x="895" y="378" class="t-c lbl" style="fill:#f1fa8c">next up: the blog feeds the newsletter</text>
 
         <!-- edges: Doc ⇄ publisher -->
         <path d="M250 110 H350" class="edge" marker-end="url(#arB)"/><text x="300" y="102" class="t-c lbl">Publish · Doc id</text>
@@ -371,7 +371,7 @@ text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
         <path d="M350 385 H250" class="edge" marker-end="url(#arB)"/><text x="300" y="377" class="t-c lbl sm">mark used · registry</text>
       </svg>
       </div>
-      <p class="diagram-caption">Publish and Pull are the same road in two directions. Beehiiv, where the signup forms and the newsletter live, sits beside the site and is not connected to the blog. The newsletter-from-the-blog leg was designed and never built, and the manual says so.</p>
+      <p class="diagram-caption">Publish and Pull are the same road in two directions. Beehiiv, where the signup forms and the newsletter live, sits beside the site today. The next step, already designed and written up in the manual, wires the blog to the newsletter so a published post becomes a send. I ran out of runway at the company before building it.</p>
 
       <h3>Two rules the writer never has to think about</h3>
       <ul>
@@ -385,7 +385,7 @@ text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
       <h2>How it stays alive after I leave</h2>
       <p>The publisher is one n8n workflow, exported to a file that imports anywhere. The Doc's menu is one script, pasted once. The manual is written for a reader who has never seen the system: the five pieces, how a post goes live, how photos rotate, where everything lives and who holds the keys, a one-line health check to run from any terminal, and a symptom table for when it fails. The writer's guide and the administrator's runbook are separate documents, because those are two different people.</p>
-      <p>Two honesty notes, because they are in the manual too. The workflow runs as a guest on an automation server that belongs to another company, by agreement, and the manual says who to call. And Beehiiv, where the signup forms and the newsletter live, sits alongside the site: it is not connected to the blog. The newsletter-from-the-blog leg was designed and never built. Writing down what was never built is part of a handoff; it keeps the next person from rediscovering it as a mystery.</p>
+      <p>Two notes, because they are in the manual too. The workflow runs as a guest on an automation server that belongs to another company, by agreement, and the manual says who to call. And the newsletter leg is next: today Beehiiv runs the signup forms and the sends alongside the site, and the design for feeding it from the blog, so a published post becomes a newsletter, is written up and waiting. I ran out of time at the company before building it. Writing the next step down is part of a handoff; the person after me starts from a plan instead of a mystery.</p>
 
       <h2>Stack</h2>
       <div class="stack-pills">

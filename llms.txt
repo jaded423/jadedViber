@@ -14,7 +14,7 @@
 ## Work (case studies for businesses)
 - [Work](https://jadedviber.com/work/): systems built for real businesses in conversation with an LLM — pipeline, blog-from-a-Doc, compliance portal, rep order portal, LLM cost gate, piGate.
 - [Photos to product pages](https://jadedviber.com/work/photo-to-web.html): a 15-minute unattended pipeline from a Drive folder to Odoo, a Google Sheet, a customer photo folder, and WooCommerce product pages.
-- [A blog you write from one Google Doc](https://jadedviber.com/work/blog-from-a-doc.html): Point 4 case study — one Google Doc with a Publish menu, an n8n workflow that round-trips the Doc with Webflow CMS (create/update keyed on a Post ID, slug frozen at first publish), and a Drive photo pool that rotates cover photos. Beehiiv runs the signup forms and newsletter alongside, not wired to the blog.
+- [A blog you write from one Google Doc](https://jadedviber.com/work/blog-from-a-doc.html): Point 4 case study — one Google Doc with a Publish menu, an n8n workflow that round-trips the Doc with Webflow CMS (create/update keyed on a Post ID, slug frozen at first publish), and a Drive photo pool that rotates cover photos. Beehiiv runs the signup forms and newsletter alongside; feeding the newsletter from the blog is the designed next step.
 
 ## Projects
 - [PhotoEditor](https://jadedviber.com/projects/photo-editor.html): macOS Tkinter app for bulk product-photo processing — scene-aware subject cut (SAM + BiRefNet), rembg fallback, smart 1000×1000 crop, SKU banner stamping.
