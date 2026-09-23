@@ -54,6 +54,11 @@
     .tm-cell.head { background: #1a1a2a; border-color: #50fa7b; color: #50fa7b; }
     .tm-cell.head::before { content: "▾"; position: absolute; top: -1.05em; left: 50%; transform: translateX(-50%); color: #50fa7b; font-size: 0.95em; }
     .tm-cell.wrote { background: #2a1a2a; color: #ff79c6; border-color: #ff79c6; }
+    @media (max-width: 520px) {
+      .tm-tape { gap: 1px; }
+      .tm-cell { box-sizing: border-box; width: calc((100vw - 4.5rem) / 32); height: calc((100vw - 4.5rem) / 32 * 1.7); font-size: 7px; border-radius: 2px; }
+      .tm-tape-wrap { overflow: visible; }
+    }
   `;
 
   let backdrop = null, cells = [], lamp = null, timer = null;
