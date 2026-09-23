@@ -183,7 +183,13 @@
   document.addEventListener('DOMContentLoaded', () => {
     injectStyle();
     injectNavButton();
-    document.addEventListener('keydown', onKey);
+    // Capture phase, and keypress too: Firefox's quick-find listens on keypress, so keydown alone can lose the race.
+    document.addEventListener('keydown', onKey, true);
+    document.addEventListener('keypress', (e) => {
+      const t = e.target;
+      const typing = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+      if (e.key === '/' && !typing) e.preventDefault();
+    }, true);
     window.addEventListener('hashchange', checkHash);
     checkHash();
   });
