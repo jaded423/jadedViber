@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Blog You Write From One Google Doc — Point 4 Case Study</title>
+  <meta name="description" content="A writer publishes blog posts from one Google Doc with a custom Publish menu. n8n round-trips the Doc to Webflow CMS; cover photos rotate from a Drive pool.">
+  <link rel="canonical" href="https://jadedviber.com/work/blog-from-a-doc.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://jadedviber.com/work/blog-from-a-doc.html">
+  <meta property="og:title" content="A Blog You Write From One Google Doc — Point 4 Case Study">
+  <meta property="og:description" content="Write in a Google Doc, click Publish, and the post is live on the Webflow site in about a minute. Pull any post back to edit it. No CMS login, no settings, no tech.">
+  <meta property="og:image" content="https://jadedviber.com/og.png">
+  <meta property="og:site_name" content="JadedViber">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="A Blog You Write From One Google Doc — Point 4 Case Study">
+  <meta name="twitter:description" content="Write in a Google Doc, click Publish, and the post is live on the Webflow site in about a minute. Pull any post back to edit it. No CMS login, no settings, no tech.">
+  <meta name="twitter:image" content="https://jadedviber.com/og.png">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="work.css">
+  <link rel="icon" type="image/png" href="../snek.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jadedviber.com/#website",
+        "url": "https://jadedviber.com",
+        "name": "JadedViber",
+        "publisher": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jadedviber.com/work/blog-from-a-doc.html#webpage",
+        "url": "https://jadedviber.com/work/blog-from-a-doc.html",
+        "name": "A Blog You Write From One Google Doc — Point 4 Case Study",
+        "isPartOf": { "@id": "https://jadedviber.com/#website" },
+        "author": { "@id": "https://jadedviber.com/#identity" },
+        "primaryImageOfPage": "https://jadedviber.com/og.png",
+        "about": { "@id": "https://jadedviber.com/work/blog-from-a-doc.html#system" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://jadedviber.com/work/blog-from-a-doc.html#system",
+        "name": "Point 4 blog publisher (Google Doc → n8n → Webflow CMS)",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "A Google Apps Script menu in one Google Doc and an n8n workflow that round-trips the Doc with a Webflow CMS collection: Publish creates or updates a post keyed on a Post ID, Pull rewrites the Doc from a live post, and a Google Drive photo pool supplies rotating cover photos.",
+        "author": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jadedviber.com/#identity",
+        "name": "Joshua Brown",
+        "url": "https://jadedviber.com",
+        "sameAs": [ "https://github.com/jaded423", "https://nownownow.com/p/DTGZ" ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jadedviber.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://jadedviber.com/work/" },
+          { "@type": "ListItem", "position": 3, "name": "A blog you write from one Google Doc", "item": "https://jadedviber.com/work/blog-from-a-doc.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="../index.html" class="nav-brand">JADED</a>
+    <div class="nav-links">
+      <a href="../work/">Work</a>
+      <a href="../index.html#philosophy">Philosophy</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#stack">Stack</a>
+      <a href="../homelab.html">Homelab</a>
+      <a href="../now.html">Now</a>
+      <a href="https://github.com/jaded423" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="container work-page">
+
+    <header class="work-hero">
+      <h1>A blog you write from one Google Doc.</h1>
+      <p class="lead">A newsletter and content brand on Webflow. Four pillars, one writer. Webflow has no writing surface of its own, so I gave the writer one: a single Google Doc with a menu named <em>Point 4</em>. Write, click <em>Publish</em>, and the post is live at its own address in about a minute. Pick any published post from a sidebar and it comes back into the Doc for editing. The cover photo picks itself. The writer never opens Webflow.</p>
+      <p class="meta">Point 4 · 2026 · Google Apps Script · n8n · Webflow CMS · handed off with a writer's guide and a runbook · <a href="../work/">← all work</a></p>
+    </header>
+
+    <article class="work-body">
+
+      <div class="story">
+        <div class="story-card">
+          <h4>The problem</h4>
+          <p>The person writing the posts had no interest in learning a CMS, and shouldn't have to. Webflow's editor is a designer's tool. That left two bad options: the writer learns Webflow, or a developer sits in the loop for every post and every typo fix. And someone still had to pick a cover photo each time without repeating last week's.</p>
+        </div>
+        <div class="story-card">
+          <h4>What I built</h4>
+          <p>One Google Doc as the writing desk, with a three-item menu: Publish, Open Blog Picker, New. Behind Publish, an automation reads the Doc, checks the header, picks a cover, finds the post by its ID, creates or updates it in Webflow, and writes the ID back into the Doc so the next Publish updates the same post. Pull runs the other way: a live post comes back into the Doc.</p>
+        </div>
+        <div class="story-card">
+          <h4>What changed</h4>
+          <p>Ten posts published by the owner's team without me in the room, as of September 2026. Nobody logs into Webflow to write. It costs nothing beyond the services the brand already paid for, and it was handed off as a package: a manual for a reader who has never seen it, a writer's guide, and an administrator's runbook.</p>
+        </div>
+      </div>
+
+      <h2>What the writer sees</h2>
+      <p>Everything happens in one Doc. The header is the block between two fence lines: Title and Pillar are the writer's; Post ID and Slug belong to the system and get left alone. The body is written normally, and headings, bold, links, lists, and quotes carry over as they are. Anything under a NOTES line stays in the Doc and never publishes. The mockup below is drawn in this site's palette; the real thing is a plain Google Doc.</p>
+
+      <div class="diagram" role="figure" aria-label="Mockup of the MASTER Google Doc with its Point 4 menu open, the fenced header block, the Blog Picker sidebar, and the resulting post page on the right.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 560" role="img" aria-label="A mockup in the site's palette. Left: the MASTER Google Doc with its Point 4 menu open, showing Publish, Open Blog Picker, and New / Clear Doc; the header block between two fence lines with Title, Pillar, Subtitle, Post ID, and Slug; the body as placeholder lines with one red-ruled quote; a NOTES fence at the bottom. Docked at the right of the Doc, the Blog Picker sidebar with a post dropdown and a red Pull button. Right: the post as it lands on the site, with a cover photo picked from the Mindset pool, the pillar eyebrow, the title, the subtitle, and the body. An arrow labeled Publish goes from the menu to the post; an arrow labeled Pull goes from the post back to the sidebar.">
+        <defs>
+          <marker id="arA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+          <linearGradient id="coverA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#bd93f9" stop-opacity=".38"/><stop offset="1" stop-color="#8be9fd" stop-opacity=".22"/></linearGradient>
+        </defs>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#f8f8f2}
+.lbl{font-size:11px;fill:#a3abc9}
+.sm{font-size:10px}
+.xs{font-size:9px}
+.mono{font-family:"SF Mono","Fira Code",Menlo,Consolas,monospace;font-size:11px}
+.box{fill:#12121a;stroke:#3a3a4a;stroke-width:1}
+.bar{fill:#1a1a24}
+.paper{fill:#16161f;stroke:#2a2a3a;stroke-width:1}
+.drop{fill:#1a1a24;stroke:#bd93f9;stroke-width:1.2}
+.hot{fill:rgba(255,85,85,.16);stroke:#ff5555;stroke-width:1}
+.red{fill:#ff5555}
+.skel{fill:#2a2a3a}
+.fence{fill:#6272a4}
+.note{fill:#f1fa8c;font-size:10px}
+.sage{fill:#50fa7b}
+.edge{fill:none;stroke:#c8ccd8;stroke-width:1.2}
+.rule{stroke:#2a2a3a;stroke-width:1}
+.t-strong{font-weight:600}
+.t-c{text-anchor:middle}
+.t-e{text-anchor:end}
+</style>
+        <!-- the Doc window, x 20..740 -->
+        <rect x="20" y="20" width="720" height="520" rx="8" class="box"/>
+        <rect x="20" y="20" width="720" height="30" rx="8" class="bar"/>
+        <rect x="20" y="40" width="720" height="10" class="bar"/>
+        <text x="36" y="40" class="t-strong">~ | MASTER — Point 4 Blog</text>
+        <text x="724" y="40" class="lbl t-e">Google Docs · the brand's shared drive</text>
+        <!-- menu bar -->
+        <text x="36" y="70" class="lbl">File</text>
+        <text x="68" y="70" class="lbl">Edit</text>
+        <text x="100" y="70" class="lbl">View</text>
+        <text x="136" y="70" class="lbl">Insert</text>
+        <text x="180" y="70" class="lbl">Format</text>
+        <text x="228" y="70" class="lbl">Tools</text>
+        <text x="268" y="70" class="lbl">Extensions</text>
+        <text x="334" y="70" class="lbl">Help</text>
+        <rect x="366" y="56" width="62" height="20" rx="4" class="hot"/>
+        <text x="397" y="70" class="t-c t-strong red">Point 4</text>
+        <line x1="20" y1="82" x2="740" y2="82" class="rule"/>
+
+        <!-- the paper -->
+        <rect x="36" y="98" width="520" height="426" rx="3" class="paper"/>
+        <text x="56" y="126" class="mono fence">---</text>
+        <text x="56" y="146" class="mono">Title: You Can't Use What You Can't Define</text>
+        <text x="56" y="166" class="mono">Pillar: Mindset</text>
+        <text x="56" y="186" class="mono">Subtitle: A one-line summary, used as the description.</text>
+        <text x="56" y="206" class="mono">Post ID: 68f2…c1d4</text>
+        <text x="200" y="206" class="note">← stamped by the first Publish; never clear it</text>
+        <text x="56" y="226" class="mono">Slug: you-cant-use-what-you-cant-define</text>
+        <text x="330" y="226" class="note">← fixed at the first Publish</text>
+        <text x="56" y="246" class="mono fence">---</text>
+
+        <text x="56" y="280" class="t-strong" style="font-size:13px">Heading 2: a section title</text>
+        <rect x="56" y="294" width="440" height="6" rx="3" class="skel"/>
+        <rect x="56" y="308" width="470" height="6" rx="3" class="skel"/>
+        <rect x="56" y="322" width="410" height="6" rx="3" class="skel"/>
+        <rect x="56" y="336" width="455" height="6" rx="3" class="skel"/>
+        <rect x="56" y="356" width="3" height="34" class="red"/>
+        <rect x="70" y="362" width="300" height="6" rx="3" class="skel"/>
+        <rect x="70" y="376" width="230" height="6" rx="3" class="skel"/>
+        <text x="400" y="382" class="note">← the red-ruled pull quote</text>
+        <rect x="56" y="404" width="450" height="6" rx="3" class="skel"/>
+        <rect x="56" y="418" width="480" height="6" rx="3" class="skel"/>
+        <rect x="56" y="432" width="300" height="6" rx="3" class="skel"/>
+        <text x="56" y="470" class="mono fence">--- NOTES ---</text>
+        <text x="56" y="488" class="lbl sm">anything below this line stays in the Doc and never publishes</text>
+        <rect x="56" y="498" width="280" height="6" rx="3" class="skel"/>
+
+        <!-- the open menu (drawn after the paper so it sits on top) -->
+        <rect x="366" y="84" width="180" height="84" rx="6" class="drop"/>
+        <text x="382" y="106">Publish</text>
+        <text x="382" y="128">Open Blog Picker</text>
+        <line x1="374" y1="138" x2="538" y2="138" class="rule"/>
+        <text x="382" y="158">New / Clear Doc</text>
+
+        <!-- the Blog Picker sidebar, docked right -->
+        <rect x="575" y="230" width="165" height="240" rx="6" class="box"/>
+        <rect x="575" y="230" width="165" height="24" rx="6" class="bar"/>
+        <text x="587" y="246" class="t-strong sm">Blog Picker</text>
+        <text x="728" y="247" class="lbl t-e">×</text>
+        <text x="587" y="272" class="t-strong" style="font-size:11px">Pull a post into this Doc</text>
+        <rect x="587" y="282" width="141" height="22" rx="3" class="paper"/>
+        <text x="594" y="297" class="sm">You Can't Use… — Mindset</text>
+        <text x="722" y="297" class="lbl t-e">▾</text>
+        <rect x="587" y="312" width="141" height="24" rx="4" class="red"/>
+        <text x="657" y="328" class="t-c xs" style="font-weight:700;fill:#fff">Pull selected → overwrite Doc</text>
+        <text x="587" y="352" class="sm sage">Done. Edit, then Publish.</text>
+        <text x="587" y="374" class="lbl xs">Overwrites the Doc body with</text>
+        <text x="587" y="386" class="lbl xs">the chosen live post.</text>
+        <text x="587" y="398" class="lbl xs">Then edit &amp; Publish.</text>
+        <text x="587" y="430" class="lbl xs">The list comes from the registry</text>
+        <text x="587" y="442" class="lbl xs">the publisher keeps.</text>
+
+        <!-- the post page, x 800..1010 -->
+        <rect x="800" y="20" width="210" height="520" rx="8" class="box"/>
+        <rect x="800" y="20" width="210" height="30" rx="8" class="bar"/>
+        <rect x="800" y="40" width="210" height="10" class="bar"/>
+        <rect x="812" y="27" width="186" height="16" rx="8" class="paper"/>
+        <text x="905" y="39" class="t-c lbl xs">point4project.com/blog/you-cant-use…</text>
+        <rect x="812" y="62" width="186" height="104" rx="4" fill="url(#coverA)" stroke="#3a3a4a"/>
+        <text x="905" y="108" class="t-c lbl sm">cover photo</text>
+        <text x="905" y="122" class="t-c lbl xs">picked from the Mindset pool</text>
+        <text x="905" y="134" class="t-c lbl xs">least recently used, no repeats</text>
+        <rect x="812" y="182" width="18" height="2" class="red"/>
+        <text x="836" y="186" class="red t-strong xs" style="letter-spacing:.2em">MINDSET</text>
+        <text x="812" y="210" class="t-strong" style="font-size:14px">YOU CAN'T USE WHAT</text>
+        <text x="812" y="228" class="t-strong" style="font-size:14px">YOU CAN'T DEFINE</text>
+        <text x="812" y="248" class="lbl sm">A one-line summary, used as</text>
+        <text x="812" y="261" class="lbl sm">the description.</text>
+        <text x="812" y="284" class="lbl xs">Point 4 · Mindset · 2026</text>
+        <line x1="812" y1="294" x2="998" y2="294" class="rule"/>
+        <rect x="812" y="308" width="186" height="5" rx="2.5" class="skel"/>
+        <rect x="812" y="320" width="170" height="5" rx="2.5" class="skel"/>
+        <rect x="812" y="332" width="180" height="5" rx="2.5" class="skel"/>
+        <rect x="812" y="344" width="150" height="5" rx="2.5" class="skel"/>
+        <rect x="812" y="364" width="120" height="5" rx="2.5" class="skel"/>
+        <rect x="812" y="380" width="186" height="5" rx="2.5" class="skel"/>
+        <rect x="812" y="392" width="176" height="5" rx="2.5" class="skel"/>
+        <rect x="812" y="404" width="184" height="5" rx="2.5" class="skel"/>
+        <rect x="812" y="416" width="140" height="5" rx="2.5" class="skel"/>
+        <rect x="812" y="436" width="3" height="26" class="red"/>
+        <rect x="822" y="441" width="160" height="5" rx="2.5" class="skel"/>
+        <rect x="822" y="453" width="120" height="5" rx="2.5" class="skel"/>
+        <text x="905" y="500" class="t-c sage sm">live in about a minute</text>
+        <text x="905" y="514" class="t-c lbl xs">the next Publish updates it in place</text>
+        <text x="905" y="527" class="t-c lbl xs">the address never changes</text>
+
+        <!-- the two directions -->
+        <path d="M546 102 H800" class="edge" marker-end="url(#arA)"/>
+        <text x="770" y="94" class="t-c lbl">Publish</text>
+        <path d="M800 324 H740" class="edge" marker-end="url(#arA)"/>
+        <text x="770" y="341" class="t-c lbl">Pull</text>
+      </svg>
+      </div>
+      <p class="diagram-caption">Left: the Doc, its menu, the header block, the Blog Picker sidebar. Right: the post as it lands on the site, cover photo included. Publish goes right; Pull comes back.</p>
+
+      <h3>How a post goes live, from the writer's chair</h3>
+      <ol>
+        <li><strong>Open the Doc.</strong> New post: <em>Point 4 → New / Clear Doc</em>. Existing post: <em>Point 4 → Open Blog Picker</em>, choose it, click <em>Pull</em>. The Doc's contents are replaced by that post.</li>
+        <li><strong>Fill the header.</strong> Title, Pillar (one of Mindset, Health, Finance, Business), and an optional Subtitle. Leave Post ID and Slug alone.</li>
+        <li><strong>Write the post under the header.</strong> Headings, bold, italics, links, lists, and quotes all carry over as they are.</li>
+        <li><strong><em>Point 4 → Publish</em>.</strong> The post is live at its own address in about a minute. On a brand-new post the Doc gets a Post ID stamped into its header; that line is what makes the next Publish update the same post instead of creating a second one, so it stays.</li>
+      </ol>
+
+      <h2>The mechanism</h2>
+      <p>One automation does all of it, sitting between the Doc and the site. The Doc's menu sends it a single message: this Doc's id, or this post's id. Everything else is the workflow's problem, and the writer never sees any of it.</p>
+
+      <div class="diagram" role="figure" aria-label="The round trip: the Google Doc on the left, the n8n publisher in the middle with its Publish, Pull, List, and Rescan branches, Webflow on the right, the photo pool below the Doc, and Beehiiv drawn alongside with no connection.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 480" role="img" aria-label="The round trip. On the left, one Google Doc: its Point 4 menu and the header block. In the middle, the publisher, one n8n workflow with four branches. Publish reads the Doc, checks the header, picks a cover, finds the post by its Post ID, creates it live or updates it in place, stamps the Post ID back into the Doc, and records the post. Pull fetches a post and rewrites the Doc. List feeds the picker. Rescan adds new photos to the pool. On the right, the Webflow Blog Posts collection and the live page. Below the Doc, the photo pool: four Drive folders and one sheet. Beehiiv sits alongside the site with no connection to any of it.">
+        <defs>
+          <marker id="arB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+        </defs>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#f8f8f2}
+.lbl{font-size:11px;fill:#a3abc9}
+.sm{font-size:10px}
+.box{fill:#12121a;stroke:#3a3a4a;stroke-width:1}
+.box-accent{fill:rgba(189,147,249,.10);stroke:#bd93f9;stroke-width:1.2}
+.box-blue{fill:rgba(139,233,253,.10);stroke:#8be9fd;stroke-width:1.2}
+.box-dash{fill:none;stroke:#6272a4;stroke-dasharray:4 3}
+.edge{fill:none;stroke:#c8ccd8;stroke-width:1.2}
+.t-strong{font-weight:600}
+.t-c{text-anchor:middle}
+</style>
+        <!-- the Doc, left -->
+        <text x="135" y="36" class="t-c lbl">THE WRITING DESK</text>
+        <rect x="20" y="50" width="230" height="150" rx="7" class="box-blue"/>
+        <text x="135" y="74" class="t-c t-strong">One Google Doc</text>
+        <text x="135" y="92" class="t-c lbl">~ | MASTER — Point 4 Blog</text>
+        <text x="135" y="116" class="t-c lbl">menu Point 4:</text>
+        <text x="135" y="131" class="t-c lbl">Publish · Open Blog Picker · New</text>
+        <text x="135" y="155" class="t-c lbl">header: Title · Pillar · Subtitle</text>
+        <text x="135" y="170" class="t-c lbl">Post ID · Slug (the system's, left alone)</text>
+        <text x="135" y="190" class="t-c lbl" style="fill:#f1fa8c">the writer never opens Webflow</text>
+
+        <!-- the photo pool, bottom-left -->
+        <rect x="20" y="290" width="230" height="140" rx="7" class="box"/>
+        <text x="135" y="314" class="t-c t-strong">The photo pool</text>
+        <text x="135" y="334" class="t-c lbl">four Drive folders, one per pillar</text>
+        <text x="135" y="349" class="t-c lbl">Mindset · Health · Finance · Business</text>
+        <text x="135" y="373" class="t-c lbl">one Google Sheet:</text>
+        <text x="135" y="388" class="t-c lbl">All — every photo, used_at, asset id</text>
+        <text x="135" y="403" class="t-c lbl">blogs — the registry of every post</text>
+        <text x="135" y="422" class="t-c lbl" style="fill:#f1fa8c">add a cover = drop a file in a folder</text>
+
+        <!-- the publisher, middle -->
+        <text x="515" y="36" class="t-c lbl">THE PUBLISHER · one n8n workflow, 28 nodes</text>
+        <rect x="350" y="50" width="330" height="380" rx="9" class="box-accent"/>
+        <text x="366" y="76" class="t-strong" style="fill:#50fa7b">Publish</text>
+        <text x="366" y="94" class="lbl">read the Doc · check the header</text>
+        <text x="366" y="109" class="lbl">pick a cover (an image in the body wins,</text>
+        <text x="366" y="124" class="lbl">else the least-recently-used of the pillar)</text>
+        <text x="366" y="139" class="lbl">find a post with the same Post ID</text>
+        <text x="366" y="154" class="lbl">none → create, live · found → update in place</text>
+        <text x="366" y="169" class="lbl">stamp the Post ID into the Doc</text>
+        <text x="366" y="184" class="lbl">registry row · mark the photo used</text>
+
+        <text x="366" y="216" class="t-strong" style="fill:#8be9fd">Pull</text>
+        <text x="366" y="234" class="lbl">fetch the chosen post from Webflow</text>
+        <text x="366" y="249" class="lbl">rewrite the Doc: header + body</text>
+
+        <text x="366" y="281" class="t-strong" style="fill:#8be9fd">List</text>
+        <text x="366" y="299" class="lbl">the registry → the picker's dropdown</text>
+
+        <text x="366" y="331" class="t-strong" style="fill:#bd93f9">Rescan</text>
+        <text x="366" y="349" class="lbl">on every Publish: new files in the pillar</text>
+        <text x="366" y="364" class="lbl">folder become new rows in the pool</text>
+        <text x="366" y="379" class="lbl">runs beside the write; can never block it</text>
+
+        <text x="515" y="416" class="t-c lbl">one webhook · three Google credentials · one Webflow token</text>
+
+        <!-- the site, right -->
+        <text x="895" y="36" class="t-c lbl">THE SITE</text>
+        <rect x="780" y="50" width="230" height="150" rx="7" class="box-blue"/>
+        <text x="895" y="74" class="t-c t-strong">Webflow CMS · Blog Posts</text>
+        <text x="895" y="92" class="t-c lbl">the canonical store of every post</text>
+        <text x="895" y="116" class="t-c lbl">point4project.com/blog/&lt;slug&gt;</text>
+        <text x="895" y="131" class="t-c lbl">live in about a minute</text>
+        <text x="895" y="155" class="t-c lbl">slug fixed at the first Publish</text>
+        <text x="895" y="170" class="t-c lbl">the Title can change; the URL doesn't</text>
+        <text x="895" y="190" class="t-c lbl" style="fill:#50fa7b">create = live, not draft</text>
+
+        <!-- Beehiiv: alongside, no edges, on purpose -->
+        <rect x="780" y="300" width="230" height="90" rx="7" class="box-dash"/>
+        <text x="895" y="324" class="t-c t-strong" style="fill:#a3abc9">Beehiiv · alongside</text>
+        <text x="895" y="342" class="t-c lbl">the signup forms on the site</text>
+        <text x="895" y="357" class="t-c lbl">and the newsletter sends</text>
+        <text x="895" y="378" class="t-c lbl" style="fill:#f1fa8c">not connected to the blog, on purpose</text>
+
+        <!-- edges: Doc ⇄ publisher -->
+        <path d="M250 110 H350" class="edge" marker-end="url(#arB)"/><text x="300" y="102" class="t-c lbl">Publish · Doc id</text>
+        <path d="M350 150 H250" class="edge" marker-end="url(#arB)"/><text x="300" y="142" class="t-c lbl">stamp Post ID</text>
+        <path d="M350 180 H250" class="edge" marker-end="url(#arB)"/><text x="300" y="172" class="t-c lbl">Pull: rewrite</text>
+
+        <!-- edges: publisher ⇄ Webflow -->
+        <path d="M680 110 H780" class="edge" marker-end="url(#arB)"/><text x="730" y="102" class="t-c lbl">create · update</text>
+        <path d="M780 150 H680" class="edge" marker-end="url(#arB)"/><text x="730" y="142" class="t-c lbl">fetch for Pull</text>
+        <path d="M780 180 H680" class="edge" marker-end="url(#arB)"/><text x="730" y="172" class="t-c lbl">list, to dedupe</text>
+
+        <!-- edges: pool ⇄ publisher -->
+        <path d="M250 340 H350" class="edge" marker-end="url(#arB)"/><text x="300" y="332" class="t-c lbl sm">read · rescan</text>
+        <path d="M350 385 H250" class="edge" marker-end="url(#arB)"/><text x="300" y="377" class="t-c lbl sm">mark used · registry</text>
+      </svg>
+      </div>
+      <p class="diagram-caption">Publish and Pull are the same road in two directions. Beehiiv, where the signup forms and the newsletter live, sits beside the site and is not connected to the blog. The newsletter-from-the-blog leg was designed and never built, and the manual says so.</p>
+
+      <h3>Two rules the writer never has to think about</h3>
+      <ul>
+        <li><strong>Post ID is the post's identity.</strong> Blank means "new post"; the publisher fills it in, and Pull fills it in too. A Doc with a Post ID always updates the post it names. Clear it by mistake and you get a second copy; the manual says exactly how to fix that.</li>
+        <li><strong>Slug is fixed the first time.</strong> The last part of the address is made from the Title at the first Publish and then never changes. The Title can change later without moving the URL, so nothing anyone shared goes dead.</li>
+      </ul>
+
+      <h2>How the cover photo picks itself</h2>
+      <p>Each pillar has a Drive folder of cover photos. On every Publish the workflow rescans that folder and adds anything new to a bookkeeping sheet, one row per photo with a used-on stamp. Then it picks the photo that has gone longest without being used: never-used first, then the oldest stamp, with a random tiebreak. Every photo in the pillar gets used before any repeats. After the post is written it stamps that row and saves the Webflow asset id, so the same photo picked again later reuses the same upload instead of making a copy.</p>
+      <p>To add covers, drop files in the folder. To force a specific one, put the image in the Doc; an image in the body always wins. To push a photo to the front of the line, clear its stamp. That is the whole photo workflow, and none of it involves opening Webflow either.</p>
+
+      <h2>How it stays alive after I leave</h2>
+      <p>The publisher is one n8n workflow, exported to a file that imports anywhere. The Doc's menu is one script, pasted once. The manual is written for a reader who has never seen the system: the five pieces, how a post goes live, how photos rotate, where everything lives and who holds the keys, a one-line health check to run from any terminal, and a symptom table for when it fails. The writer's guide and the administrator's runbook are separate documents, because those are two different people.</p>
+      <p>Two honesty notes, because they are in the manual too. The workflow runs as a guest on an automation server that belongs to another company, by agreement, and the manual says who to call. And Beehiiv, where the signup forms and the newsletter live, sits alongside the site: it is not connected to the blog. The newsletter-from-the-blog leg was designed and never built. Writing down what was never built is part of a handoff; it keeps the next person from rediscovering it as a mystery.</p>
+
+      <h2>Stack</h2>
+      <div class="stack-pills">
+        <span class="stack-pill">Google Docs</span>
+        <span class="stack-pill">Google Apps Script</span>
+        <span class="stack-pill">n8n</span>
+        <span class="stack-pill">Webflow CMS API</span>
+        <span class="stack-pill">Google Docs API</span>
+        <span class="stack-pill">Google Sheets</span>
+        <span class="stack-pill">Google Drive</span>
+        <span class="stack-pill">JSON webhook</span>
+      </div>
+      <p>The same shape as the <a href="photo-to-web.html">photos-to-web pipeline</a>: one automation in the middle, plain services on either side, and a manual that assumes the reader has never met the system.</p>
+
+      <h2>Built in conversation</h2>
+      <p>Same method as everything on this site. The workflow's twenty-eight nodes, the Doc's menu script, and the three manuals were designed and written in dialogue with Claude. The hard part wasn't wiring an API. It was deciding what the writer should never have to see: no ids, no settings, no second copy of a post. Those are design conversations, and I had them with a machine that asks the follow-up question every time.</p>
+      <p><a href="../index.html#philosophy">The philosophy</a>, or <a href="../now.html">what I'm building right now</a>.</p>
+
+      <div class="cta-row">
+        <a href="../work/" class="cta primary">All work</a>
+        <a href="photo-to-web.html" class="cta secondary">The photos-to-web pipeline</a>
+      </div>
+
+      <div class="crosslinks">
+        <a href="../index.html">← Home</a> ·
+        <a href="../work/">Work</a> ·
+        <a href="../index.html#projects">Projects</a> ·
+        <a href="../now.html">/now</a>
+      </div>
+
+    </article>
+
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> jadedviber.com</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const hamburger = document.querySelector('.nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+    }
+  </script>
+
+  <script src="/palette.js?v=2"></script>
+  <script src="/turing.js?v=4"></script>
+</body>
+</html>

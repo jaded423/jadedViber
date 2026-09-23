@@ -11,6 +11,20 @@ All notable changes to jadedViber are documented here.
 
 ---
 
+## 2026-09-23 - /work/ case study #3: Point 4, a blog you write from one Google Doc
+
+**What changed:**
+- New `work/blog-from-a-doc.html` = plan page 3: the Point 4 Doc → n8n → Webflow round trip told from the writer's chair. Story cards (problem / built / changed; the "ten posts by the owner's team without me in the room" number is `fathom/value-log.md` §5). **Picture A** = a Claude-drawn inline-SVG mockup in the site palette: the MASTER Doc with the Point 4 menu open (Publish · Open Blog Picker · New / Clear Doc), the fenced header block with the Post ID / Slug notes, skeleton body + one red-ruled quote + the NOTES fence, the Blog Picker sidebar (dropdown + red Pull button, as the bound script draws it), and the resulting post page with its pooled cover; Publish → / ← Pull. **Picture B** = the round-trip SVG: Doc ⇄ publisher (Publish / Pull / List / Rescan branches, 28 nodes) ⇄ Webflow, the photo pool below the Doc, Beehiiv as a detached dashed box. Then the writer's four steps, the two rules (Post ID identity, slug frozen at first publish), photo rotation (never-used first → oldest `used_at` → random tiebreak; body image wins; asset id reused), the handoff section, stack pills, "built in conversation". Every fact from `point4Core/{README,AUTHORING,RUNBOOK}.md` + the live export; no staff names on the page (roles only, same as the package).
+- **Beehiiv fence honored:** the page says signup forms + the newsletter live on Beehiiv alongside the site, that it is not connected to the blog, and that the newsletter-from-the-blog leg was designed and never built. No Doc→Beehiiv edge anywhere. point4pi not mentioned (sibling card later, per the plan).
+- `work/index.html`: the Point 4 card is now a live link, status line rewritten. `sitemap.xml` + `llms.txt` list the page.
+- Checked before push: title 57 / description 156 chars, canonical + OG + Twitter + JSON-LD (`WebPage` → `SoftwareApplication`, Person `#identity`, breadcrumbs), headless Chromium at 1280 and 390 wide → scrollWidth == clientWidth and no SVG `<text>` exits its viewBox (site rule: no horizontal scroll; both diagrams scale to the container).
+
+**Why:** plan `~/.claude/plans/jadedviber-portfolio.md` page 3; Cody review comes after this page.
+
+**Files:** `work/blog-from-a-doc.html` (new), `work/index.html`, `sitemap.xml`, `llms.txt`.
+
+---
+
 ## 2026-09-23 - Site rule: no horizontal scroll, anywhere
 
 **What changed (Joshua: "they should never exist"):** every `overflow-x: auto` on the site is gone. `work/work.css` diagrams scale to the container (no `min-width`, `overflow: hidden`); `homelab.css` topology wrapper likewise and `#topology` lost its 600px `min-width`; `projects/photo-editor.html` `pre` blocks are `pre-wrap` + `overflow-wrap: anywhere`, and the architecture tree's comments were shortened so desktop never wraps; the tribute tape wrap is `overflow: visible` (cells already size to the viewport on phones). Tradeoff accepted: on a phone the pipeline diagram is a thumbnail; rotate the phone for detail.
