@@ -11,6 +11,23 @@ All notable changes to jadedViber are documented here.
 
 ---
 
+## 2026-09-23 - /work/ case study #4: TCT, a compliance portal that keeps the batch trail
+
+**What changed:**
+- New `work/compliance-portal.html` = plan page 4, on the `blog-from-a-doc.html` pattern: story cards (problem / built / changed; "four core modules from whiteboard photos to a running portal in two days" = `tct/docs/changelog.md` Phase 1–4 entries dated 2026-04-02 → 04-03), then the lot-number walk (run screenshot → batch screenshot), a Claude-drawn inline SVG of the trail (ingredient §300.206 → master record §300.204 → individual batch §300.205 → production run → label §300.402, the lab §300.301 feeding both ends, a dashed pink "inspector reads it back" line), the five enforced rules, the public COA page, multi-company + branding, the real login screen, "where it stands", stack, "built in conversation".
+- **Accuracy fences, each checked in `tct/site` code:** no-COA-no-batch (`ProductionController::storeIndividual`), runs only from `complete` batches, targets frozen per batch, 3-year `retention_expires_at`, 32 distinct `AuditLog::record` events ("more than thirty"). COAs *can* be deleted, so the page says "can be archived instead of deleted", not "never deleted". Recall plans + audit reports are said plainly to be unbuilt; the app's own login screen advertises "Audit-ready exports", and the page's prose does not repeat that claim.
+- **Capture sitting:** `tct` is not a git repo (CLAUDE.md "Repo: TBD"), so there was no branch to make; the scratch copy lived in the session scratchpad instead and the TCT tree is untouched. `site/` copied without `.env` → fresh sqlite `.env` → `php:8.3-cli` in Docker (local PHP 8.5 has no `pdo_sqlite`; no sudo install) → migrate → a throwaway `CaptureSeeder` (invented org "Bluebonnet Botanicals (demo)", invented suppliers/labs, `.example` emails, `DEMO-41xx` sales orders) + a scratch-only `/_capture/login/{id}` route → headless Chromium at 1280. Container removed afterwards. The page states the screenshots come from a local copy with made-up records.
+- **The repo's `login*.png` set was not used:** they are AI-generated design mockups (misspellings like "All broners", "Chpter 30"), not captures. The real `/login` view was captured from the local run instead.
+- New `work/img/`: `tct-run.png` 78 KB, `tct-batch.png` 88 KB, `tct-public-coa.png` 40 KB, `tct-login.png` 276 KB (1000 wide truecolor; 256-colour quantize banded the gradient), `tct-og.png` 1200×630 76 KB = the page's og/twitter image (first `/work/` page with its own).
+- `work/work.css` gains `.shot` / `.shot.narrow` figures (width 100%, never a scroll). `work/index.html` TCT card is now a live link. `sitemap.xml` + `llms.txt` list the page. `palette.js` `PAGES` gains page 3 (missed last session) and page 4; `?v=2 → 3` on all nine pages that load it. `docs/site-reference.md`: cache-bust line no longer says "seven pages"; new screenshot rule under the no-scroll rule.
+- Checked before push: title 55 / description 147, canonical + OG + Twitter + JSON-LD, all 4 `<img>` have alt text; headless Chromium iframes at 390 and 320 wide → `scrollWidth == clientWidth`, no element past the right edge.
+
+**Why:** plan `~/.claude/plans/jadedviber-portfolio.md` page 4.
+
+**Files:** `work/compliance-portal.html` (new), `work/img/tct-*.png` (new), `work/work.css`, `work/index.html`, `sitemap.xml`, `llms.txt`, `palette.js`, every page's `palette.js?v=`, `docs/site-reference.md`.
+
+---
+
 ## 2026-09-23 - /work/ case study #3: Point 4, a blog you write from one Google Doc
 
 **What changed:**

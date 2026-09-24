@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hemp Compliance Portal That Keeps the Batch Trail — TCT</title>
+  <meta name="description" content="A Texas hemp compliance portal (DSHS Chapter 300): lab reports, recipes, batches, and packaging runs linked so any lot traces back in a few clicks.">
+  <link rel="canonical" href="https://jadedviber.com/work/compliance-portal.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://jadedviber.com/work/compliance-portal.html">
+  <meta property="og:title" content="Hemp Compliance Portal That Keeps the Batch Trail — TCT">
+  <meta property="og:description" content="Every record Texas hemp rules ask for, one page each, each linked to the one before it. A lot number on a box traces back to every lab report in a few clicks.">
+  <meta property="og:image" content="https://jadedviber.com/work/img/tct-og.png">
+  <meta property="og:site_name" content="JadedViber">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hemp Compliance Portal That Keeps the Batch Trail — TCT">
+  <meta name="twitter:description" content="Every record Texas hemp rules ask for, one page each, each linked to the one before it. A lot number on a box traces back to every lab report in a few clicks.">
+  <meta name="twitter:image" content="https://jadedviber.com/work/img/tct-og.png">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="work.css">
+  <link rel="icon" type="image/png" href="../snek.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jadedviber.com/#website",
+        "url": "https://jadedviber.com",
+        "name": "JadedViber",
+        "publisher": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jadedviber.com/work/compliance-portal.html#webpage",
+        "url": "https://jadedviber.com/work/compliance-portal.html",
+        "name": "Hemp Compliance Portal That Keeps the Batch Trail — TCT",
+        "isPartOf": { "@id": "https://jadedviber.com/#website" },
+        "author": { "@id": "https://jadedviber.com/#identity" },
+        "primaryImageOfPage": "https://jadedviber.com/work/img/tct-og.png",
+        "about": { "@id": "https://jadedviber.com/work/compliance-portal.html#system" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://jadedviber.com/work/compliance-portal.html#system",
+        "name": "TCT — Texas Compliance Tracker",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "url": "https://tct.elevatedtrading.com",
+        "description": "A multi-company web portal for Texas DSHS Chapter 300 hemp compliance: an ingredient registry with supplier lab reports, versioned master production records printed for two signatures, individual batch records with actual weights and pinned ingredient COAs, production runs with lot numbers and sales orders, public pre-sale COA pages for product labels, complaint intake, and an append-only audit log.",
+        "author": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jadedviber.com/#identity",
+        "name": "Joshua Brown",
+        "url": "https://jadedviber.com",
+        "sameAs": [ "https://github.com/jaded423", "https://nownownow.com/p/DTGZ" ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jadedviber.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://jadedviber.com/work/" },
+          { "@type": "ListItem", "position": 3, "name": "A compliance portal that keeps the batch trail", "item": "https://jadedviber.com/work/compliance-portal.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="../index.html" class="nav-brand">JADED</a>
+    <div class="nav-links">
+      <a href="../work/">Work</a>
+      <a href="../index.html#philosophy">Philosophy</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#stack">Stack</a>
+      <a href="../homelab.html">Homelab</a>
+      <a href="../now.html">Now</a>
+      <a href="https://github.com/jaded423" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="container work-page">
+
+    <header class="work-hero">
+      <h1>A compliance portal that keeps the batch trail.</h1>
+      <p class="lead">Texas regulates consumable hemp under DSHS Chapter 300, and the rule wants a paper trail for every batch: the lab report on each raw material, a signed recipe, a record of the run with actual weights, and a lab report the customer can reach from the label. I built a portal where each of those records is a page, and every page links to the one before it. A lot number on a box traces back to every lab report behind it in a few clicks.</p>
+      <p class="meta">Elevated Trading · 2026 · Laravel · Google sign-in · live at tct.elevatedtrading.com · <a href="../work/">← all work</a></p>
+    </header>
+
+    <article class="work-body">
+
+      <div class="story">
+        <div class="story-card">
+          <h4>The problem</h4>
+          <p>At a small hemp manufacturer, the batch trail lives in folders, email attachments, and somebody's memory. Each record exists somewhere. Nothing connects them. When the state asks about one lot, someone spends an afternoon rebuilding the chain by hand and hopes no lab report went missing along the way.</p>
+        </div>
+        <div class="story-card">
+          <h4>What I built</h4>
+          <p>One web portal. Lab reports attach to ingredients. Ingredients go into master recipes. Each recipe spawns batches with real weights, and each batch is packed into runs with lot numbers and sales orders. The finished batch's lab report gets a public page for the label. Sign-in is by Google account, and each company gets its own workspace with roles.</p>
+        </div>
+        <div class="story-card">
+          <h4>What changed</h4>
+          <p>"Show me this lot" means opening the run, clicking the batch, and one more click reaches any ingredient's lab report. The portal won't start a batch while an ingredient has no lab report on file, so the gap gets caught on the production floor instead of in an audit. The four core modules went from whiteboard photos to a running portal in two days.</p>
+        </div>
+      </div>
+
+      <h2>The regulator's question, answered in clicks</h2>
+      <p>Start where an inspector starts: the lot number on a box. It leads to the production run that packed it: how many units, what jar, which lot, against which sales order. The batch that filled those jars is a link on that page.</p>
+
+      <figure class="shot">
+        <img src="img/tct-run.png" width="1280" height="525" loading="lazy" alt="Screenshot of a production run page in the TCT portal. Run details on the left: run PR-2026-001, a link to individual batch IB-2026-001, a link to its master recipe, product CBD Tincture 1000mg, status Complete, who created it and when, retention until 2029. Packaged items on the right: two lines of 30ml dropper bottles, 240 and 120, with batch number, lot number L2026-001, and a sales order on each, totaling 360 units.">
+        <figcaption>A production run: what was packed, under which lot, for which order. The batch and the recipe are links.</figcaption>
+      </figure>
+
+      <p>The batch page is where the trail lives. It names the recipe it was made from, shows the target and the actual weight of every ingredient with the difference, and pins the lab report for each ingredient as it stood when the batch started. Every production run packed from this batch is listed underneath.</p>
+
+      <figure class="shot">
+        <img src="img/tct-batch.png" width="1280" height="590" loading="lazy" alt="Screenshot of an individual batch page in the TCT portal. Batch details on the left: batch IB-2026-001, a link to its master recipe, scale 1x, status Complete, created and completed dates, retention until 2029. On the right, Ingredients Used: CBD distillate, MCT oil, and a terpene blend, each with target weight, actual weight, variance, and a View COA link with its expiration date. Below, the production runs made from this batch.">
+        <figcaption>An individual batch: actual weights against the recipe, a lab report pinned to every ingredient, and the runs it became.</figcaption>
+      </figure>
+
+      <h2>The trail, end to end</h2>
+      <p>Five kinds of record, each mapped to a section of the rule, each pointing at the one before it. Lab reports come in from two directions: one round of testing on raw materials, one on the finished product before it can be sold.</p>
+
+      <div class="diagram" role="figure" aria-label="The batch trail: ingredient, master record, individual batch, production run, and label, left to right, with the testing lab below feeding both ends and a dashed line showing an inspector's question tracing back from the label to the ingredient.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 460" role="img" aria-label="Five boxes left to right, joined by arrows. Ingredient, section 300.206: the source registry with supplier, lot number, made, received, and expiry dates, the delta-9 THC reading, and its supplier lab report attached. Master record, section 300.204: the recipe, one per product, with ingredients and target weights, instructions, versioned, printed for two signatures with the signed scan uploaded; it flags any ingredient missing a lab report. Individual batch, section 300.205: one real run of the recipe, scaled, targets frozen, actual weights and variance, every ingredient's lab report pinned; with no lab report on file the batch cannot start. Production run: packaging a finished batch with count, jar size, strain, batch and lot number, and a sales order per line; completed batches only. Label, section 300.402: what the customer holds, with batch and lot number and a link or QR code to the pre-sale lab report on a public page with no login. Below, the testing lab, section 300.301: round one, the pre-processing lab report, goes to the ingredient; round two, the pre-sale lab report, goes to the label. Across the top, a dashed line runs from the label back to the ingredient: an inspector asks about one lot and every hop back is a link. Along the bottom: every record is held three years, and every upload and change goes into an append-only audit log.">
+        <defs>
+          <marker id="arC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+          <marker id="arP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ff79c6"/></marker>
+        </defs>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#f8f8f2}
+.lbl{font-size:11px;fill:#a3abc9}
+.sm{font-size:10px}
+.box{fill:#12121a;stroke:#3a3a4a;stroke-width:1}
+.box-accent{fill:rgba(189,147,249,.10);stroke:#bd93f9;stroke-width:1.2}
+.box-blue{fill:rgba(139,233,253,.10);stroke:#8be9fd;stroke-width:1.2}
+.edge{fill:none;stroke:#c8ccd8;stroke-width:1.2}
+.ask{fill:none;stroke:#ff79c6;stroke-width:1.2;stroke-dasharray:5 4}
+.rule{fill:#f1fa8c;font-size:11px}
+.pink{fill:#ff79c6}
+.t-strong{font-weight:600}
+.t-c{text-anchor:middle}
+</style>
+        <!-- the inspector's question, traced right to left -->
+        <text x="515" y="26" class="t-c pink">"Show me everything behind lot L2026-001." Every hop back is a link.</text>
+        <path d="M925 42 H105" class="ask" marker-end="url(#arP)"/>
+
+        <!-- section labels -->
+        <text x="105" y="78" class="t-c lbl">SOURCE · §300.206</text>
+        <text x="310" y="78" class="t-c lbl">RECIPE · §300.204</text>
+        <text x="515" y="78" class="t-c lbl">BATCH · §300.205</text>
+        <text x="720" y="78" class="t-c lbl">PACKAGING</text>
+        <text x="925" y="78" class="t-c lbl">LABEL · §300.402</text>
+
+        <!-- 1 ingredient -->
+        <rect x="20" y="90" width="170" height="190" rx="7" class="box"/>
+        <text x="105" y="116" class="t-c t-strong">Ingredient</text>
+        <text x="105" y="140" class="t-c lbl">the source registry</text>
+        <text x="105" y="158" class="t-c lbl">supplier · lot number</text>
+        <text x="105" y="176" class="t-c lbl">made · received · expires</text>
+        <text x="105" y="194" class="t-c lbl">delta-9 THC reading</text>
+        <text x="105" y="212" class="t-c lbl">its lab report attached</text>
+        <text x="105" y="258" class="t-c rule">every raw material traced</text>
+
+        <!-- 2 master record -->
+        <rect x="225" y="90" width="170" height="190" rx="7" class="box"/>
+        <text x="310" y="116" class="t-c t-strong">Master record</text>
+        <text x="310" y="140" class="t-c lbl">the recipe, one per product</text>
+        <text x="310" y="158" class="t-c lbl">ingredients, target weights</text>
+        <text x="310" y="176" class="t-c lbl">instructions, versioned</text>
+        <text x="310" y="194" class="t-c lbl">printed for two signatures</text>
+        <text x="310" y="212" class="t-c lbl">signed scan uploaded</text>
+        <text x="310" y="248" class="t-c rule">⚠ on any ingredient</text>
+        <text x="310" y="264" class="t-c rule">missing a lab report</text>
+
+        <!-- 3 individual batch: the hub -->
+        <rect x="430" y="90" width="170" height="190" rx="7" class="box-accent"/>
+        <text x="515" y="116" class="t-c t-strong">Individual batch</text>
+        <text x="515" y="140" class="t-c lbl">one real run of the recipe</text>
+        <text x="515" y="158" class="t-c lbl">scaled; targets frozen</text>
+        <text x="515" y="176" class="t-c lbl">actual weights, variance</text>
+        <text x="515" y="194" class="t-c lbl">every ingredient's</text>
+        <text x="515" y="210" class="t-c lbl">lab report pinned</text>
+        <text x="515" y="248" class="t-c rule">no lab report on file</text>
+        <text x="515" y="264" class="t-c rule">→ the batch can't start</text>
+
+        <!-- 4 production run -->
+        <rect x="635" y="90" width="170" height="190" rx="7" class="box"/>
+        <text x="720" y="116" class="t-c t-strong">Production run</text>
+        <text x="720" y="140" class="t-c lbl">packaging a finished batch</text>
+        <text x="720" y="158" class="t-c lbl">count · jar size · strain</text>
+        <text x="720" y="176" class="t-c lbl">batch number · lot number</text>
+        <text x="720" y="194" class="t-c lbl">a sales order per line</text>
+        <text x="720" y="258" class="t-c rule">completed batches only</text>
+
+        <!-- 5 label -->
+        <rect x="840" y="90" width="170" height="190" rx="7" class="box-blue"/>
+        <text x="925" y="116" class="t-c t-strong">The label</text>
+        <text x="925" y="140" class="t-c lbl">what the customer holds</text>
+        <text x="925" y="158" class="t-c lbl">batch and lot number</text>
+        <text x="925" y="176" class="t-c lbl">a link or QR code to the</text>
+        <text x="925" y="194" class="t-c lbl">pre-sale lab report</text>
+        <text x="925" y="212" class="t-c lbl">public page, no login</text>
+        <text x="925" y="258" class="t-c rule">one scan to the COA</text>
+
+        <!-- forward edges -->
+        <path d="M190 185 H225" class="edge" marker-end="url(#arC)"/>
+        <path d="M395 185 H430" class="edge" marker-end="url(#arC)"/>
+        <path d="M600 185 H635" class="edge" marker-end="url(#arC)"/>
+        <path d="M805 185 H840" class="edge" marker-end="url(#arC)"/>
+
+        <!-- the lab, below -->
+        <rect x="330" y="340" width="370" height="84" rx="7" class="box"/>
+        <text x="515" y="364" class="t-c t-strong">The testing lab · §300.301</text>
+        <text x="515" y="384" class="t-c lbl">round 1, pre-processing: the raw material</text>
+        <text x="515" y="400" class="t-c lbl">round 2, pre-sale: the finished batch</text>
+        <text x="515" y="416" class="t-c lbl sm">each report is a PDF on file, held three years</text>
+        <path d="M330 382 H105 V280" class="edge" marker-end="url(#arC)"/>
+        <text x="218" y="374" class="t-c lbl">round 1 report</text>
+        <path d="M700 382 H925 V280" class="edge" marker-end="url(#arC)"/>
+        <text x="812" y="374" class="t-c lbl">round 2 report</text>
+
+        <text x="515" y="450" class="t-c lbl">every login, upload, download, and change goes into an append-only audit log</text>
+      </svg>
+      </div>
+      <p class="diagram-caption">Left to right is how a product gets made. Right to left, the dashed line, is how an inspector reads it back. The batch in the middle is the hub: it knows its recipe, its ingredients' lab reports, and every run it became.</p>
+
+      <h3>Rules the software enforces, so nobody has to remember them</h3>
+      <ul>
+        <li><strong>No lab report, no batch.</strong> Starting a batch checks every ingredient in the recipe against the registry. If one has no lab report on file, the portal names it and stops.</li>
+        <li><strong>History doesn't move.</strong> A batch copies its target weights from the recipe the moment it starts. Editing the recipe later changes future batches, never the record of a past one.</li>
+        <li><strong>Packaging comes from finished work.</strong> A production run can only be opened against a batch that has been marked complete.</li>
+        <li><strong>Signatures stay on paper.</strong> The rule asks for two handwritten signatures on each master recipe, so the portal prints the record with two signature lines and takes the signed scan back. It doesn't pretend a click is a signature.</li>
+        <li><strong>Nothing quietly disappears.</strong> Every record carries a three-year retention date, finished records can be archived out of the way instead of deleted, and more than thirty kinds of event (sign-ins, uploads, downloads, edits, invites) are written to an audit log that only ever grows.</li>
+      </ul>
+
+      <h2>What the customer sees</h2>
+      <p>The rule's labeling section requires a link on the package to the product's lab report. Mark a pre-sale report public and it gets its own page at a random, unguessable address, ready to print as a link or a QR code. No login, no account, and nothing else from the portal visible.</p>
+
+      <figure class="shot narrow">
+        <img src="img/tct-public-coa.png" width="860" height="600" loading="lazy" alt="Screenshot of a public Certificate of Analysis page: the company name, then product, test type Pre-Sale COA, batch number, lot number, lab, test date, and expiration, with a Download COA PDF button and a note that the document is retained per DSHS Chapter 300.">
+        <figcaption>The page a label's QR code opens: the batch's pre-sale lab report, with the PDF one click away.</figcaption>
+      </figure>
+
+      <h2>Built for more than one company</h2>
+      <p>The portal was built for Elevated Trading and designed from the start to be offered to its partners and customers too. A new company registers itself through Google sign-in and becomes its own workspace, and its admin invites people as admin, manager, or viewer. Every page checks that the record belongs to the signed-in user's company. Each workspace sets its own colors and logo, and the text flips between light and dark automatically so a brand color never makes a page unreadable.</p>
+
+      <figure class="shot">
+        <img src="img/tct-login.png" width="1000" height="625" loading="lazy" alt="Screenshot of the TCT sign-in page. Left: the headline Compliance, built for Texas hemp, a one-line description, and three feature notes. Right: a Sign in with Google button, a link to register a new organization, and a note for invited users.">
+        <figcaption>The front door. Google sign-in only, so there are no passwords to store or reset.</figcaption>
+      </figure>
+
+      <h2>Where it stands</h2>
+      <p>Live at its own address. The four core modules (lab reports, products, production records, ingredients) and the settings behind them are done, and complaint intake followed a week later. Recall plans and the audit reports an inspector would download are the next two phases on the plan, and neither is built yet.</p>
+      <p>The screenshots on this page come from a copy of the portal running on my own machine, filled with a made-up company, made-up suppliers and labs, and made-up orders. No customer's records appear here.</p>
+
+      <h2>Stack</h2>
+      <div class="stack-pills">
+        <span class="stack-pill">Laravel 11</span>
+        <span class="stack-pill">PHP 8.3</span>
+        <span class="stack-pill">MySQL</span>
+        <span class="stack-pill">Blade</span>
+        <span class="stack-pill">Google sign-in (Socialite)</span>
+        <span class="stack-pill">Gmail API</span>
+        <span class="stack-pill">Cloudways · DigitalOcean</span>
+        <span class="stack-pill">Cloudflare</span>
+      </div>
+      <p>Laravel instead of something newer because the hosting the company already paid for runs PHP. The right stack is the one that fits the server you have.</p>
+
+      <h2>Built in conversation</h2>
+      <p>Same method as everything on this site. The hard part wasn't the code. It was reading Chapter 300 closely enough to know that a "master production record" and a "batch production record" are two different things, that one is a recipe and the other is Tuesday's run, and that the software should keep them apart. That reading, the data model it produced, and the portal itself came out of dialogue with Claude, starting from photos of a whiteboard.</p>
+      <p><a href="../index.html#philosophy">The philosophy</a>, or <a href="../now.html">what I'm building right now</a>.</p>
+
+      <div class="cta-row">
+        <a href="../work/" class="cta primary">All work</a>
+        <a href="photo-to-web.html" class="cta secondary">The photos-to-web pipeline</a>
+      </div>
+
+      <div class="crosslinks">
+        <a href="../index.html">← Home</a> ·
+        <a href="../work/">Work</a> ·
+        <a href="../index.html#projects">Projects</a> ·
+        <a href="../now.html">/now</a>
+      </div>
+
+    </article>
+
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> jadedviber.com</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const hamburger = document.querySelector('.nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+    }
+  </script>
+
+  <script src="/palette.js?v=3"></script>
+  <script src="/turing.js?v=4"></script>
+</body>
+</html>
