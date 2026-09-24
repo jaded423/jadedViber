@@ -19,7 +19,7 @@ All notable changes to jadedViber are documented here.
 - `homelab.html`: the sermons diagram no longer names the engine ("transcribed locally, nothing to the cloud"); the section links the new page.
 - Homepage: a Sermon follow-along project card; the Person JSON-LD gains `hasOccupation` + `knowsAbout` (the leftover the /work/ session handed to T0).
 - `palette.js` gains the page; `?v=5 → 6` on every page that loads it. `sitemap.xml` + `llms.txt` list it.
-- **Open:** the CTA "Talk to me about your church" points at the GitHub profile because the site publishes no email; swap for a mailto or a form when Joshua picks one. `projects/trans-og.png` is cut from the mockup.
+- Contact = `mailto:j@jadedviber.com` on the CTA and in the *For a church* paragraph (Joshua, same session; first published address on the site). The church stays nameless until Joshua brings the app to his church leadership; "one church live" wording stays (the app is live, it is the sharing that awaits approval). `projects/trans-og.png` is cut from the mockup.
 
 **Why:** Joshua (T0, 2026-09-23): "Can we look at adding the trans stack to a page? … neither mentioned in MCP or Sermons … a really cool piece of kit that I want to monetize/donate to churches. So I would like the what/why/when without the strict details on HOW, don't give away the farm."
 
