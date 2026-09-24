@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lead Tracking on Reps' Phones, Backed by a Sheet — Dax</title>
+  <meta name="description" content="Each rep saw only their own leads on their phone, logged every call, email, and text with one tap, and the office assigned new leads from a spreadsheet tab.">
+  <link rel="canonical" href="https://jadedviber.com/work/rep-leads-app.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://jadedviber.com/work/rep-leads-app.html">
+  <meta property="og:title" content="Lead Tracking on Reps' Phones, Backed by a Sheet — Dax">
+  <meta property="og:description" content="A phone app on a Google Sheet: each rep sees their own leads, one tap logs a call and dials it, notes and status write straight back, and the office pushes new leads from a staging tab.">
+  <meta property="og:image" content="https://jadedviber.com/work/img/dax-leads-og.png">
+  <meta property="og:site_name" content="JadedViber">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lead Tracking on Reps' Phones, Backed by a Sheet — Dax">
+  <meta name="twitter:description" content="A phone app on a Google Sheet: each rep sees their own leads, one tap logs a call and dials it, notes and status write straight back, and the office pushes new leads from a staging tab.">
+  <meta name="twitter:image" content="https://jadedviber.com/work/img/dax-leads-og.png">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="work.css">
+  <link rel="icon" type="image/png" href="../snek.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jadedviber.com/#website",
+        "url": "https://jadedviber.com",
+        "name": "JadedViber",
+        "publisher": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jadedviber.com/work/rep-leads-app.html#webpage",
+        "url": "https://jadedviber.com/work/rep-leads-app.html",
+        "name": "Lead Tracking on Reps' Phones, Backed by a Sheet — Dax",
+        "isPartOf": { "@id": "https://jadedviber.com/#website" },
+        "author": { "@id": "https://jadedviber.com/#identity" },
+        "primaryImageOfPage": "https://jadedviber.com/work/img/dax-leads-og.png",
+        "about": { "@id": "https://jadedviber.com/work/rep-leads-app.html#system" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://jadedviber.com/work/rep-leads-app.html#system",
+        "name": "Dax Distro Dialer Leads",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "iOS, Android, Web (AppSheet)",
+        "description": "A mobile lead-tracking app for a wholesale distributor's sales reps, built on AppSheet over a Google Sheet. Row-level visibility from a rep roster tab, one-tap Call, Email, and Text actions that log the contact and open the phone's dialer, mailer, or SMS, per-lead notes, a status workflow that advances on first contact, a map of shops, a per-rep activity chart, and a Google Apps Script menu that pushes new leads from a staging tab and emails the assigned rep. Preceded by a Python parser that read vendor lead emails into the master sheet and kept per-rep sheets in sync.",
+        "author": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jadedviber.com/#identity",
+        "name": "Joshua Brown",
+        "url": "https://jadedviber.com",
+        "sameAs": [ "https://github.com/jaded423", "https://nownownow.com/p/DTGZ" ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jadedviber.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://jadedviber.com/work/" },
+          { "@type": "ListItem", "position": 3, "name": "Lead tracking on the reps' phones", "item": "https://jadedviber.com/work/rep-leads-app.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="../index.html" class="nav-brand">JADED</a>
+    <div class="nav-links">
+      <a href="../work/">Work</a>
+      <a href="../index.html#philosophy">Philosophy</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#stack">Stack</a>
+      <a href="../homelab.html">Homelab</a>
+      <a href="../now.html">Now</a>
+      <a href="https://github.com/jaded423" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="container work-page">
+
+    <header class="work-hero">
+      <h1>Lead tracking on the reps' phones, backed by a spreadsheet.</h1>
+      <p class="lead">Dax Distro bought leads: five to ten smoke shops a day, each arriving as an email in a shared inbox. A few reps worked them by phone. Nobody could say who had called which shop, how many times, or what came of it, because the answer lived in the reps' text messages. I built a phone app on a Google Sheet where each rep sees only their own leads, one tap logs a call and dials it, and the office hands out new leads from a spreadsheet tab with a menu click.</p>
+      <p class="meta">Dax Distro · Feb–Apr 2026 · AppSheet · Google Sheets · Apps Script · retired with the company · <a href="../work/">← all work</a></p>
+    </header>
+
+    <article class="work-body">
+
+      <div class="story">
+        <div class="story-card">
+          <h4>The problem</h4>
+          <p>Leads came in as emails and went out as forwards. A rep's notes were in their phone, a rep's call count was a guess, and a lead that got no call for a week was invisible until somebody asked. Sharing one spreadsheet with everyone would have shown every rep every other rep's shops. Keeping a spreadsheet per rep meant the office had no single picture.</p>
+        </div>
+        <div class="story-card">
+          <h4>What I built</h4>
+          <p>A phone app built with AppSheet over one Google Sheet. A rep signs in with their company Google account and sees only the leads assigned to them. Each lead has three buttons: Call, Email, Text. Each writes a timestamped activity row and then opens the phone's dialer, mail, or messages. A note is three taps. Status moves itself on the first contact. New leads go in on a staging tab in the sheet and a menu click pushes them to the reps with an email each.</p>
+        </div>
+        <div class="story-card">
+          <h4>What changed</h4>
+          <p>"Who's called this shop" became a number on the card. The office saw calls, emails, and texts per rep on a chart without asking anyone. A new rep was one row in a roster tab and a share; the app didn't need editing. And after a stray column insert broke the app for everyone once, a guard in the sheet started raising the alarm the moment a tab's shape changed.</p>
+        </div>
+      </div>
+
+      <h2>The rep's phone</h2>
+      <p>The app opens on a deck of the rep's leads, newest on top, each card carrying the shop, its status, and how many times it has been contacted. Tap one and the buttons are the first thing on the screen. The drawing below is reconstructed from the app's configuration: the app lived in the company's Google Workspace, which was closed with the company, so there is no screenshot to show.</p>
+
+      <div class="diagram" role="figure" aria-label="Two phone screens drawn side by side. Left, the Leads deck: cards for four shops, each with a status chip, phone, city, and contact counts. Right, one lead opened: Call and Log, Email and Log, Text and Log buttons, a plus-Note button, the shop's details, and an activity list of the calls and texts logged so far. Callouts explain that the rep sees only their rows, that one tap logs the contact then opens the dialer, and that status advances on the first contact.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 560" role="img" aria-label="A reconstruction of the Dialer Leads app. Left phone, titled Leads, shows four lead cards: Northside Smoke and Vape, status Attempting Contact, two calls and one text; Cedar Creek Wellness, status NEW, no contact yet; Lone Star Glass Co., status Samples Sent, three calls and one email; Bayou Botanicals, status Attempting Contact, one call. A tab bar reads Leads, Map, Table, Activity. Right phone shows Northside Smoke and Vape opened, with three large buttons Call and Log, Email and Log, Text and Log, a plus Note button, fields for phone, address, manager, and whether they currently sell, and an Activity list of three logged contacts with timestamps and a note. Between the phones, three callouts: the rep sees only rows where Sales Rep is theirs, the roster tab decides; one tap writes an Activity Log row then opens the dialer; the first contact moves status from NEW to Attempting Contact by itself.">
+        <defs>
+          <marker id="arL" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ff79c6"/></marker>
+        </defs>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#f8f8f2}
+.lbl{font-size:11px;fill:#a3abc9}
+.sm{font-size:10px}
+.xs{font-size:9px}
+.phone{fill:#0e0e12;stroke:#3a3a4a;stroke-width:2}
+.screen{fill:#12121a}
+.bar{fill:#1a1a24}
+.card{fill:#1a1a24;stroke:#2a2a3a;stroke-width:1}
+.chip-new{fill:rgba(139,233,253,.18);stroke:#8be9fd;stroke-width:.8}
+.chip-att{fill:rgba(241,250,140,.16);stroke:#f1fa8c;stroke-width:.8}
+.chip-smp{fill:rgba(80,250,123,.16);stroke:#50fa7b;stroke-width:.8}
+.btn{fill:rgba(189,147,249,.16);stroke:#bd93f9;stroke-width:1}
+.btn-note{fill:none;stroke:#6272a4;stroke-width:1;stroke-dasharray:3 2}
+.call{fill:none;stroke:#ff79c6;stroke-width:1.2;stroke-dasharray:5 4}
+.pink{fill:#ff79c6}
+.t-strong{font-weight:600}
+.t-c{text-anchor:middle}
+.green{fill:#50fa7b}.blue{fill:#8be9fd}.yellow{fill:#f1fa8c}.purple{fill:#bd93f9}
+</style>
+
+        <!-- LEFT PHONE: the deck -->
+        <rect x="40" y="20" width="260" height="520" rx="26" class="phone"/>
+        <rect x="52" y="34" width="236" height="492" rx="16" class="screen"/>
+        <rect x="52" y="34" width="236" height="40" rx="16" class="bar"/>
+        <rect x="52" y="58" width="236" height="16" class="bar"/>
+        <text x="66" y="59" class="t-strong">Leads</text>
+        <text x="274" y="59" class="lbl sm" text-anchor="end">Sam · 4</text>
+
+        <!-- card 1 -->
+        <rect x="62" y="84" width="216" height="78" rx="6" class="card"/>
+        <text x="72" y="103" class="t-strong">Northside Smoke &amp; Vape</text>
+        <rect x="72" y="110" width="104" height="16" rx="8" class="chip-att"/>
+        <text x="124" y="122" class="t-c xs yellow">ATTEMPTING CONTACT</text>
+        <text x="72" y="141" class="lbl sm">(512) 555-0134 · Austin</text>
+        <text x="72" y="155" class="lbl sm">2 calls · 0 emails · 1 text</text>
+        <!-- card 2 -->
+        <rect x="62" y="170" width="216" height="78" rx="6" class="card"/>
+        <text x="72" y="189" class="t-strong">Cedar Creek Wellness</text>
+        <rect x="72" y="196" width="40" height="16" rx="8" class="chip-new"/>
+        <text x="92" y="208" class="t-c xs blue">NEW</text>
+        <text x="72" y="227" class="lbl sm">(713) 555-0188 · Houston</text>
+        <text x="72" y="241" class="lbl sm">no contact yet</text>
+        <!-- card 3 -->
+        <rect x="62" y="256" width="216" height="78" rx="6" class="card"/>
+        <text x="72" y="275" class="t-strong">Lone Star Glass Co.</text>
+        <rect x="72" y="282" width="80" height="16" rx="8" class="chip-smp"/>
+        <text x="112" y="294" class="t-c xs green">SAMPLES SENT</text>
+        <text x="72" y="313" class="lbl sm">(214) 555-0102 · Dallas</text>
+        <text x="72" y="327" class="lbl sm">3 calls · 1 email · 0 texts</text>
+        <!-- card 4 -->
+        <rect x="62" y="342" width="216" height="78" rx="6" class="card"/>
+        <text x="72" y="361" class="t-strong">Bayou Botanicals</text>
+        <rect x="72" y="368" width="104" height="16" rx="8" class="chip-att"/>
+        <text x="124" y="380" class="t-c xs yellow">ATTEMPTING CONTACT</text>
+        <text x="72" y="399" class="lbl sm">(409) 555-0166 · Beaumont</text>
+        <text x="72" y="413" class="lbl sm">1 call · 0 emails · 0 texts</text>
+        <!-- tab bar -->
+        <rect x="52" y="486" width="236" height="40" rx="16" class="bar"/>
+        <rect x="52" y="486" width="236" height="16" class="bar"/>
+        <text x="86" y="510" class="t-c sm purple">Leads</text>
+        <text x="142" y="510" class="t-c sm lbl">Map</text>
+        <text x="198" y="510" class="t-c sm lbl">Table</text>
+        <text x="254" y="510" class="t-c sm lbl">Activity</text>
+
+        <!-- RIGHT PHONE: one lead -->
+        <rect x="730" y="20" width="260" height="520" rx="26" class="phone"/>
+        <rect x="742" y="34" width="236" height="492" rx="16" class="screen"/>
+        <rect x="742" y="34" width="236" height="40" rx="16" class="bar"/>
+        <rect x="742" y="58" width="236" height="16" class="bar"/>
+        <text x="756" y="59" class="lbl">‹ Leads</text>
+        <text x="866" y="59" class="t-c t-strong">Northside Smoke &amp; Vape</text>
+        <rect x="756" y="84" width="104" height="16" rx="8" class="chip-att"/>
+        <text x="808" y="96" class="t-c xs yellow">ATTEMPTING CONTACT</text>
+        <!-- three buttons -->
+        <rect x="756" y="110" width="66" height="34" rx="6" class="btn"/>
+        <text x="789" y="125" class="t-c sm purple">📞 Call</text>
+        <text x="789" y="138" class="t-c xs lbl">&amp; Log</text>
+        <rect x="827" y="110" width="66" height="34" rx="6" class="btn"/>
+        <text x="860" y="125" class="t-c sm purple">✉ Email</text>
+        <text x="860" y="138" class="t-c xs lbl">&amp; Log</text>
+        <rect x="898" y="110" width="66" height="34" rx="6" class="btn"/>
+        <text x="931" y="125" class="t-c sm purple">💬 Text</text>
+        <text x="931" y="138" class="t-c xs lbl">&amp; Log</text>
+        <rect x="756" y="152" width="208" height="22" rx="6" class="btn-note"/>
+        <text x="860" y="167" class="t-c sm lbl">+ Note</text>
+        <!-- fields -->
+        <text x="756" y="196" class="lbl xs">SHOP PHONE</text>
+        <text x="756" y="210" class="sm">(512) 555-0134</text>
+        <text x="756" y="230" class="lbl xs">ADDRESS</text>
+        <text x="756" y="244" class="sm">2200 Guadalupe St, Austin</text>
+        <text x="756" y="264" class="lbl xs">MANAGER · CURRENTLY SELLING?</text>
+        <text x="756" y="278" class="sm">Marisol Vega · Yes · 2 lbs / order</text>
+        <!-- activity -->
+        <text x="756" y="304" class="lbl xs">ACTIVITY (3)</text>
+        <rect x="756" y="312" width="208" height="20" rx="4" class="card"/>
+        <text x="762" y="326" class="sm">📞 Call · Mar 12, 10:41 · Sam</text>
+        <rect x="756" y="336" width="208" height="20" rx="4" class="card"/>
+        <text x="762" y="350" class="sm">💬 Text · Mar 12, 10:44 · Sam</text>
+        <rect x="756" y="360" width="208" height="20" rx="4" class="card"/>
+        <text x="762" y="374" class="sm">📞 Call · Mar 14, 09:15 · Sam</text>
+        <text x="756" y="404" class="lbl xs">NOTES (1)</text>
+        <rect x="756" y="412" width="208" height="34" rx="4" class="card"/>
+        <text x="762" y="426" class="sm">Mar 14 · owner in Tue/Thu,</text>
+        <text x="762" y="440" class="sm">wants two samples first</text>
+        <!-- tab bar -->
+        <rect x="742" y="486" width="236" height="40" rx="16" class="bar"/>
+        <rect x="742" y="486" width="236" height="16" class="bar"/>
+        <text x="776" y="510" class="t-c sm purple">Leads</text>
+        <text x="832" y="510" class="t-c sm lbl">Map</text>
+        <text x="888" y="510" class="t-c sm lbl">Table</text>
+        <text x="944" y="510" class="t-c sm lbl">Activity</text>
+
+        <!-- CALLOUTS between the phones -->
+        <text x="515" y="76" class="t-c t-strong pink">what the sheet decides</text>
+
+        <path d="M300 122 H340" class="call"/>
+        <text x="350" y="118" class="lbl">the rep sees only rows where</text>
+        <text x="350" y="134" class="lbl">Sales Rep is theirs. The roster tab</text>
+        <text x="350" y="150" class="lbl">says who is a rep and who is an admin.</text>
+
+        <path d="M690 127 H730" class="call" marker-end="url(#arL)"/>
+        <text x="350" y="222" class="lbl">one tap does two things, in order:</text>
+        <text x="350" y="238" class="lbl">write a row to the Activity Log tab</text>
+        <text x="350" y="254" class="lbl">(lead, rep, Call, timestamp), then</text>
+        <text x="350" y="270" class="lbl">open the phone's dialer on the number.</text>
+        <path d="M640 250 C 700 250, 700 127, 690 127" class="call"/>
+
+        <text x="350" y="330" class="lbl">the counts on each card are formulas</text>
+        <text x="350" y="346" class="lbl">over that log. The first contact moves</text>
+        <text x="350" y="362" class="lbl">status from NEW to Attempting Contact</text>
+        <text x="350" y="378" class="lbl">by itself; Samples Sent, Won, Lost are</text>
+        <text x="350" y="394" class="lbl">a tap on the chip.</text>
+        <path d="M340 335 H300" class="call" marker-end="url(#arL)"/>
+
+        <text x="350" y="446" class="lbl">a note is three taps: + Note, type, save.</text>
+        <text x="350" y="462" class="lbl">Each one is its own row, so the office</text>
+        <text x="350" y="478" class="lbl">can read who said what, when.</text>
+        <path d="M660 458 H700 C 720 458, 720 429, 740 429" class="call" marker-end="url(#arL)"/>
+
+        <text x="515" y="530" class="t-c lbl sm">drawn from the app's configuration; not a screenshot</text>
+      </svg>
+      </div>
+      <p class="diagram-caption">Left: the deck a rep opens to. Right: one lead. Every number and chip on the left is computed from rows the buttons on the right wrote.</p>
+
+      <h3>Rules the sheet enforced</h3>
+      <ul>
+        <li><strong>A roster tab decides who sees what.</strong> Reps and admins are rows in a Reps tab: name, email, role, active, assignable. The app looks up the signed-in email there. Admins see every lead; a rep sees rows assigned to them; anyone not on the tab sees nothing. Adding a rep is one row and a share. The app itself never changes.</li>
+        <li><strong>Reps never touch the sheet.</strong> The app reads and writes the sheet as its owner, so nobody in the field needs, or gets, access to the spreadsheet behind it.</li>
+        <li><strong>Every row has a real key.</strong> Leads, activity, and notes carry their own IDs instead of relying on a row number, so sorting or deleting in the sheet can't scramble which activity belongs to which shop.</li>
+        <li><strong>Assignable is not the same as admin.</strong> A flag on the roster keeps the office staff out of the "assign to" dropdown while leaving them full visibility, and the dropdown in the staging tab filters on the same flag.</li>
+        <li><strong>The sheet guards its own shape.</strong> A script counts the columns on every tab whenever the sheet changes and alerts the moment one is inserted or removed. Somebody did that once, by accident, and every rep's app stopped working until it was found.</li>
+      </ul>
+
+      <h2>How a lead moved</h2>
+      <p>Two versions, one sheet. The first, in February, was a parser that read the vendor's lead emails into a master sheet every fifteen minutes and kept a spreadsheet per rep in sync both ways, with the sheet owning the lead's details and the rep owning status and notes. Then the reps asked for it on their phones, and the second version replaced the per-rep spreadsheets with the app and gave the office a staging tab and a button.</p>
+
+      <div class="diagram" role="figure" aria-label="A flow left to right. Vendor lead emails arrive in a shared inbox. In the first version a Python parser wrote them to the master sheet, which synced two ways with a spreadsheet per rep. In the second version, the office types leads into a New Lead Entry staging tab; a Push Leads menu assigns IDs, appends them to the Leads tab, emails each assigned rep with a link into the app, and clears the tab. The Leads tab feeds the AppSheet app on the reps' phones, filtered by the signed-in email; the app writes Activity Log, Notes, and Status back; a RepStats tab totals contacts per rep for a chart the admins see.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 420" role="img" aria-label="Flow diagram. Left: lead vendor emails, five to ten a day, in a shared inbox. Top lane, labeled first version, February 2026: a Python parser every fifteen minutes, arrow to the master sheet, two-way arrow to one spreadsheet per rep, with the sheet owning lead details and the rep owning status, contacts, and notes. Bottom lane, labeled second version, March 2026 onward: the office types leads into a New Lead Entry tab, arrow to the Push Leads menu, an Apps Script that assigns IDs, fills dates, appends to Leads, emails each rep with a View in App link, and clears the tab; arrow to the Leads tab, highlighted, of the same Google Sheet; two-way arrow to the AppSheet app on a rep's phone, filtered by sign-in; arrows from the app back to the Activity Log, Notes, and Status; arrow from those to a RepStats tab that counts calls, emails, and texts per rep and drives a chart for admins.">
+        <defs>
+          <marker id="arF" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+        </defs>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#f8f8f2}
+.lbl{font-size:11px;fill:#a3abc9}
+.sm{font-size:10px}
+.box{fill:#12121a;stroke:#3a3a4a;stroke-width:1}
+.box-dim{fill:#0e0e12;stroke:#2a2a3a;stroke-width:1;stroke-dasharray:4 3}
+.box-accent{fill:rgba(189,147,249,.10);stroke:#bd93f9;stroke-width:1.2}
+.box-blue{fill:rgba(139,233,253,.10);stroke:#8be9fd;stroke-width:1.2}
+.edge{fill:none;stroke:#c8ccd8;stroke-width:1.2}
+.edge-dim{fill:none;stroke:#6272a4;stroke-width:1;stroke-dasharray:4 3}
+.rule{fill:#f1fa8c;font-size:11px}
+.dim{fill:#6272a4}
+.t-strong{font-weight:600}
+.t-c{text-anchor:middle}
+</style>
+        <!-- source -->
+        <rect x="20" y="150" width="150" height="110" rx="7" class="box"/>
+        <text x="95" y="176" class="t-c t-strong">Lead vendor</text>
+        <text x="95" y="198" class="t-c lbl">5–10 emails a day</text>
+        <text x="95" y="214" class="t-c lbl">into a shared inbox</text>
+        <text x="95" y="230" class="t-c lbl">shop · phone · address</text>
+        <text x="95" y="246" class="t-c lbl">manager · what they sell</text>
+
+        <!-- first version lane, dimmed -->
+        <text x="230" y="36" class="lbl dim">FIRST VERSION · FEB 2026</text>
+        <rect x="230" y="46" width="160" height="60" rx="7" class="box-dim"/>
+        <text x="310" y="68" class="t-c dim t-strong">Python parser</text>
+        <text x="310" y="86" class="t-c lbl dim">Gmail API, every 15 min</text>
+        <text x="310" y="100" class="t-c lbl dim">regex on the vendor's format</text>
+        <path d="M95 150 V76 H230" class="edge-dim" marker-end="url(#arF)"/>
+        <path d="M390 76 H430" class="edge-dim" marker-end="url(#arF)"/>
+        <rect x="430" y="46" width="160" height="60" rx="7" class="box-dim"/>
+        <text x="510" y="68" class="t-c dim t-strong">Master sheet</text>
+        <text x="510" y="86" class="t-c lbl dim">owns the lead's details</text>
+        <text x="510" y="100" class="t-c lbl dim">and who it's assigned to</text>
+        <path d="M590 76 H630" class="edge-dim" marker-end="url(#arF)" marker-start="url(#arF)"/>
+        <rect x="630" y="46" width="160" height="60" rx="7" class="box-dim"/>
+        <text x="710" y="68" class="t-c dim t-strong">A spreadsheet per rep</text>
+        <text x="710" y="86" class="t-c lbl dim">rep owns status, contacts,</text>
+        <text x="710" y="100" class="t-c lbl dim">notes; synced both ways</text>
+        <text x="850" y="72" class="lbl dim">replaced by the</text>
+        <text x="850" y="88" class="lbl dim">phone app below</text>
+
+        <!-- second version lane -->
+        <text x="230" y="146" class="lbl">SECOND VERSION · MAR 2026 ONWARD</text>
+        <rect x="230" y="156" width="150" height="100" rx="7" class="box"/>
+        <text x="305" y="178" class="t-c t-strong">New Lead Entry</text>
+        <text x="305" y="196" class="t-c lbl">a staging tab</text>
+        <text x="305" y="212" class="t-c lbl">the office types leads in,</text>
+        <text x="305" y="228" class="t-c lbl">picks the rep from a</text>
+        <text x="305" y="244" class="t-c lbl">dropdown of assignable reps</text>
+        <path d="M170 205 H230" class="edge" marker-end="url(#arF)"/>
+
+        <path d="M380 205 H420" class="edge" marker-end="url(#arF)"/>
+        <rect x="420" y="146" width="170" height="120" rx="7" class="box"/>
+        <text x="505" y="168" class="t-c t-strong">Push Leads ▸ (a menu)</text>
+        <text x="505" y="188" class="t-c lbl">Apps Script in the sheet:</text>
+        <text x="505" y="204" class="t-c lbl">assign IDs, fill the dates,</text>
+        <text x="505" y="220" class="t-c lbl">append to Leads, email each</text>
+        <text x="505" y="236" class="t-c lbl">rep a "View in App" link,</text>
+        <text x="505" y="252" class="t-c lbl">clear the staging tab</text>
+
+        <path d="M590 205 H630" class="edge" marker-end="url(#arF)"/>
+        <rect x="630" y="136" width="160" height="140" rx="7" class="box-accent"/>
+        <text x="710" y="158" class="t-c t-strong">The Google Sheet</text>
+        <text x="710" y="180" class="t-c lbl">Leads · Reps</text>
+        <text x="710" y="196" class="t-c lbl">Activity Log · Notes</text>
+        <text x="710" y="212" class="t-c lbl">RepStats · New Lead Entry</text>
+        <text x="710" y="240" class="t-c rule">one source of truth,</text>
+        <text x="710" y="256" class="t-c rule">the office can open it</text>
+
+        <path d="M790 205 H830" class="edge" marker-end="url(#arF)" marker-start="url(#arF)"/>
+        <rect x="830" y="146" width="180" height="120" rx="7" class="box-blue"/>
+        <text x="920" y="168" class="t-c t-strong">The app, on a phone</text>
+        <text x="920" y="188" class="t-c lbl">AppSheet, company sign-in</text>
+        <text x="920" y="204" class="t-c lbl">rows filtered by the rep's email</text>
+        <text x="920" y="220" class="t-c lbl">Call · Email · Text, each logged</text>
+        <text x="920" y="236" class="t-c lbl">notes · status · map of shops</text>
+        <text x="920" y="256" class="t-c lbl sm">reads and writes the sheet directly</text>
+
+        <!-- what comes back -->
+        <path d="M920 266 V320 H810" class="edge" marker-end="url(#arF)"/>
+        <rect x="615" y="296" width="195" height="50" rx="7" class="box"/>
+        <text x="712" y="316" class="t-c t-strong">Activity Log · Notes · Status</text>
+        <text x="712" y="334" class="t-c lbl">a row per tap, with who and when</text>
+        <path d="M615 321 H590" class="edge" marker-end="url(#arF)"/>
+        <rect x="420" y="296" width="170" height="50" rx="7" class="box"/>
+        <text x="505" y="316" class="t-c t-strong">RepStats → a chart</text>
+        <text x="505" y="334" class="t-c lbl">calls, emails, texts per rep; admins see it</text>
+
+        <text x="515" y="392" class="t-c lbl">what was tried and dropped: the AppSheet API (needs a pricier plan), push notifications (only fire for taps in the app),</text>
+        <text x="515" y="408" class="t-c lbl">deep links to one record (unreliable on phones), and a browser robot that edited the app to add a rep (made unnecessary by the roster lookup)</text>
+      </svg>
+      </div>
+      <p class="diagram-caption">The sheet in the middle is the same one throughout. The first version put the reps in spreadsheets of their own; the second put the sheet on their phones and the office on a button.</p>
+
+      <h3>What didn't work, and what replaced it</h3>
+      <p>Most of the second version's design came from things that failed on the way. AppSheet's own API would have let the script hand leads to the app directly, but it needs a plan tier the company's Google Workspace policy blocked, so the script writes the sheet and sends its own email instead. AppSheet's push notifications fire only for rows added inside the app, never for rows a script writes, so the email with a link into the app became the notification. Deep links to a single record opened the wrong screen on phones often enough to be dropped for a link to the deck sorted newest first. And an early tool I wrote to add a rep, a browser robot that clicked through the AppSheet editor and rewrote six expressions, was deleted the day the security filters were rewritten to look the rep up in the roster tab, because from then on adding a rep needed no edit at all.</p>
+
+      <h2>Where it stands</h2>
+      <p>Dax Distro wound down in July 2026 and the app, its sheet, and the Workspace it lived in went with it. The scripts, the setup guide, and the app's full configuration are archived, which is what the drawings on this page are built from. The shops, reps, and numbers in them are invented.</p>
+      <p>The reps' other tool from the same months: <a href="rep-order-portal.html">the order portal</a>, where a won lead became an order.</p>
+
+      <h2>Stack</h2>
+      <div class="stack-pills">
+        <span class="stack-pill">AppSheet</span>
+        <span class="stack-pill">Google Sheets</span>
+        <span class="stack-pill">Google Apps Script</span>
+        <span class="stack-pill">Gmail (MailApp)</span>
+        <span class="stack-pill">Python · Gmail API · Sheets API (v1)</span>
+        <span class="stack-pill">Playwright (retired)</span>
+      </div>
+      <p>No-code was the right tool because the users were on phones, the data was already a spreadsheet, and the hard part was never the screens. It was deciding who sees what, and putting that decision in one place the office could edit.</p>
+
+      <h2>Built in conversation</h2>
+      <p>Same method as everything on this site. The security filters, the grouped actions that log and then dial, the staging-tab script, the schema guard, and the decision to delete the browser robot all came out of dialogue with Claude, with the reps trying each change on their phones between rounds.</p>
+      <p><a href="../index.html#philosophy">The philosophy</a>, or <a href="../now.html">what I'm building right now</a>.</p>
+
+      <div class="cta-row">
+        <a href="../work/" class="cta primary">All work</a>
+        <a href="rep-order-portal.html" class="cta secondary">The order portal</a>
+      </div>
+
+      <div class="crosslinks">
+        <a href="../index.html">← Home</a> ·
+        <a href="../work/">Work</a> ·
+        <a href="../index.html#projects">Projects</a> ·
+        <a href="../now.html">/now</a>
+      </div>
+
+    </article>
+
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> jadedviber.com</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const hamburger = document.querySelector('.nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+    }
+  </script>
+
+  <script src="/palette.js?v=4"></script>
+  <script src="/turing.js?v=4"></script>
+</body>
+</html>

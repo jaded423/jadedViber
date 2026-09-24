@@ -9,6 +9,8 @@
     { name: 'Photos to product pages',  hint: 'work · the unattended pipeline',       href: '/work/photo-to-web.html' },
     { name: 'Blog from a Google Doc',   hint: 'work · Point 4, Doc to Webflow',       href: '/work/blog-from-a-doc.html' },
     { name: 'Compliance portal',        hint: 'work · TCT, the batch trail',          href: '/work/compliance-portal.html' },
+    { name: 'Rep order portal',         hint: 'work · Dax, orders on a spreadsheet',  href: '/work/rep-order-portal.html' },
+    { name: 'Rep leads app',            hint: 'work · Dax, leads on the reps\' phones', href: '/work/rep-leads-app.html' },
     { name: 'Projects',                 hint: 'tools and open source',                href: '/#projects' },
     { name: 'PhotoEditor',              hint: 'projects · bulk product photos',       href: '/projects/photo-editor.html' },
     { name: 'Philosophy',               hint: 'why everything here came out of a chat', href: '/#philosophy' },

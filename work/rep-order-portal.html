@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Portal for 1099 Sales Reps on Google Sheets — Dax</title>
+  <meta name="description" content="Sales reps built wholesale orders from live stock, price tier and commission worked out per line, and every order landed in the Google Sheet the office used.">
+  <link rel="canonical" href="https://jadedviber.com/work/rep-order-portal.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://jadedviber.com/work/rep-order-portal.html">
+  <meta property="og:title" content="Order Portal for 1099 Sales Reps on Google Sheets — Dax">
+  <meta property="og:description" content="Reps signed in, built orders from live inventory with the volume tier and commission worked out for them, and every order landed in the spreadsheet the office already ran on.">
+  <meta property="og:image" content="https://jadedviber.com/work/img/dax-og.png">
+  <meta property="og:site_name" content="JadedViber">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Order Portal for 1099 Sales Reps on Google Sheets — Dax">
+  <meta name="twitter:description" content="Reps signed in, built orders from live inventory with the volume tier and commission worked out for them, and every order landed in the spreadsheet the office already ran on.">
+  <meta name="twitter:image" content="https://jadedviber.com/work/img/dax-og.png">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="work.css">
+  <link rel="icon" type="image/png" href="../snek.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jadedviber.com/#website",
+        "url": "https://jadedviber.com",
+        "name": "JadedViber",
+        "publisher": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jadedviber.com/work/rep-order-portal.html#webpage",
+        "url": "https://jadedviber.com/work/rep-order-portal.html",
+        "name": "Order Portal for 1099 Sales Reps on Google Sheets — Dax",
+        "isPartOf": { "@id": "https://jadedviber.com/#website" },
+        "author": { "@id": "https://jadedviber.com/#identity" },
+        "primaryImageOfPage": "https://jadedviber.com/work/img/dax-og.png",
+        "about": { "@id": "https://jadedviber.com/work/rep-order-portal.html#system" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://jadedviber.com/work/rep-order-portal.html#system",
+        "name": "Dax Distro Rep Order Portal",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "A sign-in order portal for a wholesale distributor's independent sales reps: rep-scoped customers, line items from live inventory, a volume-tier pricing and commission engine, order status workflow, an admin inventory view with an audit log, and a Google Sheet as the database. Two-way stock sync with WooCommerce, customer and item sync to QuickBooks Online, email notifications, nightly backups. Built first on Google Apps Script, then rewritten in PHP.",
+        "author": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jadedviber.com/#identity",
+        "name": "Joshua Brown",
+        "url": "https://jadedviber.com",
+        "sameAs": [ "https://github.com/jaded423", "https://nownownow.com/p/DTGZ" ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jadedviber.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://jadedviber.com/work/" },
+          { "@type": "ListItem", "position": 3, "name": "An order portal for 1099 sales reps", "item": "https://jadedviber.com/work/rep-order-portal.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="../index.html" class="nav-brand">JADED</a>
+    <div class="nav-links">
+      <a href="../work/">Work</a>
+      <a href="../index.html#philosophy">Philosophy</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#stack">Stack</a>
+      <a href="../homelab.html">Homelab</a>
+      <a href="../now.html">Now</a>
+      <a href="https://github.com/jaded423" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="container work-page">
+
+    <header class="work-hero">
+      <h1>An order portal for 1099 sales reps, on a spreadsheet backend.</h1>
+      <p class="lead">Dax Distro sold wholesale flower through independent reps who could not be given a login to the company's order system. Orders came in by text and got retyped. Prices depended on a volume tier that changed with the size of the whole order, so every quote was a lookup, and every commission was arithmetic someone did later. I built a portal where a rep signs in, picks one of their own customers, adds lines from live stock, and watches the tier, the price, and their commission settle as they type. Submit writes the order to the Google Sheet the office already ran on.</p>
+      <p class="meta">Dax Distro · Feb–Apr 2026 · Google Apps Script, then PHP · Google Sheets as the database · retired with the company · <a href="../work/">← all work</a></p>
+    </header>
+
+    <article class="work-body">
+
+      <div class="story">
+        <div class="story-card">
+          <h4>The problem</h4>
+          <p>Reps in the field, orders arriving as texts and calls, the office retyping them into the wholesale system. A price sheet with five product grades and five volume tiers, where the tier came from the total weight of the order, so a rep quoting one line at a time got it wrong. Commissions worked out by hand at month end. Nobody in the field could see what was actually in stock.</p>
+        </div>
+        <div class="story-card">
+          <h4>What I built</h4>
+          <p>A web portal with a Google sign-in limited to company accounts. A rep sees only the customers they brought in, builds an order from inventory grouped by grade with stock levels showing, and the app works out the tier from the order's total weight, prices each line, and shows the commission. Submitting writes the order to the sheet, takes the stock down, and emails the office. Admins see every order, move it through its statuses, and run inventory.</p>
+        </div>
+        <div class="story-card">
+          <h4>What changed</h4>
+          <p>Pricing arguments ended, because the same matrix priced everyone and an override was allowed but logged. Out-of-stock product disappeared from the form instead of being sold. Reps got their own numbers on demand: sales, commission, top customers. The first version was live the day it was started. Six weeks later, after the reps had lived in it, I rewrote it on a faster stack without changing what they saw.</p>
+        </div>
+      </div>
+
+      <h2>What the rep saw</h2>
+      <p>One page, top to bottom: the customer, the lines, the money. The customer card searches the rep's own book by name, contact, or phone; a new customer is a short form with duplicate detection on phone and email, and a billing address that defaults to the shipping one. The product list is grouped by grade and shows the stock left. Here three lines add up to twelve pounds, which lands the whole order in the Gold tier, and every line is priced at Gold.</p>
+
+      <figure class="shot">
+        <img src="img/dax-order.png" width="1280" height="890" loading="lazy" alt="Screenshot of the order portal's New Order page. A purple header with the Dax Distro logo and the signed-in rep's name. A Customer card shows the selected customer, Northside Smoke and Vape, with contact, phone, email, and city, plus Edit and Change buttons. An Order Items card lists three lines: Blue Meridian 4 lbs, Sugar Pine 3 lbs, Copper Haze 5 lbs, each marked Gold tier with a price per pound, commission per pound, and line total. A totals bar reads 12 lbs (Gold), order total $9,150.00, your commission $415.00.">
+        <figcaption>The order builder. The tier is computed from all three lines together, and the commission column is the rep's own number, not the company's.</figcaption>
+      </figure>
+
+      <p>Below the lines: notes, a shipping charge typed in from the carrier's estimate, and a payment method. ACH is the default; a card adds a two-percent fee to the subtotal plus shipping. Commission is figured on product only, never on shipping or fees, and the summary says so in numbers rather than in fine print.</p>
+
+      <h3>Rules the app enforced, so nobody had to argue about them</h3>
+      <ul>
+        <li><strong>The tier belongs to the order, not the line.</strong> Five product grades by five weight bands. Total weight picks the band; every line is priced in it. Add a line and watch the others get cheaper.</li>
+        <li><strong>You can't sell what isn't there.</strong> A product with zero stock is not in the dropdown. A quantity is capped at what's on the shelf. The stock number the rep sees is at most a minute old.</li>
+        <li><strong>Your customers are yours.</strong> A rep sees, edits, and orders for the customers they created and no one else's. Duplicate detection by phone and email stops the same shop being entered twice under two reps.</li>
+        <li><strong>Overrides are allowed and remembered.</strong> A rep can click a line's tier and pick another. The order records both the tier used and the tier the app would have chosen, so the office can see every exception.</li>
+        <li><strong>The browser suggests, the server decides.</strong> Prices update live in the page for feel, then the server recomputes every line from the matrix on submit. A tampered page can't invent a price.</li>
+        <li><strong>Stock moves are a ledger.</strong> Every change to inventory, whether an order, a delivery, a correction, or a cancellation, writes a line with the previous number, the new number, who did it, and why. Cancelling an order puts its stock back and says so.</li>
+        <li><strong>The sensitive bits stay masked.</strong> A customer's license number and tax ID go out to the browser masked, and come back untouched unless the rep types a new one.</li>
+      </ul>
+
+      <h2>After submit</h2>
+      <p>An order gets an ID, one row per line in the sheet, an email to the office with the full order laid out, and a place in the rep's Current Orders list. From there it walks Pending, Approved, Processing, Shipped, Completed, and only an admin can move it. A rep sees a badge; an admin sees a dropdown. Clicking a row opens the lines with the tier each one was priced at, and the totals, fees, and commission underneath.</p>
+
+      <figure class="shot">
+        <img src="img/dax-orders.png" width="1280" height="780" loading="lazy" alt="Screenshot of the Current Orders page. A table of four orders with ID, date, customer, item count, total, and a status badge: Pending, Approved, Processing, Shipped. The first order is expanded to show its line items, Night Harbor 2 lbs and Lemon Lantern 6 lbs at Silver tier, with price, line total, and commission per line, then total weight 8 lbs, subtotal $6,700, shipping $60, payment Credit Card, CC fee $135.20, grand total $6,895.20, and commission $330.">
+        <figcaption>A rep's order list with one order opened. The Silver tier on both lines came from the order's eight pounds, not from either line alone.</figcaption>
+      </figure>
+
+      <p>The Reports view gives a rep the same four numbers the office would otherwise be asked for, over any date range: total sales, total commission, order count, and average order, with cancelled orders excluded and counted separately, plus a top-ten of their customers. An admin sees the same page across any rep or all of them, and can download the commission run as a spreadsheet.</p>
+
+      <figure class="shot narrow">
+        <img src="img/dax-reports.png" width="1280" height="840" loading="lazy" alt="Screenshot of the Reports page: date preset buttons with All Time selected, a from and to date range, and a Download CSV button; five stat tiles reading total sales $37,825, total commission $1,890, five total orders, one cancelled, average order size $7,565; and a Top Customers by Sales table of five shops.">
+        <figcaption>Reports, from the rep's chair. The commission tile is the number they used to have to ask for.</figcaption>
+      </figure>
+
+      <h2>Where the data lived</h2>
+      <p>The office already ran on one Google Sheet, so the portal used that sheet as its database instead of replacing it. Customers, orders, inventory, the stock ledger, the rep roster, and the form settings are each a tab. The office kept working in the spreadsheet they knew, and the portal put rules in front of it. Around that core sat the connections a distributor actually needs: the website's stock, the accounting system, the product photos, and a nightly backup.</p>
+
+      <div class="diagram" role="figure" aria-label="The portal's data path: a rep's browser talks to a PHP API, which reads and writes one Google Sheet; the API also sends email to the office, syncs stock and product pages with WooCommerce, creates customers and items in QuickBooks, and pulls product photos from Drive, while the sheet is backed up to Drive nightly.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 470" role="img" aria-label="Four columns left to right. The rep's browser: a single-page app with Google sign-in limited to company accounts, showing orders, customers, reports, and for admins inventory. Arrow labeled JSON over HTTPS, session token, to the API: PHP on the web host, which checks the session, recomputes every price, holds a lock while stock changes, and caches reads for sixty seconds. A two-way arrow labeled Sheets API to the highlighted box OC Backend, one Google Sheet, with tabs Customers, Orders, Inventory, InventoryLog, AuthorizedReps, and Settings, captioned the office keeps working here. On the right, four boxes the API talks to: Email to the office, one message per order and per cancellation; WooCommerce, stock pushed out on every order, web orders coming back in by webhook, and a product page created when a product is added; QuickBooks Online, a customer or an item created when one is added here; Google Drive, the product photo pulled from a pending folder and moved to in-stock, and a nightly backup of the sheet, last thirty kept. A note at the bottom: failed syncs are logged and retried every fifteen minutes, so a slow partner never blocks a rep's order.">
+        <defs>
+          <marker id="arD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+        </defs>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#f8f8f2}
+.lbl{font-size:11px;fill:#a3abc9}
+.sm{font-size:10px}
+.box{fill:#12121a;stroke:#3a3a4a;stroke-width:1}
+.box-accent{fill:rgba(189,147,249,.10);stroke:#bd93f9;stroke-width:1.2}
+.box-blue{fill:rgba(139,233,253,.10);stroke:#8be9fd;stroke-width:1.2}
+.edge{fill:none;stroke:#c8ccd8;stroke-width:1.2}
+.rule{fill:#f1fa8c;font-size:11px}
+.t-strong{font-weight:600}
+.t-c{text-anchor:middle}
+</style>
+        <text x="115" y="30" class="t-c lbl">THE REP</text>
+        <text x="355" y="30" class="t-c lbl">THE RULES</text>
+        <text x="620" y="30" class="t-c lbl">THE DATABASE</text>
+        <text x="900" y="30" class="t-c lbl">THE REST OF THE BUSINESS</text>
+
+        <!-- rep's browser -->
+        <rect x="20" y="130" width="190" height="150" rx="7" class="box-blue"/>
+        <text x="115" y="156" class="t-c t-strong">A rep's browser</text>
+        <text x="115" y="180" class="t-c lbl">one page, no install</text>
+        <text x="115" y="198" class="t-c lbl">Google sign-in,</text>
+        <text x="115" y="214" class="t-c lbl">company accounts only</text>
+        <text x="115" y="238" class="t-c lbl">orders · customers · reports</text>
+        <text x="115" y="256" class="t-c lbl">admins: inventory</text>
+
+        <!-- API -->
+        <rect x="260" y="130" width="190" height="150" rx="7" class="box"/>
+        <text x="355" y="156" class="t-c t-strong">The API</text>
+        <text x="355" y="180" class="t-c lbl">PHP on the web host</text>
+        <text x="355" y="198" class="t-c lbl">checks the session</text>
+        <text x="355" y="214" class="t-c lbl">recomputes every price</text>
+        <text x="355" y="230" class="t-c lbl">locks stock while it changes</text>
+        <text x="355" y="246" class="t-c lbl">caches reads for 60 seconds</text>
+        <text x="355" y="268" class="t-c rule">the browser suggests, this decides</text>
+
+        <!-- the sheet -->
+        <rect x="510" y="110" width="220" height="190" rx="7" class="box-accent"/>
+        <text x="620" y="136" class="t-c t-strong">OC Backend · one Google Sheet</text>
+        <text x="620" y="160" class="t-c lbl">Customers · Orders</text>
+        <text x="620" y="178" class="t-c lbl">Inventory · InventoryLog</text>
+        <text x="620" y="196" class="t-c lbl">AuthorizedReps · Settings</text>
+        <text x="620" y="226" class="t-c lbl">a tab each, headers as columns</text>
+        <text x="620" y="244" class="t-c lbl">the rep roster is a tab too:</text>
+        <text x="620" y="260" class="t-c lbl">add a row, the rep can sign in</text>
+        <text x="620" y="286" class="t-c rule">the office keeps working here</text>
+
+        <!-- edges left to right -->
+        <path d="M210 205 H260" class="edge" marker-end="url(#arD)"/>
+        <text x="235" y="196" class="t-c lbl sm">JSON</text>
+        <path d="M450 195 H510" class="edge" marker-end="url(#arD)" marker-start="url(#arD)"/>
+        <text x="480" y="186" class="t-c lbl sm">Sheets API</text>
+
+        <!-- the rest of the business, right column -->
+        <rect x="790" y="50" width="220" height="70" rx="7" class="box"/>
+        <text x="900" y="72" class="t-c t-strong">Email to the office</text>
+        <text x="900" y="92" class="t-c lbl">one message per order,</text>
+        <text x="900" y="108" class="t-c lbl">one per cancellation</text>
+
+        <rect x="790" y="135" width="220" height="90" rx="7" class="box"/>
+        <text x="900" y="157" class="t-c t-strong">WooCommerce (the website)</text>
+        <text x="900" y="177" class="t-c lbl">stock pushed out on every order</text>
+        <text x="900" y="193" class="t-c lbl">web orders come back by webhook</text>
+        <text x="900" y="209" class="t-c lbl">new product → a product page</text>
+
+        <rect x="790" y="240" width="220" height="60" rx="7" class="box"/>
+        <text x="900" y="262" class="t-c t-strong">QuickBooks Online</text>
+        <text x="900" y="282" class="t-c lbl">new customer or item → created there</text>
+
+        <rect x="790" y="315" width="220" height="90" rx="7" class="box"/>
+        <text x="900" y="337" class="t-c t-strong">Google Drive</text>
+        <text x="900" y="357" class="t-c lbl">product photo: pending → in stock</text>
+        <text x="900" y="373" class="t-c lbl">→ the product page, with an</text>
+        <text x="900" y="389" class="t-c lbl">AI-written description via n8n</text>
+
+        <!-- one bus from the API to everything on the right -->
+        <path d="M355 130 V85 H760 V420" class="edge"/>
+        <path d="M760 85 H790" class="edge" marker-end="url(#arD)"/>
+        <path d="M760 180 H790" class="edge" marker-end="url(#arD)" marker-start="url(#arD)"/>
+        <path d="M760 270 H790" class="edge" marker-end="url(#arD)"/>
+        <path d="M760 360 H790" class="edge" marker-end="url(#arD)"/>
+        <path d="M760 420 H790" class="edge" marker-end="url(#arD)"/>
+
+        <!-- backup -->
+        <rect x="790" y="405" width="220" height="30" rx="7" class="box"/>
+        <text x="900" y="425" class="t-c lbl">nightly copy of the sheet · last 30 kept</text>
+
+        <text x="400" y="440" class="t-c lbl">a failed sync is logged and retried every 15 minutes,</text>
+        <text x="400" y="456" class="t-c lbl">so a slow partner never blocks a rep's order</text>
+      </svg>
+      </div>
+      <p class="diagram-caption">Left to right: the rep, the rules, the spreadsheet, and everything the spreadsheet had to stay in step with. The sheet is the one thing in the picture the office could open and read without me.</p>
+
+      <h2>The admin side</h2>
+      <p>Admins got an Inventory page the reps never saw: receive a delivery, correct a count with a required note, edit a product, and read the ledger of every change underneath. Adding a product did more than add a row. It created the product page on the company website, pulled the product's photo from a Drive folder and attached it, and asked an n8n workflow to write the description. The same idea, a photo in a folder becoming a product page without a person in between, later grew into <a href="photo-to-web.html">the pipeline I built for Elevated</a>.</p>
+
+      <figure class="shot">
+        <img src="img/dax-inventory.png" width="1280" height="1290" loading="lazy" alt="Screenshot of the admin Inventory Management page. A product table with rating, product name, type, potency, a color-coded stock badge, a checkmark or cross for whether the website has a photo, and action buttons per row. Below it, a Recent Activity ledger: date, product, change type (Order, Received, Adjustment, Cancellation), the change amount in green or red, previous stock to new stock, who made the change, and a note such as an order ID, a delivery invoice, or 'damaged in storage'.">
+        <figcaption>Inventory with its ledger. Every number in the Stock column has a history underneath it, and a cancellation shows up as stock coming back.</figcaption>
+      </figure>
+
+      <h2>Two builds in six weeks</h2>
+      <p>The first version was a Google Apps Script web app: one HTML file and one script, embedded in the company's WordPress site, live the same day it was started. Sign-in was email plus a PIN, because Google's own sign-in misbehaved inside that sandbox when a rep had two Google accounts in the browser. It worked, and the reps used it for two weeks. Its one real flaw was the platform: Apps Script wakes up cold, and a rep tapping the link on a phone waited five to fifteen seconds for the page.</p>
+      <p>So I rewrote the backend in PHP on the same host as the company website. The two dozen script functions became service classes behind a small API, the page's calls became ordinary fetches, sessions became signed tokens, sign-in became Google's, restricted to company accounts, and a memory cache kept the common reads under two hundred milliseconds. The page the reps saw did not change. The old version stayed deployed for a month in case of rollback, and was never needed.</p>
+
+      <h2>Where it stands</h2>
+      <p>Dax Distro wound down in July 2026 and the portal was retired with it. The code, the docs, and the runbooks are archived. Everything on this page comes from a copy of the portal running on my own machine against made-up customers, made-up products, made-up prices, and made-up orders. No real rep, customer, or price appears here.</p>
+      <p>The reps had a second tool from the same period: <a href="rep-leads-app.html">a lead-tracking app on their phones</a>, backed by another Google Sheet.</p>
+
+      <h2>Stack</h2>
+      <div class="stack-pills">
+        <span class="stack-pill">PHP 8.4 · Slim 4</span>
+        <span class="stack-pill">Google Sheets API</span>
+        <span class="stack-pill">Google sign-in</span>
+        <span class="stack-pill">JWT sessions</span>
+        <span class="stack-pill">Memcached</span>
+        <span class="stack-pill">Gmail SMTP</span>
+        <span class="stack-pill">WooCommerce REST + webhooks</span>
+        <span class="stack-pill">QuickBooks Online API</span>
+        <span class="stack-pill">Google Drive API</span>
+        <span class="stack-pill">n8n</span>
+        <span class="stack-pill">Cloudways</span>
+        <span class="stack-pill">Google Apps Script (v1)</span>
+      </div>
+      <p>A spreadsheet as the database is a choice people apologize for. Here it was the point: the office could read it, fix it, and back it up without a developer, and the portal's job was to keep it honest.</p>
+
+      <h2>Built in conversation</h2>
+      <p>Same method as everything on this site. The pricing engine, the rep-scoping, the two-way stock sync, and the PHP rewrite all came out of dialogue with Claude, one feature at a time, each one tested with the reps before the next. The rewrite from Apps Script to PHP took days rather than weeks because the first version was already the specification.</p>
+      <p><a href="../index.html#philosophy">The philosophy</a>, or <a href="../now.html">what I'm building right now</a>.</p>
+
+      <div class="cta-row">
+        <a href="../work/" class="cta primary">All work</a>
+        <a href="rep-leads-app.html" class="cta secondary">The reps' lead app</a>
+      </div>
+
+      <div class="crosslinks">
+        <a href="../index.html">← Home</a> ·
+        <a href="../work/">Work</a> ·
+        <a href="../index.html#projects">Projects</a> ·
+        <a href="../now.html">/now</a>
+      </div>
+
+    </article>
+
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> jadedviber.com</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const hamburger = document.querySelector('.nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+    }
+  </script>
+
+  <script src="/palette.js?v=4"></script>
+  <script src="/turing.js?v=4"></script>
+</body>
+</html>

@@ -11,6 +11,23 @@ All notable changes to jadedViber are documented here.
 
 ---
 
+## 2026-09-23 - /work/ case studies #5 + #5b: the Dax Distro order portal and the reps' lead app
+
+**What changed:**
+- New `work/rep-order-portal.html` = plan page 5 (daxOrder). Story cards (problem / built / changed), four real screenshots (order builder with three lines landing in the Gold tier; a rep's order list with one order expanded; Reports on All Time; the admin Inventory page with its ledger), a Claude-drawn inline SVG of the data path (rep's browser → PHP API → the one Google Sheet → email / WooCommerce / QuickBooks / Drive on a single bus), the seven enforced rules, "two builds in six weeks" (Apps Script + email/PIN live 2026-02-19 → PHP/Slim on Cloudways 2026-03-04 → Google sign-in 2026-03-05, all from `daxOrder/docs/changelog.md`), where it stands, stack, built in conversation.
+- New `work/rep-leads-app.html` = plan page 5b (Joshua's ask this session: the AppSheet "DAX - Dialer Leads" app was missing from the plan). Two Claude SVGs, both labeled reconstructions: two phone screens (the deck + one lead with the Call / Email / Text & Log buttons, "+ Note", the activity list) and the lead's flow (first-version Python parser lane dimmed; second version = staging tab → Push Leads menu → the Sheet ⇄ the phone → Activity Log / Notes / Status → RepStats). Sources: `graveyard/dax-teardown-2026-07/appsheet-dax-dialer-leads/{README,SETUP}.md`, `appsheet/docs/{architecture,changelog}.md`, `graveyard/dax-teardown-2026-07/daxLeads/CLAUDE.md`. The "what didn't work" paragraph (AppSheet API plan-gated, push bot blind to script writes, deep links, the Playwright add-rep robot deleted on 2026-04-06) is straight from those docs.
+- **Capture sitting (daxOrder):** the PHP-era SPA (`php/frontend/index.html`) copied to the session scratchpad with the Google client-id placeholder replaced; a Python `http.server` stub answering its eleven `/api/*` calls from a generated `fixtures.json`; a `scene.js` injected before `</body>` that seeds `daxRepSession` in localStorage and walks the app into `?scene=order|orders|reports|inventory`; headless Chromium at 1280 with a virtual-time budget; crops with ImageMagick. **Everything in the fixtures is invented, including the price and commission matrix** (the real one is in `PricingService.php` and is not on the page). The Dax logo in the header is the product as it was. No Wayback needed. Graveyard tree untouched.
+- **Accuracy fences:** the leads page does not claim the Python parser fed the AppSheet sheet (the docs say leads were typed into the staging tab); the order page says email+PIN for v1 and Google sign-in for v2, matching the changelog; "the sensitive bits stay masked" = `CustomerService::maskField` on TaxID/LicenseNo; "server recomputes" = `OrderService::submitOrder` server-side recalc; "locks stock" = `LockService` Memcached mutex.
+- New `work/img/`: `dax-order.png` 145 KB (1280×890), `dax-orders.png` 147 KB (1280×780), `dax-reports.png` 135 KB (1280×840), `dax-inventory.png` 210 KB (1280×1290), `dax-og.png` 162 KB and `dax-leads-og.png` 221 KB (both 1200×630).
+- `work/index.html`: the Dax card is a live link and no longer says "email and PIN" or "leads flowed in from Gmail the same way"; a sixth card for the leads app follows it (seven cards total, two still pending). `sitemap.xml` + `llms.txt` list both pages. `palette.js` `PAGES` gains both; `?v=3 → 4` on all eleven pages that load it.
+- Checked before push: order page title 55 / description 157, leads page 54 / 156; canonical + OG + Twitter + JSON-LD on both; all 4 `<img>` on the order page have alt text (the leads page has none, its pictures are inline SVG with `aria-label`); headless Chromium iframes at 1280, 390, and 320 wide → `scrollWidth == clientWidth` and no element past the right edge on either page.
+
+**Why:** plan `~/.claude/plans/jadedviber-portfolio.md` pages 5 + 5b; Joshua: "They are both products I made for Dax Distro."
+
+**Files:** `work/rep-order-portal.html` (new), `work/rep-leads-app.html` (new), `work/img/dax-*.png` (new), `work/index.html`, `sitemap.xml`, `llms.txt`, `palette.js`, every page's `palette.js?v=`.
+
+---
+
 ## 2026-09-23 - /work/ case study #4: TCT, a compliance portal that keeps the batch trail
 
 **What changed:**
