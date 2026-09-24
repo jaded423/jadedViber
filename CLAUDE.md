@@ -21,7 +21,7 @@ Personal brand website at **jadedviber.com**. Static single-page site, no build 
 ```
 jadedViber/
 ├── index.html          # main page (hero, projects, stack)
-├── homelab.html        # Proxmox cluster + network topology
+├── homelab.html · homelab.css · homelab.js   # the lab page (rebuilt 2026-09-23): JS-rendered clickable map + 4 static SVG diagrams in the /work diagram style; shares work/work.css (hero, story cards, diagram frame); facts come from homeLab/wiki, no LAN/tailnet IPs on the page
 ├── now.html            # current focus (/now)
 ├── style.css           # Dracula-themed styles
 ├── palette.js · turing.js · turing.jpg   # `/` command palette + the Turing tribute (loaded on every content page); detail in docs/site-reference.md § Interactive features

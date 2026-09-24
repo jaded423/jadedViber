@@ -1,296 +1,346 @@
-// Homelab topology data and interactions
+// Homelab map: data + renderer. Same visual vocabulary as the /work diagrams (classes in homelab.css).
+// No LAN addresses, no MACs, no tailnet IPs, no SSIDs. The wiki in the homeLab repo owns those.
 (function () {
   'use strict';
 
-  // Color palette
   const COLORS = {
-    physical: '#50fa7b',
-    vm: '#8be9fd',
-    service: '#ffb86c',
-    device: '#bd93f9',
-    cloud: '#ff79c6'
+    physical: '#50fa7b', vm: '#8be9fd', ct: '#8be9fd', cloud: '#ff79c6',
+    device: '#bd93f9', storage: '#ffb86c', host: '#6272a4'
+  };
+  const SHAPE = {
+    physical: 'box-sage', vm: 'box-blue', ct: 'box-ct', cloud: 'box-pink',
+    device: 'box-accent', storage: 'box-orange', host: 'box-dash', net: 'box'
+  };
+  const TYPE_LABEL = {
+    physical: 'physical', vm: 'virtual machine', ct: 'container', cloud: 'overlay network',
+    device: 'device', storage: 'storage', host: 'host jobs', net: 'network'
   };
 
-  // Node definitions (NO real IPs or credentials)
+  // ---- section captions ----
+  const captions = [
+    { x: 520, y: 16, text: 'ANYWHERE · THE ROAMING FLEET · every box runs the Tailscale client', anchor: 'middle' },
+    { x: 520, y: 329, text: 'THE HOUSE · one flat /22 · 2.5 GbE between the nodes', anchor: 'middle' },
+    { x: 44, y: 658, text: 'ALSO ON THE LAN', anchor: 'start' }
+  ];
+
+  // ---- groups (the two Proxmox nodes) ----
+  const groups = [
+    { id: 'book5', type: 'physical', x: 40, y: 340, w: 400, h: 310,
+      title: 'book5 · Proxmox node 1', right: 'Galaxy Book5 Pro 360 · 16 GB',
+      desc: 'A Samsung Galaxy Book5 Pro 360 running Proxmox VE with its screen switched off. Cluster node 1, the SSH jump host, the Twingate connector, and the place tower\'s syslog goes to die loudly. It keeps the lighter guests and all the watchdogs.',
+      specs: [
+        { label: 'Hardware', value: 'Galaxy Book5 Pro 360, Lunar Lake' },
+        { label: 'Memory', value: '16 GB' },
+        { label: 'Storage', value: '880 GB NVMe, ZFS' },
+        { label: 'Guests', value: 'VM 100 · CT 316 · CT 103' },
+        { label: 'Network', value: '2.5 GbE over USB' },
+        { label: 'Watchdogs', value: 'network, CPU, tower' }
+      ] },
+    { id: 'tower', type: 'physical', x: 480, y: 340, w: 520, h: 310,
+      title: 'tower · Proxmox node 2', right: 'ThinkStation P510 · Xeon 16c · 78 GB ECC · Quadro M4000',
+      desc: 'A Lenovo ThinkStation P510: sixteen Xeon cores, 78 GB of ECC memory, a Quadro M4000 bound to VFIO and handed whole to the media VM. Cluster node 2 and the storage box. The kernel is pinned to a known-good build after a newer one started hanging it silently.',
+      specs: [
+        { label: 'Hardware', value: 'ThinkStation P510' },
+        { label: 'CPU', value: 'Xeon E5-2667 v4, 16c / 32t' },
+        { label: 'Memory', value: '78 GB DDR4 ECC' },
+        { label: 'GPU', value: 'Quadro M4000 8 GB → VM 101' },
+        { label: 'Storage', value: 'SSD rpool + 4 TB HDD media-pool' },
+        { label: 'Guests', value: 'VM 101 · VM 111' },
+        { label: 'Network', value: '2.5 GbE primary, 1 GbE spare' }
+      ] }
+  ];
+
+  // ---- nodes ----
   const nodes = [
-    // Cloud
-    { id: 'twingate', label: 'Twingate', type: 'cloud', x: 400, y: 40, w: 120, h: 40, icon: '\u2601',
-      desc: 'Zero-trust network access. Connects all devices across any network without traditional VPN.', specs: [
-        { label: 'Type', value: 'ZTNA Mesh' }, { label: 'Devices', value: '10+' }
-      ]},
+    // roaming fleet
+    { id: 'pocket', type: 'device', x: 40, y: 28, w: 180, h: 50, title: 'Pocket', lines: ['GPD Pocket 4 · daily driver'],
+      desc: 'A GPD Pocket 4 running Omarchy (Arch + Hyprland). The daily driver since mid-September, where every command in the lab is typed. Ryzen AI 9, 32 GB, 2 TB, an 8.8-inch screen.',
+      specs: [{ label: 'OS', value: 'Omarchy' }, { label: 'Role', value: 'workstation' }, { label: 'Reaches the lab', value: 'Tailscale, by name' }] },
+    { id: 'phone', type: 'device', x: 240, y: 28, w: 180, h: 50, title: 'Phone', lines: ['S25 Ultra · Termux · Tailscale'],
+      desc: 'Samsung S25 Ultra with Termux. Full SSH access to the lab from anywhere, and the sermon pages play here.',
+      specs: [{ label: 'Access', value: 'Termux + ssh' }, { label: 'Path', value: 'Tailscale' }] },
+    { id: 'tablet', type: 'device', x: 440, y: 28, w: 180, h: 50, title: 'Tablet', lines: ['Tab S9 FE · on-demand tunnel'],
+      desc: 'Samsung Galaxy Tab S9 FE. Reaches the lab through an on-demand tunnel to save battery.',
+      specs: [{ label: 'Hardware', value: 'Tab S9 FE' }, { label: 'Tunnel', value: 'on demand' }] },
+    { id: 'go', type: 'device', x: 640, y: 28, w: 180, h: 50, title: 'Pixelbook Go', lines: ['CachyOS · dual kernel'],
+      desc: 'A Pixelbook Go running CachyOS with two kernels to pick from at boot. Lightweight portable box, static on the LAN when it is home.',
+      specs: [{ label: 'OS', value: 'CachyOS' }, { label: 'Role', value: 'portable dev' }] },
+    { id: 'mac', type: 'device', x: 840, y: 28, w: 180, h: 50, title: 'Mac', lines: ['the old daily driver · retiring'],
+      desc: 'The MacBook Air that ran the lab until September. Mirrored whole to tower\'s ZFS pool before it goes, snapshot per run.',
+      specs: [{ label: 'Status', value: 'retiring' }, { label: 'Backup', value: 'tower media-pool/backups' }] },
 
-    // Physical infrastructure
-    { id: 'book5', label: 'book5', type: 'physical', x: 200, y: 140, w: 120, h: 40, icon: '\uD83D\uDCBB',
-      desc: 'Samsung Galaxy Book5 Pro running Proxmox. Primary cluster node, hosts VMs and manages SSH tunnels.', specs: [
-        { label: 'Role', value: 'Proxmox Node' }, { label: 'Hardware', value: 'Galaxy Book5 Pro' }, { label: 'Services', value: 'SSH hub, watchdogs' }
-      ]},
-    { id: 'tower', label: 'tower', type: 'physical', x: 400, y: 140, w: 120, h: 40, icon: '\uD83D\uDDFC',
-      desc: 'Lenovo ThinkStation P510 running Proxmox. Secondary cluster node, workhorse for heavy VMs.', specs: [
-        { label: 'Role', value: 'Proxmox Node' }, { label: 'Hardware', value: 'ThinkStation P510' }, { label: 'Network', value: '2.5 GbE' }
-      ]},
-    { id: 'pihole', label: 'pihole', type: 'physical', x: 600, y: 140, w: 120, h: 40, icon: '\uD83E\uDDE0',
-      desc: 'Raspberry Pi running Pi-hole for network-wide DNS ad blocking and local DNS resolution.', specs: [
-        { label: 'Role', value: 'DNS / Ad Blocking' }, { label: 'Hardware', value: 'Raspberry Pi 2' }, { label: 'Extra', value: 'QDevice for cluster quorum' }
-      ]},
+    // overlays
+    { id: 'tailscale', type: 'cloud', x: 40, y: 132, w: 350, h: 50, title: 'Tailscale mesh', lines: ['MagicDNS · bare ssh alias works from anywhere · the primary path'],
+      desc: 'The primary way in. Every host runs the client and gets a name, so the bare alias reaches it from anywhere with no port forwards and no VPN server to maintain. A tailnet ACL tags the Pi gateway and auto-approves the LAN route it advertises.',
+      specs: [{ label: 'Role', value: 'primary overlay' }, { label: 'Names', value: 'MagicDNS' }, { label: 'Since', value: 'May 2026 (was LAN-first)' }] },
+    { id: 'internet', type: 'net', x: 430, y: 132, w: 200, h: 50, title: 'Internet', lines: ['Spectrum modem in bridge mode'],
+      desc: 'The cable modem is in bridge mode, so the router holds the public address and there is no double NAT. Power-cycle it when the router changes; it binds to the first MAC it sees.',
+      specs: [{ label: 'Modem', value: 'bridge mode' }, { label: 'NAT', value: 'single, at the router' }] },
+    { id: 'twingate', type: 'cloud', x: 670, y: 132, w: 350, h: 50, title: 'Twingate', lines: ['zero-trust · scoped to LAN-only web UIs · connector on book5'],
+      desc: 'The second overlay, kept on purpose. Scoped to the web UIs that only answer on the LAN (Home Assistant, Plex). When one overlay breaks, the other usually still works.',
+      specs: [{ label: 'Role', value: 'secondary overlay' }, { label: 'Connector', value: 'runs on book5' }, { label: 'Scope', value: 'media + LAN-only UIs' }] },
 
-    // VMs
-    { id: 'omarchy', label: 'omarchy', type: 'vm', x: 180, y: 260, w: 120, h: 40, icon: '\uD83D\uDDA5',
-      desc: 'Arch Linux VM with a full desktop environment. Daily driver for development and tinkering.', specs: [
-        { label: 'OS', value: 'Arch Linux' }, { label: 'Host', value: 'book5' }, { label: 'Use', value: 'Desktop / Dev' }
-      ]},
-    { id: 'ubuntu', label: 'ubuntu', type: 'vm', x: 420, y: 260, w: 120, h: 40, icon: '\uD83D\uDC27',
-      desc: 'Ubuntu Server VM running Docker. Hosts all self-hosted services including media, AI, and security.', specs: [
-        { label: 'OS', value: 'Ubuntu Server' }, { label: 'Host', value: 'tower' }, { label: 'Runtime', value: 'Docker' }
-      ]},
+    // the edge of the house
+    { id: 'pigw1', type: 'physical', x: 40, y: 218, w: 260, h: 56, title: 'pi-gw1', lines: ['Raspberry Pi 5 · Tailscale subnet router', 'Caddy front door for the sermon pages'],
+      desc: 'A Raspberry Pi 5 wired into the router. It advertises the whole LAN as a Tailscale subnet route, so a phone on cellular reaches the cameras, the router, and the containers that have no Tailscale of their own. Caddy on it terminates TLS for sermons.jadedviber.com. It is the first unit of a client-site gateway kit, living here as the tester.',
+      specs: [{ label: 'Hardware', value: 'Raspberry Pi 5' }, { label: 'Jobs', value: 'subnet router · Caddy' }, { label: 'Origin', value: 'piGate kit #1' }] },
+    { id: 'router', type: 'physical', x: 400, y: 218, w: 260, h: 56, title: 'Flint 3 router', lines: ['GL.iNet, OpenWrt underneath · gateway + DHCP', 'DNS handed to clients = the pihole'],
+      desc: 'A GL.iNet Flint 3 (Wi-Fi 7, OpenWrt-based) is the gateway since 23 September, the third router this year. Config as code over ssh, real DHCP, the pihole handed out as DNS. Static hosts pin their own addresses outside the DHCP pool, so nothing can collide.',
+      specs: [{ label: 'Model', value: 'GL.iNet Flint 3' }, { label: 'Firmware', value: 'GL 4.9, OpenWrt' }, { label: 'DHCP', value: 'pool outside the static range' }, { label: 'Since', value: '2026-09-23' }] },
+    { id: 'deco', type: 'physical', x: 720, y: 218, w: 200, h: 56, title: 'Deco BE63', lines: ['Wi-Fi access point only', 'wired backhaul to the router'],
+      desc: 'The surviving Deco of a pair (lightning took the other in June). It used to be the router; now it is an access point on a wired backhaul and nothing more.',
+      specs: [{ label: 'Role', value: 'access point' }, { label: 'Backhaul', value: 'wired' }] },
 
-    // Services (on ubuntu)
-    { id: 'plex', label: 'Plex', type: 'service', x: 220, y: 380, w: 100, h: 36, icon: '\u25B6',
-      desc: 'Media server for streaming movies, TV shows, and music across all devices.', specs: [
-        { label: 'Type', value: 'Media Server' }, { label: 'Host', value: 'ubuntu (Docker)' }
-      ]},
-    { id: 'jellyfin', label: 'Jellyfin', type: 'service', x: 340, y: 380, w: 100, h: 36, icon: '\uD83C\uDFAC',
-      desc: 'Open-source media server. Plex alternative with no subscription required.', specs: [
-        { label: 'Type', value: 'Media Server' }, { label: 'Host', value: 'ubuntu (Docker)' }
-      ]},
-    { id: 'ollama', label: 'Ollama', type: 'service', x: 460, y: 380, w: 100, h: 36, icon: '\uD83E\uDD16',
-      desc: 'Local AI model inference. Runs LLMs for AI-assisted development and experimentation.', specs: [
-        { label: 'Type', value: 'AI / LLM' }, { label: 'Host', value: 'ubuntu (Docker)' }
-      ]},
-    { id: 'frigate', label: 'Frigate', type: 'service', x: 580, y: 380, w: 100, h: 36, icon: '\uD83D\uDCF7',
-      desc: 'NVR with real-time AI object detection. Monitors security cameras with local processing.', specs: [
-        { label: 'Type', value: 'NVR / Security' }, { label: 'Host', value: 'ubuntu (Docker)' }, { label: 'Detection', value: 'AI object detection' }
-      ]},
+    // book5 guests
+    { id: 'vm100', type: 'vm', x: 60, y: 376, w: 360, h: 56, title: 'VM 100 · omarchy', lines: ['Arch + Hyprland desktop · Sunshine game stream · n8n', 'book5\'s Intel Arc iGPU passed through for encode'],
+      desc: 'An Arch Linux desktop VM with Hyprland. Doubles as a game-stream rig (Sunshine, hardware encode on the passed-through iGPU) and the home of the n8n automation stack. Memory is fixed, ballooning off, because ballooning crushed it under game load.',
+      specs: [{ label: 'OS', value: 'Arch, Hyprland' }, { label: 'Memory', value: '9 GB fixed, no balloon' }, { label: 'GPU', value: 'Intel Arc iGPU passthrough' }, { label: 'Runs', value: 'Sunshine · n8n' }] },
+    { id: 'ct316', type: 'ct', x: 60, y: 448, w: 172, h: 56, title: 'CT 316 · sermons', lines: ['nginx · pages + audio', 'LAN-only, fronted by pi-gw1'],
+      desc: 'An unprivileged Debian container that is the one home of the sermon site: follow-along pages, transcripts, and one mp3 per sermon. Born on tower on 21 September, moved to book5 two days later after tower hung twice. It has no Tailscale of its own; pi-gw1 fronts it.',
+      specs: [{ label: 'Type', value: 'LXC, Debian 13' }, { label: 'Size', value: '1 GB · 2 cores · 8 GB disk' }, { label: 'Serves', value: 'sermons.jadedviber.com' }] },
+    { id: 'ct103', type: 'ct', x: 248, y: 448, w: 172, h: 56, title: 'CT 103 · Homelable', lines: ['network scanner', 'keeps a map of the /22'],
+      desc: 'A network scanner container that walks the whole subnet and keeps an inventory, with a small MCP endpoint so a Claude session can ask it what is on the network.',
+      specs: [{ label: 'Type', value: 'container' }, { label: 'Job', value: 'scan + inventory' }] },
+    { id: 'book5host', type: 'host', x: 60, y: 520, w: 360, h: 114, title: 'on the host itself', lines: ['network + CPU watchdogs', 'tower-watchdog: three silent minutes → pull tower\'s plug', 'syslog receiver for tower\'s last words', 'Twingate connector · the ssh jump host', 'quorum: the pihole is the cluster\'s tie-breaker'],
+      desc: 'The jobs that run on book5 outside any guest. A net-health watchdog that probes internet, peers, and DNS separately and only restarts networking on true isolation. A CPU watchdog. A tower watchdog that power-cycles tower\'s smart plug after three unanswered minutes. rsyslog listening for tower. The Twingate connector.',
+      specs: [{ label: 'Watchdogs', value: 'net-health · CPU · tower' }, { label: 'Logs', value: 'tower → book5, UDP syslog' }, { label: 'Quorum', value: 'QDevice on the pihole' }] },
 
-    // Client devices
-    { id: 'mac', label: 'Mac', type: 'device', x: 80, y: 510, w: 100, h: 36, icon: '\uD83C\uDF4E',
-      desc: 'Primary development machine. Runs Claude Code, Neovim, and manages all projects.', specs: [
-        { label: 'Role', value: 'Dev / Staging' }, { label: 'Tunnel', value: 'Persistent SSH' }
-      ]},
-    { id: 'phone', label: 'Phone', type: 'device', x: 200, y: 510, w: 100, h: 36, icon: '\uD83D\uDCF1',
-      desc: 'Android device with Termux. SSH access to entire homelab from anywhere.', specs: [
-        { label: 'Access', value: 'Termux + SSH' }, { label: 'Tunnel', value: 'Persistent SSH' }
-      ]},
-    { id: 'tablet', label: 'Tablet', type: 'device', x: 320, y: 510, w: 100, h: 36, icon: '\uD83D\uDCF2',
-      desc: 'Samsung Galaxy Tab S9 FE. On-demand SSH tunnel to save battery.', specs: [
-        { label: 'Hardware', value: 'Galaxy Tab S9 FE' }, { label: 'Tunnel', value: 'On-demand' }
-      ]},
-    { id: 'pixelbook', label: 'Pixelbook', type: 'device', x: 440, y: 510, w: 100, h: 36, icon: '\uD83D\uDCBB',
-      desc: 'Pixelbook Go running Linux. Lightweight portable dev machine.', specs: [
-        { label: 'Hardware', value: 'Pixelbook Go' }, { label: 'Tunnel', value: 'Persistent SSH' }
-      ]},
-    { id: 'pc', label: 'PC', type: 'device', x: 560, y: 510, w: 100, h: 36, icon: '\uD83D\uDDA5',
-      desc: 'Windows PC with WSL Ubuntu. Production deployment target for scripts.', specs: [
-        { label: 'Role', value: 'Production / WSL' }, { label: 'Tunnel', value: 'Persistent SSH' }
-      ]}
+    // tower guests
+    { id: 'vm101', type: 'vm', x: 500, y: 376, w: 290, h: 150, align: 'left', title: 'VM 101 · ubuntu — the workhorse', lines: [
+        '48 GB · 28 vCPU · the Quadro M4000 passed through',
+        'media: Plex · Jellyfin · qBittorrent',
+        'AI: Ollama + Open WebUI · whisper',
+        'eyes: Frigate NVR · MQTT · plate reader',
+        'code + books: Gitea · two Odoo instances',
+        'games: steam-headless, streamed by Sunshine',
+        'ops: Portainer · ClamAV · autoheal',
+        'egress: Mullvad WireGuard, lockdown always on'],
+      desc: 'The busiest box in the house. Ubuntu Server with Docker: two media servers, torrents, a local LLM with a chat UI, an NVR watching two cameras with plate recognition, a Gitea mirror, two Odoo instances (one to learn the ERP I use at work, one for personal finance), a headless Steam rig, and on-demand Whisper. It is the only machine on Mullvad, lockdown on, which is why it is reached by jumping through tower rather than over Tailscale.',
+      specs: [{ label: 'OS', value: 'Ubuntu Server 22.04' }, { label: 'Resources', value: '48 GB · 28 vCPU' }, { label: 'GPU', value: 'Quadro M4000, VFIO' }, { label: 'Services', value: '17 running' }, { label: 'Storage', value: 'one root disk + NFS from tower' }, { label: 'Egress', value: 'Mullvad, lockdown' }, { label: 'Access', value: 'ProxyJump through tower' }] },
+    { id: 'vm111', type: 'vm', x: 810, y: 376, w: 170, h: 56, title: 'VM 111 · Home Assistant', lines: ['Hubspace · Frigate · MQTT', 'porch-cam notifications'],
+      desc: 'Home Assistant OS. Smart plugs and lights, the Frigate integration, an MQTT bus, and the notification that fires when autoheal has to restart Frigate, so a silent fix is never silent.',
+      specs: [{ label: 'OS', value: 'Home Assistant OS' }, { label: 'Integrations', value: 'Hubspace · Frigate · MQTT' }, { label: 'Access', value: 'ProxyJump tower · Twingate for the UI' }] },
+    { id: 'mediapool', type: 'storage', x: 810, y: 448, w: 170, h: 78, title: 'media-pool', lines: ['4 TB ZFS HDD pool', 'media · Frigate clips', 'Ollama models · backups'],
+      desc: 'tower\'s 4 TB spinning-disk ZFS pool, exported to VM 101 over NFS across the 2.5 GbE bridge. Movies, series, music, camera recordings, model files, and the whole-machine backups of the Mac and the Pocket, one snapshot per run.',
+      specs: [{ label: 'Pool', value: '4 TB HDD, ZFS' }, { label: 'Export', value: 'NFS → VM 101, 3.2 T' }, { label: 'Datasets', value: 'media · frigate · ollama · backups' }] },
+    { id: 'towerhost', type: 'host', x: 500, y: 542, w: 480, h: 92, title: 'on the host itself', lines: [
+        'kernel pinned to a known-good build after 6.17.13 started hanging the box',
+        'lockup → loud panic → reboot in 30 s · pstore keeps the kernel\'s last words',
+        'rsyslog streams to book5, so the log survives the crash',
+        'ZFS: rpool on SSD for VM disks · media-pool on HDD, exported over NFS'],
+      desc: 'What tower runs outside its guests: the ZFS pools and the NFS export, and the crash instrumentation. Soft and hard lockups are set to panic, panic reboots the box in thirty seconds, pstore keeps the panic across the reboot, and rsyslog forwards everything to book5 as it happens.',
+      specs: [{ label: 'Kernel', value: 'pinned 6.17.4' }, { label: 'On lockup', value: 'panic → reboot 30 s' }, { label: 'Forensics', value: 'pstore + book5 syslog' }] },
+
+    // also on the LAN
+    { id: 'pihole', type: 'physical', x: 40, y: 690, w: 210, h: 56, title: 'pihole', lines: ['Raspberry Pi 2 B · DNS + ad-block', 'unbound resolver · cluster QDevice'],
+      desc: 'A Raspberry Pi 2 doing three jobs: Pi-hole ad-blocking DNS for every client, an unbound recursive resolver behind it, and the QDevice that breaks ties for the two-node Proxmox cluster. A 7-inch screen on the front shows the query dashboard.',
+      specs: [{ label: 'Hardware', value: 'Raspberry Pi 2 Model B' }, { label: 'DNS', value: 'Pi-hole + unbound' }, { label: 'Extra', value: 'Proxmox QDevice' }] },
+    { id: 'cams', type: 'device', x: 280, y: 690, w: 210, h: 56, title: 'Cameras', lines: ['two Tapo cams, porch + pet cam', 'streams into Frigate on VM 101'],
+      desc: 'Two TP-Link Tapo cameras, one on the porch (4K) and one on the pets (2K). They stream to Frigate on VM 101, which does object detection and plate reading locally. Nothing leaves the house.',
+      specs: [{ label: 'Cameras', value: '2× Tapo' }, { label: 'NVR', value: 'Frigate, VM 101' }, { label: 'Cloud', value: 'none' }] },
+    { id: 'pc', type: 'device', x: 520, y: 690, w: 210, h: 56, title: 'PC + WSL', lines: ['Windows box · WSL Ubuntu', 'shares its internet with pi1'],
+      desc: 'A Windows desktop with WSL. It came home from the office in August. Its remaining job is to share its connection with pi1, which has no Wi-Fi.',
+      specs: [{ label: 'OS', value: 'Windows + WSL' }, { label: 'Job', value: 'ICS host for pi1' }] },
+    { id: 'pi1', type: 'physical', x: 760, y: 690, w: 210, h: 56, title: 'pi1', lines: ['Raspberry Pi 1 B+ · DietPi', 'bare-git mirror of 15 repos'],
+      desc: 'The original Raspberry Pi, model B+, on DietPi. A bare-git mirror of fifteen repositories, pushed weekly alongside GitHub and Gitea. It used to sit offsite; since August it lives in the same building as the cluster it backs up, so it is a third local copy now.',
+      specs: [{ label: 'Hardware', value: 'Raspberry Pi 1 B+' }, { label: 'OS', value: 'DietPi Bookworm' }, { label: 'Repos', value: '15, bare' }, { label: 'Offsite', value: 'not any more' }] }
   ];
 
-  // Connections between nodes
-  const connections = [
-    // Twingate to physical
-    { from: 'twingate', to: 'book5' },
-    { from: 'twingate', to: 'tower' },
-    { from: 'twingate', to: 'pihole' },
-    // Physical to VMs
-    { from: 'book5', to: 'omarchy' },
-    { from: 'tower', to: 'ubuntu' },
-    // Ubuntu to services
-    { from: 'ubuntu', to: 'plex' },
-    { from: 'ubuntu', to: 'jellyfin' },
-    { from: 'ubuntu', to: 'ollama' },
-    { from: 'ubuntu', to: 'frigate' },
-    // Devices to twingate
-    { from: 'twingate', to: 'mac' },
-    { from: 'twingate', to: 'phone' },
-    { from: 'twingate', to: 'tablet' },
-    { from: 'twingate', to: 'pixelbook' },
-    { from: 'twingate', to: 'pc' }
+  // ---- edges: explicit paths, labeled like the /work diagrams ----
+  const edges = [
+    // fleet → overlays
+    { d: 'M130 78 V96', cls: 'faint', from: 'pocket', to: 'tailscale' },
+    { d: 'M330 78 V96', cls: 'faint', from: 'phone', to: 'tailscale' },
+    { d: 'M530 78 V96', cls: 'faint', from: 'tablet', to: 'tailscale' },
+    { d: 'M730 78 V96', cls: 'faint', from: 'go', to: 'tailscale' },
+    { d: 'M930 78 V96', cls: 'faint', from: 'mac', to: 'tailscale' },
+    { d: 'M130 96 H930', cls: 'bus' },
+    { d: 'M215 96 V132', arrow: true, from: 'fleet', to: 'tailscale', label: 'ssh · every host by name', lx: 222, ly: 118, anchor: 'start' },
+    { d: 'M845 96 V132', arrow: true, from: 'fleet', to: 'twingate', label: 'LAN-only web UIs', lx: 852, ly: 118, anchor: 'start' },
+    // overlays → edge of the house
+    { d: 'M170 182 V218', arrow: true, from: 'tailscale', to: 'pigw1', label: 'advertises the LAN as a subnet route', lx: 178, ly: 204, anchor: 'start' },
+    { d: 'M530 182 V218', arrow: true, from: 'internet', to: 'router', label: 'WAN · public IP · no double NAT', lx: 538, ly: 204, anchor: 'start' },
+    { d: 'M660 246 H720', arrow: true, from: 'router', to: 'deco', label: 'wired', lx: 690, ly: 240, anchor: 'middle' },
+    // into the LAN bus
+    { d: 'M28 310 H1000', cls: 'bus' },
+    { d: 'M170 274 V310', arrow: true, from: 'pigw1', to: 'lan' },
+    { d: 'M530 274 V310', arrow: true, from: 'router', to: 'lan' },
+    { d: 'M820 274 V310', arrow: true, from: 'deco', to: 'lan', label: 'Wi-Fi clients', lx: 828, ly: 296, anchor: 'start' },
+    // bus → the nodes
+    { d: 'M240 310 V340', arrow: true, from: 'lan', to: 'book5' },
+    { d: 'M740 310 V340', arrow: true, from: 'lan', to: 'tower' },
+    // inside tower
+    { d: 'M810 490 H790', arrow: true, from: 'mediapool', to: 'vm101' },
+    // bus → also on the LAN
+    { d: 'M28 310 V666 H865', cls: 'faint' },
+    { d: 'M145 666 V690', cls: 'faint', from: 'lan', to: 'pihole' },
+    { d: 'M385 666 V690', cls: 'faint', from: 'lan', to: 'cams' },
+    { d: 'M625 666 V690', cls: 'faint', from: 'lan', to: 'pc' },
+    { d: 'M865 666 V690', cls: 'faint', from: 'lan', to: 'pi1' },
+    { d: 'M730 718 H760', arrow: true, from: 'pc', to: 'pi1', label: 'ICS', lx: 745, ly: 712, anchor: 'middle', small: true }
   ];
 
-  // Build node lookup
-  const nodeMap = {};
-  nodes.forEach(n => { nodeMap[n.id] = n; });
-
-  // SVG helpers
+  // ---- render ----
   const svgNS = 'http://www.w3.org/2000/svg';
-  const connGroup = document.getElementById('connections');
-  const nodeGroup = document.getElementById('nodes');
+  const svg = document.getElementById('topology');
+  if (!svg) return;
+  const gGroups = document.getElementById('topo-groups');
+  const gEdges = document.getElementById('topo-edges');
+  const gNodes = document.getElementById('topo-nodes');
+  const gLabels = document.getElementById('topo-labels');
 
-  function getCenter(node) {
-    return { x: node.x + node.w / 2, y: node.y + node.h / 2 };
+  function el(name, attrs, cls) {
+    const e = document.createElementNS(svgNS, name);
+    Object.keys(attrs || {}).forEach(k => e.setAttribute(k, attrs[k]));
+    if (cls) e.setAttribute('class', cls);
+    return e;
+  }
+  function text(x, y, str, cls) {
+    const t = el('text', { x, y }, cls);
+    t.textContent = str;
+    return t;
   }
 
-  function getColor(type) {
-    return COLORS[type] || '#6272a4';
-  }
-
-  // Draw connections
-  const lineElements = [];
-  connections.forEach(conn => {
-    const from = nodeMap[conn.from];
-    const to = nodeMap[conn.to];
-    if (!from || !to) return;
-    const c1 = getCenter(from);
-    const c2 = getCenter(to);
-
-    // Static line
-    const line = document.createElementNS(svgNS, 'line');
-    line.setAttribute('x1', c1.x);
-    line.setAttribute('y1', c1.y);
-    line.setAttribute('x2', c2.x);
-    line.setAttribute('y2', c2.y);
-    line.setAttribute('stroke', '#2a2a2a');
-    line.classList.add('topo-line');
-    line.dataset.from = conn.from;
-    line.dataset.to = conn.to;
-
-    // Calculate length for dash animation
-    const len = Math.sqrt((c2.x - c1.x) ** 2 + (c2.y - c1.y) ** 2);
-    line.style.strokeDasharray = len;
-    line.style.strokeDashoffset = len;
-
-    connGroup.appendChild(line);
-
-    // Flow line (dashed animated)
-    const flow = document.createElementNS(svgNS, 'line');
-    flow.setAttribute('x1', c1.x);
-    flow.setAttribute('y1', c1.y);
-    flow.setAttribute('x2', c2.x);
-    flow.setAttribute('y2', c2.y);
-    flow.setAttribute('stroke', '#2a2a2a');
-    flow.classList.add('topo-line-flow');
-    flow.dataset.from = conn.from;
-    flow.dataset.to = conn.to;
-    connGroup.appendChild(flow);
-
-    lineElements.push({ line, flow, from: conn.from, to: conn.to });
+  captions.forEach(c => {
+    const t = text(c.x, c.y, c.text, 'cap');
+    t.setAttribute('text-anchor', c.anchor);
+    gLabels.appendChild(t);
   });
 
-  // Draw nodes
-  const nodeElements = [];
-  nodes.forEach((node, idx) => {
-    const g = document.createElementNS(svgNS, 'g');
-    g.classList.add('topo-node');
-    g.dataset.id = node.id;
-    g.style.setProperty('--node-color', getColor(node.type));
+  const items = [];   // every clickable thing: { el, data }
 
-    const rect = document.createElementNS(svgNS, 'rect');
-    rect.setAttribute('x', node.x);
-    rect.setAttribute('y', node.y);
-    rect.setAttribute('width', node.w);
-    rect.setAttribute('height', node.h);
-    rect.setAttribute('fill', '#161616');
-    rect.setAttribute('stroke', getColor(node.type));
-    g.appendChild(rect);
-
-    // Icon
-    const icon = document.createElementNS(svgNS, 'text');
-    icon.classList.add('node-icon');
-    icon.setAttribute('x', node.x + 16);
-    icon.setAttribute('y', node.y + node.h / 2 + 5);
-    icon.textContent = node.icon;
-    g.appendChild(icon);
-
-    // Label
-    const label = document.createElementNS(svgNS, 'text');
-    label.setAttribute('x', node.x + node.w / 2 + 6);
-    label.setAttribute('y', node.y + node.h / 2 + 4);
-    label.textContent = node.label;
-    g.appendChild(label);
-
-    nodeGroup.appendChild(g);
-    nodeElements.push({ el: g, node, idx });
+  groups.forEach(g => {
+    const wrap = el('g', { 'data-id': g.id }, 'topo-group');
+    wrap.style.setProperty('--node-color', COLORS[g.type]);
+    wrap.appendChild(el('rect', { x: g.x, y: g.y, width: g.w, height: g.h, rx: 9 }, 'box-group g-shape'));
+    wrap.appendChild(text(g.x + 16, g.y + 22, g.title, 't-strong'));
+    const r = text(g.x + g.w - 16, g.y + 22, g.right, 'lbl t-e');
+    wrap.appendChild(r);
+    gGroups.appendChild(wrap);
+    items.push({ el: wrap, data: g });
   });
 
-  // Staggered fade-in on load
+  const edgeEls = [];
+  edges.forEach(e => {
+    const p = el('path', { d: e.d }, 'topo-edge' + (e.cls ? ' ' + e.cls : ''));
+    if (e.arrow) p.setAttribute('marker-end', 'url(#topo-ar)');
+    gEdges.appendChild(p);
+    let label = null;
+    if (e.label) {
+      label = text(e.lx, e.ly, e.label, 'topo-label' + (e.small ? ' xs' : ''));
+      label.setAttribute('text-anchor', e.anchor || 'middle');
+      gLabels.appendChild(label);
+    }
+    edgeEls.push({ p, label, from: e.from, to: e.to, cls: e.cls });
+  });
+
+  nodes.forEach(n => {
+    const wrap = el('g', { 'data-id': n.id }, 'topo-node');
+    wrap.style.setProperty('--node-color', COLORS[n.type]);
+    wrap.appendChild(el('rect', { x: n.x, y: n.y, width: n.w, height: n.h, rx: 7 }, SHAPE[n.type]));
+    const left = n.align === 'left';
+    const tx = left ? n.x + 16 : n.x + n.w / 2;
+    const tcls = left ? 't-strong' : 't-strong t-c';
+    const lcls = left ? 'lbl' : 'lbl t-c';
+    wrap.appendChild(text(tx, n.y + 19, n.title, tcls));
+    (n.lines || []).forEach((line, i) => {
+      wrap.appendChild(text(tx, n.y + 35 + 14 * i, line, lcls));
+    });
+    gNodes.appendChild(wrap);
+    items.push({ el: wrap, data: n });
+  });
+
+  // ---- entrance ----
   function animateIn() {
-    nodeElements.forEach(({ el, idx }) => {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const groupEls = items.filter(i => i.el.classList.contains('topo-group'));
+    const nodeEls = items.filter(i => i.el.classList.contains('topo-node'));
+    groupEls.forEach((g, i) => setTimeout(() => g.el.classList.add('visible'), i * 120));
+    nodeEls.forEach((n, i) => setTimeout(() => n.el.classList.add('visible'), 200 + i * 45));
+    const edgeStart = reduce ? 0 : 200 + nodeEls.length * 45;
+    edgeEls.forEach((e, i) => {
+      const drawable = !e.cls && !reduce;
+      if (drawable) {
+        const len = e.p.getTotalLength();
+        e.p.style.strokeDasharray = len;
+        e.p.style.strokeDashoffset = len;
+        e.p.style.transition = 'stroke-dashoffset 0.5s ease, stroke 0.15s ease, opacity 0.6s ease';
+      }
       setTimeout(() => {
-        el.classList.add('visible');
-      }, idx * 80);
+        e.p.classList.add('shown');
+        if (drawable) e.p.style.strokeDashoffset = 0;
+        if (e.label) e.label.classList.add('shown');
+      }, edgeStart + i * 40);
     });
-
-    // Animate lines after nodes start appearing
-    setTimeout(() => {
-      lineElements.forEach(({ line, flow }, i) => {
-        setTimeout(() => {
-          line.classList.add('animated');
-          line.setAttribute('stroke', '#3a3a3a');
-          setTimeout(() => {
-            flow.classList.add('animated');
-            flow.setAttribute('stroke', '#3a3a3a');
-          }, 400);
-        }, i * 50);
-      });
-    }, nodes.length * 40);
+    // clear the dash inline styles once drawn so highlight/dim look right
+    setTimeout(() => edgeEls.forEach(e => {
+      if (!e.cls) { e.p.style.strokeDasharray = ''; e.p.style.strokeDashoffset = ''; e.p.style.transition = ''; }
+    }), edgeStart + edgeEls.length * 40 + 700);
   }
 
-  // Hover highlighting
-  nodeElements.forEach(({ el, node }) => {
-    el.addEventListener('mouseenter', () => {
-      lineElements.forEach(({ line, flow, from, to }) => {
-        if (from === node.id || to === node.id) {
-          line.classList.add('highlight');
-          line.setAttribute('stroke', getColor(node.type));
-          flow.classList.add('highlight');
-          flow.setAttribute('stroke', getColor(node.type));
-        }
-      });
+  // ---- hover: light the edges that touch this box ----
+  const GROUP_OF = {};
+  nodes.forEach(n => {
+    if (['vm100', 'ct316', 'ct103', 'book5host'].includes(n.id)) GROUP_OF[n.id] = 'book5';
+    if (['vm101', 'vm111', 'mediapool', 'towerhost'].includes(n.id)) GROUP_OF[n.id] = 'tower';
+  });
+  const FLEET = ['pocket', 'phone', 'tablet', 'go', 'mac'];
+
+  function touches(edge, id) {
+    const ids = [id];
+    if (GROUP_OF[id]) ids.push(GROUP_OF[id]);
+    if (FLEET.includes(id)) ids.push('fleet');
+    return ids.includes(edge.from) || ids.includes(edge.to);
+  }
+  function setHover(id, color) {
+    edgeEls.forEach(e => {
+      const hit = id && touches(e, id);
+      e.p.classList.toggle('highlight', !!hit);
+      e.p.classList.toggle('dim', !!id && !hit);
+      if (hit) e.p.style.setProperty('--edge-color', color); else e.p.style.removeProperty('--edge-color');
+      if (e.label) { e.label.classList.toggle('highlight', !!hit); e.label.classList.toggle('dim', !!id && !hit); }
     });
-    el.addEventListener('mouseleave', () => {
-      lineElements.forEach(({ line, flow }) => {
-        line.classList.remove('highlight');
-        line.setAttribute('stroke', '#3a3a3a');
-        flow.classList.remove('highlight');
-        flow.setAttribute('stroke', '#3a3a3a');
-      });
-    });
+  }
+  items.forEach(({ el: g, data }) => {
+    g.addEventListener('mouseenter', () => setHover(data.id, COLORS[data.type]));
+    g.addEventListener('mouseleave', () => setHover(null));
   });
 
-  // Detail panel
+  // ---- detail panel ----
   const panel = document.getElementById('detail-panel');
   const panelTitle = document.getElementById('detail-title');
   const panelType = document.getElementById('detail-type');
   const panelDesc = document.getElementById('detail-desc');
   const panelSpecs = document.getElementById('detail-specs');
   const closeBtn = document.getElementById('detail-close');
+  let selected = null;
 
-  function openPanel(node) {
-    panelTitle.textContent = node.label;
-    panelType.textContent = node.type;
-    panelType.style.color = getColor(node.type);
-    panelDesc.textContent = node.desc;
-    panelSpecs.innerHTML = (node.specs || []).map(s =>
-      `<div class="detail-spec"><span class="detail-spec-label">${s.label}</span><span class="detail-spec-value">${s.value}</span></div>`
+  function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+  function openPanel(item) {
+    if (selected) selected.el.classList.remove('selected');
+    selected = item;
+    item.el.classList.add('selected');
+    const d = item.data;
+    panelTitle.textContent = d.title;
+    panelType.textContent = TYPE_LABEL[d.type] || d.type;
+    panelType.style.color = COLORS[d.type];
+    panelDesc.textContent = d.desc || '';
+    panelSpecs.innerHTML = (d.specs || []).map(s =>
+      `<div class="detail-spec"><span class="detail-spec-label">${esc(s.label)}</span><span class="detail-spec-value">${esc(s.value)}</span></div>`
     ).join('');
     panel.classList.add('open');
   }
-
   function closePanel() {
     panel.classList.remove('open');
+    if (selected) { selected.el.classList.remove('selected'); selected = null; }
   }
-
-  nodeElements.forEach(({ el, node }) => {
-    el.addEventListener('click', () => openPanel(node));
+  items.forEach(item => {
+    item.el.addEventListener('click', ev => { ev.stopPropagation(); openPanel(item); });
   });
-
   closeBtn.addEventListener('click', closePanel);
+  document.addEventListener('click', e => { if (!panel.contains(e.target)) closePanel(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
 
-  // Close panel on click outside
-  document.addEventListener('click', (e) => {
-    if (!panel.contains(e.target) && !e.target.closest('.topo-node')) {
-      closePanel();
-    }
-  });
-
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closePanel();
-  });
-
-  // Start animations
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', animateIn);
-  } else {
-    animateIn();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', animateIn);
+  else animateIn();
 })();

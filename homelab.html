@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homelab — Two-node Proxmox cluster, Tailscale mesh, Pi1 mirror | JadedViber</title>
-  <meta name="description" content="Interactive topology of a two-node Proxmox homelab: book5 + tower, VMs running Plex/Jellyfin/Ollama/Frigate, Twingate + Tailscale mesh, Pi1 git mirror at a remote site.">
+  <title>Homelab — two-node Proxmox cluster, Tailscale-first, self-healing | JadedViber</title>
+  <meta name="description" content="Interactive map and diagrams of a two-node Proxmox homelab: a laptop and a workstation, Plex, Frigate and Ollama on one VM, Tailscale-first access through a Pi subnet router, ZFS over NFS, and the watchdog chain that turns a kernel hang into a 30-second reboot.">
   <link rel="canonical" href="https://jadedviber.com/homelab.html">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://jadedviber.com/homelab.html">
-  <meta property="og:title" content="Homelab — Two-node Proxmox cluster, Tailscale mesh, Pi1 mirror">
-  <meta property="og:description" content="Interactive topology of a two-node Proxmox homelab: book5 + tower, VMs running Plex/Jellyfin/Ollama/Frigate, Twingate + Tailscale mesh, Pi1 git mirror at a remote site.">
-  <meta property="og:image" content="https://jadedviber.com/og.png">
+  <meta property="og:title" content="Homelab — two-node Proxmox cluster, Tailscale-first, self-healing">
+  <meta property="og:description" content="Interactive map and diagrams of a two-node Proxmox homelab: a laptop and a workstation, Plex, Frigate and Ollama on one VM, Tailscale-first access through a Pi subnet router, ZFS over NFS, and the watchdog chain that turns a kernel hang into a 30-second reboot.">
+  <meta property="og:image" content="https://jadedviber.com/homelab-og.png">
   <meta property="og:site_name" content="JadedViber">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Homelab — Two-node Proxmox cluster, Tailscale mesh, Pi1 mirror">
-  <meta name="twitter:description" content="Interactive topology of a two-node Proxmox homelab: book5 + tower, VMs running Plex/Jellyfin/Ollama/Frigate, Twingate + Tailscale mesh, Pi1 git mirror at a remote site.">
-  <meta name="twitter:image" content="https://jadedviber.com/og.png">
+  <meta name="twitter:title" content="Homelab — two-node Proxmox cluster, Tailscale-first, self-healing">
+  <meta name="twitter:description" content="Interactive map and diagrams of a two-node Proxmox homelab: Plex, Frigate and Ollama on one VM, Tailscale-first access, ZFS over NFS, and the watchdog chain that turns a kernel hang into a 30-second reboot.">
+  <meta name="twitter:image" content="https://jadedviber.com/homelab-og.png">
 
   <script type="application/ld+json">
   {
@@ -29,11 +29,12 @@
         "@type": "WebPage",
         "@id": "https://jadedviber.com/homelab.html#webpage",
         "url": "https://jadedviber.com/homelab.html",
-        "name": "Homelab — Two-node Proxmox cluster, Tailscale mesh, Pi1 mirror",
-        "description": "Interactive topology of a two-node Proxmox homelab: book5 + tower, VMs running Plex/Jellyfin/Ollama/Frigate, Twingate + Tailscale mesh, Pi1 git mirror at a remote site.",
+        "name": "Homelab — two-node Proxmox cluster, Tailscale-first, self-healing",
+        "description": "Interactive map and diagrams of a two-node Proxmox homelab: a laptop and a workstation, Plex, Frigate and Ollama on one VM, Tailscale-first access through a Pi subnet router, ZFS over NFS, and the watchdog chain that turns a kernel hang into a 30-second reboot.",
         "isPartOf": { "@id": "https://jadedviber.com/#website" },
         "author": { "@id": "https://jadedviber.com/#identity" },
-        "primaryImageOfPage": "https://jadedviber.com/og.png"
+        "primaryImageOfPage": "https://jadedviber.com/homelab-og.png",
+        "dateModified": "2026-09-23"
       },
       {
         "@type": "WebSite",
@@ -46,16 +47,24 @@
         "@type": "Person",
         "@id": "https://jadedviber.com/#identity",
         "name": "Joshua Brown",
-        "url": "https://github.com/jaded423",
-        "sameAs": ["https://github.com/jaded423"],
+        "url": "https://jadedviber.com",
+        "sameAs": [ "https://github.com/jaded423", "https://nownownow.com/p/DTGZ" ],
         "description": "Homelab tinkerer and developer behind JadedViber."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jadedviber.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Homelab", "item": "https://jadedviber.com/homelab.html" }
+        ]
       }
     ]
   }
   </script>
 
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="homelab.css">
+  <link rel="stylesheet" href="work/work.css">
+  <link rel="stylesheet" href="homelab.css?v=2">
   <link rel="icon" type="image/png" href="snek.png">
 </head>
 <body>
@@ -63,82 +72,360 @@
   <nav class="topnav">
     <a href="index.html#hero" class="nav-brand">JADED</a>
     <div class="nav-links">
+      <a href="work/">Work</a>
       <a href="index.html#philosophy">Philosophy</a>
       <a href="index.html#projects">Projects</a>
       <a href="index.html#stack">Stack</a>
       <a href="homelab.html" class="active">Homelab</a>
       <a href="now.html">Now</a>
-      <a href="https://github.com/jaded423" target="_blank">GitHub</a>
+      <a href="https://github.com/jaded423" target="_blank" rel="noopener">GitHub</a>
     </div>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <div class="container homelab-container">
-    <section class="homelab-hero">
-      <h1 class="section-title">Homelab</h1>
-      <p class="homelab-subtitle">A two-node Proxmox cluster, VMs, Docker services, and a mesh of devices connected through Twingate.</p>
+  <main class="container work-page homelab-page">
+
+    <header class="work-hero">
+      <h1>Two mini-PCs, one flat network, and a lot of watchdogs.</h1>
+      <p class="lead">A two-node Proxmox cluster in a home office: a laptop with its screen off and a workstation with a Xeon, three VMs, two containers, a Raspberry Pi doing DNS, and a fleet of devices that reach all of it by name from anywhere. It streams the movies, watches the porch, runs a local LLM, mirrors my repos, and serves sermons to my phone. The interesting part is what happens when a piece of it breaks.</p>
+      <p class="meta">Home office · 2025–2026 · Proxmox VE · Tailscale · ZFS · Docker · <a href="https://github.com/jaded423/homeLab" target="_blank" rel="noopener">the docs repo</a></p>
+    </header>
+
+    <div class="stats" aria-label="At a glance">
+      <div class="stat"><b>2</b><span>Proxmox nodes</span></div>
+      <div class="stat"><b>3 + 2</b><span>VMs + containers</span></div>
+      <div class="stat"><b>17</b><span>services on one VM</span></div>
+      <div class="stat"><b>4 TB</b><span>ZFS media pool</span></div>
+      <div class="stat"><b>2.5 GbE</b><span>between the nodes</span></div>
+      <div class="stat"><b>3</b><span>git remotes</span></div>
+    </div>
+
+    <section class="topology">
+      <h2>The map</h2>
+      <p>Top to bottom: the devices I carry, the two overlay networks they use to get in, the edge of the house, the two Proxmox nodes with their guests, and the small boxes that live on the LAN beside them. Every box is clickable. Hover to see what it talks to.</p>
+      <div class="topology-wrapper">
+        <svg id="topology" class="hl-svg" viewBox="0 0 1040 764" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The homelab map. A row of roaming devices at the top feed two overlay networks, Tailscale and Twingate. Below them the edge of the house: a Raspberry Pi subnet router, the Flint 3 router fed by the internet, and a Deco access point. All of it lands on one flat LAN. Under the LAN sit the two Proxmox nodes: book5 with the omarchy desktop VM, the sermons container, the Homelable scanner and the host watchdogs; tower with the ubuntu workhorse VM, Home Assistant, the media pool feeding the VM over NFS, and the crash instrumentation. A last row holds the pihole, the cameras, the PC, and the pi1 git mirror.">
+          <defs>
+            <marker id="topo-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+          </defs>
+          <g id="topo-groups"></g>
+          <g id="topo-edges"></g>
+          <g id="topo-nodes"></g>
+          <g id="topo-labels"></g>
+        </svg>
+      </div>
+      <div class="topology-legend">
+        <div class="legend-item"><span class="legend-dot" style="background:rgba(80,250,123,.15);border-color:#50fa7b"></span> Physical</div>
+        <div class="legend-item"><span class="legend-dot" style="background:rgba(139,233,253,.15);border-color:#8be9fd"></span> Virtual machine</div>
+        <div class="legend-item"><span class="legend-dot" style="background:rgba(139,233,253,.05);border-color:#6272a4"></span> Container</div>
+        <div class="legend-item"><span class="legend-dot" style="background:rgba(255,121,198,.15);border-color:#ff79c6"></span> Overlay network</div>
+        <div class="legend-item"><span class="legend-dot" style="background:rgba(189,147,249,.15);border-color:#bd93f9"></span> Device</div>
+        <div class="legend-item"><span class="legend-dot" style="background:rgba(255,184,108,.15);border-color:#ffb86c"></span> Storage</div>
+      </div>
+      <p class="topology-hint">Tap a box for what it is and what it runs. On a phone the map scrolls sideways.</p>
     </section>
 
-    <div class="topology-wrapper">
-      <svg id="topology" viewBox="0 0 800 620" xmlns="http://www.w3.org/2000/svg">
-        <!-- Connection lines (drawn first, behind nodes) -->
-        <g id="connections" class="connections"></g>
-        <!-- Nodes (drawn on top) -->
-        <g id="nodes"></g>
-      </svg>
-    </div>
+    <article class="work-body">
 
-    <!-- Detail panel -->
-    <div class="detail-panel" id="detail-panel">
-      <button class="detail-close" id="detail-close">&times;</button>
-      <h3 class="detail-title" id="detail-title"></h3>
-      <p class="detail-type" id="detail-type"></p>
-      <p class="detail-desc" id="detail-desc"></p>
-      <div class="detail-specs" id="detail-specs"></div>
-    </div>
+      <div class="story">
+        <div class="story-card">
+          <h4>What it is</h4>
+          <p>Two Proxmox nodes in a home office. <strong>book5</strong> is a Galaxy Book laptop with its screen switched off. <strong>tower</strong> is a ThinkStation with sixteen Xeon cores, 78 GB of ECC memory, and a Quadro handed whole to the media VM. A Raspberry Pi 2 does DNS and breaks cluster ties. Everything else is a guest.</p>
+        </div>
+        <div class="story-card">
+          <h4>Why it exists</h4>
+          <p>To run the things I'd rather not rent: media, cameras, a local LLM, a git mirror, an ERP to learn on, and a network I can break on purpose. And to give the ops habits I use at work a home: one source of truth per fact, a runbook per host, a log that survives the crash.</p>
+        </div>
+        <div class="story-card">
+          <h4>What it taught me</h4>
+          <p>Most of the value is in the failure modes. A silent hang taught me to make crashes loud. A lightning strike taught me to check which bridge a VM is actually on. A mirror that came home taught me that "offsite" is a fact about geography, not intent.</p>
+        </div>
+      </div>
 
-    <!-- Legend -->
-    <div class="topology-legend">
-      <div class="legend-item"><span class="legend-dot" style="background:#50fa7b"></span> Physical</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#8be9fd"></span> Virtual Machines</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#ffb86c"></span> Services</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#bd93f9"></span> Devices</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#ff79c6"></span> Cloud</div>
-    </div>
+      <h2>How I reach it</h2>
+      <p>Every host runs the Tailscale client and gets a name, so the bare alias works from anywhere: a phone on cellular, the Pocket in a café. Three things complicate that, and each has its own path. A few boxes have no Tailscale of their own, so a Raspberry Pi on the LAN advertises the whole subnet as a route. One VM lives behind Mullvad with lockdown on, which walls the tailnet off, so it's reached by jumping through its host. And a second overlay, Twingate, stays scoped to the web UIs that only answer on the LAN.</p>
 
-    <section class="homelab-writeup">
-      <h2>About this lab</h2>
-      <p>This is a two-node Proxmox VE cluster running on commodity mini-PCs. <strong>book5</strong> is the primary hypervisor — it hosts the Twingate connector, a Pi-hole LXC, a transcript-processing LXC, and acts as the SSH jump host for every roaming device. <strong>tower</strong> is the heavier node — Nvidia M4000 passthrough to a media VM, kernel pinned to a known-good 6.17.4-2-pve after a regression in 6.17.13 caused silent hangs every 1–3 days.</p>
+      <div class="diagram" role="figure" aria-label="Access model: devices on the left reach Tailscale, which fans out to hosts directly, to LAN-only things through the pi-gw1 subnet router, and to the Mullvad-walled VM through a ProxyJump on tower. Twingate is a second overlay scoped to LAN-only web UIs.">
+        <svg class="hl-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 330">
+          <defs>
+            <marker id="ar-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+          </defs>
+          <text x="120" y="44" class="t-c cap">FROM ANYWHERE</text>
+          <rect x="20" y="60" width="200" height="44" rx="7" class="box-accent"/>
+          <text x="120" y="78" class="t-c t-strong">Phone on cellular</text>
+          <text x="120" y="94" class="t-c lbl">Tailscale app, Termux</text>
+          <rect x="20" y="120" width="200" height="44" rx="7" class="box-accent"/>
+          <text x="120" y="138" class="t-c t-strong">The Pocket in a café</text>
+          <text x="120" y="154" class="t-c lbl">Omarchy, Tailscale client</text>
+          <rect x="20" y="180" width="200" height="44" rx="7" class="box-accent"/>
+          <text x="120" y="198" class="t-c t-strong">Any device on the tailnet</text>
+          <text x="120" y="214" class="t-c lbl">phones, tablets, laptops</text>
 
-      <h2>Virtual machines and services</h2>
-      <p>VM 100 (Omarchy) is an Arch desktop used for headless GPU experiments. VM 101 (Ubuntu) is the media + AI workhorse — it runs Plex (32400), Jellyfin (8096), Ollama (11434) for local LLM inference, Frigate (5000) for two Tapo cameras on the 192.168.68.0/22 subnet, qBittorrent (8080), and a local ALPR service on 8088. A separate Pi-hole LXC (192.168.68.248) handles DNS for the lab, overriding the Twingate resolver because the Twingate DNS started failing while the client still reported <code>online</code>.</p>
+          <rect x="300" y="60" width="200" height="164" rx="7" class="box-pink"/>
+          <text x="400" y="84" class="t-c t-strong">Tailscale</text>
+          <text x="400" y="104" class="t-c lbl">mesh VPN · MagicDNS</text>
+          <text x="400" y="119" class="t-c lbl">bare ssh alias, from anywhere</text>
+          <text x="400" y="134" class="t-c lbl">no port forwards</text>
+          <text x="400" y="149" class="t-c lbl">no VPN server to babysit</text>
+          <text x="400" y="176" class="t-c lbl">tailnet ACL tags the Pi gateway</text>
+          <text x="400" y="191" class="t-c lbl">and auto-approves its LAN route</text>
+          <text x="400" y="212" class="t-c sm sage">the primary path since May</text>
+          <path d="M220 82 H300" class="edge" marker-end="url(#ar-a)"/>
+          <path d="M220 142 H300" class="edge" marker-end="url(#ar-a)"/>
+          <path d="M220 202 H300" class="edge" marker-end="url(#ar-a)"/>
 
-      <h2>Networking</h2>
-      <p>Everything sits on a single 192.168.68.0/22 subnet after a router migration in early 2026 collapsed the old dual-subnet setup. Both Proxmox nodes run 2.5 GbE primary interfaces on vmbr1. <strong>Tailscale</strong> provides MagicDNS across the whole tailnet — laptops, phones, the Pi1 mirror — and <strong>Twingate</strong> handles outside-network access into the lab. The two overlay networks intentionally overlap; when one breaks, the other usually still works.</p>
+          <rect x="600" y="50" width="200" height="56" rx="7" class="box-sage"/>
+          <text x="700" y="69" class="t-c t-strong">Direct, by name</text>
+          <text x="700" y="85" class="t-c lbl">book5 · tower · omarchy</text>
+          <text x="700" y="99" class="t-c lbl">pihole · pi1 · pi-gw1</text>
+          <rect x="600" y="114" width="200" height="56" rx="7" class="box"/>
+          <text x="700" y="133" class="t-c t-strong">Through pi-gw1</text>
+          <text x="700" y="149" class="t-c lbl">Pi 5 subnet router: the whole LAN</text>
+          <text x="700" y="163" class="t-c lbl">cameras · router · the sermons CT</text>
+          <rect x="600" y="178" width="200" height="56" rx="7" class="box-blue"/>
+          <text x="700" y="197" class="t-c t-strong">ProxyJump through tower</text>
+          <text x="700" y="213" class="t-c lbl">VM 101, Mullvad walls it off</text>
+          <text x="700" y="227" class="t-c lbl">VM 111, Home Assistant</text>
+          <path d="M500 100 H560 V78 H600" class="edge" marker-end="url(#ar-a)"/>
+          <text x="530" y="94" class="t-c lbl sm">ssh host</text>
+          <path d="M500 142 H600" class="edge" marker-end="url(#ar-a)"/>
+          <text x="550" y="136" class="t-c lbl sm">LAN addresses</text>
+          <path d="M500 184 H560 V206 H600" class="edge" marker-end="url(#ar-a)"/>
+          <text x="530" y="178" class="t-c lbl sm">one hop</text>
 
-      <h2>Remote mirror</h2>
-      <p>A Raspberry Pi (<strong>Pi1</strong>) sits at a separate physical site running DietPi-Bookworm. It mirrors 15 git repos weekly from GitHub + Gitea, driven by a <code>push-all</code> skill from the workstation. The Pi has no Wi-Fi — it runs off ICS from a host PC for internet, but Tailscale reachability is host-independent, so it stays online on the tailnet even when the host is off. A small 3.5" SPI TFT renders a live status dashboard (<code>pi1-hub</code>, Python + rich).</p>
+          <rect x="300" y="250" width="200" height="50" rx="7" class="box-pink"/>
+          <text x="400" y="270" class="t-c t-strong">Twingate</text>
+          <text x="400" y="288" class="t-c lbl">zero-trust · the second overlay</text>
+          <path d="M120 224 V275 H300" class="edge" marker-end="url(#ar-a)"/>
+          <text x="215" y="268" class="t-c lbl sm">second client</text>
+          <rect x="600" y="250" width="200" height="50" rx="7" class="box"/>
+          <text x="700" y="270" class="t-c t-strong">LAN-only web UIs</text>
+          <text x="700" y="288" class="t-c lbl">Home Assistant · Plex · Proxmox</text>
+          <path d="M500 275 H600" class="edge" marker-end="url(#ar-a)"/>
+          <text x="550" y="268" class="t-c lbl sm">connector on book5</text>
 
-      <h2>Observability</h2>
-      <p>tower forwards its full syslog to book5 over UDP/514 via rsyslog. After the kernel regression turned hangs into silent freezes, the box was instrumented with <code>softlockup_panic=1</code>, <code>hardlockup_panic=1</code>, and a 30-second auto-reboot on panic — so a hang now becomes a loud panic + auto-recovery instead of a remote-reboot-required outage. <code>pstore</code> captures panic dumps across the reboot. book5 also runs a network-health watchdog that probes internet, peers, and DNS separately and only escalates to a NetworkManager restart on true isolation.</p>
+          <rect x="830" y="50" width="180" height="250" rx="7" class="box-dash"/>
+          <text x="920" y="74" class="t-c cap">THE RULE</text>
+          <text x="920" y="98" class="t-c lbl">bare alias = Tailscale</text>
+          <text x="920" y="113" class="t-c lbl">-local = the LAN</text>
+          <text x="920" y="135" class="t-c lbl sm">flipped in May 2026;</text>
+          <text x="920" y="149" class="t-c lbl sm">before that, LAN first</text>
+          <text x="920" y="184" class="t-c lbl">two overlays on purpose:</text>
+          <text x="920" y="199" class="t-c lbl">when one breaks,</text>
+          <text x="920" y="214" class="t-c lbl">the other usually</text>
+          <text x="920" y="229" class="t-c lbl">still works</text>
+          <text x="920" y="262" class="t-c lbl sm">the VM on Mullvad is the</text>
+          <text x="920" y="276" class="t-c lbl sm">one host with no tailnet</text>
+        </svg>
+      </div>
+      <p class="diagram-caption">The bare alias is the tailnet, the -local suffix is the LAN. Flipped in May; before that it was the other way round, and every roaming device carried a reverse tunnel.</p>
 
-      <p>Tap or click any node above to see its IP, role, and dependencies.</p>
-    </section>
+      <h2>Where the bytes live</h2>
+      <p>tower owns the disks. VM disks sit on an SSD pool; the media, the camera recordings, the model files, and the whole-machine backups sit on a 4 TB spinning pool that tower exports to VM 101 over NFS across the 2.5 GbE bridge. The VM itself has one root disk and nothing local worth keeping, so a rebuild is a rebuild, not a recovery.</p>
 
-    <footer>
-      <p>&copy; <span id="year"></span> jadedviber.com</p>
-    </footer>
+      <div class="diagram" role="figure" aria-label="Storage: tower's two ZFS pools on the left, the media pool exported over NFS to VM 101 in the middle, and the four consumers on the right: Plex and Jellyfin reading, qBittorrent writing downloads, Frigate writing clips, Ollama loading models.">
+        <svg class="hl-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 300">
+          <defs>
+            <marker id="ar-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+          </defs>
+          <rect x="20" y="30" width="260" height="230" rx="9" class="box-sage"/>
+          <text x="36" y="52" class="t-strong">tower · ZFS</text>
+          <text x="264" y="52" class="lbl t-e">the storage node</text>
+          <rect x="36" y="66" width="228" height="44" rx="7" class="box"/>
+          <text x="150" y="84" class="t-c t-strong">rpool · 370 GB SSD</text>
+          <text x="150" y="100" class="t-c lbl">the VM disks</text>
+          <rect x="36" y="122" width="228" height="124" rx="7" class="box-orange"/>
+          <text x="150" y="144" class="t-c t-strong">media-pool · 4 TB HDD</text>
+          <text x="150" y="163" class="t-c lbl">media/ movies · series · music</text>
+          <text x="150" y="178" class="t-c lbl">frigate/ camera recordings</text>
+          <text x="150" y="193" class="t-c lbl">ollama/ model files</text>
+          <text x="150" y="208" class="t-c lbl">backups/ the Mac · the Pocket</text>
+          <text x="150" y="232" class="t-c sm sage">a ZFS snapshot per backup run</text>
+
+          <path d="M280 184 H400" class="edge" marker-end="url(#ar-b)"/>
+          <text x="340" y="172" class="t-c lbl">NFS · 3.2 T</text>
+          <text x="340" y="200" class="t-c lbl sm">over the 2.5 G bridge</text>
+
+          <rect x="400" y="150" width="220" height="70" rx="7" class="box-blue"/>
+          <text x="510" y="172" class="t-c t-strong">VM 101 mounts it</text>
+          <text x="510" y="190" class="t-c lbl">/mnt/media-pool · /mnt/ollama</text>
+          <text x="510" y="205" class="t-c lbl">one root disk, no local media</text>
+
+          <rect x="720" y="40" width="290" height="40" rx="7" class="box"/>
+          <text x="865" y="57" class="t-c t-strong">Plex · Jellyfin</text>
+          <text x="865" y="72" class="t-c lbl">read the library</text>
+          <rect x="720" y="95" width="290" height="40" rx="7" class="box"/>
+          <text x="865" y="112" class="t-c t-strong">qBittorrent</text>
+          <text x="865" y="127" class="t-c lbl">download → scan → move into place</text>
+          <rect x="720" y="150" width="290" height="40" rx="7" class="box"/>
+          <text x="865" y="167" class="t-c t-strong">Frigate</text>
+          <text x="865" y="182" class="t-c lbl">writes the camera clips</text>
+          <rect x="720" y="205" width="290" height="40" rx="7" class="box"/>
+          <text x="865" y="222" class="t-c t-strong">Ollama</text>
+          <text x="865" y="237" class="t-c lbl">loads models off the pool</text>
+          <path d="M620 185 H670 V60 H720" class="edge" marker-end="url(#ar-b)"/>
+          <path d="M620 185 H670 V115 H720" class="edge" marker-end="url(#ar-b)"/>
+          <path d="M620 185 H670 V170 H720" class="edge" marker-end="url(#ar-b)"/>
+          <path d="M620 185 H670 V225 H720" class="edge" marker-end="url(#ar-b)"/>
+
+          <text x="515" y="284" class="t-c note">one disk, one mount per VM: fewer places to look when something fills up</text>
+        </svg>
+      </div>
+      <p class="diagram-caption">Code lives in three places on purpose: GitHub, a Gitea on VM 101, and the bare mirror on pi1. A weekly sweep pushes to all three.</p>
+
+      <h2>What happens when tower hangs</h2>
+      <p>In March a kernel upgrade started hanging tower silently every one to three days. No panic, no log line, just a box that stopped answering until someone walked over. The fix was less about preventing the hang than about making sure the next one was loud, short, and left evidence.</p>
+
+      <div class="diagram" role="figure" aria-label="The crash chain, left to right: a kernel regression, pin the kernel, make hangs panic, reboot in thirty seconds with pstore keeping the dump, read it later from pstore and book5's syslog copy. Below, the watchdogs that act if it hangs anyway.">
+        <svg class="hl-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 250">
+          <defs>
+            <marker id="ar-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+          </defs>
+          <rect x="20" y="40" width="180" height="64" rx="7" class="box-red"/>
+          <text x="110" y="61" class="t-c t-strong">A kernel regression</text>
+          <text x="110" y="78" class="t-c lbl">6.17.13 hung tower silently</text>
+          <text x="110" y="93" class="t-c lbl">every one to three days</text>
+          <rect x="225" y="40" width="180" height="64" rx="7" class="box-sage"/>
+          <text x="315" y="61" class="t-c t-strong">Pin the kernel</text>
+          <text x="315" y="78" class="t-c lbl">stay on the last good build</text>
+          <text x="315" y="93" class="t-c lbl">until a newer one proves itself</text>
+          <rect x="430" y="40" width="180" height="64" rx="7" class="box-sage"/>
+          <text x="520" y="61" class="t-c t-strong">Make hangs loud</text>
+          <text x="520" y="78" class="t-c lbl">soft + hard lockup ⇒ panic</text>
+          <text x="520" y="93" class="t-c lbl">a crash you can see</text>
+          <rect x="635" y="40" width="180" height="64" rx="7" class="box-sage"/>
+          <text x="725" y="61" class="t-c t-strong">Reboot in 30 s</text>
+          <text x="725" y="78" class="t-c lbl">panic=30 · pstore keeps</text>
+          <text x="725" y="93" class="t-c lbl">the kernel's last words</text>
+          <rect x="840" y="40" width="170" height="64" rx="7" class="box-blue"/>
+          <text x="925" y="61" class="t-c t-strong">Read it later</text>
+          <text x="925" y="78" class="t-c lbl">pstore + book5's copy</text>
+          <text x="925" y="93" class="t-c lbl">of the syslog stream</text>
+          <path d="M200 72 H225" class="edge" marker-end="url(#ar-c)"/>
+          <path d="M405 72 H430" class="edge" marker-end="url(#ar-c)"/>
+          <path d="M610 72 H635" class="edge" marker-end="url(#ar-c)"/>
+          <path d="M815 72 H840" class="edge" marker-end="url(#ar-c)"/>
+
+          <rect x="20" y="130" width="990" height="104" rx="7" class="box-dash"/>
+          <text x="36" y="152" class="t-strong" style="fill:#f1fa8c">and if it hangs anyway</text>
+          <text x="36" y="173" class="lbl">book5's tower-watchdog probes tower every three minutes; three silent minutes and it power-cycles tower's smart plug</text>
+          <text x="36" y="189" class="lbl">book5's net-health watchdog probes internet, peers, and DNS separately, and restarts networking only on true isolation</text>
+          <text x="36" y="205" class="lbl">on VM 101, autoheal restarts an unhealthy Frigate and pings Home Assistant, so I see when it fired</text>
+          <text x="36" y="224" class="sm sage">pinned since May; the hangs got rare, not extinct. The plug is the last resort.</text>
+        </svg>
+      </div>
+      <p class="diagram-caption">A hang used to mean a walk to the office. Now it means a panic, a reboot, a dump in pstore, and the last lines already sitting on the other node.</p>
+
+      <h2>One small thing it serves</h2>
+      <p>The lab's newest job is the least infrastructural: sermons. The Pocket transcribes a recording locally with Whisper and builds a follow-along page with the audio. A nightly job syncs the pages and the mp3 into a container on book5. A Raspberry Pi in front of it terminates TLS and proxies the request, so the page is on my phone anywhere, with nothing exposed to the internet.</p>
+
+      <div class="diagram" role="figure" aria-label="The sermons pipeline: the Pocket transcribes and builds pages, a nightly sync copies them into CT 316 on book5, pi-gw1's Caddy fronts the container with TLS, and a phone on the tailnet opens sermons.jadedviber.com.">
+        <svg class="hl-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 190">
+          <defs>
+            <marker id="ar-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+          </defs>
+          <rect x="20" y="40" width="220" height="70" rx="7" class="box-accent"/>
+          <text x="130" y="62" class="t-c t-strong">The Pocket</text>
+          <text x="130" y="80" class="t-c lbl">local Whisper, large-v3-turbo</text>
+          <text x="130" y="95" class="t-c lbl">→ transcript · page · mp3</text>
+          <path d="M240 75 H340" class="edge" marker-end="url(#ar-d)"/>
+          <text x="290" y="67" class="t-c lbl">nightly sync</text>
+          <text x="290" y="92" class="t-c lbl xs">checksum read-back</text>
+          <rect x="340" y="40" width="220" height="70" rx="7" class="box-blue"/>
+          <text x="450" y="62" class="t-c t-strong">CT 316 · sermons, on book5</text>
+          <text x="450" y="80" class="t-c lbl">nginx, answers the LAN only</text>
+          <text x="450" y="95" class="t-c lbl">audio + follow-along pages</text>
+          <path d="M640 75 H560" class="edge" marker-end="url(#ar-d)"/>
+          <text x="600" y="67" class="t-c lbl">LAN</text>
+          <rect x="640" y="40" width="170" height="70" rx="7" class="box-sage"/>
+          <text x="725" y="62" class="t-c t-strong">pi-gw1 · Caddy</text>
+          <text x="725" y="80" class="t-c lbl">TLS · reverse proxy</text>
+          <text x="725" y="95" class="t-c lbl">answers the tailnet only</text>
+          <path d="M870 75 H810" class="edge" marker-end="url(#ar-d)"/>
+          <text x="840" y="67" class="t-c lbl">https</text>
+          <rect x="870" y="40" width="140" height="70" rx="7" class="box-accent"/>
+          <text x="940" y="62" class="t-c t-strong">Phone</text>
+          <text x="940" y="80" class="t-c lbl sm">sermons.jadedviber.com</text>
+          <text x="940" y="95" class="t-c lbl">on the tailnet, anywhere</text>
+          <text x="515" y="150" class="t-c note">a recording transcribed in the morning is a page with audio by the evening, on any device, with no port open to the internet</text>
+        </svg>
+      </div>
+      <p class="diagram-caption">The container was born on tower and moved to book5 two days later, after tower hung twice in one day. Correlation, not proof; the move is the experiment.</p>
+
+      <h2>2026 so far</h2>
+      <ol class="timeline">
+        <li><time>January</time><p>The media library moved from book5 to a ZFS pool on tower, exported over NFS. Plex has read from there since.</p></li>
+        <li><time>February</time><p>A new router collapsed two subnets into one flat network. Both nodes moved to 2.5 GbE at the same time.</p></li>
+        <li class="hot"><time>March – May</time><p>A kernel upgrade started hanging tower every one to three days. In May the kernel was pinned, lockups were set to panic, and remote syslog plus pstore went in.</p></li>
+        <li><time>May</time><p>The SSH convention flipped: the bare alias is Tailscale now and the LAN is the fallback. pi1 was reflashed to DietPi. VM 101 was consolidated onto one disk.</p></li>
+        <li class="hot"><time>June 19</time><p>Lightning. One Wi-Fi node died. The cable reroute revealed VM 101 had been on 1 GbE the whole time; merged onto the 2.5 G bridge for about a quarter more throughput. A week later a second router replaced the Deco.</p></li>
+        <li><time>July</time><p>tower hung once more on the pinned kernel with an empty pstore, so book5 got a watchdog that power-cycles tower's smart plug after three silent minutes.</p></li>
+        <li><time>August</time><p>The PC and pi1 came home from the office. The git mirror is no longer offsite; GitHub and Gitea are the offsite copies now.</p></li>
+        <li class="good"><time>September</time><p>pi-gw1, a Raspberry Pi 5, joined as a Tailscale subnet router. The Pocket replaced the Mac as daily driver. A sermons container was born on tower, tower hung twice in two days, and the container moved to book5. On the 23rd a GL.iNet Flint 3 became the router, the third this year, with the Deco demoted to an access point.</p></li>
+      </ol>
+
+      <h2>Stack</h2>
+      <div class="stack-pills">
+        <span class="stack-pill">Proxmox VE</span>
+        <span class="stack-pill">ZFS</span>
+        <span class="stack-pill">NFS</span>
+        <span class="stack-pill">Docker</span>
+        <span class="stack-pill">Tailscale</span>
+        <span class="stack-pill">Twingate</span>
+        <span class="stack-pill">Pi-hole + unbound</span>
+        <span class="stack-pill">Mullvad WireGuard</span>
+        <span class="stack-pill">OpenWrt</span>
+        <span class="stack-pill">rsyslog + pstore</span>
+        <span class="stack-pill">systemd timers</span>
+        <span class="stack-pill">Caddy · nginx</span>
+        <span class="stack-pill">Frigate</span>
+        <span class="stack-pill">Home Assistant</span>
+        <span class="stack-pill">Ollama</span>
+        <span class="stack-pill">faster-whisper</span>
+      </div>
+      <p>Every host has a page in a typed wiki in the <a href="https://github.com/jaded423/homeLab" target="_blank" rel="noopener">homeLab repo</a>, with the same rule the work projects follow: one fact, one home, everything else points. The recovery runbook for a downed host is a Claude skill that walks reachability, web UI, service health, watchdog logs, and kernel forensics in that order, because that is the order I kept doing it in by hand.</p>
+
+      <h2>Built in conversation</h2>
+      <p>None of this was designed in one sitting. It accreted, one outage at a time, through dialogue with Claude: what should happen when tower stops answering at 2am, which bridge a VM is really on, whether a mirror in the same building counts as a backup. The lab is where those habits got practiced before they went to <a href="work/">work</a>.</p>
+      <p><a href="index.html#philosophy">The philosophy</a>, or <a href="now.html">what I'm building right now</a>.</p>
+
+      <div class="cta-row">
+        <a href="https://github.com/jaded423/homeLab" class="cta primary" target="_blank" rel="noopener">The docs repo</a>
+        <a href="work/" class="cta secondary">Client work</a>
+      </div>
+
+      <div class="crosslinks">
+        <a href="index.html">← Home</a> ·
+        <a href="work/">Work</a> ·
+        <a href="index.html#projects">Projects</a> ·
+        <a href="now.html">/now</a>
+      </div>
+
+    </article>
+
+  </main>
+
+  <!-- Detail panel -->
+  <div class="detail-panel" id="detail-panel">
+    <button class="detail-close" id="detail-close" aria-label="Close">&times;</button>
+    <h3 class="detail-title" id="detail-title"></h3>
+    <p class="detail-type" id="detail-type"></p>
+    <p class="detail-desc" id="detail-desc"></p>
+    <div class="detail-specs" id="detail-specs"></div>
   </div>
 
-  <script src="homelab.js"></script>
+  <footer>
+    <p>&copy; <span id="year"></span> jadedviber.com</p>
+  </footer>
+
+  <script src="homelab.js?v=2"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
     const hamburger = document.getElementById('nav-hamburger');
     const navLinks = document.querySelector('.nav-links');
-    if (hamburger) {
+    if (hamburger && navLinks) {
       hamburger.addEventListener('click', () => {
         navLinks.classList.toggle('open');
         hamburger.classList.toggle('open');

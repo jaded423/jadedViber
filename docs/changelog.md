@@ -11,6 +11,22 @@ All notable changes to jadedViber are documented here.
 
 ---
 
+## 2026-09-23 - homelab.html rebuilt: current-state facts + the /work diagram style
+
+**What changed:**
+- `homelab.html` rewritten in the case-study shape (`work/work.css` linked for the hero, story cards, diagram frame, pills, CTAs; `homelab.css` keeps the page-only parts: stat tiles, map, panel, timeline). Sections: hero + six stat tiles → **the map** → three story cards → *How I reach it* → *Where the bytes live* → *What happens when tower hangs* → *One small thing it serves* (sermons) → *2026 so far* timeline → stack → CTAs.
+- **The map** (`homelab.js`) is data-driven again but drawn in the same vocabulary as the /work SVGs (rounded boxes, labeled edges, arrow markers, section captions): the roaming fleet → Tailscale/Twingate → pi-gw1 / Flint 3 / Deco → one LAN bus → book5 and tower as group boxes holding their guests (VM 100, CT 316, CT 103, host jobs · VM 101, VM 111, media-pool, host jobs) → pihole / cameras / PC + WSL / pi1. Click = detail panel; hover = the touching edges light up, the rest dim; staggered entrance, honours `prefers-reduced-motion`; sideways scroll under 700 px.
+- Four static inline SVGs, hand-placed like the /work pages: the access model (Tailscale direct / via pi-gw1 / ProxyJump / Twingate, plus "the rule"), storage (tower ZFS → NFS → VM 101 → consumers), the crash chain (regression → pin → panic → 30 s reboot → pstore/syslog, plus the three watchdogs), and the sermons pipeline (Pocket → CT 316 → pi-gw1 Caddy → phone).
+- Current-state facts from `homeLab/wiki` replace the May-era text: Flint 3 router (2026-09-23), Deco as AP, pi-gw1 subnet router, CT 316 on book5, pi1 home since August (no longer offsite), the Pocket as daily driver, the Mac retiring, the tower-watchdog smart-plug power-cycle, 17 services on VM 101. Deliberately absent: LAN/tailnet IPs, MACs, SSIDs, usernames, admin URLs.
+- `homelab-og.png` (new, 1200×630) = the top of the map; og/twitter/JSON-LD images point at it. JSON-LD gains `BreadcrumbList` + `dateModified`. `sitemap.xml` lastmod → 2026-09-23. Nav gains the Work link like every other page.
+- Checked before push: headless Chromium renders at 1240 px, 23 map nodes present, no label collisions after three shortenings (book5 header, two fleet subtitles, the NFS labels, the sermons sync sub-label).
+
+**Why:** Joshua (T0 session, 2026-09-23): "take a look at the homeLab page and think about updating it with current setup info, and also upgrading its diagrams to resemble the better ones on elevatedCore and Point 4 … that whole page could get a revamp to look nicer and flashier."
+
+**Files:** `homelab.html`, `homelab.css`, `homelab.js`, `homelab-og.png` (new), `sitemap.xml`, `CLAUDE.md`, `docs/changelog.md`
+
+---
+
 ## 2026-09-23 - /work/ case studies #6 + #7: the LLM cost gate and piGate. The gallery is complete.
 
 **What changed:**
