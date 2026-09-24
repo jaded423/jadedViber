@@ -319,7 +319,7 @@
       <p class="diagram-caption">A hang used to mean a walk to the office. Now it means a panic, a reboot, a dump in pstore, and the last lines already sitting on the other node.</p>
 
       <h2>One small thing it serves</h2>
-      <p>The lab's newest job is the least infrastructural: sermons. The Pocket transcribes a recording locally with Whisper and builds a follow-along page with the audio. A nightly job syncs the pages and the mp3 into a container on book5. A Raspberry Pi in front of it terminates TLS and proxies the request, so the page is on my phone anywhere, with nothing exposed to the internet.</p>
+      <p>The lab's newest job is the least infrastructural: sermons. The Pocket transcribes a recording locally with Whisper and builds a follow-along page with the audio. A nightly job syncs the pages and the mp3 into a container on book5. A Raspberry Pi in front of it terminates TLS and proxies the request, so the page is on my phone anywhere, with nothing exposed to the internet. The kit has <a href="projects/trans.html">its own page</a>.</p>
 
       <div class="diagram" role="figure" aria-label="The sermons pipeline: the Pocket transcribes and builds pages, a nightly sync copies them into CT 316 on book5, pi-gw1's Caddy fronts the container with TLS, and a phone on the tailnet opens sermons.jadedviber.com.">
         <svg class="hl-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 190">
@@ -328,7 +328,7 @@
           </defs>
           <rect x="20" y="40" width="220" height="70" rx="7" class="box-accent"/>
           <text x="130" y="62" class="t-c t-strong">The Pocket</text>
-          <text x="130" y="80" class="t-c lbl">local Whisper, large-v3-turbo</text>
+          <text x="130" y="80" class="t-c lbl">transcribed locally, nothing to the cloud</text>
           <text x="130" y="95" class="t-c lbl">→ transcript · page · mp3</text>
           <path d="M240 75 H340" class="edge" marker-end="url(#ar-d)"/>
           <text x="290" y="67" class="t-c lbl">nightly sync</text>
@@ -432,7 +432,7 @@
       });
     }
   </script>
-  <script src="/palette.js?v=5"></script>
+  <script src="/palette.js?v=6"></script>
   <script src="/turing.js?v=4"></script>
 </body>
 </html>

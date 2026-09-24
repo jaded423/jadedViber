@@ -11,6 +11,22 @@ All notable changes to jadedViber are documented here.
 
 ---
 
+## 2026-09-23 - projects/trans.html: the sermon follow-along kit, what/why/when only
+
+**What changed:**
+- New `projects/trans.html` = the trans stack's page, written for a church elder who runs the channel: hero + four stat tiles → three story cards (problem / what it is / where it stands) → a phone + index **mockup** SVG (invented sermon titles; the live instance belongs to a real church that is not named) → *Why I built it* → *The shape, without the recipe* (four boxes + what stays private) → *Where it stands* timeline (spring → Jul → Sep 19 / 20 / 23 → next) → *For a church* (what you get / what stays yours / what it costs) → *Also in the kit* → outline-only stack pills → CTAs. **No recipe by design** (Joshua: "don't give away the farm"): no engine or model names, no host names, no schedule detail, no repo link. Facts + decisions from `trans/TODO.md` and `~/.claude/plans/trans.sermon-saas.pot-plan.md` (free app, donations welcome, church owns its data, own box, no licensed Bible text in a public build).
+- Reuses `work/work.css` + `homelab.css` (stat tiles, timeline); page-only CSS inline (`.terms`, `.feature-grid`).
+- `homelab.html`: the sermons diagram no longer names the engine ("transcribed locally, nothing to the cloud"); the section links the new page.
+- Homepage: a Sermon follow-along project card; the Person JSON-LD gains `hasOccupation` + `knowsAbout` (the leftover the /work/ session handed to T0).
+- `palette.js` gains the page; `?v=5 → 6` on every page that loads it. `sitemap.xml` + `llms.txt` list it.
+- **Open:** the CTA "Talk to me about your church" points at the GitHub profile because the site publishes no email; swap for a mailto or a form when Joshua picks one. `projects/trans-og.png` is cut from the mockup.
+
+**Why:** Joshua (T0, 2026-09-23): "Can we look at adding the trans stack to a page? … neither mentioned in MCP or Sermons … a really cool piece of kit that I want to monetize/donate to churches. So I would like the what/why/when without the strict details on HOW, don't give away the farm."
+
+**Files:** `projects/trans.html` (new), `projects/trans-og.png` (new), `index.html`, `homelab.html`, `palette.js`, every page's `palette.js?v=`, `sitemap.xml`, `llms.txt`, `CLAUDE.md`, `docs/changelog.md`
+
+---
+
 ## 2026-09-23 - homelab.html rebuilt: current-state facts + the /work diagram style
 
 **What changed:**

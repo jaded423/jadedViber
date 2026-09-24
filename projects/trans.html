@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sermon follow-along: read, search every sermon | JadedViber</title>
+  <meta name="description" content="Turns a church's YouTube channel into follow-along pages: text that scrolls with the audio, tappable verses, and search across every sermon. Free for churches.">
+  <link rel="canonical" href="https://jadedviber.com/projects/trans.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://jadedviber.com/projects/trans.html">
+  <meta property="og:title" content="Sermon follow-along: read, search every sermon your church posted">
+  <meta property="og:description" content="Turns a church's YouTube channel into follow-along pages: text that scrolls with the audio, tappable verses, and search across every sermon. Free for churches, on their own hardware.">
+  <meta property="og:image" content="https://jadedviber.com/projects/trans-og.png">
+  <meta property="og:site_name" content="JadedViber">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sermon follow-along: read, search every sermon your church posted">
+  <meta name="twitter:description" content="Turns a church's YouTube channel into follow-along pages: text that scrolls with the audio, tappable verses, and search across every sermon. Free for churches.">
+  <meta name="twitter:image" content="https://jadedviber.com/projects/trans-og.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://jadedviber.com/projects/trans.html#app",
+        "name": "Sermon follow-along (trans)",
+        "url": "https://jadedviber.com/projects/trans.html",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any (web app)",
+        "description": "A transcription kit that turns a church's YouTube channel into follow-along pages: verbatim text that scrolls with the audio, tappable verse references, and a search across every sermon. Runs on hardware the church controls; free for churches.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jadedviber.com/#identity",
+        "name": "Joshua Brown",
+        "url": "https://jadedviber.com",
+        "sameAs": [ "https://github.com/jaded423", "https://nownownow.com/p/DTGZ" ],
+        "description": "Homelab tinkerer and developer behind JadedViber."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jadedviber.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://jadedviber.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "Sermon follow-along", "item": "https://jadedviber.com/projects/trans.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../work/work.css">
+  <link rel="stylesheet" href="../homelab.css?v=2">
+  <link rel="icon" type="image/png" href="../snek.png">
+  <style>
+    .stats { margin-top: 0.5rem; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.25rem 0; }
+    .feature-card { background: #12121a; border: 1px solid #2a2a3a; border-radius: 6px; padding: 1rem; }
+    .feature-card h4 { color: #8be9fd; font-size: 0.95rem; margin: 0 0 0.4rem; }
+    .feature-card p { color: #d8d8d2; font-size: 0.92rem; line-height: 1.55; margin: 0; }
+    .terms { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.25rem 0; }
+    .terms div { background: #12121a; border: 1px solid #2a2a3a; border-left: 3px solid #50fa7b; border-radius: 6px; padding: 1rem; }
+    .terms div.keep { border-left-color: #8be9fd; }
+    .terms div.cost { border-left-color: #ffb86c; }
+    .terms h4 { color: #f8f8f2; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 0.5rem; }
+    .terms ul { margin: 0 0 0 1.1rem; padding: 0; }
+    .terms li { color: #d8d8d2; font-size: 0.92rem; line-height: 1.5; margin-bottom: 0.3rem; }
+  </style>
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="../index.html#hero" class="nav-brand">JADED</a>
+    <div class="nav-links">
+      <a href="../work/">Work</a>
+      <a href="../index.html#philosophy">Philosophy</a>
+      <a href="../index.html#projects" class="active">Projects</a>
+      <a href="../index.html#stack">Stack</a>
+      <a href="../homelab.html">Homelab</a>
+      <a href="../now.html">Now</a>
+      <a href="https://github.com/jaded423" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="container work-page homelab-page">
+
+    <header class="work-hero">
+      <h1>Press play. Read along. Search every sermon your church ever posted.</h1>
+      <p class="lead">A transcription kit I built for myself, then pointed at my church's YouTube channel. Each recording becomes a verbatim transcript, a follow-along page where the words scroll with the audio and every paragraph jumps the player, and one search box across every sermon ever posted. It runs on hardware I control, sends nothing to a cloud transcription service, and it is free to churches. This page is the what and the why. The how stays in the kit.</p>
+      <p class="meta">Personal project · 2026 · one church live · free for churches, donations welcome · <a href="../index.html#projects">← all projects</a></p>
+    </header>
+
+    <div class="stats" aria-label="At a glance">
+      <div class="stat"><b>1</b><span>church live</span></div>
+      <div class="stat"><b>2 / night</b><span>back catalog pace</span></div>
+      <div class="stat"><b>0</b><span>cloud transcription calls</span></div>
+      <div class="stat"><b>$0</b><span>for the church</span></div>
+    </div>
+
+    <article class="work-body">
+
+      <div class="story">
+        <div class="story-card">
+          <h4>The problem</h4>
+          <p>A church's YouTube channel is a pile of hour-long videos nobody can search. The member who missed a Sunday can't find "the one about Esther 4". The member who can't hear well gets nothing at all. The pastor's own archive is a scroll bar.</p>
+        </div>
+        <div class="story-card">
+          <h4>What it is</h4>
+          <p>A page per sermon: the audio, the words scrolling with it, a tap on any paragraph to jump there, the verses cited pulled out as cards. One index over all of them with a search that reads every word ever preached and opens the hit at that second. Installable on a phone under the church's own name and icon.</p>
+        </div>
+        <div class="story-card">
+          <h4>Where it stands</h4>
+          <p>Live for one church since September 2026, on my own hardware, the back catalog filling in a couple of recordings every night. The decision to offer it to other churches was made the night the search went live. The app is free. Donations welcome. Kingdom work, not a revenue line.</p>
+        </div>
+      </div>
+
+      <h2>What a listener gets</h2>
+      <p>On the left, a sermon page on a phone. The current paragraph is lit and the page follows the audio; scroll by hand and it politely stops following until you come back. On the right, the index: a search over titles or over the transcripts themselves, and a browse by book or series. A hit opens the sermon at the second the phrase was said.</p>
+
+      <div class="diagram" role="figure" aria-label="A mockup in the site's palette. Left, a phone showing a sermon page: title, a scripture line, an audio bar, transcript paragraphs with timestamps, the current paragraph highlighted, and a Verses cited card with two references. Right, the index page: a search box, a Titles or Transcripts toggle, three results with a highlighted phrase and a jump-to time, and a browse-by-book list. An arrow from a result to the phone reads: a hit opens the sermon at that second.">
+        <svg class="hl-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 560">
+          <defs>
+            <marker id="ar-t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+          </defs>
+          <!-- the phone, x 40..330 -->
+          <text x="185" y="30" class="t-c cap">THE SERMON PAGE, ON A PHONE</text>
+          <rect x="40" y="44" width="290" height="500" rx="22" class="box"/>
+          <rect x="140" y="52" width="90" height="6" rx="3" fill="#2a2a3a"/>
+          <text x="60" y="88" class="t-strong" style="font-size:14px">The Weight of a Promise</text>
+          <text x="60" y="106" class="lbl sm">Genesis 15 · Sunday morning</text>
+          <!-- audio bar -->
+          <rect x="60" y="120" width="250" height="34" rx="6" fill="#1a1a24" stroke="#2a2a3a"/>
+          <polygon points="72,129 72,145 84,137" fill="#50fa7b"/>
+          <rect x="94" y="136" width="176" height="3" rx="1.5" fill="#2a2a3a"/>
+          <rect x="94" y="136" width="70" height="3" rx="1.5" fill="#50fa7b"/>
+          <circle cx="164" cy="137.5" r="4" fill="#50fa7b"/>
+          <text x="302" y="141" class="lbl xs t-e">12:40</text>
+          <!-- transcript paragraphs -->
+          <text x="60" y="180" class="lbl xs">11:52</text>
+          <rect x="60" y="186" width="250" height="5" rx="2.5" fill="#2a2a3a"/>
+          <rect x="60" y="196" width="230" height="5" rx="2.5" fill="#2a2a3a"/>
+          <rect x="60" y="206" width="180" height="5" rx="2.5" fill="#2a2a3a"/>
+          <rect x="52" y="222" width="266" height="60" rx="6" fill="rgba(80,250,123,.08)" stroke="#50fa7b"/>
+          <text x="60" y="238" class="xs sage">12:40 · now</text>
+          <rect x="60" y="246" width="250" height="5" rx="2.5" fill="#a3abc9"/>
+          <rect x="60" y="256" width="238" height="5" rx="2.5" fill="#a3abc9"/>
+          <rect x="60" y="266" width="200" height="5" rx="2.5" fill="#a3abc9"/>
+          <text x="60" y="302" class="lbl xs">13:31</text>
+          <rect x="60" y="308" width="250" height="5" rx="2.5" fill="#2a2a3a"/>
+          <rect x="60" y="318" width="210" height="5" rx="2.5" fill="#2a2a3a"/>
+          <rect x="60" y="328" width="240" height="5" rx="2.5" fill="#2a2a3a"/>
+          <rect x="60" y="338" width="150" height="5" rx="2.5" fill="#2a2a3a"/>
+          <text x="60" y="366" class="lbl xs">14:05</text>
+          <rect x="60" y="372" width="250" height="5" rx="2.5" fill="#2a2a3a"/>
+          <rect x="60" y="382" width="200" height="5" rx="2.5" fill="#2a2a3a"/>
+          <!-- verses card -->
+          <rect x="60" y="410" width="250" height="84" rx="6" class="box-blue"/>
+          <text x="72" y="430" class="t-strong sm">Verses cited</text>
+          <rect x="72" y="440" width="88" height="20" rx="10" fill="#1a1a24" stroke="#8be9fd"/>
+          <text x="116" y="454" class="t-c xs">Genesis 15:6</text>
+          <rect x="168" y="440" width="84" height="20" rx="10" fill="#1a1a24" stroke="#8be9fd"/>
+          <text x="210" y="454" class="t-c xs">Romans 4:3</text>
+          <text x="72" y="482" class="lbl xs">tap a verse → a reader opens to it</text>
+          <text x="185" y="524" class="t-c lbl xs">tap any paragraph to jump the audio there</text>
+
+          <!-- the index, x 560..1010 -->
+          <text x="785" y="30" class="t-c cap">THE INDEX · EVERY SERMON THE CHURCH POSTED</text>
+          <rect x="560" y="44" width="450" height="500" rx="8" class="box"/>
+          <text x="580" y="76" class="t-strong" style="font-size:14px">Sermon follow-along</text>
+          <text x="990" y="76" class="lbl xs t-e">installable · the church's name + icon</text>
+          <rect x="580" y="92" width="410" height="30" rx="6" fill="#1a1a24" stroke="#2a2a3a"/>
+          <text x="594" y="111" class="lbl sm">Search — a book, a word, a month …</text>
+          <rect x="580" y="132" width="70" height="20" rx="10" fill="#1a1a24" stroke="#6272a4"/>
+          <text x="615" y="146" class="t-c xs lbl">Titles</text>
+          <rect x="656" y="132" width="96" height="20" rx="10" fill="rgba(80,250,123,.12)" stroke="#50fa7b"/>
+          <text x="704" y="146" class="t-c xs sage">Transcripts</text>
+          <text x="990" y="146" class="lbl xs t-e">3 hits for "promise"</text>
+          <!-- results -->
+          <rect x="580" y="166" width="410" height="66" rx="6" fill="#16161f" stroke="#2a2a3a"/>
+          <text x="594" y="186" class="t-strong sm">The Weight of a Promise</text>
+          <text x="976" y="186" class="lbl xs t-e">Genesis 15</text>
+          <text x="594" y="204" class="lbl xs">…and God does not ask him to earn it; the</text>
+          <rect x="594" y="209" width="62" height="14" rx="3" fill="rgba(241,250,140,.18)"/>
+          <text x="597" y="220" class="xs" style="fill:#f1fa8c">promise</text>
+          <text x="662" y="220" class="lbl xs">comes first and the faith answers it…</text>
+          <text x="976" y="220" class="xs sage t-e">→ 12:40</text>
+          <rect x="580" y="242" width="410" height="66" rx="6" fill="#16161f" stroke="#2a2a3a"/>
+          <text x="594" y="262" class="t-strong sm">For Such a Time as This</text>
+          <text x="976" y="262" class="lbl xs t-e">Esther 4</text>
+          <text x="594" y="280" class="lbl xs">…she was not given a</text>
+          <rect x="702" y="285" width="62" height="14" rx="3" fill="rgba(241,250,140,.18)"/>
+          <text x="705" y="296" class="xs" style="fill:#f1fa8c">promise</text>
+          <text x="770" y="296" class="lbl xs">of safety, only a place to stand…</text>
+          <text x="976" y="296" class="xs sage t-e">→ 31:08</text>
+          <rect x="580" y="318" width="410" height="66" rx="6" fill="#16161f" stroke="#2a2a3a"/>
+          <text x="594" y="338" class="t-strong sm">Building Without Anxiety</text>
+          <text x="976" y="338" class="lbl xs t-e">Psalm 127</text>
+          <text x="594" y="356" class="lbl xs">…the house is not the</text>
+          <rect x="704" y="361" width="62" height="14" rx="3" fill="rgba(241,250,140,.18)"/>
+          <text x="707" y="372" class="xs" style="fill:#f1fa8c">promise</text>
+          <text x="772" y="372" class="lbl xs">; the Builder is…</text>
+          <text x="976" y="372" class="xs sage t-e">→ 08:52</text>
+          <!-- browse -->
+          <text x="580" y="416" class="t-strong sm">By book / series</text>
+          <text x="580" y="438" class="lbl xs">Genesis (4) · Esther (7) · Psalms (2) · Micah (3) · Ephesians (9)</text>
+          <text x="580" y="456" class="lbl xs">Sunday School · Sermons · Timeline</text>
+          <text x="580" y="490" class="lbl xs">a new Sunday appears by Monday morning</text>
+          <text x="580" y="506" class="lbl xs">the back catalog fills in a couple a night</text>
+          <text x="580" y="530" class="xs" style="fill:#f1fa8c">nothing here leaves the church's own box</text>
+
+          <!-- the arrow -->
+          <path d="M560 199 H445 V250 H330" class="edge" marker-end="url(#ar-t)"/>
+          <text x="502" y="178" class="t-c lbl sm">a hit opens the sermon</text>
+          <text x="502" y="191" class="t-c lbl sm">at that second</text>
+        </svg>
+      </div>
+      <p class="diagram-caption">A mockup, not a screenshot: the sermons on the live instance belong to a real church, so the titles here are invented. The shape is exact.</p>
+
+      <h2>Why I built it</h2>
+      <p>The kit started at work, before there was a church in the picture. A CEO records his meetings on a pocket recorder and wanted the agreed action items to land in his calendar without anyone typing them up. Transcription turned out to be the easy layer; the hard part was deciding who gets to say what an "agreed" item is. That design became a small tool that takes any recording or link and hands back the words with timestamps, and a mode that turns a narrated screen recording into a written procedure.</p>
+      <p>Then I pointed it at my own church's channel because I wanted to study the sermons with the verses in front of me. The first version was for me. The first night I used it on my phone produced a list of seven things that were wrong with it, all fixed by the next evening. The night the search went live, reading every word of every sermon and opening the exact second, it stopped being a personal tool. Any church with a YouTube channel could have this, and most of them have nobody to build it.</p>
+      <p>Three people are on my mind when I work on it. The member who can't hear well and has been getting nothing from the recording. The member who missed a Sunday and wants the one about Esther, not a scroll bar. And the pastor, who has been preaching for years into an archive nobody can open.</p>
+
+      <h2>The shape, without the recipe</h2>
+      <p>Four boxes. The church keeps doing what it already does. The rest happens on a machine the church controls, or on mine while we get started.</p>
+
+      <div class="diagram" role="figure" aria-label="Four boxes left to right: the church's YouTube channel, the recordings it already makes; transcription on hardware the church controls, nothing sent to a cloud service; pages and search served from a small box in the church office or from mine; phones anywhere, an installable app under the church's own name. A note beneath lists what stays private: the recordings, the transcripts, and who listens.">
+        <svg class="hl-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 230">
+          <defs>
+            <marker id="ar-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+          </defs>
+          <rect x="20" y="40" width="220" height="84" rx="7" class="box"/>
+          <text x="130" y="64" class="t-c t-strong">The church's channel</text>
+          <text x="130" y="82" class="t-c lbl">the recordings it already posts</text>
+          <text x="130" y="97" class="t-c lbl">nothing new to learn or upload</text>
+          <text x="130" y="114" class="t-c sm sage">the church owns them</text>
+          <rect x="280" y="40" width="220" height="84" rx="7" class="box-sage"/>
+          <text x="390" y="64" class="t-c t-strong">Transcribed</text>
+          <text x="390" y="82" class="t-c lbl">on hardware the church controls,</text>
+          <text x="390" y="97" class="t-c lbl">or mine while the catalog fills</text>
+          <text x="390" y="114" class="t-c sm sage">no cloud transcription service</text>
+          <rect x="540" y="40" width="220" height="84" rx="7" class="box-blue"/>
+          <text x="650" y="64" class="t-c t-strong">Pages + search</text>
+          <text x="650" y="82" class="t-c lbl">a page per sermon, one index,</text>
+          <text x="650" y="97" class="t-c lbl">served from a small box</text>
+          <text x="650" y="114" class="t-c sm sage">in the church office</text>
+          <rect x="800" y="40" width="210" height="84" rx="7" class="box-accent"/>
+          <text x="905" y="64" class="t-c t-strong">Phones, anywhere</text>
+          <text x="905" y="82" class="t-c lbl">an installable app under</text>
+          <text x="905" y="97" class="t-c lbl">the church's own name and icon</text>
+          <text x="905" y="114" class="t-c sm sage">private to the congregation</text>
+          <path d="M240 82 H280" class="edge" marker-end="url(#ar-s)"/>
+          <path d="M500 82 H540" class="edge" marker-end="url(#ar-s)"/>
+          <path d="M760 82 H800" class="edge" marker-end="url(#ar-s)"/>
+          <rect x="20" y="150" width="990" height="60" rx="7" class="box-dash"/>
+          <text x="36" y="172" class="t-strong" style="fill:#f1fa8c">what stays private</text>
+          <text x="36" y="192" class="lbl">the recordings · the transcripts · who listens, and to what. None of it is sent to a third party, and the church can pull the plug on the box any Sunday it likes.</text>
+        </svg>
+      </div>
+      <p class="diagram-caption">Verse references on a public build link out to a reader rather than carrying licensed Bible text. My own copy is for me; a church's copy has to be clean.</p>
+
+      <h2>Where it stands</h2>
+      <ol class="timeline">
+        <li><time>Spring 2026</time><p>The first version. A link or a file in, a transcript with subtitles and timestamps out, on my own laptop.</p></li>
+        <li><time>July</time><p>It became the one transcription tool in my kit. A mode that turns a narrated screen recording into a written procedure moved in from a retired sibling. The meeting-to-action-items design was written for the CEO's recorder.</p></li>
+        <li class="good"><time>September 19</time><p>A night of benchmarking local engines on the new laptop, then the first sermon follow-along page: the audio, the words scrolling with it, the verses as cards.</p></li>
+        <li class="good"><time>September 20</time><p>Version two, from the list of seven things my first phone use turned up. A nightly job that picks up Sunday's recording and works through the back catalog. Hosted from the homelab.</p></li>
+        <li class="hot"><time>September 23</time><p>Search across titles and every transcript went live. That night the decisions were made: offer it to churches, free, on their own hardware, with the church owning its data.</p></li>
+        <li><time>Next</time><p>Decide where transcription runs once it is more than one church. Find the second church. Then it gets its own name.</p></li>
+      </ol>
+
+      <h2>For a church</h2>
+      <div class="terms">
+        <div>
+          <h4>What you get</h4>
+          <ul>
+            <li>A page for every sermon on your channel, old and new.</li>
+            <li>Words that scroll with the audio; tap a paragraph to jump.</li>
+            <li>Verses cited, pulled out and tappable.</li>
+            <li>One search across every word ever preached.</li>
+            <li>An app icon on the phone with your name on it.</li>
+          </ul>
+        </div>
+        <div class="keep">
+          <h4>What stays yours</h4>
+          <ul>
+            <li>The recordings. They never leave your channel.</li>
+            <li>The transcripts. They live on your box.</li>
+            <li>The congregation's listening. Nobody is tracked.</li>
+            <li>The box itself, if you want to run it without me.</li>
+          </ul>
+        </div>
+        <div class="cost">
+          <h4>What it costs</h4>
+          <ul>
+            <li>The app: nothing. Donations welcome, never required.</li>
+            <li>The box in your office: hardware at cost, if you want one.</li>
+            <li>The one real cost is machine time for the back catalog. Trim it to last year, let it fill in as time allows, or pay for priority.</li>
+          </ul>
+        </div>
+      </div>
+      <p>If your church has a YouTube channel and someone who runs it, that is all it takes to start. The live instance is my own church; the plan is one more, then whoever asks.</p>
+
+      <h2>Also in the kit</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h4>Any recording, any link</h4>
+          <p>A meeting, a voice memo, a lecture, a video link. Out comes the text, with subtitles and timestamps, on my own machine.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Screen recording to procedure</h4>
+          <p>Narrate what you are doing once. The kit writes it up as a step-by-step procedure someone else can follow.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Meeting to calendar</h4>
+          <p>The action items a meeting actually agreed on, extracted and placed on a calendar, with a person confirming before anything is booked.</p>
+        </div>
+      </div>
+
+      <h2>Stack, in outline</h2>
+      <div class="stack-pills">
+        <span class="stack-pill">Local speech-to-text</span>
+        <span class="stack-pill">No cloud transcription</span>
+        <span class="stack-pill">Verbatim, with timestamps</span>
+        <span class="stack-pill">Static pages</span>
+        <span class="stack-pill">Installable web app</span>
+        <span class="stack-pill">Full-text search</span>
+        <span class="stack-pill">Runs on a laptop or a Raspberry Pi</span>
+        <span class="stack-pill">Private network, no open ports</span>
+      </div>
+      <p>The kit is not open source and the recipe is not on this page. What is on this page is everything a church needs to decide whether it wants one.</p>
+
+      <h2>Built in conversation</h2>
+      <p>Like everything on this site, it was designed and built through dialogue with Claude: which verse formats a preacher actually says out loud, how long a paragraph should be before it stops being readable on a phone, what to do when the audio and the words drift. <a href="../index.html#philosophy">The philosophy</a>, <a href="../homelab.html">the homelab that serves it</a>, or <a href="../now.html">what I'm building right now</a>.</p>
+
+      <div class="cta-row">
+        <a href="https://github.com/jaded423" class="cta primary" target="_blank" rel="noopener">Talk to me about your church</a>
+        <a href="../homelab.html" class="cta secondary">The homelab</a>
+      </div>
+
+      <div class="crosslinks">
+        <a href="../index.html">← Home</a> ·
+        <a href="../index.html#projects">Projects</a> ·
+        <a href="../work/">Work</a> ·
+        <a href="../now.html">/now</a>
+      </div>
+
+    </article>
+
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> jadedviber.com</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const hamburger = document.getElementById('nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+        hamburger.classList.toggle('open');
+      });
+    }
+  </script>
+  <script src="/palette.js?v=6"></script>
+  <script src="/turing.js?v=4"></script>
+</body>
+</html>

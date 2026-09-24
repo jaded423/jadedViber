@@ -28,7 +28,7 @@ jadedViber/
 ├── snek*.png           # the snek is a SEED, not a logo — brand mark = the live ASCII render, deliberately non-uniform (never standardize; see brain `jadedviber-brand-snek-is-a-seed`). snek.png = seed · snek-logo.png = seed composited on #0a0a0a ONLY for Google's OAuth consent card (not an icon, not the brand) · snek-ascii-{hq,xl}.png = frozen ASCII renders on #000 for places that need a raster · snek-ascii-icon.png = full-bleed maskable phone/app icon (regen `scripts/snek-icon.py`) — regen recipe in docs/site-reference.md
 ├── sitemap.xml · CNAME
 ├── app/ privacy/ terms/  # clean-path pages for Google OAuth consent (dir/index.html)
-├── projects/photo-editor.html
+├── projects/           # dev-tools track: photo-editor.html · trans.html (the sermon follow-along kit — what/why/when only, no recipe; facts from trans/TODO.md + the sermon-saas pot-plan)
 ├── work/               # client-facing case studies (index = the gallery Cody sends clients; work.css shared) — plan: ~/.claude/plans/jadedviber-portfolio.md
 └── docs/               # typed notes (see index)
 ```

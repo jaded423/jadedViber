@@ -15,6 +15,7 @@
     { name: 'piGate',                   hint: 'work · remote access in a box',        href: '/work/pigate.html' },
     { name: 'Projects',                 hint: 'tools and open source',                href: '/#projects' },
     { name: 'PhotoEditor',              hint: 'projects · bulk product photos',       href: '/projects/photo-editor.html' },
+    { name: 'Sermon follow-along',      hint: 'projects · trans, sermons you can read and search', href: '/projects/trans.html' },
     { name: 'Philosophy',               hint: 'why everything here came out of a chat', href: '/#philosophy' },
     { name: 'Stack',                    hint: 'editor · terminal · AI',               href: '/#stack' },
     { name: 'Homelab',                  hint: 'the Proxmox cluster',                  href: '/homelab.html' },
