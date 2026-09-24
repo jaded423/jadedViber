@@ -22,6 +22,8 @@ All notable changes to jadedViber are documented here.
 - `work/index.html`: the Dax card is a live link and no longer says "email and PIN" or "leads flowed in from Gmail the same way"; a sixth card for the leads app follows it (seven cards total, two still pending). `sitemap.xml` + `llms.txt` list both pages. `palette.js` `PAGES` gains both; `?v=3 → 4` on all eleven pages that load it.
 - Checked before push: order page title 55 / description 157, leads page 54 / 156; canonical + OG + Twitter + JSON-LD on both; all 4 `<img>` on the order page have alt text (the leads page has none, its pictures are inline SVG with `aria-label`); headless Chromium iframes at 1280, 390, and 320 wide → `scrollWidth == clientWidth` and no element past the right edge on either page.
 
+- **Correction (Joshua, from his phone, same night):** the order page had the lineage backwards ("the same idea later grew into the Elevated pipeline"). The real order: the photo editor came first at Elevated → Dax (a spin-off) reused its Drive folders/photos for WooCommerce product pages → that WooCommerce work is what made Joshua close the loop back at Elevated (photo editor + Live Ref → Elevated WP product pages). Rewritten as its own paragraph on the Dax page; the reverse link added to `projects/photo-editor.html` ("Why it exists") and `work/photo-to-web.html` (after the Stack pills).
+
 **Why:** plan `~/.claude/plans/jadedviber-portfolio.md` pages 5 + 5b; Joshua: "They are both products I made for Dax Distro."
 
 **Files:** `work/rep-order-portal.html` (new), `work/rep-leads-app.html` (new), `work/img/dax-*.png` (new), `work/index.html`, `sitemap.xml`, `llms.txt`, `palette.js`, every page's `palette.js?v=`.
