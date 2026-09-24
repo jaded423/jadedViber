@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>An LLM That Only Gets Paid When Something Is New — Elevated</title>
+  <meta name="description" content="Product copy written by Claude once per new item and never again, on a flat subscription where it is signed in, so the AI bill stopped being open-ended.">
+  <link rel="canonical" href="https://jadedviber.com/work/cost-gate.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://jadedviber.com/work/cost-gate.html">
+  <meta property="og:title" content="An LLM That Only Gets Paid When Something Is New — Elevated">
+  <meta property="og:description" content="Two gates in front of every automated Claude call: only when an item is new, and on the flat plan instead of the meter wherever a machine is signed in. The pipeline stays AI-written and the bill stays a number I chose.">
+  <meta property="og:image" content="https://jadedviber.com/work/img/cost-gate-og.png">
+  <meta property="og:site_name" content="JadedViber">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="An LLM That Only Gets Paid When Something Is New — Elevated">
+  <meta name="twitter:description" content="Two gates in front of every automated Claude call: only when an item is new, and on the flat plan instead of the meter wherever a machine is signed in. The pipeline stays AI-written and the bill stays a number I chose.">
+  <meta name="twitter:image" content="https://jadedviber.com/work/img/cost-gate-og.png">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="work.css">
+  <link rel="icon" type="image/png" href="../snek.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jadedviber.com/#website",
+        "url": "https://jadedviber.com",
+        "name": "JadedViber",
+        "publisher": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jadedviber.com/work/cost-gate.html#webpage",
+        "url": "https://jadedviber.com/work/cost-gate.html",
+        "name": "An LLM That Only Gets Paid When Something Is New — Elevated",
+        "isPartOf": { "@id": "https://jadedviber.com/#website" },
+        "author": { "@id": "https://jadedviber.com/#identity" },
+        "primaryImageOfPage": "https://jadedviber.com/work/img/cost-gate-og.png",
+        "about": { "@id": "https://jadedviber.com/work/cost-gate.html#system" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://jadedviber.com/work/cost-gate.html#system",
+        "name": "The LLM cost gate",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Linux, macOS",
+        "description": "A pattern for automations that call an LLM: a free template tier first, one LLM call per new item stored in a sheet with a human override column that always wins, and, on any machine signed in to Claude, a headless Claude call with the API key blanked in the process so the call bills a flat subscription instead of the metered API. Used by a product-description step in a 15-minute pipeline, a meeting-transcript brain, a memory-extraction hook, and a lab-report extractor.",
+        "author": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jadedviber.com/#identity",
+        "name": "Joshua Brown",
+        "url": "https://jadedviber.com",
+        "sameAs": [ "https://github.com/jaded423", "https://nownownow.com/p/DTGZ" ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jadedviber.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://jadedviber.com/work/" },
+          { "@type": "ListItem", "position": 3, "name": "An LLM that only gets paid when something is new", "item": "https://jadedviber.com/work/cost-gate.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="../index.html" class="nav-brand">JADED</a>
+    <div class="nav-links">
+      <a href="../work/">Work</a>
+      <a href="../index.html#philosophy">Philosophy</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#stack">Stack</a>
+      <a href="../homelab.html">Homelab</a>
+      <a href="../now.html">Now</a>
+      <a href="https://github.com/jaded423" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="container work-page">
+
+    <header class="work-hero">
+      <h1>An LLM that only gets paid when something is new.</h1>
+      <p class="lead">Once a few automations were calling Claude on their own, the API bill was about to become the one line on the budget nobody could predict. I already pay for a Claude subscription. So I put two gates in front of every automated call: the model is only asked when there is something genuinely new to write, and wherever a machine is signed in to my plan, the call goes through headless Claude on that flat subscription instead of the meter. The pipeline stays AI-written. The cost became a number I set.</p>
+      <p class="meta">Elevated Trading · 2026 · Claude · Python · a Google Sheet as the cache · live in the 15-minute pipeline · <a href="../work/">← all work</a></p>
+    </header>
+
+    <article class="work-body">
+
+      <div class="story">
+        <div class="story-card">
+          <h4>The problem</h4>
+          <p>The product pipeline runs every fifteen minutes, all day. If each run asked an LLM to write copy for every product, that is thousands of calls a month for text that almost never changes, and a bill that grows with the schedule instead of the work. The easy answer was to not automate the writing at all, which is how most small companies end up with product pages that say nothing.</p>
+        </div>
+        <div class="story-card">
+          <h4>What I built</h4>
+          <p>A description step with a free tier and a gate. A template writes a serviceable blurb for every product at no cost. The LLM is asked only for a product that is new, in stock, and has no copy yet, and its answer is stored in a sheet next to a column a human can overwrite. On machines signed in to my Claude plan, the call runs through headless Claude with the API key blanked, so it bills the subscription, not the meter.</p>
+        </div>
+        <div class="story-card">
+          <h4>What changed</h4>
+          <p>The LLM runs a handful of times a month, once per new product, instead of ninety-six times a day. The bill stopped being open-ended: flat where a machine is signed in, a few cents on the smallest model where one isn't. Product pages ship with real copy on the same tick the product appears. And the gate turned out to be portable, so the same move now fronts three other automations.</p>
+        </div>
+      </div>
+
+      <h2>Two gates, one picture</h2>
+      <p>The first gate is about when. The second is about which door the call goes through. Almost every tick takes the top path and costs nothing.</p>
+
+      <div class="diagram" role="figure" aria-label="A flow of the two gates. The tick fires every fifteen minutes. Is there a new in-stock item with no copy yet? No, almost every tick: ship what is already there, the human override if any, else the copy written before, else the free template, at no cost, to the product page. Yes, a few times a month: which machine is asking? A machine signed in to Claude runs headless Claude with the API key blanked, so the flat subscription pays. The cloud VM with no sign-in makes a metered call pinned to the smallest model. Either way one blurb is written once and stored in a hidden sheet tab with Override, Generated, and Updated columns, never regenerated, a human's edit winning forever, and it flows back to the product page. Below, the same gate dropped into three other automations: meeting transcripts to calendar and tasks, session memory extraction, and lab-report extraction, each headless Claude with the key blanked.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 560" role="img" aria-label="Flow diagram of the cost gate, described in the surrounding text.">
+        <defs>
+          <marker id="arG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+          <marker id="arGg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#50fa7b"/></marker>
+        </defs>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#f8f8f2}
+.lbl{font-size:11px;fill:#a3abc9}
+.sm{font-size:10px}
+.box{fill:#12121a;stroke:#3a3a4a;stroke-width:1}
+.box-accent{fill:rgba(189,147,249,.10);stroke:#bd93f9;stroke-width:1.2}
+.box-green{fill:rgba(80,250,123,.08);stroke:#50fa7b;stroke-width:1.2}
+.box-blue{fill:rgba(139,233,253,.10);stroke:#8be9fd;stroke-width:1.2}
+.box-q{fill:rgba(241,250,140,.08);stroke:#f1fa8c;stroke-width:1.2}
+.edge{fill:none;stroke:#c8ccd8;stroke-width:1.2}
+.edge-g{fill:none;stroke:#50fa7b;stroke-width:1.6}
+.rule{fill:#f1fa8c;font-size:11px}
+.green{fill:#50fa7b}.pink{fill:#ff79c6}.purple{fill:#bd93f9}
+.t-strong{font-weight:600}
+.t-c{text-anchor:middle}
+</style>
+        <!-- the tick -->
+        <rect x="20" y="50" width="190" height="80" rx="7" class="box"/>
+        <text x="115" y="76" class="t-c t-strong">The tick fires</text>
+        <text x="115" y="98" class="t-c lbl">every 15 minutes,</text>
+        <text x="115" y="114" class="t-c lbl">96 times a day</text>
+
+        <!-- gate 1 -->
+        <path d="M210 90 H260" class="edge" marker-end="url(#arG)"/>
+        <rect x="260" y="40" width="220" height="100" rx="7" class="box-q"/>
+        <text x="370" y="62" class="t-c lbl">GATE 1 · WHEN</text>
+        <text x="370" y="86" class="t-c t-strong">A new in-stock item</text>
+        <text x="370" y="104" class="t-c t-strong">with no copy yet?</text>
+        <text x="370" y="128" class="t-c lbl">both cells blank, nothing else counts</text>
+
+        <!-- no path -->
+        <path d="M480 90 H540" class="edge-g" marker-end="url(#arGg)"/>
+        <text x="510" y="80" class="t-c sm green">no</text>
+        <text x="510" y="112" class="t-c sm lbl">almost every tick</text>
+        <rect x="540" y="40" width="240" height="100" rx="7" class="box-green"/>
+        <text x="660" y="62" class="t-c t-strong">Ship what's already there</text>
+        <text x="660" y="84" class="t-c lbl">the human's override, if any</text>
+        <text x="660" y="100" class="t-c lbl">else the copy written before</text>
+        <text x="660" y="116" class="t-c lbl">else the free template</text>
+        <text x="660" y="134" class="t-c green t-strong">$0</text>
+        <path d="M780 90 H830" class="edge-g" marker-end="url(#arGg)"/>
+        <rect x="830" y="55" width="180" height="70" rx="7" class="box-blue"/>
+        <text x="920" y="84" class="t-c t-strong">The product page</text>
+        <text x="920" y="106" class="t-c lbl">on the same tick</text>
+
+        <!-- yes path down -->
+        <path d="M370 140 V200" class="edge" marker-end="url(#arG)"/>
+        <text x="392" y="176" class="sm pink">yes · a few times a month</text>
+
+        <!-- gate 2 -->
+        <rect x="260" y="200" width="220" height="70" rx="7" class="box-q"/>
+        <text x="370" y="222" class="t-c lbl">GATE 2 · WHICH DOOR</text>
+        <text x="370" y="246" class="t-c t-strong">Which machine is asking?</text>
+
+        <path d="M300 270 V320" class="edge" marker-end="url(#arG)"/>
+        <path d="M440 270 V320" class="edge" marker-end="url(#arG)"/>
+
+        <!-- signed-in machine -->
+        <rect x="20" y="320" width="250" height="110" rx="7" class="box-accent"/>
+        <text x="145" y="342" class="t-c t-strong">A machine signed in to Claude</text>
+        <text x="145" y="364" class="t-c lbl">runs headless Claude, and blanks the</text>
+        <text x="145" y="380" class="t-c lbl">API key in that process first, so the</text>
+        <text x="145" y="396" class="t-c lbl">call can only use the subscription</text>
+        <text x="145" y="420" class="t-c rule">flat · already paid · no meter</text>
+        <path d="M300 320 V300 H145 V320" class="edge" style="opacity:0"/>
+
+        <!-- cloud VM -->
+        <rect x="290" y="320" width="230" height="110" rx="7" class="box"/>
+        <text x="405" y="342" class="t-c t-strong">The cloud VM, no sign-in</text>
+        <text x="405" y="364" class="t-c lbl">a metered call, pinned to the</text>
+        <text x="405" y="380" class="t-c lbl">smallest model; the same</text>
+        <text x="405" y="396" class="t-c lbl">once-per-item rule still applies</text>
+        <text x="405" y="420" class="t-c rule">cents, not dollars</text>
+
+        <!-- written once -->
+        <path d="M270 375 H290" class="edge" style="opacity:0"/>
+        <path d="M520 375 H560" class="edge" marker-end="url(#arG)"/>
+        <path d="M145 430 V450 H540 V375 H560" class="edge" marker-end="url(#arG)"/>
+        <rect x="560" y="320" width="260" height="110" rx="7" class="box-accent"/>
+        <text x="690" y="342" class="t-c t-strong">One blurb, written once</text>
+        <text x="690" y="364" class="t-c lbl">stored in a hidden sheet tab:</text>
+        <text x="690" y="380" class="t-c lbl">Strain · Override · Generated · Updated</text>
+        <text x="690" y="396" class="t-c lbl">never regenerated; the model only writes,</text>
+        <text x="690" y="412" class="t-c lbl">every fact is handed to it</text>
+        <path d="M820 375 H920 V125" class="edge" marker-end="url(#arG)"/>
+        <text x="880" y="368" class="t-c sm lbl">next tick</text>
+
+        <!-- reuse strip -->
+        <text x="515" y="490" class="t-c lbl">THE SAME GATE, DROPPED INTO OTHER AUTOMATIONS · headless Claude, key blanked, flat</text>
+        <rect x="60" y="502" width="280" height="44" rx="7" class="box"/>
+        <text x="200" y="520" class="t-c t-strong">Meeting transcript → calendar + tasks</text>
+        <text x="200" y="537" class="t-c lbl">a second pass re-reads knowing what the first caught</text>
+        <rect x="375" y="502" width="280" height="44" rx="7" class="box"/>
+        <text x="515" y="520" class="t-c t-strong">Session memory extraction</text>
+        <text x="515" y="537" class="t-c lbl">a hook that turns a work session into facts</text>
+        <rect x="690" y="502" width="280" height="44" rx="7" class="box"/>
+        <text x="830" y="520" class="t-c t-strong">Lab-report extraction</text>
+        <text x="830" y="537" class="t-c lbl">a PDF into a schema, replacing 13 regexes</text>
+      </svg>
+      </div>
+      <p class="diagram-caption">Green is the path almost every tick takes. The purple boxes are the only places an LLM is ever invoked, and the left one is the trick: a signed-in machine with the key blanked cannot bill the meter even by accident.</p>
+
+      <h3>The rules, in order of how often they fire</h3>
+      <ul>
+        <li><strong>A template goes first, and it isn't canned.</strong> With no LLM at all, every product gets a readable blurb built from the facts already in the sheet. Sentence shapes and word choices are picked by a hash of the product's name, so the same product always reads the same and its neighbours read differently.</li>
+        <li><strong>The model is asked once per item.</strong> Only a product that is in stock with both its cells blank qualifies. An existing blurb is never regenerated. A blurb a person has corrected is never touched. The step is safe to run every tick because on most ticks it does nothing.</li>
+        <li><strong>The human wins, forever.</strong> The copy lives in a hidden tab of the sheet the team already uses, with an Override column beside the Generated one. Anyone who dislikes a line types a better one and the site ships theirs from then on.</li>
+        <li><strong>Flat wherever possible.</strong> On any machine where I am signed in to Claude, the automation calls headless Claude and blanks the API key in that process first. That forces the subscription path, so the call is covered by a plan I already pay for and there is no way for it to land on the meter.</li>
+        <li><strong>Metered only where necessary, and small.</strong> The production server is a cloud VM with no sign-in, so its calls are metered, pinned to the smallest model, and still subject to the once-per-item rule. A failed call is non-fatal: the page ships the template copy that tick and the step retries next time.</li>
+        <li><strong>The key is a file, never an export.</strong> The API key lives in one file on disk, read directly by the few things allowed to use it. It is deliberately not a shell variable, because an exported secret leaks into transcripts and, after a rotation, keeps serving the old value to every process without any visible error. Both of those happened once.</li>
+        <li><strong>The model only writes.</strong> Every concrete claim, the aroma family, the potency, the appearance, is handed to it as a verified fact, and the prompt forbids inventing any. In a regulated product category the copy can't say things the lab report doesn't.</li>
+      </ul>
+
+      <h2>Why headless Claude is the interesting part</h2>
+      <p>Claude can be run from a terminal without a conversation, a prompt in and an answer out. Run that way on a machine that is signed in to a subscription, it draws on the plan rather than the pay-per-token API, and the plan is a fixed number every month. The one thing to get right is that the same command will happily use an API key if it finds one in the environment. So the gate clears the key inside the child process before the call, every time. The metered path becomes impossible from that machine, not just avoided.</p>
+      <p>That turned the cost of automating with an LLM from an open-ended variable into a controllable one. A metered API on the loose bills for every run of every script that someone later wires up and forgets. A subscription with the meter unplugged bills the same whether the scripts run ten times or ten thousand. For a small company that is the difference between "let's automate that" and "let's not risk it".</p>
+
+      <h2>Where the gate has gone since</h2>
+      <p>The move is a few lines, so it became a module rather than a one-off. It now fronts a meeting assistant that reads a transcript and proposes calendar events and tasks, with a second headless pass that re-reads the transcript knowing what the first pass caught. It fronts a hook that turns a finished work session into searchable facts. And it fronts a lab-report extractor that reads a certificate of analysis PDF into a fixed schema, replacing a cascade of thirteen regular expressions, though that one is parked as a branch until the sheet it feeds is ready to switch over.</p>
+
+      <h2>Where it stands</h2>
+      <p>The description step has run in <a href="photo-to-web.html">the 15-minute pipeline</a> since July 2026, first against a local model on a Mac, since September against Claude on the production VM. The template tier, the once-per-item rule, and the override column are the parts that survived every backend change, which is the point of building the gate separately from the model behind it.</p>
+
+      <h2>Stack</h2>
+      <div class="stack-pills">
+        <span class="stack-pill">Claude (headless, subscription)</span>
+        <span class="stack-pill">Claude API (Haiku, metered fallback)</span>
+        <span class="stack-pill">Python</span>
+        <span class="stack-pill">Google Sheets API</span>
+        <span class="stack-pill">systemd timers</span>
+        <span class="stack-pill">a local model, earlier (Ollama)</span>
+      </div>
+      <p>The cheapest LLM call is the one you don't make. The second cheapest is the one already covered by a plan you're paying for anyway.</p>
+
+      <h2>Built in conversation</h2>
+      <p>Same method as everything on this site. The gate, the template engine's variation trick, and the override column all came out of dialogue with Claude, including the part where Claude helped design the thing that stops Claude from being called too often.</p>
+      <p><a href="../index.html#philosophy">The philosophy</a>, or <a href="../now.html">what I'm building right now</a>.</p>
+
+      <div class="cta-row">
+        <a href="../work/" class="cta primary">All work</a>
+        <a href="photo-to-web.html" class="cta secondary">The pipeline it runs in</a>
+      </div>
+
+      <div class="crosslinks">
+        <a href="../index.html">← Home</a> ·
+        <a href="../work/">Work</a> ·
+        <a href="../index.html#projects">Projects</a> ·
+        <a href="../now.html">/now</a>
+      </div>
+
+    </article>
+
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> jadedviber.com</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const hamburger = document.querySelector('.nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+    }
+  </script>
+
+  <script src="/palette.js?v=5"></script>
+  <script src="/turing.js?v=4"></script>
+</body>
+</html>

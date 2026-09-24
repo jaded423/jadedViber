@@ -11,6 +11,21 @@ All notable changes to jadedViber are documented here.
 
 ---
 
+## 2026-09-23 - /work/ case studies #6 + #7: the LLM cost gate and piGate. The gallery is complete.
+
+**What changed:**
+- New `work/cost-gate.html` = plan page 6. Joshua's framing (this session): "headless claude should get a good mention there, it gave a more controllable cost variable than API on the loose." The page tells two gates: **when** (a free deterministic template tier from `elevatedCore/pipeline/web/describe.py`; Claude asked once per new in-stock item with both `_Descriptions` cells blank, from `web/seed/fill_descriptions.py` + `web/sheets_desc.py`; a human Override column that always wins) and **which door** (on a signed-in machine, `claude -p` with `ANTHROPIC_API_KEY=""` in the child process, so the call bills the subscription and cannot hit the meter, the pattern from `meeting/meeting/assistant/brain.py` and the `todo()` shell wrapper; the cloud VM has no sign-in so its calls are metered on Haiku, `run_full_sync.sh` STEP 4.5 since 2026-09-15). One SVG of the two gates + a strip of the three other automations the gate fronts (meeting brain, `brain/hooks/brain_autoextract.py`, the parked LiveRef 3.0 COA extractor). No numbers on the page: the value log's `[calls × tokens × price]` is still a placeholder.
+- New `work/pigate.html` = plan page 7. **No client is named** (Joshua: BeWell is a potential employer, no consent; the church is "a church pilot", the medical group is not mentioned at all). Sources: `piGate/CLAUDE.md`, `docs/tailscale-mode.md`, `docs/first-visit.md`, `docs/demo-card.md`, `fleet/FLASH.md`, the T0 plan `just-a-thought-on-curious-treasure.md`; the one-pager's *shape* (what it is / what you get / can and can't see / first visit) is reused, its addressee is not. Two SVGs: the topology (site LAN untouched + the box → the client-owned Tailscale network → a phone and a granted laptop, plus a "who holds the keys" box) and the first-visit timeline (green dots = the box by itself, purple = the visit's work). **No kit photo exists on disk** (the only candidate upload was the Pocket), so the page is drawings only. Numbers used: under 3 min to tailnet (2m35s, 2026-09-09), four networks for discovery, under $100 of hardware ($91.97/kit).
+- OG images `cost-gate-og.png` + `pigate-og.png` = each page's first diagram cropped to 1200×630.
+- `work/index.html`: the last two pending cards are live links; **all seven gallery cards now resolve**. `sitemap.xml` + `llms.txt` list both. `palette.js` `PAGES` gains both; `?v=4 → 5` on all thirteen pages that load it.
+- Checked before push: titles 59 / 58, descriptions 152 / 157, canonical + OG + Twitter + JSON-LD (`SoftwareApplication` for the gate, `Product` for piGate), no `<img>` (inline SVG with `aria-label`), headless Chromium iframes at 1280 and 390 wide → `scrollWidth == clientWidth`, no element past the right edge.
+
+**Why:** plan `~/.claude/plans/jadedviber-portfolio.md` pages 6 + 7 (Joshua: "What is the next page? ... and then the last page?"). Leftovers for T0: the homepage Person `hasOccupation`, then step 9 (retire the plan file into this changelog, flip Leg 4).
+
+**Files:** `work/cost-gate.html` (new), `work/pigate.html` (new), `work/img/cost-gate-og.png` + `work/img/pigate-og.png` (new), `work/index.html`, `sitemap.xml`, `llms.txt`, `palette.js`, every page's `palette.js?v=`.
+
+---
+
 ## 2026-09-23 - /work/ case studies #5 + #5b: the Dax Distro order portal and the reps' lead app
 
 **What changed:**

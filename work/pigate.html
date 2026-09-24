@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remote Access in a Box: a Raspberry Pi on the Client's LAN</title>
+  <meta name="description" content="Plug a Raspberry Pi into a church or a small office: it joins their own private network, finds every device, and watches them from anywhere. No firewall hole.">
+  <link rel="canonical" href="https://jadedviber.com/work/pigate.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://jadedviber.com/work/pigate.html">
+  <meta property="og:title" content="Remote Access in a Box: a Raspberry Pi on the Client's LAN">
+  <meta property="og:description" content="Two cables. Within minutes the box is on a private network the client owns, every device on their LAN is on a status page, and named people can be granted one device each. Nothing installed, nothing opened.">
+  <meta property="og:image" content="https://jadedviber.com/work/img/pigate-og.png">
+  <meta property="og:site_name" content="JadedViber">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Remote Access in a Box: a Raspberry Pi on the Client's LAN">
+  <meta name="twitter:description" content="Two cables. Within minutes the box is on a private network the client owns, every device on their LAN is on a status page, and named people can be granted one device each. Nothing installed, nothing opened.">
+  <meta name="twitter:image" content="https://jadedviber.com/work/img/pigate-og.png">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="work.css">
+  <link rel="icon" type="image/png" href="../snek.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jadedviber.com/#website",
+        "url": "https://jadedviber.com",
+        "name": "JadedViber",
+        "publisher": { "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://jadedviber.com/work/pigate.html#webpage",
+        "url": "https://jadedviber.com/work/pigate.html",
+        "name": "Remote Access in a Box: a Raspberry Pi on the Client's LAN",
+        "isPartOf": { "@id": "https://jadedviber.com/#website" },
+        "author": { "@id": "https://jadedviber.com/#identity" },
+        "primaryImageOfPage": "https://jadedviber.com/work/img/pigate-og.png",
+        "about": { "@id": "https://jadedviber.com/work/pigate.html#system" }
+      },
+      {
+        "@type": "Product",
+        "@id": "https://jadedviber.com/work/pigate.html#system",
+        "name": "piGate",
+        "description": "A pre-configured Raspberry Pi 5 appliance for small sites. Plugged into any LAN with power and Ethernet, it joins a private Tailscale network the client owns, advertises that LAN as an approved route, inventories the network, seeds an Uptime Kuma status page with a monitor per device, and pushes a phone notification. Named people are granted specific devices; nothing is installed on the client's machines and no firewall port is opened. Flashed from a five-command runbook; hardware-watchdog, auto-updates, log-to-RAM, and node tagging so the box survives people leaving.",
+        "brand": { "@type": "Person", "@id": "https://jadedviber.com/#identity" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jadedviber.com/#identity",
+        "name": "Joshua Brown",
+        "url": "https://jadedviber.com",
+        "sameAs": [ "https://github.com/jaded423", "https://nownownow.com/p/DTGZ" ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jadedviber.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://jadedviber.com/work/" },
+          { "@type": "ListItem", "position": 3, "name": "Remote access in a box", "item": "https://jadedviber.com/work/pigate.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="../index.html" class="nav-brand">JADED</a>
+    <div class="nav-links">
+      <a href="../work/">Work</a>
+      <a href="../index.html#philosophy">Philosophy</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#stack">Stack</a>
+      <a href="../homelab.html">Homelab</a>
+      <a href="../now.html">Now</a>
+      <a href="https://github.com/jaded423" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="container work-page">
+
+    <header class="work-hero">
+      <h1>Remote access in a box.</h1>
+      <p class="lead">A church, a family's house, a small office with a printer nobody can fix on the phone. The usual answer is a VPN, which means a hole in the firewall, an account on every machine, and a subscription someone forgets to cancel. This is a small box, about the size of a deck of cards, that plugs into the network with two cables. Within minutes it is on a private network the client owns, every device on their LAN is on a status page, and named people can be granted specific devices from anywhere. Nothing is installed on their computers and nothing changes on their router.</p>
+      <p class="meta">My own product · 2026 · Raspberry Pi 5 · Tailscale · Uptime Kuma · in build, pilot site next · <a href="../work/">← all work</a></p>
+    </header>
+
+    <article class="work-body">
+
+      <div class="story">
+        <div class="story-card">
+          <h4>The problem</h4>
+          <p>Small sites have the same tickets as big ones and no one on staff to take them. The person who can fix things lives somewhere else. Every remote-access tool wants a port opened, software on each machine, or a monthly bill per seat, and the first time the router gets replaced it all stops working. Meanwhile nobody knows the printer went down until Sunday morning.</p>
+        </div>
+        <div class="story-card">
+          <h4>What I built</h4>
+          <p>A Raspberry Pi flashed from a five-command runbook. Plugged in, it works out which network it is on, joins the client's private network, and announces that LAN as a route that is approved automatically. Then it scans the LAN, puts a row for every device on a status page, and buzzes a phone: new network, this many devices. From then on the box watches the site and the people the client names can reach the devices they are granted.</p>
+        </div>
+        <div class="story-card">
+          <h4>What changed</h4>
+          <p>Card to reachable in under three minutes, measured. Plug-and-play discovery proven on four different networks. A full first visit rehearsed end to end on my own LAN before any client saw it, and two boxes built: one for a church pilot, one for my former employer. The whole kit is under a hundred dollars of hardware. It started as a Twingate box I shipped to relatives, and the Tailscale version replaced it for client sites.</p>
+        </div>
+      </div>
+
+      <h2>What sits where</h2>
+      <p>The box is the only new thing on the client's network. It dials out to the private network, which is how a phone or a laptop anywhere reaches the site without a single port being opened. A grant is one line in an admin console the client controls; remove the line and the access is gone.</p>
+
+      <div class="diagram" role="figure" aria-label="Topology. On the left, the site's network: a router with a PC, a printer, a camera, a Mac, and a NAS, and the piGate box plugged in beside them. The box joins the private network, advertises the site's LAN as a route, pings every device, and serves a status page. In the middle, the private Tailscale network the client owns: no port forwarding, encrypted peer to peer, each grant one line, logged. On the right, anywhere: a phone with the status page and push alerts, a laptop that screen-shares, remote-desktops, or SSHes into a granted device. Below: nothing installed on their machines, nothing changed on their router, no hole in the firewall.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 440" role="img" aria-label="Topology diagram of the piGate appliance, described in the surrounding text.">
+        <defs>
+          <marker id="arT" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8ccd8"/></marker>
+        </defs>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#f8f8f2}
+.lbl{font-size:11px;fill:#a3abc9}
+.sm{font-size:10px}
+.box{fill:#12121a;stroke:#3a3a4a;stroke-width:1}
+.zone{fill:none;stroke:#3a3a4a;stroke-width:1;stroke-dasharray:5 4}
+.box-accent{fill:rgba(189,147,249,.10);stroke:#bd93f9;stroke-width:1.2}
+.box-blue{fill:rgba(139,233,253,.10);stroke:#8be9fd;stroke-width:1.2}
+.box-green{fill:rgba(80,250,123,.08);stroke:#50fa7b;stroke-width:1.2}
+.edge{fill:none;stroke:#c8ccd8;stroke-width:1.2}
+.lan{fill:none;stroke:#6272a4;stroke-width:1}
+.rule{fill:#f1fa8c;font-size:11px}
+.green{fill:#50fa7b}.pink{fill:#ff79c6}
+.t-strong{font-weight:600}
+.t-c{text-anchor:middle}
+</style>
+        <!-- the site -->
+        <rect x="20" y="40" width="440" height="330" rx="10" class="zone"/>
+        <text x="240" y="30" class="t-c lbl">THE SITE'S OWN NETWORK · untouched</text>
+
+        <rect x="180" y="60" width="120" height="44" rx="7" class="box"/>
+        <text x="240" y="79" class="t-c t-strong">Their router</text>
+        <text x="240" y="95" class="t-c lbl sm">no port forwarded</text>
+        <path d="M240 104 V130" class="lan"/>
+        <path d="M60 130 H420" class="lan"/>
+
+        <rect x="35" y="140" width="80" height="50" rx="6" class="box"/>
+        <text x="75" y="160" class="t-c">Front desk</text>
+        <text x="75" y="176" class="t-c lbl sm">Windows · RDP</text>
+        <rect x="125" y="140" width="80" height="50" rx="6" class="box"/>
+        <text x="165" y="160" class="t-c">Printer</text>
+        <text x="165" y="176" class="t-c lbl sm">web UI</text>
+        <rect x="215" y="140" width="80" height="50" rx="6" class="box"/>
+        <text x="255" y="160" class="t-c">Camera</text>
+        <text x="255" y="176" class="t-c lbl sm">ONVIF</text>
+        <rect x="305" y="140" width="80" height="50" rx="6" class="box"/>
+        <text x="345" y="160" class="t-c">A Mac</text>
+        <text x="345" y="176" class="t-c lbl sm">Screen Sharing</text>
+        <rect x="395" y="140" width="55" height="50" rx="6" class="box"/>
+        <text x="422" y="160" class="t-c">NAS</text>
+        <text x="422" y="176" class="t-c lbl sm">SSH</text>
+        <path d="M75 130 V140 M165 130 V140 M255 130 V140 M345 130 V140 M422 130 V140" class="lan"/>
+
+        <!-- the box -->
+        <path d="M240 130 V215" class="lan"/>
+        <rect x="90" y="215" width="300" height="140" rx="8" class="box-accent"/>
+        <text x="240" y="238" class="t-c t-strong">piGate · a Raspberry Pi 5 · two cables</text>
+        <text x="240" y="260" class="t-c lbl">joins the private network by itself</text>
+        <text x="240" y="276" class="t-c lbl">announces this LAN as a route, approved on arrival</text>
+        <text x="240" y="292" class="t-c lbl">pings every device, one row each on a status page</text>
+        <text x="240" y="308" class="t-c lbl">keeps watching when the site's internet drops</text>
+        <text x="240" y="334" class="t-c rule">it asks devices if they're there; it never looks inside one</text>
+
+        <!-- private network -->
+        <path d="M390 285 H540" class="edge" marker-end="url(#arT)" marker-start="url(#arT)"/>
+        <text x="465" y="276" class="t-c sm lbl">dials out</text>
+        <rect x="540" y="200" width="200" height="170" rx="8" class="box-green"/>
+        <text x="640" y="224" class="t-c t-strong">The private network</text>
+        <text x="640" y="242" class="t-c lbl">Tailscale · owned by the client</text>
+        <text x="640" y="266" class="t-c lbl">encrypted, device to device</text>
+        <text x="640" y="282" class="t-c lbl">works behind any router,</text>
+        <text x="640" y="298" class="t-c lbl">no port forwarding, ever</text>
+        <text x="640" y="322" class="t-c lbl">a grant = one line in the console</text>
+        <text x="640" y="338" class="t-c lbl">tied to a named person, logged,</text>
+        <text x="640" y="354" class="t-c lbl">revoked in one click</text>
+
+        <!-- anywhere -->
+        <text x="895" y="30" class="t-c lbl">ANYWHERE</text>
+        <path d="M740 260 H790" class="edge" marker-end="url(#arT)" marker-start="url(#arT)"/>
+        <rect x="790" y="200" width="220" height="70" rx="7" class="box-blue"/>
+        <text x="900" y="222" class="t-c t-strong">A phone</text>
+        <text x="900" y="242" class="t-c lbl">the status page: green and red dots</text>
+        <text x="900" y="258" class="t-c lbl">a push the moment something drops</text>
+        <path d="M740 320 H790" class="edge" marker-end="url(#arT)" marker-start="url(#arT)"/>
+        <rect x="790" y="290" width="220" height="80" rx="7" class="box-blue"/>
+        <text x="900" y="312" class="t-c t-strong">A laptop, granted one device</text>
+        <text x="900" y="332" class="t-c lbl">screen-share a Mac · RDP a PC</text>
+        <text x="900" y="348" class="t-c lbl">the printer's own admin page</text>
+        <text x="900" y="364" class="t-c lbl">never on their Wi-Fi</text>
+
+        <!-- ownership note -->
+        <rect x="540" y="60" width="470" height="110" rx="8" class="box"/>
+        <text x="775" y="84" class="t-c t-strong">Who holds the keys</text>
+        <text x="775" y="106" class="t-c lbl">the network belongs to the client's own account; I am an invited admin</text>
+        <text x="775" y="122" class="t-c lbl">the box is tagged as the network's, not a person's, so it outlives staff changes</text>
+        <text x="775" y="138" class="t-c lbl">key expiry off, auto-updates on, a watchdog reboots a hang, logs live in RAM</text>
+        <text x="775" y="158" class="t-c lbl">a sealed envelope with the admin login stays in the office</text>
+
+        <text x="515" y="410" class="t-c rule">nothing installed on their machines · nothing changed on their router · no hole in the firewall</text>
+      </svg>
+      </div>
+      <p class="diagram-caption">Left: the site, exactly as it was, plus one box. Middle: a private network the client owns. Right: the people the client names, wherever they are.</p>
+
+      <h3>What the box will and won't do</h3>
+      <ul>
+        <li><strong>It sees who is there, not what is inside.</strong> Discovery asks each device on the LAN whether it answers and what kind of thing it is. Reaching into a machine to use it is a separate grant, to a named person, that shows up in a log.</li>
+        <li><strong>The client owns the network.</strong> Each site's private network is created under an account the client holds, and I am invited in as an administrator. If they want me gone, it is one click on their side. Free at this scale.</li>
+        <li><strong>The box belongs to the network, not to a person.</strong> Nodes are tagged so they don't vanish when an account is removed, the box's key never expires, it updates itself, and a hardware watchdog reboots it if it hangs. A second imaged card in a drawer turns a dead SD card into a phone-call fix.</li>
+        <li><strong>It keeps watching without the internet.</strong> The monitoring runs on the box. When a site loses its connection the box keeps checking the LAN and reports the moment the outside world is back.</li>
+        <li><strong>Two sites with the same subnet don't collide.</strong> Every home router hands out the same addresses. Each site gets its own address mapping on the private network, designed in on day one rather than discovered at site four.</li>
+        <li><strong>Paper before plug.</strong> A one-page authorization from whoever owns the site, credentials in a per-client password-manager collection rather than my own vault, and the break-glass envelope, even for a church that isn't paying.</li>
+      </ul>
+
+      <h2>The first visit</h2>
+      <p>The runbook is written for one visit, and it was rehearsed on my own network before any client saw it. Most of the time goes to naming things and to the one-time touch each managed machine needs.</p>
+
+      <div class="diagram" role="figure" aria-label="A timeline of the first visit. Zero minutes: plug in power and Ethernet on the router or core switch. About three minutes: the box is on the private network and this LAN's route is approved automatically. Five to fifteen minutes: every device found, the status page fills, the phone buzzes with new network and a device count. Then: name the rows from a phone, a host address becomes front desk printer. Then: one touch per managed machine, a Mac's Screen Sharing, a Windows PC's Remote Desktop, a reservation on the router. Then: verify each device from the phone on cellular with Wi-Fi off. Leaving: the sealed envelope, a spare card, and a label with a phone number on the box.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 300" role="img" aria-label="First-visit timeline, described in the surrounding text.">
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:12px;fill:#f8f8f2}
+.lbl{font-size:11px;fill:#a3abc9}
+.sm{font-size:10px}
+.box{fill:#12121a;stroke:#3a3a4a;stroke-width:1}
+.box-accent{fill:rgba(189,147,249,.10);stroke:#bd93f9;stroke-width:1.2}
+.line{fill:none;stroke:#6272a4;stroke-width:2}
+.dot{fill:#bd93f9}
+.dot-g{fill:#50fa7b}
+.time{fill:#50fa7b;font-size:11px;font-weight:600}
+.t-strong{font-weight:600}
+.t-c{text-anchor:middle}
+</style>
+        <path d="M60 70 H970" class="line"/>
+        <!-- 1 -->
+        <circle cx="95" cy="70" r="6" class="dot-g"/>
+        <text x="95" y="52" class="t-c time">0:00</text>
+        <rect x="20" y="95" width="150" height="80" rx="7" class="box"/>
+        <text x="95" y="117" class="t-c t-strong">Plug in</text>
+        <text x="95" y="137" class="t-c lbl">power + Ethernet, on the</text>
+        <text x="95" y="153" class="t-c lbl">router or core switch,</text>
+        <text x="95" y="169" class="t-c lbl">never a Wi-Fi extender</text>
+        <!-- 2 -->
+        <circle cx="265" cy="70" r="6" class="dot-g"/>
+        <text x="265" y="52" class="t-c time">≈ 3 min</text>
+        <rect x="190" y="95" width="150" height="80" rx="7" class="box"/>
+        <text x="265" y="117" class="t-c t-strong">On the network</text>
+        <text x="265" y="137" class="t-c lbl">shows up on the phone's</text>
+        <text x="265" y="153" class="t-c lbl">Tailscale list; this LAN's</text>
+        <text x="265" y="169" class="t-c lbl">route approved by itself</text>
+        <!-- 3 -->
+        <circle cx="435" cy="70" r="6" class="dot-g"/>
+        <text x="435" y="52" class="t-c time">5–15 min</text>
+        <rect x="360" y="95" width="150" height="80" rx="7" class="box-accent"/>
+        <text x="435" y="117" class="t-c t-strong">Everything found</text>
+        <text x="435" y="137" class="t-c lbl">a row per device on the</text>
+        <text x="435" y="153" class="t-c lbl">status page; the phone buzzes:</text>
+        <text x="435" y="169" class="t-c lbl">"new network, 28 devices"</text>
+        <!-- 4 -->
+        <circle cx="605" cy="70" r="6" class="dot"/>
+        <rect x="530" y="95" width="150" height="80" rx="7" class="box"/>
+        <text x="605" y="117" class="t-c t-strong">Name the rows</text>
+        <text x="605" y="137" class="t-c lbl">from the phone, with the</text>
+        <text x="605" y="153" class="t-c lbl">person who knows: "host .77"</text>
+        <text x="605" y="169" class="t-c lbl">becomes "front desk printer"</text>
+        <!-- 5 -->
+        <circle cx="775" cy="70" r="6" class="dot"/>
+        <rect x="700" y="95" width="150" height="80" rx="7" class="box"/>
+        <text x="775" y="117" class="t-c t-strong">One touch each</text>
+        <text x="775" y="137" class="t-c lbl">a Mac's Screen Sharing on,</text>
+        <text x="775" y="153" class="t-c lbl">a PC's Remote Desktop on,</text>
+        <text x="775" y="169" class="t-c lbl">a reservation on the router</text>
+        <!-- 6 -->
+        <circle cx="945" cy="70" r="6" class="dot"/>
+        <rect x="870" y="95" width="150" height="80" rx="7" class="box"/>
+        <text x="945" y="117" class="t-c t-strong">Verify, then leave</text>
+        <text x="945" y="137" class="t-c lbl">each device from the phone</text>
+        <text x="945" y="153" class="t-c lbl">on cellular, Wi-Fi off;</text>
+        <text x="945" y="169" class="t-c lbl">the envelope stays</text>
+
+        <text x="515" y="225" class="t-c lbl">after that, everything is remote: the box is watched, the devices are reachable by the people named, and a dead card is "swap it and plug back in"</text>
+        <text x="515" y="250" class="t-c lbl">what still needs a body on site: anything before the machine boots, a dead disk, a paper jam, and Sunday morning at 9:55</text>
+      </svg>
+      </div>
+      <p class="diagram-caption">Green dots are the box working by itself. Purple dots are the visit's real work: names, one-time touches, and proof from outside the building.</p>
+
+      <h2>How it gets built</h2>
+      <p>Every box is flashed from the same recipe. A small script writes the first-boot configuration, the OS image goes onto the card, two files are dropped on it, and the card goes in the Pi. The first boot creates the user, installs the private-network client and the monitoring container, turns on the hardware watchdog, moves logs into RAM so the card lasts, sets updates to apply themselves with an early-morning reboot, and joins the network with a key that was prepared in the client's admin console before the flash. Moving the box to a different network re-announces the new one; there is nothing to reconfigure. The private-network key is scrubbed off the card after the first login.</p>
+      <p>The first version of this, for family networks, ran a different connector and needed a one-gigabyte Pi at minimum. The current fleet runs on the cheapest Pi 5, because the private-network client idles in a few dozen megabytes, and the monitoring is the heavier tenant.</p>
+
+      <h2>Where it stands</h2>
+      <p>In build, with the plumbing proven and the product still being shaped. Two boxes exist: one rehearsed the full first visit on my own network and now also serves a couple of small sites of mine, the other is built for a church pilot and waiting on the visit. After the pilot: a retainer for my former employer's office, then a paid version with a flat price per site. The next feature is self-healing, the box power-cycling a wedged router or access point through a smart plug and only paging a human when that didn't work, which is the same pattern that already keeps my homelab up. Client-branded status pages are queued behind it.</p>
+      <p>The name is piGate. The site names in the drawings are made up, and no client is named on this page.</p>
+
+      <h2>Stack</h2>
+      <div class="stack-pills">
+        <span class="stack-pill">Raspberry Pi 5</span>
+        <span class="stack-pill">Raspberry Pi OS Lite · cloud-init</span>
+        <span class="stack-pill">Tailscale (subnet router, tags, auto-approve)</span>
+        <span class="stack-pill">Uptime Kuma (Docker)</span>
+        <span class="stack-pill">ntfy push</span>
+        <span class="stack-pill">nmap · arp-scan · mDNS</span>
+        <span class="stack-pill">Caddy (optional named status page)</span>
+        <span class="stack-pill">Python (flash + seed tooling)</span>
+      </div>
+      <p>All open, established tools. Nothing here depends on me staying involved, which is the first thing a client should ask.</p>
+
+      <h2>Built in conversation</h2>
+      <p>Same method as everything on this site. The route-approval trick, the discovery service, the first-visit runbook, and the list of gotchas that bite six months later (key expiry, card death, the wrong network profile on Windows) all came out of dialogue with Claude, then were proven on real hardware one flash at a time.</p>
+      <p><a href="../index.html#philosophy">The philosophy</a>, <a href="../homelab.html">the homelab it grew out of</a>, or <a href="../now.html">what I'm building right now</a>.</p>
+
+      <div class="cta-row">
+        <a href="../work/" class="cta primary">All work</a>
+        <a href="../homelab.html" class="cta secondary">The homelab</a>
+      </div>
+
+      <div class="crosslinks">
+        <a href="../index.html">← Home</a> ·
+        <a href="../work/">Work</a> ·
+        <a href="../index.html#projects">Projects</a> ·
+        <a href="../now.html">/now</a>
+      </div>
+
+    </article>
+
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> jadedviber.com</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const hamburger = document.querySelector('.nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+    }
+  </script>
+
+  <script src="/palette.js?v=5"></script>
+  <script src="/turing.js?v=4"></script>
+</body>
+</html>
