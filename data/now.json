@@ -2,34 +2,65 @@
   "_schema": "v1",
   "_managed_by": "scripts/render_now.py (via ~/scripts/bin/now)",
   "current": {
-    "title": "geoTracker — free-tier SEO + GEO rank tracker",
-    "summary": "A zero-cost SEO + GEO pipeline, driven through Claude. The model writes the diagnostics; I review and ship. Shipped so far: SERP rank pulls via Brave API with a DuckDuckGo fallback, a rule-based on-page auditor that scores pages 0–100, and a fix generator that emits paste-ready meta tags, JSON-LD, robots.txt, sitemap.xml, and llms.txt — plus IndexNow pings so Bing reindexes within minutes. 42 keywords tracked, daily diff reports, brand-mention detection. Building now: competitor page scrapes, weekly content-gap reports, LLM citation tracking (does ChatGPT/Claude/Perplexity actually mention us?), and a cron loop so the whole pipeline runs untouched.",
-    "started": "2026-05-18",
-    "progress_pct": 73,
-    "tags": ["SEO", "GEO", "Python", "Brave API", "Claude"],
-    "links": []
+    "title": "Sermon follow-along — a synced transcript app for my church",
+    "summary": "Each Sunday's sermon goes from the YouTube stream to a page you can follow along with. A local Whisper model transcribes it, a second pass re-transcribes the quiet gaps, and every verse the pastor cites is found and attached as a card or a link, with a translation dropdown. One renderer builds two editions: a private one on my tailnet and a public one for the congregation, installable as a PWA. It runs unattended every night on my home lab, and requests from church members arrive by email and land in the backlog.",
+    "started": "2026-09-27",
+    "progress_pct": 80,
+    "tags": [
+      "Python",
+      "Whisper",
+      "PWA",
+      "Home lab",
+      "Claude"
+    ],
+    "links": [
+      {
+        "label": "live",
+        "url": "https://cbw.jadedviber.com"
+      }
+    ]
   },
   "completed": [
+    {
+      "title": "geoTracker — free-tier SEO + GEO rank tracker (parked)",
+      "summary": "Got as far as SERP rank pulls via Brave with a DuckDuckGo fallback, a rule-based on-page auditor, a fix generator and IndexNow pings. Parked at 73% in September 2026 to make room for other work.",
+      "started": "2026-05-18",
+      "finished": "2026-09-15",
+      "tags": [
+        "Python",
+        "SEO",
+        "GEO"
+      ]
+    },
     {
       "title": "On-page audit + fix-generator loop",
       "summary": "Built rule-based defect detector (onpage_audit.py) and a fix generator that emits paste-ready patches: head snippets, JSON-LD, robots.txt, sitemap.xml, llms.txt. First run on jadedviber.com: score 36/100, 12 defects.",
       "started": "2026-05-19",
       "finished": "2026-05-19",
-      "tags": ["Python", "SEO"]
+      "tags": [
+        "Python",
+        "SEO"
+      ]
     },
     {
       "title": "jadedviber.com SEO foundation",
       "summary": "Shipped the patches: meta + Open Graph + Twitter Card + WebSite/Person JSON-LD on index.html, plus robots.txt/sitemap.xml/llms.txt at site root. Generated a 1200×630 og.png via headless chrome from a styled template. Audit score: 36/100 → 98/100.",
       "started": "2026-05-19",
       "finished": "2026-05-19",
-      "tags": ["SEO", "GitHub Pages"]
+      "tags": [
+        "SEO",
+        "GitHub Pages"
+      ]
     },
     {
       "title": "geoTracker scaffold",
       "summary": "Free-tier SEO/GEO tracker scaffolded. Brave Search API + DuckDuckGo fallback for SERP, SQLite for storage, daily rank diff + weekly content-gap reports. Anti-spam guardrails baked into the workflow.",
       "started": "2026-05-18",
       "finished": "2026-05-18",
-      "tags": ["Python", "SEO"]
+      "tags": [
+        "Python",
+        "SEO"
+      ]
     }
   ]
 }

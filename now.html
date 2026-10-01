@@ -56,20 +56,20 @@
           <span class="now-cmd typing" style="--chars: 17"> cat /current.task</span>
         </div>
         <div class="now-line" style="--delay: 1">
-          <span class="now-output now-current-title">geoTracker — free-tier SEO + GEO rank tracker</span>
+          <span class="now-output now-current-title">Sermon follow-along — a synced transcript app for my church</span>
         </div>
         <div class="now-line" style="--delay: 2">
-          <span class="now-comment">started 2026-05-18</span>
+          <span class="now-comment">started 2026-09-27</span>
         </div>
         <div class="now-line now-summary-line" style="--delay: 3">
-          <span class="now-output-text">A zero-cost SEO + GEO pipeline, driven through Claude. The model writes the diagnostics; I review and ship. Shipped so far: SERP rank pulls via Brave API with a DuckDuckGo fallback, a rule-based on-page auditor that scores pages 0–100, and a fix generator that emits paste-ready meta tags, JSON-LD, robots.txt, sitemap.xml, and llms.txt — plus IndexNow pings so Bing reindexes within minutes. 42 keywords tracked, daily diff reports, brand-mention detection. Building now: competitor page scrapes, weekly content-gap reports, LLM citation tracking (does ChatGPT/Claude/Perplexity actually mention us?), and a cron loop so the whole pipeline runs untouched.</span>
+          <span class="now-output-text">Each Sunday&#x27;s sermon goes from the YouTube stream to a page you can follow along with. A local Whisper model transcribes it, a second pass re-transcribes the quiet gaps, and every verse the pastor cites is found and attached as a card or a link, with a translation dropdown. One renderer builds two editions: a private one on my tailnet and a public one for the congregation, installable as a PWA. It runs unattended every night on my home lab, and requests from church members arrive by email and land in the backlog.</span>
         </div>
-        <div class="now-tags"><span class="now-tag">SEO</span><span class="now-tag">GEO</span><span class="now-tag">Python</span><span class="now-tag">Brave API</span><span class="now-tag">Claude</span></div>
-        
+        <div class="now-tags"><span class="now-tag">Python</span><span class="now-tag">Whisper</span><span class="now-tag">PWA</span><span class="now-tag">Home lab</span><span class="now-tag">Claude</span></div>
+        <div class="now-links"><a href="https://cbw.jadedviber.com" target="_blank" rel="noopener">live</a></div>
         <div class="now-line" style="--delay: 5">
           <div class="now-progress-container">
-            <div class="now-progress-bar" style="--target-pct: 73%"></div>
-            <span class="now-progress-text">73%</span>
+            <div class="now-progress-bar" style="--target-pct: 80%"></div>
+            <span class="now-progress-text">80%</span>
           </div>
         </div>
         <div class="now-line now-cursor-line" style="--delay: 6">
@@ -109,6 +109,20 @@
     {
       "filename": "ship.1.md",
       "index": 1,
+      "title": "geoTracker \u2014 free-tier SEO + GEO rank tracker (parked)",
+      "summary": "Got as far as SERP rank pulls via Brave with a DuckDuckGo fallback, a rule-based on-page auditor, a fix generator and IndexNow pings. Parked at 73% in September 2026 to make room for other work.",
+      "started": "2026-05-18",
+      "finished": "2026-09-15",
+      "tags": [
+        "Python",
+        "SEO",
+        "GEO"
+      ],
+      "links": []
+    },
+    {
+      "filename": "ship.2.md",
+      "index": 2,
       "title": "On-page audit + fix-generator loop",
       "summary": "Built rule-based defect detector (onpage_audit.py) and a fix generator that emits paste-ready patches: head snippets, JSON-LD, robots.txt, sitemap.xml, llms.txt. First run on jadedviber.com: score 36/100, 12 defects.",
       "started": "2026-05-19",
@@ -120,8 +134,8 @@
       "links": []
     },
     {
-      "filename": "ship.2.md",
-      "index": 2,
+      "filename": "ship.3.md",
+      "index": 3,
       "title": "jadedviber.com SEO foundation",
       "summary": "Shipped the patches: meta + Open Graph + Twitter Card + WebSite/Person JSON-LD on index.html, plus robots.txt/sitemap.xml/llms.txt at site root. Generated a 1200\u00d7630 og.png via headless chrome from a styled template. Audit score: 36/100 \u2192 98/100.",
       "started": "2026-05-19",
@@ -133,8 +147,8 @@
       "links": []
     },
     {
-      "filename": "ship.3.md",
-      "index": 3,
+      "filename": "ship.4.md",
+      "index": 4,
       "title": "geoTracker scaffold",
       "summary": "Free-tier SEO/GEO tracker scaffolded. Brave Search API + DuckDuckGo fallback for SERP, SQLite for storage, daily rank diff + weekly content-gap reports. Anti-spam guardrails baked into the workflow.",
       "started": "2026-05-18",
@@ -147,18 +161,23 @@
     }
   ],
   "current": {
-    "title": "geoTracker \u2014 free-tier SEO + GEO rank tracker",
-    "summary": "A zero-cost SEO + GEO pipeline, driven through Claude. The model writes the diagnostics; I review and ship. Shipped so far: SERP rank pulls via Brave API with a DuckDuckGo fallback, a rule-based on-page auditor that scores pages 0\u2013100, and a fix generator that emits paste-ready meta tags, JSON-LD, robots.txt, sitemap.xml, and llms.txt \u2014 plus IndexNow pings so Bing reindexes within minutes. 42 keywords tracked, daily diff reports, brand-mention detection. Building now: competitor page scrapes, weekly content-gap reports, LLM citation tracking (does ChatGPT/Claude/Perplexity actually mention us?), and a cron loop so the whole pipeline runs untouched.",
-    "started": "2026-05-18",
-    "progress_pct": 73,
+    "title": "Sermon follow-along \u2014 a synced transcript app for my church",
+    "summary": "Each Sunday's sermon goes from the YouTube stream to a page you can follow along with. A local Whisper model transcribes it, a second pass re-transcribes the quiet gaps, and every verse the pastor cites is found and attached as a card or a link, with a translation dropdown. One renderer builds two editions: a private one on my tailnet and a public one for the congregation, installable as a PWA. It runs unattended every night on my home lab, and requests from church members arrive by email and land in the backlog.",
+    "started": "2026-09-27",
+    "progress_pct": 80,
     "tags": [
-      "SEO",
-      "GEO",
       "Python",
-      "Brave API",
+      "Whisper",
+      "PWA",
+      "Home lab",
       "Claude"
     ],
-    "links": []
+    "links": [
+      {
+        "label": "live",
+        "url": "https://cbw.jadedviber.com"
+      }
+    ]
   }
 }
       </script>
@@ -197,6 +216,22 @@
       "blogPost": [
         {
           "@type": "BlogPosting",
+          "headline": "geoTracker \u2014 free-tier SEO + GEO rank tracker (parked)",
+          "abstract": "Got as far as SERP rank pulls via Brave with a DuckDuckGo fallback, a rule-based on-page auditor, a fix generator and IndexNow pings. Parked at 73% in September 2026 to make room for other work.",
+          "datePublished": "2026-09-15",
+          "author": {
+            "@type": "Person",
+            "name": "Joshua Brown",
+            "url": "https://github.com/jaded423"
+          },
+          "publisher": {
+            "@id": "https://jadedviber.com/#identity"
+          },
+          "keywords": "Python, SEO, GEO",
+          "url": "https://jadedviber.com/now.html#ship.1.md"
+        },
+        {
+          "@type": "BlogPosting",
           "headline": "On-page audit + fix-generator loop",
           "abstract": "Built rule-based defect detector (onpage_audit.py) and a fix generator that emits paste-ready patches: head snippets, JSON-LD, robots.txt, sitemap.xml, llms.txt. First run on jadedviber.com: score 36/100, 12 defects.",
           "datePublished": "2026-05-19",
@@ -209,7 +244,7 @@
             "@id": "https://jadedviber.com/#identity"
           },
           "keywords": "Python, SEO",
-          "url": "https://jadedviber.com/now.html#ship.1.md"
+          "url": "https://jadedviber.com/now.html#ship.2.md"
         },
         {
           "@type": "BlogPosting",
@@ -225,7 +260,7 @@
             "@id": "https://jadedviber.com/#identity"
           },
           "keywords": "SEO, GitHub Pages",
-          "url": "https://jadedviber.com/now.html#ship.2.md"
+          "url": "https://jadedviber.com/now.html#ship.3.md"
         },
         {
           "@type": "BlogPosting",
@@ -241,7 +276,7 @@
             "@id": "https://jadedviber.com/#identity"
           },
           "keywords": "Python, SEO",
-          "url": "https://jadedviber.com/now.html#ship.3.md"
+          "url": "https://jadedviber.com/now.html#ship.4.md"
         }
       ]
     }
@@ -251,19 +286,25 @@
     <noscript>
       <div class="now-archive-list">
       <article class="now-archive-item" id="ship.1.md">
-        <div class="now-archive-meta">shipped 2026-05-19 · ship.1.md</div>
+        <div class="now-archive-meta">shipped 2026-09-15 · ship.1.md</div>
+        <h3 class="now-archive-title">geoTracker — free-tier SEO + GEO rank tracker (parked)</h3>
+        <p class="now-archive-summary">Got as far as SERP rank pulls via Brave with a DuckDuckGo fallback, a rule-based on-page auditor, a fix generator and IndexNow pings. Parked at 73% in September 2026 to make room for other work.</p>
+        <div class="now-tags"><span class="now-tag">Python</span><span class="now-tag">SEO</span><span class="now-tag">GEO</span></div>
+      </article>
+      <article class="now-archive-item" id="ship.2.md">
+        <div class="now-archive-meta">shipped 2026-05-19 · ship.2.md</div>
         <h3 class="now-archive-title">On-page audit + fix-generator loop</h3>
         <p class="now-archive-summary">Built rule-based defect detector (onpage_audit.py) and a fix generator that emits paste-ready patches: head snippets, JSON-LD, robots.txt, sitemap.xml, llms.txt. First run on jadedviber.com: score 36/100, 12 defects.</p>
         <div class="now-tags"><span class="now-tag">Python</span><span class="now-tag">SEO</span></div>
       </article>
-      <article class="now-archive-item" id="ship.2.md">
-        <div class="now-archive-meta">shipped 2026-05-19 · ship.2.md</div>
+      <article class="now-archive-item" id="ship.3.md">
+        <div class="now-archive-meta">shipped 2026-05-19 · ship.3.md</div>
         <h3 class="now-archive-title">jadedviber.com SEO foundation</h3>
         <p class="now-archive-summary">Shipped the patches: meta + Open Graph + Twitter Card + WebSite/Person JSON-LD on index.html, plus robots.txt/sitemap.xml/llms.txt at site root. Generated a 1200×630 og.png via headless chrome from a styled template. Audit score: 36/100 → 98/100.</p>
         <div class="now-tags"><span class="now-tag">SEO</span><span class="now-tag">GitHub Pages</span></div>
       </article>
-      <article class="now-archive-item" id="ship.3.md">
-        <div class="now-archive-meta">shipped 2026-05-18 · ship.3.md</div>
+      <article class="now-archive-item" id="ship.4.md">
+        <div class="now-archive-meta">shipped 2026-05-18 · ship.4.md</div>
         <h3 class="now-archive-title">geoTracker scaffold</h3>
         <p class="now-archive-summary">Free-tier SEO/GEO tracker scaffolded. Brave Search API + DuckDuckGo fallback for SERP, SQLite for storage, daily rank diff + weekly content-gap reports. Anti-spam guardrails baked into the workflow.</p>
         <div class="now-tags"><span class="now-tag">Python</span><span class="now-tag">SEO</span></div>
