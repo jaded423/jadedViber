@@ -11,6 +11,25 @@ All notable changes to jadedViber are documented here.
 
 ---
 
+## 2026-10-01 - /now moves to the sermon app; geoTracker pulled; photoEditor download re-homed
+
+**What changed:**
+- `/now` current task is the sermon follow-along app (live link `cbw.jadedviber.com`, progress 80% — a placeholder Joshua may adjust). geoTracker moved to the completed list as "parked at 73%".
+- geoTracker card removed from the homepage; its `code` links are gone (the repo is private and archived).
+- `projects/photo-editor.html`: both download links now point at `jaded423/photoEditor` releases instead of the Elevated org's copy.
+- Homepage `gspace` link → `gsuite` (the repo's current name).
+
+**Why:**
+- Joshua left Elevated 2026-09-30; the site should only link to repos he controls, and geoTracker is retired (`~/projects/archive/elevated/geoTracker`).
+
+**Files modified:**
+- `data/now.json` - new `current`, geoTracker entry added to `completed`
+- `now.html` - re-rendered by `scripts/render_now.py`
+- `index.html` - geoTracker card removed, gsuite link
+- `projects/photo-editor.html` - download links
+
+---
+
 ## 2026-09-23 - projects/trans.html: the sermon follow-along kit, what/why/when only
 
 **What changed:**
